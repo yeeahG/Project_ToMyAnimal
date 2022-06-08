@@ -1,0 +1,29 @@
+.yBZdR {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.up_btn {
+    margin-bottom: -5.33333vw;
+    z-index: 0;
+    padding-top: 16vw;
+}
+
+.up_btn svg {
+    width: 26.1333vw;
+}
+
+.up_btn svg circle {
+    transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1) 0s;
+}
+
+@media (min-width: 900px) {
+    .up_btn {
+        margin-bottom: 1.38889vw;
+        padding-top: 2.77778vw;
+    }
+    .up_btn svg {
+        width: 6.80556vw;
+    }
+}
