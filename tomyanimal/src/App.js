@@ -1,5 +1,6 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css';
+import Menu from './Pages/Menu';
 
 function App() {
   return (
@@ -7,6 +8,7 @@ function App() {
       <header className="App-header">
 
         <BrowserRouter>
+          <Menu />
         
         </BrowserRouter>
 

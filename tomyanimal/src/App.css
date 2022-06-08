@@ -1,3 +1,24 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
+}
+
+body {
+  -ms-overflow-style:none; 
+}
+
+body::-webkit-scrollbar { 
+  display:none; 
+}
+
+
+a, button {
+  cursor: pointer;
+  outline: none;
+  color: inherit;
+  font-family: inherit;
+  text-decoration: none;
+  border: none;
+  background: none;
+  margin: 0px;
+  padding: 0px;
 }
