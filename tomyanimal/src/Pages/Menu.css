@@ -1,0 +1,130 @@
+.nav__form {
+    width: 100%;
+    position: sticky;
+    top: 0px;
+    z-index: 3;
+    background: white;
+}
+
+.nav__container {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    z-index: 9;
+}
+
+#menu-btn {
+    font-size: 40px;
+}
+
+#login-btn {
+    font-size: 40px;
+}
+
+
+
+/*menu*/
+.show-menu{
+    position: absolute;
+    left: 0%;
+    transition: all 0.4s cubic-bezier(0.77, 0, 0.175, 1) 0s;
+}
+    
+.hide-menu{
+    position: absolute;
+    left: -110%;
+    transition: all 0.4s cubic-bezier(0.77, 0, 0.175, 1) 0s;
+}
+
+#menu-wrapper {
+    background-color: #fe81b9;
+    position: fixed;
+    z-index: 999;
+    padding: 8.53333vw;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    display: flex;
+
+    transform: translate3d(0px, 0px, 0px);
+    transition: all 0.4s cubic-bezier(0.77, 0, 0.175, 1) 0s;
+    top: 0;
+    height: 100%;
+    border-right: 0.104167vw solid rgb(0, 0, 0);
+}
+
+.menu__close__btn {
+    width: 9vw;
+    position: absolute;
+    right: 8.53333vw;
+    top: 8.53333vw;
+}
+
+.menu__name {
+    font-size: 9vw;
+    line-height: 13.6vw;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    display: inline-block;
+}
+
+.menu__name:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    /* background-color: #0087ca; */
+    background-color: #000;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.menu__name:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/*Line*/
+.space__styledSpace {
+    display: block;
+    width: 100%;
+    /* padding-top: 10.6667vw; */
+    padding-top: 1vw;
+}
+
+
+@media (min-width: 900px) {
+    .menu__wrapper {
+        width: 28.1111vw;
+        height: 100%;
+        padding: 3.16667vw;
+        border-right: 0.104167vw solid rgb(0, 0, 0);
+    }
+
+    .menu__close__btn {
+        width: 2.77778vw;
+        right: 2.22222vw;
+        top: 2.22222vw;
+    }
+
+    .menu__list {
+        display: block;
+    }
+    .menu__name {
+        font-size: 3.81944vw;
+        line-height: 4.51389vw;
+        position: relative;
+    }
+    .nav__container {
+        padding: 1vw  2.77778vw;
+    }
+}
+
+@media (max-width: 900px) {
+    #menu-wrapper {
+        width: 86%;
+    }
+}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './Menu.css'
 
 const Menu = () => {
     const [isOpen, setMenu] = useState(false);
