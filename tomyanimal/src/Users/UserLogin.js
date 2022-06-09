@@ -4,10 +4,22 @@ import axios from 'axios';
 
 const UserLogin = () => {
     const [details, setDetails] = useState({id:"", password: ""});
+    const navigate = useNavigate();
 
     const userdata = {
         userPhoneNumberOrUserId: details.id,
         userPassword: details.password
+    }
+
+    const submitHandler = async e => {
+        e.preventDefault();
+
+        const {data} = await axios.post('http://localhost:8084/api/auth/signin', userdata);
+
+        console.log(axios.defaults.headers.common['Authorization'] = `Bearer ${data['accessToken']}`);
+        const jwt = axios.defaults.headers.common['Authorization'] = `${data['accessToken']}`;
+        localStorage.setItem('logintoken', jwt);
+    
     }
 
 
