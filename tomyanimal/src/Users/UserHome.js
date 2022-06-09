@@ -1,6 +1,5 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import './UserHome.css'
 
 const UserHome = () => {
     const navigate = useNavigate();
@@ -10,7 +9,8 @@ const UserHome = () => {
         // setUser({name: "", id: ""});
     
         // localStorage.clear();
-        localStorage.removeItem('logininfo');
+        //localStorage.removeItem('logininfo');
+        localStorage.removeItem('logintoken');
         navigate.push('/')
     }
 

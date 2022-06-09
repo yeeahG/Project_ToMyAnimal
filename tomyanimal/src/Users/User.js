@@ -9,11 +9,20 @@ const User = () => {
         margin: "5vw"
     }
 
+    // useEffect( async () => {
+    //     (
+    //         async () => {
+    //             const {data} = axios.get('http://localhost:8084/api/auth/signin');
+    //             setName(data.userName);
+    //         }
+    //     )();
+    // }, []);
+
 
 
   return (
     <div>
-        <h3>Hello {name}</h3>
+        <h3>Hello </h3>
         {localStorage.getItem('logintoken') ? 
         <UserHome />
         :
