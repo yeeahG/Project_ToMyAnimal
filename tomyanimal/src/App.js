@@ -4,6 +4,7 @@ import Home from './Pages/Home'
 import User from './Users/User';
 import Signup from './Users/Signup';
 import Animal from './Animals/Animal';
+import AnimalLog from './Animals/AnimalLog';
 import Place from './Places/Place';
 import './App.css';
 
@@ -18,6 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/animal" element={<Animal />} />
+            <Route path="/animal/log" element={<AnimalLog />} />
             <Route path="/places" element={<Place />} />
             <Route path="/user" element={<User />} />
             <Route path="/register" element={<Signup />} />
