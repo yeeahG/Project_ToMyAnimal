@@ -3,6 +3,7 @@ import Menu from './Pages/Menu';
 import Home from './Pages/Home'
 import './App.css';
 import User from './Users/User';
+import Animal from './Animals/Animal';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/animal" element={<Animal />} />
             <Route path="/user" element={<User />} />
           </Routes>
         
