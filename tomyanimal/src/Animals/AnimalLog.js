@@ -29,7 +29,7 @@ const AnimalLog = () => {
                 <a className='collection__content' href='./log'>Log</a>
             </div>
             <div className='collection'>
-                <a className='collection__content'>Details</a>
+                <a className='collection__content'>Check up</a>
             </div>
             </ul>
         </div>
