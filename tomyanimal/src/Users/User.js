@@ -5,6 +5,9 @@ import UserLogin from './UserLogin'
 
 
 const User = () => {
+    const style = {
+        margin: "5vw"
+    }
 
 
 
