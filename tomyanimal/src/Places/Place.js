@@ -1,4 +1,5 @@
 import React from 'react'
+import Map from './Map'
 import './Places.css'
 
 const Place = () => {
@@ -20,7 +21,7 @@ const Place = () => {
       <div className='space'></div>
         
       <div className='map__container'>
-        Map
+        <Map />
       </div>
 
       <div className='place__content'>
