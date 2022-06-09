@@ -1,10 +1,11 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Menu from './Pages/Menu';
 import Home from './Pages/Home'
-import './App.css';
 import User from './Users/User';
+import Signup from './Users/Signup';
 import Animal from './Animals/Animal';
 import Place from './Places/Place';
+import './App.css';
 
 function App() {
   return (
@@ -17,8 +18,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/animal" element={<Animal />} />
-            <Route path="/user" element={<User />} />
             <Route path="/places" element={<Place />} />
+            <Route path="/user" element={<User />} />
+            <Route path="/register" element={<Signup />} />
           </Routes>
         
         </BrowserRouter>

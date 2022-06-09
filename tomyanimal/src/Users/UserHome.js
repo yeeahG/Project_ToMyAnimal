@@ -10,7 +10,8 @@ const UserHome = () => {
         // setUser({name: "", id: ""});
     
         // localStorage.clear();
-        localStorage.removeItem('logininfo');
+        //localStorage.removeItem('logininfo');
+        localStorage.removeItem('logintoken');
         navigate.push('/')
     }
 

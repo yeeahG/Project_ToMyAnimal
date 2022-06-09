@@ -1,0 +1,106 @@
+.login__form h2 {
+    font-size: 8.8vw;
+    font-weight: 700;
+    line-height: 1;
+    padding: 3.73333vw 0px 2.66667vw;
+    letter-spacing: -0.015em;
+    max-width: 100%;
+    margin: 0px;
+    color: rgb(0, 0, 0);
+}
+
+.login__input input {
+    display: block;
+    width: 100%;
+    padding: 15px 0;
+    box-sizing: border-box;
+    background-color: transparent;
+    border-width: 0;
+    border-radius: 0;
+    outline: none;
+    font-size: inherit;
+    /* border-bottom: 1px solid #FF6458; */
+    border: none;
+    border-bottom: 1px solid #CCC;
+    color: #CCC;
+}
+
+.input:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    /* background-color: #0087ca; */
+    background-color: #000;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.input:focus {
+    outline: none;
+    border-bottom: 2px solid #555;
+}
+
+.input:focus::-webkit-input {
+    color: black;
+}
+
+.input:focus+:after {
+    transform: scale(1);
+    transform-origin: bottom left;
+}
+
+.login__btn {
+    width: 100%;
+    text-transform: uppercase;
+    font-size: 3.73333vw;
+    line-height: 5.33333vw;
+    height: 15.7333vw;
+    border: 0.4vw solid rgb(0, 0, 0);
+    border-radius: 2.93333vw;
+    box-sizing: border-box;
+    margin-top: 5.6vw;
+    background-color: transparent;
+}
+
+.login__register {
+    text-align: center;
+    margin-top: 3.46667vw;
+}
+
+.login__register a {
+    text-decoration: underline;
+}
+
+@media (min-width: 900px) {
+    .login__form h2 {
+        position: relative;
+        margin: 0px;
+        font-size: 4vw;
+        padding: 0px;
+        max-width: 100%;
+        height: 100px;
+    }
+    /* .login__input input {
+        height: 3vw;
+        border: 0.104167vw solid #FF6458;
+        border-radius: 0.763889vw;
+        padding-left: 0.902778vw;
+        font-size: 0.972222vw;
+        margin-bottom: 0.555556vw;
+    } */
+    .login__btn {
+        font-size: 0.972222vw;
+        line-height: 1.38889vw;
+        height: 4.09722vw;
+        border: 0.104167vw solid #FF6458;
+        border-radius: 0.763889vw;
+        margin-top: 1.45833vw;
+    }
+    .login__register {
+        margin-top: 0.902778vw;
+    }
+}
