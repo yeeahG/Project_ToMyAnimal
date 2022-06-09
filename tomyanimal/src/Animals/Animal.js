@@ -1,8 +1,18 @@
 import React from 'react'
+import AnimalInfo from './AnimalInfo'
+import User from '../Users/User'
 
 const Animal = () => {
   return (
-    <div>Animal</div>
+    <div>
+      <main>
+        {localStorage.getItem('logintoken') ?
+        <AnimalInfo />
+        :
+        <User />
+        }
+      </main>
+    </div>
   )
 }
 
