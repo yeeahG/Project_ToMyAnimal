@@ -1,11 +1,11 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Menu from './Pages/Menu';
 import Home from './Pages/Home'
-import './App.css';
 import User from './Users/User';
 import Signup from './Users/Signup';
 import Animal from './Animals/Animal';
 import Place from './Places/Place';
+import './App.css';
 
 function App() {
   return (

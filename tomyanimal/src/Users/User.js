@@ -2,7 +2,6 @@ import React, { useEffect, useState }  from 'react'
 import axios from 'axios'
 import UserHome from '../Users/UserHome'
 import UserLogin from './UserLogin'
-import './User.css'
 
 
 const User = () => {
