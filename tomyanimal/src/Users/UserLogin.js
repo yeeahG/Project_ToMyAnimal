@@ -3,6 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const UserLogin = () => {
+    const [details, setDetails] = useState({id:"", password: ""});
+
+    const userdata = {
+        userPhoneNumberOrUserId: details.id,
+        userPassword: details.password
+    }
+
+
+
   return (
     <div>
 
