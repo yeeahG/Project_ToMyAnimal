@@ -2,6 +2,24 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+    let [phoneNumber, setPhoneNumber] = useState("");
+    let [username, setUsername] = useState("");
+    let [signinId, setSigninId] = useState("");
+    let [signinPassword, setSigninPassword] = useState("");
+    let [signinPasswordCheck, setSigninPasswordCheck] = useState("");
+    
+    let [savedPhoneNumber, setSavedPhoneNumber] = useState("");
+    let [savedUsername, setSavedUsername] = useState("");
+    let [savedSigninId, setSavedSigninId] = useState("");
+    let [savedSigninPassword, setSavedSigninPassword] = useState("");
+  
+    let localStorage = window.localStorage;
+    const navigate = useNavigate();
+    const [error, setError] = useState("");
+
+
+    
+
   return (
     <div>
         <div className='signContainer'>
