@@ -18,7 +18,55 @@ const Signup = () => {
     const [error, setError] = useState("");
 
 
+    const onSubmitSignUp = async () => {
+        const item = {
+          phoneNumber: phoneNumber,
+          userId: signinId,
+          userName: username,
+          userPassword: signinPassword,
+        }
+        console.log(item);
     
+        if( phoneNumber!="" || signinId!="" || username!="" || signinPassword!="" || signinPasswordCheck!="") {
+          // if (signinPassword === signinPasswordCheck) {
+    
+            await fetch('http://localhost:8084/api/auth/signup', {
+              method: 'POST',
+              // credentials: 'include',
+              // mode: 'no-cors',
+              headers: {
+                'Content-Type': 'application/json;',
+                // 'Content-Type': 'application/json; charset=UTF-8',
+                // 'Access-Control-Allow-Origin': 'http://localhost:8082/',
+                // 'Accept': '*/*'
+              },
+              body: JSON.stringify(item),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log('성공:', data);
+              })
+    
+            /*
+            .then((result) => {
+              result.message === 'SUCCESS' ? alert("가입이 완료되었습니다") : alert("다시 시도해주세요")
+            })*/
+    
+            .catch((error) => {
+              console.error('실패:', error);
+              });
+        
+            localStorage.setItem("userinfo", JSON.stringify(item))
+            alert('가입이 완료되었습니다')
+            navigate.push('/login')
+    
+          // } else {
+          //   setError("비밀번호가 일치하지 않습니다")
+          // }
+        } else {
+          setError("한 글자 이상 입력하세요")
+        }
+    }
 
   return (
     <div>
