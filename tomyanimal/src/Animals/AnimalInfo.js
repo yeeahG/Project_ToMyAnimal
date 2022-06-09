@@ -1,4 +1,5 @@
 import React from 'react'
+import './AnimalInfo.css'
 
 const AnimlInfo = () => {
   return (
