@@ -1,4 +1,5 @@
 import React from 'react'
+import './Places.css'
 
 const Place = () => {
   return (
@@ -47,9 +48,8 @@ const Place = () => {
           <div className='info__details'>
 
             <div className='details__description'>
-              <h1>I'm choco</h1>
-              <p>2years old</p>
-              <p>Lorem</p>
+              <h1>목록</h1>
+              <p></p>
             </div>
 
             <div className='stack'>
@@ -65,7 +65,7 @@ const Place = () => {
                 </p>
               </div>
             </div>
-            
+
           </div>
 
         </div>
