@@ -7,6 +7,7 @@ import Animal from './Animals/Animal';
 import AnimalLog from './Animals/AnimalLog';
 import Place from './Places/Place';
 import './App.css';
+import Footer from './Pages/Footer';
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
             <Route path="/user" element={<User />} />
             <Route path="/register" element={<Signup />} />
           </Routes>
+
+          <Footer />
         
         </BrowserRouter>
 
