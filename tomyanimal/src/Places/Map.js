@@ -34,7 +34,7 @@ const Map = () => {
 
   return (
     <div className='map__container'>
-        <div id="map" style={{width:'70vw', height:"50vh"}}></div>
+        <div id="map" style={{height:"50vh"}}></div>
     </div>
   )
 }
