@@ -76,10 +76,11 @@ const Place = () => {
 
         <div className='content__wrapper'>
           <div className='place__form'>
+            
             <Header 
               setType={setType} setRatings={setRatings} setCoordinates={setCoordinates}
             />
-            List
+
             <PlaceList placeData={placeData} isLoading={isLoading} />
           </div>
 

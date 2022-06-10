@@ -9,8 +9,8 @@ const Map = () => {
     const container = document.getElementById("map");
 
     const options = {
-      center: new window.kakao.maps.LatLng(36.2683, 127.6358),
-      level: 11,
+      center: new window.kakao.maps.LatLng(37, 127),
+      level: 13,
     };
 
     const map = new window.kakao.maps.Map(container, options);
