@@ -1,8 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Map from './Map'
+import { placeData } from './placeData'
+import PlaceList from './PlaceList'
 import './Places.css'
 
 const Place = () => {
+  const [places, setPlaces] = useState([]);
+
+  useEffect(() => {
+    // placeData((data) => {
+    //   setPlaces(data);
+    // })
+    setPlaces();
+  }, )
+  //console.log(places[0].title);
+
+  // const [productInfos, setProductInfos] = useState([]);
+  // const location = useLocation();
+
+  // useEffect(() => {
+  //   fetch(`${api.fetchAccommList}${location.search}`)
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       setProductInfos(res.message);
+  //     });
+  // }, [location]);
+
+
   return (
     <div className='place__container'>
 
@@ -44,13 +68,21 @@ const Place = () => {
         <div className='content__wrapper'>
           <div className='place__form'>
             List
+            <PlaceList places={places} />
           </div>
 
           <div className='info__details'>
 
             <div className='details__description'>
               <h1>이름</h1>
+              {/* {places[0].title} */}
               <p>주소</p>
+              {/* {places[0].addr} */}
+              {/* {places?.map(elm => {
+                elm.title
+                elm.addr
+              })} */}
+
             </div>
 
             <div className='stack'>
@@ -69,6 +101,10 @@ const Place = () => {
           </div>
 
         </div>
+
+        
+
+
 
       </div>
 

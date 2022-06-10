@@ -17,6 +17,12 @@ const Map = () => {
 
     console.log("loading kakaomap");
 
+    // 지도에 확대 축소 컨트롤을 생성한다
+		var zoomControl = new kakao.maps.ZoomControl();
+
+		// 지도의 우측에 확대 축소 컨트롤을 추가한다
+		map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT)
+
     // //marker data 파일에서 가져옴
     // markerdata.forEach((el) => {
     // //마커를 생성
