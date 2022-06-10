@@ -8,9 +8,13 @@ import './Places.css'
 const Place = () => {
   const [places, setPlaces] = useState([]);
 
-  const [coordinates, setCoordinates] = useState({ lat:0, lng:0})
-  const [type, setType] = useState('Hospital')
-  const [ratings, setRatings] =useState("")
+  const [coordinates, setCoordinates] = useState({ lat:0, lng:0});
+  const [type, setType] = useState('Hospital');
+  const [ratings, setRatings] =useState("");
+
+  const [isLoading, setisLoading] = useState(true);
+
+  //console.log(placeData);
 
   useEffect(() => {
     // placeData((data) => {
@@ -76,7 +80,7 @@ const Place = () => {
               setType={setType} setRatings={setRatings} setCoordinates={setCoordinates}
             />
             List
-            <PlaceList places={places} />
+            <PlaceList placeData={placeData} isLoading={isLoading} />
           </div>
 
           <div className='info__details'>
