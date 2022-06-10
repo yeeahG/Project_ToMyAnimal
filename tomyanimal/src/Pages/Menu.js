@@ -49,7 +49,7 @@ const Menu = () => {
                         <a className="menu__name" id="furniture" href="/">What</a>
                     </div>
                     <div>
-                        <a className="menu__name" id="places" href="/places">Where is</a>
+                        <a className="menu__name" id="places" href="/places/all">Where is</a>
                     </div>
                     <div>
                         <a className="menu__name" id="about" href="/">About</a>

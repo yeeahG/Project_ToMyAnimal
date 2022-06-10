@@ -1,8 +1,41 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import Header from './Header'
 import Map from './Map'
+import { placeData } from './placeData'
+import PlaceList from './PlaceList'
 import './Places.css'
 
 const Place = () => {
+  const [places, setPlaces] = useState([]);
+
+  const [coordinates, setCoordinates] = useState({ lat:0, lng:0});
+  const [type, setType] = useState('Hospital');
+  const [ratings, setRatings] =useState("");
+
+  const [isLoading, setisLoading] = useState(true);
+
+  //console.log(placeData);
+
+  useEffect(() => {
+    // placeData((data) => {
+    //   setPlaces(data);
+    // })
+    setPlaces();
+  }, )
+  //console.log(places[0].title);
+
+  // const [productInfos, setProductInfos] = useState([]);
+  // const location = useLocation();
+
+  // useEffect(() => {
+  //   fetch(`${api.fetchAccommList}${location.search}`)
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       setProductInfos(res.message);
+  //     });
+  // }, [location]);
+
+
   return (
     <div className='place__container'>
 
@@ -33,36 +66,47 @@ const Place = () => {
               <a className='collection__content'>전체</a>
             </div>
             <div className='collection'>
-              <a className='collection__content' href=''>Seoul</a>
+              <a className='collection__content' href='/places/seoul'>Seoul</a>
             </div>
             <div className='collection'>
-              <a className='collection__content'>Daegu</a>
+              <a className='collection__content' href='/places/daegu'>Daegu</a>
             </div>
           </ul>
         </div>
 
         <div className='content__wrapper'>
-          <div className='animal__imageform'>
-            List
+          <div className='place__form'>
+            
+            <Header 
+              setType={setType} setRatings={setRatings} setCoordinates={setCoordinates}
+            />
+
+            <PlaceList placeData={placeData} isLoading={isLoading} />
           </div>
 
           <div className='info__details'>
 
             <div className='details__description'>
-              <h1>목록</h1>
-              <p></p>
+              <h1>이름</h1>
+              {/* {places[0].title} */}
+              <p>주소</p>
+              {/* {places[0].addr} */}
+              {/* {places?.map(elm => {
+                elm.title
+                elm.addr
+              })} */}
+
             </div>
 
             <div className='stack'>
               <button className='details__btn' aria-expanded="false">
-                <span>Log</span>
+                <span>리뷰</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="14.255" height="14.255">
                   <path fill='none' stroke="currentcolor" strokeWidth="1.5" d="M7.129 0v14.255M0 7.129h14.255"></path>
                 </svg>
               </button>
               <div className='details__panel'>
-                <p>세부내용 aria-expanded="true"로 변경되면서 이 부분이 열림
-                  d="M0 7.128h14.255"로 바꿔주기
+                <p>세부내용
                 </p>
               </div>
             </div>
@@ -70,6 +114,10 @@ const Place = () => {
           </div>
 
         </div>
+
+        
+
+
 
       </div>
 
