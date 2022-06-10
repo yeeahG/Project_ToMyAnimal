@@ -42,27 +42,26 @@ const Place = () => {
         </div>
 
         <div className='content__wrapper'>
-          <div className='animal__imageform'>
+          <div className='place__form'>
             List
           </div>
 
           <div className='info__details'>
 
             <div className='details__description'>
-              <h1>목록</h1>
-              <p></p>
+              <h1>이름</h1>
+              <p>주소</p>
             </div>
 
             <div className='stack'>
               <button className='details__btn' aria-expanded="false">
-                <span>Log</span>
+                <span>리뷰</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="14.255" height="14.255">
                   <path fill='none' stroke="currentcolor" strokeWidth="1.5" d="M7.129 0v14.255M0 7.129h14.255"></path>
                 </svg>
               </button>
               <div className='details__panel'>
-                <p>세부내용 aria-expanded="true"로 변경되면서 이 부분이 열림
-                  d="M0 7.128h14.255"로 바꿔주기
+                <p>세부내용
                 </p>
               </div>
             </div>

@@ -86,7 +86,6 @@ li {
     margin-bottom: 1.38889vw;
 }
 
-/*반려동물 정보 내용*/
 /*MAP*/
 .place__content {
     padding: 4rem 1rem 4rem 1rem;
@@ -107,28 +106,13 @@ li {
 }
 
 /*사진*/
-.animal__imageform {
+.place__form {
     position: relative;
     /* background: #efede7; */
     display: grid;
     grid-area: 1/-1;
 }
 
-.animal__blob {
-    fill: #fe81b9;
-}
-
-#image__container {
-    box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;
-}
-
-#image__container img {
-    min-width: 100%;
-    max-width: 100%;
-    min-height: 100%;
-    max-height: 100%;
-    object-fit: cover;
-}
 
 /*내용*/
 .info__details {
