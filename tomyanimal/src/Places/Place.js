@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Header from './Header'
 import Map from './Map'
 import { placeData } from './placeData'
 import PlaceList from './PlaceList'
@@ -6,6 +7,10 @@ import './Places.css'
 
 const Place = () => {
   const [places, setPlaces] = useState([]);
+
+  const [coordinates, setCoordinates] = useState({ lat:0, lng:0})
+  const [type, setType] = useState('Hospital')
+  const [ratings, setRatings] =useState("")
 
   useEffect(() => {
     // placeData((data) => {
@@ -57,16 +62,19 @@ const Place = () => {
               <a className='collection__content'>전체</a>
             </div>
             <div className='collection'>
-              <a className='collection__content' href=''>Seoul</a>
+              <a className='collection__content' href='/places/seoul'>Seoul</a>
             </div>
             <div className='collection'>
-              <a className='collection__content'>Daegu</a>
+              <a className='collection__content' href='/places/daegu'>Daegu</a>
             </div>
           </ul>
         </div>
 
         <div className='content__wrapper'>
           <div className='place__form'>
+            <Header 
+              setType={setType} setRatings={setRatings} setCoordinates={setCoordinates}
+            />
             List
             <PlaceList places={places} />
           </div>
