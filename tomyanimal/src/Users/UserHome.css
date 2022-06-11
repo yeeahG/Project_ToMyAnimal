@@ -82,8 +82,12 @@ li {
     grid-row-gap: 1rem;
 }
 
+.menu__wrap {
+    cursor: pointer;
+}
 
-.menu__list {
+
+.menu__list__title {
     font-weight: 700;
     text-transform: uppercase;
     margin-bottom: 1.38889vw;

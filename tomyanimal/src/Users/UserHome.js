@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
 import AnimalAccount from './AnimalAccount';
 import UserAccount from './UserAccount';
 import './UserHome.css'
