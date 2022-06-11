@@ -1,19 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import AnimalAccount from './AnimalAccount';
+import UserAccount from './UserAccount';
 import './UserHome.css'
 
 const UserHome = () => {
-    const navigate = useNavigate();
+  const [activeIndex, setActiveIndex]=useState(0);
 
-    const Logout = () => {
-        // console.log("log out");
-        // setUser({name: "", id: ""});
-    
-        // localStorage.clear();
-        //localStorage.removeItem('logininfo');
-        localStorage.removeItem('logintoken');
-        navigate.push('/')
+  const tabClickHandler=(index)=>{
+    setActiveIndex(index);
+  };
+
+  const tabContArr=[
+    {
+      tabTitle:(
+        <li className={activeIndex===0 ? "is-active" : ""} onClick={()=>tabClickHandler(0)}> Overview </li>
+      ),
+      tabCont:(
+        <div> <UserAccount /> </div>
+      )
+    },
+    {
+      tabTitle:(
+        <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}> My animal </li>
+      ),
+      tabCont:(
+        <div> <AnimalAccount/> </div>
+      )
     }
+  ];
 
 
   return (
@@ -35,40 +50,32 @@ const UserHome = () => {
       <div className='line'></div>
       <div className='space'></div>
 
-      <div className='userinfo__content'>
-        <div className='userinfo__subtitle'>
-          <h1>Details</h1>
-          <button>Edit</button>
+
+      <section className='wrapper'>
+
+        <div className='left__menu'>
+          <ul className='menu__wrap'>
+            <li className='menu__list'>My Account</li>
+            {tabContArr.map((section, index)=>{
+              return section.tabTitle
+            })}
+          </ul>
         </div>
 
-        <div className='userinfo__table'>
 
-          <table>
-            <tbody>
-              <tr>
-                <td>Name</td>
-                <td>userName</td>
-              </tr>
-              <tr>
-                <td>Contact</td>
-                <td>email or phonenumebr</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-          {localStorage.getItem('userinfo')}&nbsp;
-          GET method로 userName, userPhoneNumberOrUserId 가져오기
+        <div className='userinfo__content'>
 
-        <div className='welcome'>
-          <button onClick={Logout} className='welcome__btn'>
-            <a href="/user">Logout</a>
-          </button>
-          <button className='welcome__btn'>
-            <a href="/">Home</a>
-          </button>
+          <div>{tabContArr[activeIndex].tabCont}</div>
         </div>
 
-      </div>
+        <div className='animalinfo__content'>
+     
+        </div>
+
+      </section>
+
+
+
     </div>
   )
 }
