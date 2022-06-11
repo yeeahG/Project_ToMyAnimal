@@ -78,7 +78,7 @@ const AnimalLog = () => {
 
   return (
     <>
-        <div>
+        <div className='navi__container'>
             <select>
                 <option value='latest'>최신순</option>
                 <option value='oldest'>오래된순</option>
@@ -88,19 +88,20 @@ const AnimalLog = () => {
             </button>
         </div>
 
-            {isOpen &&
-            <div className='input__container'>
-                <span>Title </span><input></input>
-                <span>Day </span><input type="date"></input>
-                <div className='content__container'>
-                    <span>Content </span><textarea></textarea>
-                    <input type="file" accept="image/*"/>
-                </div>
-                <button className='upload__btn'>upload</button>
+        {isOpen &&
+        <div className='input__container'>
+            <span>Title </span><input></input>
+            <span>Day </span><input type="date"></input>
+            <div className='content__container'>
+                <span>Content </span>
+                <textarea placeholder='What about your animal?'></textarea>
+                <input type="file" accept="image/*"/>
             </div>
-            }
-        <div className='content__wrapper'>
+            <button className='upload__btn'>upload</button>
+        </div>
+        }
 
+        <div className='content__wrapper'>
 
             <div >
                 {logs.map((it) => {
