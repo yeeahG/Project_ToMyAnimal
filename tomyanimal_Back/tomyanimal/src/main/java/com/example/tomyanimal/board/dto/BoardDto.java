@@ -1,5 +1,6 @@
-package com.example.tomyanimal.model;
+package com.example.tomyanimal.board.dto;
 
+import com.example.tomyanimal.model.Board;
 import lombok.*;
 
 import java.time.LocalDateTime;
