@@ -15,7 +15,6 @@ const Header = ( {setType, setRatings, setCoordinates} ) => {
             <option onClick={() => setRatings(1)}>1.0</option>
         </select>
 
-        {/*Hospital*/}
         <select>
             <option onClick={() => setType("Hospital")}>동물병원</option>
             <option onClick={() => setType("Hospital")}>훈련소</option>
