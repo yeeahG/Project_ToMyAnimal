@@ -1,3 +1,8 @@
+.userinfo__container {
+    display: flex;
+    flex-direction: column;
+}
+
 .header {
     color: rgb(0, 0, 0);
     text-align: center;
@@ -50,8 +55,36 @@
     max-width: 94.6667vw;
 }
 
+/*USER DETAIL TABLE*/
 .userinfo__content {
-    padding: 0 1rem;
+    display: grid;
+    grid-row-gap: 2rem;
+    padding: 1rem 1rem 4rem;
+    max-width: 30rem;
+    width: 100%;
+    align-self: center;
+}
+
+.userinfo__table {
+    display: grid;
+    width: 100%;
+    overflow-x: auto;
+    border-bottom: 1px solid;
+}
+
+.userinfo__table table {
+    border-spacing: 0;
+}
+
+.userinfo__table td {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    vertical-align: top;
+    border-top: 1px solid;
+}
+
+.userinfo__table tr:first-child td {
+    border-top: none;
 }
 
 

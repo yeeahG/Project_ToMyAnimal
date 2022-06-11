@@ -22,7 +22,7 @@ const UserHome = () => {
       <div className='header'>
         <div className='space'></div>
         <div className='header__wrapper'>
-          <h1 className='header__content'>user Info</h1>
+          <h1 className='header__content'>My account</h1>
           <div className='header__detail'>
             <p>
               details
@@ -36,10 +36,27 @@ const UserHome = () => {
       <div className='space'></div>
 
       <div className='userinfo__content'>
+        <h1>Details</h1>
 
-        {localStorage.getItem('userinfo')}
+        <div className='userinfo__table'>
+
+          <table>
+            <tbody>
+              <tr>
+                <td>Name</td>
+                <td>userName</td>
+              </tr>
+              <tr>
+                <td>Contact</td>
+                <td>email or phonenumebr</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+          {localStorage.getItem('userinfo')}&nbsp;
+          GET method로 userName, userPhoneNumberOrUserId 가져오기
+
         <div className='welcome'>
-          <h2>Welcome, <span></span></h2>
           <button onClick={Logout}>
             <a href="/user">Logout</a>
           </button>
