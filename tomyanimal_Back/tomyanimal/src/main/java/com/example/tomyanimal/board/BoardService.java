@@ -1,7 +1,8 @@
 package com.example.tomyanimal.board;
 
+import com.example.tomyanimal.controller.MemberController;
 import com.example.tomyanimal.model.Board;
-import com.example.tomyanimal.model.BoardDto;
+import com.example.tomyanimal.board.dto.BoardDto;
 import com.example.tomyanimal.repository.BoardRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;

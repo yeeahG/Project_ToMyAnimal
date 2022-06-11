@@ -1,7 +1,7 @@
 package com.example.tomyanimal.controller;
 
 import com.example.tomyanimal.board.BoardService;
-import com.example.tomyanimal.model.BoardDto;
+import com.example.tomyanimal.board.dto.BoardDto;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
