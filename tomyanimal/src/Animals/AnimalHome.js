@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import AnimalPage from './AnimalPage';
 import AnimalLog from './AnimalLog';
+import CheckUp from './CheckUp';
 import './AnimalInfo.css'
 
 const AnimalHome = () => {
@@ -24,15 +25,15 @@ const AnimalHome = () => {
         <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}> My Log</li>
       ),
       tabCont:(
-        <div> <AnimalLog/> </div>
+        <div> <AnimalLog /> </div>
       )
     },
     {
       tabTitle:(
-        <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}>Check up</li>
+        <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}>Check up</li>
       ),
       tabCont:(
-        <div> <AnimalLog/> </div>
+        <div> <CheckUp /> </div>
       )
     }
   ];
