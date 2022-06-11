@@ -36,7 +36,10 @@ const UserHome = () => {
       <div className='space'></div>
 
       <div className='userinfo__content'>
-        <h1>Details</h1>
+        <div className='userinfo__subtitle'>
+          <h1>Details</h1>
+          <button>Edit</button>
+        </div>
 
         <div className='userinfo__table'>
 
