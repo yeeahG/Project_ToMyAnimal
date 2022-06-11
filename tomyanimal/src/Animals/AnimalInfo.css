@@ -144,11 +144,55 @@ li {
 .navi__container {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
+    display: flex;
+    max-width: 50rem;
+    justify-content: space-between;
+}
+
+.navi__container button {
+    text-transform: uppercase;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    gap: 0.5rem;
+    font-size: 0.972222vw;
+    font-weight: 700;
+    justify-content: space-between;
+    justify-self: start;
+    text-align: left;
+    cursor: pointer;
+
+    background: transparent;
+    color: #559df2;
+    border: 1px solid #559df2;
+
+    padding: 0.25rem 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: calc(2rem + 2px);
+    line-height: 1rem;
+    border-radius: 100vw;
+}
+
+.navi__container button:hover {
+    color: white;
+    background-color: #559df2;
 }
 
 .input__container {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
+    display: grid;
+    grid-row-gap: 1.5rem;
+    padding: 1rem 1rem 4rem;
+    width: 100%;
+    max-width: 50rem;
+    align-self: center;
+}
+
+.title__container {
+    display: flex;
 }
 
 .input__container textarea {
@@ -215,6 +259,8 @@ li {
     grid-row-gap: 2rem;
     grid-column-gap: 2rem;
     margin-bottom: 2rem;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 /**/

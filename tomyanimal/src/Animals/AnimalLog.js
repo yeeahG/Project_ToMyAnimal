@@ -88,58 +88,57 @@ const AnimalLog = () => {
             </button>
         </div>
 
-        {isOpen &&
+        {isOpen ?
         <div className='input__container'>
-            <span>Title </span><input></input>
-            <span>Day </span><input type="date"></input>
+            <div className='title__container'>
+                <span>Title </span><input></input>
+                <span>Day </span><input type="date"></input>
+            </div>
             <div className='content__container'>
-                <span>Content </span>
                 <textarea placeholder='What about your animal?'></textarea>
                 <input type="file" accept="image/*"/>
             </div>
             <button className='upload__btn'>upload</button>
         </div>
-        }
+        :
+        <>
+            <div className='content__wrapper'>
+                <div >
+                    {logs.map((it) => {
+                        <li key={it.id}>
+                        {it.content}
+                        </li>
+                    })}
+                    
+                    {dummyData[0].date}
+                    {dummyData[0].content}
+                </div>
 
-        <div className='content__wrapper'>
+                <div>
+                    {dummyData[1].content}
+                </div>
 
-            <div >
-                {logs.map((it) => {
-                    <li key={it.id}>
-                    {it.content}
+                <div>
+                    {dummyData[2].content}
+                </div>
+
+            </div>
+
+            <ul className="list_day">
+                {dummy.words.map((log) => (
+                    <li key={log.id}>
+                        <div>
+                        Day {log.day}
+                        </div>
+                        <p>{log.content}</p>
                     </li>
-                })}
-                
-                {dummyData[0].date}
-                {dummyData[0].content}
-                
-            </div>
-
-            <div>
-                {dummyData[1].content}
-                
-            </div>
-
-            
-            <div>
-                {dummyData[2].content}
-                
-            </div>
+                ))}
+            </ul>
+        </>
 
 
-        </div>
 
-        <ul className="list_day">
-            {dummy.words.map((log) => (
-                <li key={log.id}>
-                    <div>
-                    Day {log.day}
-                    </div>
-                    <p>{log.content}</p>
-                </li>
-
-            ))}
-        </ul>
+        }
 
         <section className='etc'>
         <h2>New section</h2>

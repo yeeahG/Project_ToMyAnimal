@@ -28,12 +28,12 @@ const AnimalPage = () => {
               <div className='details__description'>
                 <h1>I'm choco</h1>
                 <p>2years old</p>
-                <p>Lorem</p>
+                <p>1.5kg</p>
               </div>
 
               <div className='stack'>
                 <button className='details__btn' aria-expanded="false">
-                  <span>Log</span>
+                  <span>접종내역</span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="14.255" height="14.255">
                     <path fill='none' stroke="currentcolor" strokeWidth="1.5" d="M7.129 0v14.255M0 7.129h14.255"></path>
                   </svg>
