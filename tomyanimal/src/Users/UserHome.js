@@ -1,19 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import AnimalAccount from './AnimalAccount';
+import UserAccount from './UserAccount';
 import './UserHome.css'
 
 const UserHome = () => {
-    const navigate = useNavigate();
+  const [activeIndex, setActiveIndex]=useState(0);
 
-    const Logout = () => {
-        // console.log("log out");
-        // setUser({name: "", id: ""});
-    
-        // localStorage.clear();
-        //localStorage.removeItem('logininfo');
-        localStorage.removeItem('logintoken');
-        navigate.push('/')
+  const tabClickHandler=(index)=>{
+    setActiveIndex(index);
+  };
+
+  const tabContArr=[
+    {
+      tabTitle:(
+        <li className={activeIndex===0 ? "is-active" : ""} onClick={()=>tabClickHandler(0)}> Overview </li>
+      ),
+      tabCont:(
+        <div> <UserAccount /> </div>
+      )
+    },
+    {
+      tabTitle:(
+        <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}> My animal </li>
+      ),
+      tabCont:(
+        <div> <AnimalAccount/> </div>
+      )
     }
+  ];
 
 
   return (
@@ -22,7 +37,7 @@ const UserHome = () => {
       <div className='header'>
         <div className='space'></div>
         <div className='header__wrapper'>
-          <h1 className='header__content'>user Info</h1>
+          <h1 className='header__content'>My account</h1>
           <div className='header__detail'>
             <p>
               details
@@ -35,20 +50,32 @@ const UserHome = () => {
       <div className='line'></div>
       <div className='space'></div>
 
-      <div className='userinfo__content'>
 
-        {localStorage.getItem('userinfo')}
-        <div className='welcome'>
-          <h2>Welcome, <span></span></h2>
-          <button onClick={Logout}>
-            <a href="/user">Logout</a>
-          </button>
-          <button>
-            <a href="/">Home</a>
-          </button>
+      <section className='wrapper'>
+
+        <div className='left__menu'>
+          <ul className='menu__wrap'>
+            <li className='menu__list'>My Account</li>
+            {tabContArr.map((section, index)=>{
+              return section.tabTitle
+            })}
+          </ul>
         </div>
 
-      </div>
+
+        <div className='userinfo__content'>
+
+          <div>{tabContArr[activeIndex].tabCont}</div>
+        </div>
+
+        <div className='animalinfo__content'>
+     
+        </div>
+
+      </section>
+
+
+
     </div>
   )
 }
