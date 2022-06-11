@@ -1,0 +1,220 @@
+/*HEADER*/
+.header {
+    color: rgb(0, 0, 0);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.space {
+    display: block;
+    width: 100%;
+    padding-top: 5.33333vw;
+}
+
+.header__wrapper {
+    width: 100%;
+    margin: 10.6667vw 2.66667vw 4.26667vw;
+}
+
+.header__content {
+    font-size: 8.8vw;
+    font-weight: 700;
+    line-height: 1;
+    padding: 3.73333vw 0px 2.66667vw;
+    letter-spacing: -0.015em;
+    max-width: 100%;
+    margin: 0px;
+    color: rgb(0, 0, 0);
+}
+
+.header__detail {
+    font-size: 3.73333vw;
+    font-weight: 300;
+    line-height: 6.4vw;
+    margin-top: 0px;
+    white-space: pre-wrap;
+    padding: 0px 2.66667vw;
+    color: rgb(0, 0, 0);
+}
+
+.line {
+    border-top: 0.4vw solid rgb(0, 0, 0);
+    margin: 0px auto;
+    max-width: 94.6667vw;
+}
+
+/*MAP*/
+.map__container {
+    padding: 3vw;
+}
+
+
+
+
+
+/*LEFT*/
+ul {
+    list-style: none;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.left__menu {
+    /* position: sticky; */
+    top: 3.7rem;
+    max-height: calc(100vh - 3.7rem);
+    overflow-y: auto;
+    display: grid;
+    grid-row-gap: 1rem;
+}
+
+
+.menu__list {
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1.38889vw;
+}
+
+/*MAP*/
+.place__content {
+    padding: 4rem 1rem 4rem 1rem;
+    display: grid;
+    grid-gap: 1rem;
+}
+
+.content__wrapper {
+    align-items: start;
+    display: grid;
+    grid-row-gap: 2rem;
+    grid-column-gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.grid {
+    display: grid;
+}
+
+/*사진*/
+.place__form {
+    position: relative;
+    /* background: #efede7; */
+    display: grid;
+    grid-area: 1/-1;
+}
+
+
+/*내용*/
+.info__details {
+    display: grid;
+    align-content: start;
+    grid-row-gap: 3rem;
+}
+
+.details__description {
+    display: grid;
+    grid-row-gap: 1rem;
+}
+
+
+
+@media (min-width: 600px) {
+    .content__wrapper {
+        grid-auto-flow: column;
+        grid-auto-columns: 1fr;
+    }
+    .etc h2 {
+        letter-spacing: -0.05ch;
+    }
+}
+
+
+@media (min-width: 900px) {
+    /*HEADER*/
+    .info__container {
+        margin: 0px 2.77778vw;
+    }
+    .space {
+        padding-top: 1.38889vw;
+    }
+    .header__wrapper {
+        position: relative;
+        margin: 0px;
+    }
+    .header__content {
+        font-size: 5.34722vw;
+        padding: 0px;
+        max-width: 100%;
+    }
+    .header__detail {
+        font-size: 0.972222vw;
+        line-height: 1.66667vw;
+        font-weight: 700;
+        margin-top: 1.45833vw;
+        padding: 0px 0px 0vw;
+    }
+    .header__detail p {
+        margin: auto;
+        font-weight: normal;
+        max-width: 27.3611vw;
+    }
+    .line {
+        border-top: 0.104167vw solid rgb(0, 0, 0);
+    }
+
+
+    .place__container {
+        margin: 0px 2.77778vw;
+    }
+
+
+    /*CONTENT*/
+    .place__content {
+        grid-template-columns: 1fr 3fr;
+    }
+        
+        /*LEFT*/
+        .left__menu {
+            /* display: block;
+            grid-column: span 2 / auto; */
+        }
+    
+        /*MENU LIST*/
+        .collection__content {
+            font-size: 0.972222vw;
+            line-height: 1.52778vw;
+            letter-spacing: -0.015em;
+            display: inline-block;
+            position: relative;
+        }
+        .collection__content::after {
+            content: "";
+            width: 100%;
+            display: block;
+            transform: scaleX(0);
+            transform-origin: left center;
+            border-bottom: 0.104167vw solid black;
+            transition: none 0s ease 0s;
+            bottom: 0.486111vw;
+        }
+    
+        /*반려동물 정보 내용*/
+        .content__wrapper {
+            grid-column-gap: 3rem;
+        }
+    
+        .animal__blob {
+            width: 20vw;
+        }
+
+}
