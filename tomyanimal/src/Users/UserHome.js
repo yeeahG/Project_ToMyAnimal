@@ -63,7 +63,6 @@ const UserHome = () => {
 
 
         <div className='userinfo__content'>
-
           <div>{tabContArr[activeIndex].tabCont}</div>
         </div>
 

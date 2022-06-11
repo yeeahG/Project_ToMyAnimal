@@ -26,7 +26,7 @@ const User = () => {
         <UserHome />
         :
         <div className='user__container'style={style}>
-            <UserLogin />
+          <UserLogin />
         </div>
         }
     </div>
