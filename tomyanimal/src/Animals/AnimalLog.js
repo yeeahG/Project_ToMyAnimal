@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer, useState } from 'react'
+import dummy from './data.json'
 import './AnimalInfo.css'
 
 const reducer = (state, action) => {
@@ -86,31 +87,43 @@ const AnimalLog = () => {
         </div>
 
         <div className='content__wrapper'>
-            <div className='animal__imageform'>
+            <div >
                 {logs.map((it) => {
                     <li key={it.id}>
                     {it.content}
                     </li>
                 })}
                 
+                {dummyData[0].date}
                 {dummyData[0].content}
                 
             </div>
 
-            <div className='info__details'>
-
-                <div className='details__description'>
-                    <h1>출력</h1>
-                    
-                </div>
+            <div>
+                {dummyData[1].content}
+                
             </div>
 
-            <div className='boxInner' >
-
-
+            
+            <div>
+                {dummyData[2].content}
+                
             </div>
+
 
         </div>
+
+        <ul className="list_day">
+            {dummy.words.map((log) => (
+                <li key={log.id}>
+                    <div>
+                    Day {log.day}
+                    </div>
+                    <p>{log.content}</p>
+                </li>
+
+            ))}
+        </ul>
 
         <section className='etc'>
         <h2>New section</h2>
