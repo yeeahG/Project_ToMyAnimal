@@ -1,3 +1,8 @@
+.userinfo__container {
+    display: flex;
+    flex-direction: column;
+}
+
 .header {
     color: rgb(0, 0, 0);
     text-align: center;
@@ -50,10 +55,111 @@
     max-width: 94.6667vw;
 }
 
-.userinfo__content {
-    padding: 0 1rem;
+
+.wrapper {
+    display: grid;
+    grid-gap: 1rem;
+    padding: 4rem 1rem 4rem 1rem;
 }
 
+
+/*LEFT*/
+ul {
+    list-style: none;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.left__menu {
+    /* position: sticky; */
+    top: 3.7rem;
+    max-height: calc(100vh - 3.7rem);
+    overflow-y: auto;
+    display: grid;
+    grid-row-gap: 1rem;
+}
+
+
+.menu__list {
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1.38889vw;
+}
+
+/*USER DETAIL TABLE*/
+.userinfo__content {
+    display: grid;
+    grid-row-gap: 2rem;
+    padding: 1rem 1rem 4rem;
+    max-width: 30rem;
+    width: 100%;
+    align-self: center;
+}
+
+.userinfo__subtitle {
+    display: flex;
+    justify-content: space-between;
+}
+
+.userinfo__table {
+    display: grid;
+    width: 100%;
+    overflow-x: auto;
+    border-bottom: 1px solid;
+}
+
+.userinfo__table table {
+    border-spacing: 0;
+}
+
+.userinfo__table td {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    vertical-align: top;
+    border-top: 1px solid;
+}
+
+.userinfo__table tr:first-child td {
+    border-top: none;
+}
+
+.welcome {
+    display: flex;
+}
+
+.welcome__btn {
+    text-transform: uppercase;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    gap: 0.5rem;
+    font-size: 0.972222vw;
+    font-weight: 700;
+    justify-content: space-between;
+    justify-self: start;
+    text-align: left;
+    cursor: pointer;
+
+    background: transparent;
+    color: #559df2;
+    border: 1px solid #559df2;
+
+    padding: 0.25rem 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: calc(2rem + 2px);
+    line-height: 1rem;
+    border-radius: 100vw;
+}
+
+.welcome__btn:hover {
+    color: white;
+    background-color: #559df2;
+}
 
 
 @media (min-width: 900px) {
@@ -90,6 +196,12 @@
     
     /*CONTENT*/
     .userinfo__content {
-
+        /* grid-template-columns: 1fr 3fr; */
     }
+
+    .wrapper {
+        grid-template-columns: 1fr 3fr;
+    }
+
+
 }

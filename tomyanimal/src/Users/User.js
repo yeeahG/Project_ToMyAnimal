@@ -22,7 +22,6 @@ const User = () => {
 
   return (
     <div className='login__container'>
-        <h3>Hello </h3>
         {localStorage.getItem('logintoken') ? 
         <UserHome />
         :
