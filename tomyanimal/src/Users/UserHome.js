@@ -57,10 +57,10 @@ const UserHome = () => {
           GET method로 userName, userPhoneNumberOrUserId 가져오기
 
         <div className='welcome'>
-          <button onClick={Logout}>
+          <button onClick={Logout} className='welcome__btn'>
             <a href="/user">Logout</a>
           </button>
-          <button>
+          <button className='welcome__btn'>
             <a href="/">Home</a>
           </button>
         </div>
