@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useEffect, useReducer, useState, useRef } from 'react'
 import dummy from './data.json'
 import './AnimalInfo.css'
 import { Navigate } from 'react-router-dom';
@@ -66,13 +66,24 @@ const dummyData = [
 ]
 
 const AnimalLog = () => {
+    const [data, dispatch] = useReducer(reducer, dummyData);
     const [sortType, setSortType] = useState('latest');
     const [logs, setLogs] = useState(dummyData);
     const [isOpen, setOpen] = useState(false);
 
-    // const dummyList = logs.map(log => 
-    //     {log.content}
-    // )
+    //date state를 변화시킬 수 있는 dispatch 함수들
+    const dataId = useRef(0);
+    //CREATE
+    const onCreate = (date, content, emotion) => {
+        dispatch({type : "CREATE", data:{
+        id: dataId.current, 
+        date: new Date(date).getTime(),
+        content,
+        emotion
+        }});
+        dataId.current += 1;
+    }
+
 
     console.log(logs);
 
@@ -83,6 +94,7 @@ const AnimalLog = () => {
                 <option value='latest'>최신순</option>
                 <option value='oldest'>오래된순</option>
             </select>
+
             <button onClick={()=>setOpen(!isOpen)}>
                 {isOpen ? "Close" : "Write"}
             </button>
@@ -98,7 +110,7 @@ const AnimalLog = () => {
                 <textarea placeholder='What about your animal?'></textarea>
                 <input type="file" accept="image/*"/>
             </div>
-            <button className='upload__btn'>upload</button>
+            <button className='upload__btn' >upload</button>
         </div>
         :
         <>
@@ -127,8 +139,9 @@ const AnimalLog = () => {
             <ul className="list_day">
                 {dummy.words.map((log) => (
                     <li key={log.id}>
-                        <div>
-                        Day {log.day}
+                        <div className='log__content'>
+                            <h3>Day {log.day}</h3>
+                            <button>edit</button>
                         </div>
                         <p>{log.content}</p>
                     </li>
