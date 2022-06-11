@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useEffect, useReducer, useState, useRef } from 'react'
 import dummy from './data.json'
 import './AnimalInfo.css'
 import { Navigate } from 'react-router-dom';
@@ -66,79 +66,92 @@ const dummyData = [
 ]
 
 const AnimalLog = () => {
+    const [data, dispatch] = useReducer(reducer, dummyData);
     const [sortType, setSortType] = useState('latest');
     const [logs, setLogs] = useState(dummyData);
     const [isOpen, setOpen] = useState(false);
 
-    // const dummyList = logs.map(log => 
-    //     {log.content}
-    // )
+    //date state를 변화시킬 수 있는 dispatch 함수들
+    const dataId = useRef(0);
+    //CREATE
+    const onCreate = (date, content, emotion) => {
+        dispatch({type : "CREATE", data:{
+        id: dataId.current, 
+        date: new Date(date).getTime(),
+        content,
+        emotion
+        }});
+        dataId.current += 1;
+    }
+
 
     console.log(logs);
 
   return (
     <>
-        <div>
+        <div className='navi__container'>
             <select>
                 <option value='latest'>최신순</option>
                 <option value='oldest'>오래된순</option>
             </select>
+
             <button onClick={()=>setOpen(!isOpen)}>
                 {isOpen ? "Close" : "Write"}
             </button>
         </div>
 
-            {isOpen &&
-            <div className='input__container'>
+        {isOpen ?
+        <div className='input__container'>
+            <div className='title__container'>
                 <span>Title </span><input></input>
                 <span>Day </span><input type="date"></input>
-                <div className='content__container'>
-                    <span>Content </span><textarea></textarea>
-                    <input type="file" accept="image/*"/>
-                </div>
-                <button className='upload__btn'>upload</button>
             </div>
-            }
-        <div className='content__wrapper'>
-
-
-            <div >
-                {logs.map((it) => {
-                    <li key={it.id}>
-                    {it.content}
-                    </li>
-                })}
-                
-                {dummyData[0].date}
-                {dummyData[0].content}
-                
+            <div className='content__container'>
+                <textarea placeholder='What about your animal?'></textarea>
+                <input type="file" accept="image/*"/>
             </div>
-
-            <div>
-                {dummyData[1].content}
-                
-            </div>
-
-            
-            <div>
-                {dummyData[2].content}
-                
-            </div>
-
-
+            <button className='upload__btn' >upload</button>
         </div>
+        :
+        <>
+            <div className='content__wrapper'>
+                <div >
+                    {logs.map((it) => {
+                        <li key={it.id}>
+                        {it.content}
+                        </li>
+                    })}
+                    
+                    {dummyData[0].date}
+                    {dummyData[0].content}
+                </div>
 
-        <ul className="list_day">
-            {dummy.words.map((log) => (
-                <li key={log.id}>
-                    <div>
-                    Day {log.day}
-                    </div>
-                    <p>{log.content}</p>
-                </li>
+                <div>
+                    {dummyData[1].content}
+                </div>
 
-            ))}
-        </ul>
+                <div>
+                    {dummyData[2].content}
+                </div>
+
+            </div>
+
+            <ul className="list_day">
+                {dummy.words.map((log) => (
+                    <li key={log.id}>
+                        <div className='log__content'>
+                            <h3>Day {log.day}</h3>
+                            <button>edit</button>
+                        </div>
+                        <p>{log.content}</p>
+                    </li>
+                ))}
+            </ul>
+        </>
+
+
+
+        }
 
         <section className='etc'>
         <h2>New section</h2>
