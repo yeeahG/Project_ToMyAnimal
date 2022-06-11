@@ -52,21 +52,5 @@ public class MemberController {
         return userSummary;
     }
 
-    @PostMapping("/users/delete")
-    public String delete(String userId, String userPassword){
-        Member member = memberRepository.findByUserId(userId)
-                .get();
-        Member member1 = memberRepository.findByUserPassword(userPassword).get();
-
-        System.out.println("id :"+ member + "pw:"+member1);
-        return "";
-    }
-
-
-
-
-
-
-
 
 }
