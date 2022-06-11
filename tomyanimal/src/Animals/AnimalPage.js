@@ -1,45 +1,10 @@
 import React from 'react'
 import './AnimalInfo.css'
 
-const AnimlInfo = () => {
+const AnimalPage = () => {
   return (
-    <div className='info__container'>
-
-      <div className='header'>
-        <div className='space'></div>
-        <div className='header__wrapper'>
-          <h1 className='header__content'>Header</h1>
-          <div className='header__detail'>
-            <p>details</p>
-          </div>
-        </div>
-      </div>
-        
-      <div className='space'></div>
-      <div className='line'></div>
-      <div className='space'></div>
-
-      <div className='info__content'>
-        {/* <div className='grid'> */}
-
-          <div className='left__menu'>
-            <ul className='menu__wrap'>
-              <li className='menu__list'>My animal</li>
-              <div className='collection'>
-                <a className='collection__content'>Info</a>
-              </div>
-              <div className='collection'>
-                <a className='collection__content' href='/animal/log'>Log</a>
-              </div>
-              <div className='collection'>
-                <a className='collection__content'>Check up</a>
-              </div>
-            </ul>
-          </div>
-
-          <div className='content__wrapper'>
-
-            <div className='animal__imageform'>
+    <div className='content__wrapper'>
+        <div className='animal__imageform'>
               <svg className="animal__blob" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg">
                 <mask id="mask0" mask-type="alpha">
                   <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 
@@ -80,22 +45,8 @@ const AnimlInfo = () => {
                 </div>
               </div>
             </div>
-
-          </div>
-        {/* </div> */}
-
-      </div>
-
-        
-
-      <section className='etc'>
-        <h2>New section</h2>
-      </section>
-
-
-      
     </div>
   )
 }
 
-export default AnimlInfo
+export default AnimalPage

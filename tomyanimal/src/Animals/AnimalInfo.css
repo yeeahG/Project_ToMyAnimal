@@ -156,6 +156,15 @@ li {
     cursor: pointer;
 }
 
+/*---------------log-----------------*/
+.list_day {
+    align-items: start;
+    display: grid;
+    grid-row-gap: 2rem;
+    grid-column-gap: 2rem;
+    margin-bottom: 2rem;
+}
+
 /**/
 .etc {
     display: grid;
@@ -175,6 +184,12 @@ li {
         grid-auto-flow: column;
         grid-auto-columns: 1fr;
     }
+
+    .list_day {
+        grid-auto-flow: column;
+        grid-auto-columns: 1fr;
+    }
+    
     .etc h2 {
         letter-spacing: -0.05ch;
     }
@@ -249,6 +264,11 @@ li {
 
     .animal__blob {
         width: 20vw;
+    }
+
+    /*log*/
+    .list_day {
+        grid-column-gap: 3rem;
     }
 
     /**/

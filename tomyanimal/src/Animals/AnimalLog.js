@@ -1,56 +1,135 @@
-import React from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
+import dummy from './data.json'
+import './AnimalInfo.css'
+
+const reducer = (state, action) => {
+    //state 상태관리 로직들
+    let newState = [];
+  
+    switch(action.type) {
+      case 'INIT':{
+        return action.data;
+      }
+      case 'CREATE':{
+        // const newItem = {
+        //   ...action.data
+        // }
+        newState = [action.data, ...state];
+        break;
+      }
+      case 'REMOVE':{
+        newState = state.filter((it) => it.id !== action.targetId);
+        break;
+      }
+      case 'EDIT':{
+        newState = state.map((it) => it.id === action.data.id ? {...action.data} : it);
+        break;
+      }
+      default:
+        return state;
+    }
+    return newState;
+  }
+
+const dummyData = [
+    {
+      id:1, 
+      emotion: 1,
+      content: "Today 1",
+      date: 1652940360079,
+    },
+    {
+      id:2, 
+      emotion: 2,
+      content: "Today 2",
+      date: 1652940360082,
+    },
+    {
+      id:3, 
+      emotion: 3,
+      content: "Today 3",
+      date: 1652940360182,
+    },
+    {
+      id:4, 
+      emotion: 4,
+      content: "Today 4",
+      date: 1652940360192,
+    },
+    {
+      id:5, 
+      emotion: 2,
+      content: "Today 5",
+      date: 1852940360192,
+    },
+]
 
 const AnimalLog = () => {
-  return (
-    <div>
-        <div className='header'>
-            <div className='space'></div>
-            <div className='header__wrapper'>
-                <h1 className='header__content'>Header</h1>
-                <div className='header__detail'>
-                    <p>details</p>
-                </div>
-            </div>
-        </div>
-        
-        <div className='space'></div>
-        <div className='line'></div>
-        <div className='space'></div>
+    const [sortType, setSortType] = useState('latest');
+    const [logs, setLogs] = useState(dummyData);
+    console.log(dummyData[1].content);
 
-        <div className='info__content'>
-        
-        <div className='left__menu'>
-            <ul className='menu__wrap'>
-            <li className='menu__list'>My animal</li>
-            <div className='collection'>
-                <a className='collection__content' href='/animal'>Info</a>
-            </div>
-            <div className='collection'>
-                <a className='collection__content' href='./log'>Log</a>
-            </div>
-            <div className='collection'>
-                <a className='collection__content'>Details</a>
-            </div>
-            </ul>
+    // const dummyList = logs.map(log => 
+    //     {log.content}
+    // )
+
+    console.log(logs);
+
+
+  return (
+    <>
+        <div>
+            <select>
+                <option value='latest'>최신순</option>
+                <option value='oldest'>오래된순</option>
+            </select>
+            <button>write</button>
         </div>
 
         <div className='content__wrapper'>
-            <div>
-            입력
+            <div >
+                {logs.map((it) => {
+                    <li key={it.id}>
+                    {it.content}
+                    </li>
+                })}
+                
+                {dummyData[0].date}
+                {dummyData[0].content}
+                
             </div>
+
             <div>
-            목록
+                {dummyData[1].content}
+                
             </div>
-        </div>
+
+            
+            <div>
+                {dummyData[2].content}
+                
+            </div>
+
 
         </div>
 
-        
+        <ul className="list_day">
+            {dummy.words.map((log) => (
+                <li key={log.id}>
+                    <div>
+                    Day {log.day}
+                    </div>
+                    <p>{log.content}</p>
+                </li>
+
+            ))}
+        </ul>
 
         <section className='etc'>
         <h2>New section</h2>
         </section>
-    </div>
+    
+    </>
   )
 }
 
