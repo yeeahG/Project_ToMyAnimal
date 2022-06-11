@@ -140,6 +140,50 @@ li {
     grid-row-gap: 1rem;
 }
 
+.input__container {
+
+}
+
+.input__container textarea {
+    resize: vertical;
+    width: 30vw;
+}
+
+.content__container {
+
+}
+
+.upload__btn {
+    text-transform: uppercase;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    gap: 0.5rem;
+    font-size: 0.972222vw;
+    font-weight: 700;
+    justify-content: space-between;
+    justify-self: start;
+    text-align: left;
+    cursor: pointer;
+
+    background: transparent;
+    color: #559df2;
+    border: 1px solid #559df2;
+
+    padding: 0.25rem 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: calc(2rem + 2px);
+    line-height: 1rem;
+    border-radius: 100vw;
+}
+
+.upload__btn:hover {
+    color: white;
+    background-color: #559df2;
+}
+
 /**/
 .stack {
     display: flex;

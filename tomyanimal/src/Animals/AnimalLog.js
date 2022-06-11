@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import dummy from './data.json'
 import './AnimalInfo.css'
+import { Navigate } from 'react-router-dom';
 
 const reducer = (state, action) => {
     //state 상태관리 로직들
@@ -67,14 +68,13 @@ const dummyData = [
 const AnimalLog = () => {
     const [sortType, setSortType] = useState('latest');
     const [logs, setLogs] = useState(dummyData);
-    console.log(dummyData[1].content);
+    const [isOpen, setOpen] = useState(false);
 
     // const dummyList = logs.map(log => 
     //     {log.content}
     // )
 
     console.log(logs);
-
 
   return (
     <>
@@ -83,10 +83,25 @@ const AnimalLog = () => {
                 <option value='latest'>최신순</option>
                 <option value='oldest'>오래된순</option>
             </select>
-            <button>write</button>
+            <button onClick={()=>setOpen(!isOpen)}>
+                {isOpen ? "Close" : "Write"}
+            </button>
         </div>
 
+            {isOpen &&
+            <div className='input__container'>
+                <span>Title </span><input></input>
+                <span>Day </span><input type="date"></input>
+                <div className='content__container'>
+                    <span>Content </span><textarea></textarea>
+                    <input type="file" accept="image/*"/>
+                </div>
+                <button className='upload__btn'>upload</button>
+            </div>
+            }
         <div className='content__wrapper'>
+
+
             <div >
                 {logs.map((it) => {
                     <li key={it.id}>
