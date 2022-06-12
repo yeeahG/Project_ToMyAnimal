@@ -1,4 +1,4 @@
-package com.example.tomyanimal.board;
+package com.example.tomyanimal.board.service;
 
 import com.example.tomyanimal.controller.MemberController;
 import com.example.tomyanimal.model.Board;
