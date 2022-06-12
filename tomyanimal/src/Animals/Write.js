@@ -32,7 +32,9 @@ const Write = () => {
     }
 
     onCreate(date, content);
-    navigate('/animal', {replace: true})
+    navigate('/animal')
+    alert("작성이 완료되었습니다. ")
+    
   }
   
   return (
