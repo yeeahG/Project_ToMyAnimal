@@ -13,7 +13,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Member {
+public class Member extends Time{
 
 
     @Id
@@ -41,11 +41,21 @@ public class Member {
     @JoinTable(name = "member_roles", joinColumns = @JoinColumn(name = "member_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+
     // Postman 입력 값
+    @Builder
     public Member(String userId, String username, String phoneNumber, String password) {
         this.userId = userId;
         this.userName = username;
         this.userPhoneNumber = phoneNumber;
         this.userPassword = password;
     }
+
+    // 회원정보 수정 기능
+    public Member update(String userPhoneNumber, String userPassword){
+        this.userPhoneNumber=userPhoneNumber;
+        this.userPassword = userPassword;
+        return this;
+    }
+
 }
