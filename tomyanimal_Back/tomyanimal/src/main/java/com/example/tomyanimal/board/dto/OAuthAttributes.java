@@ -2,6 +2,7 @@ package com.example.tomyanimal.board.dto;
 
 import com.example.tomyanimal.model.Member;
 //import com.example.tomyanimal.model.RoleName;
+import com.example.tomyanimal.model.RoleName;
 import lombok.Builder;
 import lombok.Getter;
 

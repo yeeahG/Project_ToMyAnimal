@@ -68,13 +68,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll().antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/user/checkUsernameAvailability", "/api/user/checkEmailAvailability").permitAll()
                 .antMatchers(HttpMethod.GET, "/board/**", "/api/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/board/**").permitAll().anyRequest().authenticated().and()
-                .formLogin()
-                .loginPage("/api/auth/siginin") // 로그인 페이지 주소 설정
-                .defaultSuccessUrl("/")
-                .and()
-                .logout().logoutUrl("/")
-                .and();
+                .antMatchers(HttpMethod.POST, "/board/**").permitAll().anyRequest().authenticated().and();
+//                .formLogin()
+//                .loginPage("/api/auth/signin") // 로그인 페이지 주소 설정
+//                .defaultSuccessUrl("/")
+//                .and()
+//                .logout().logoutUrl("/")
+//                .and();
 //                .oauth2Login().userInfoEndpoint().userService(customOAuth2UserService);
                 
 
