@@ -130,7 +130,7 @@ const Place = () => {
           </ul>
         </div>
 
-        <div className='content__wrapper'>
+        <div className='place__wrapper'>
           <div className='place__form'>
             {tabContArr[activeIndex].tabCont}
           </div>

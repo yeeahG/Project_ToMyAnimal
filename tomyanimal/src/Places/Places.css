@@ -93,7 +93,7 @@ li {
     grid-gap: 1rem;
 }
 
-.content__wrapper {
+.place__wrapper {
     /* align-items: start;
     display: grid;
     grid-row-gap: 2rem;
@@ -157,7 +157,7 @@ li {
 }
 
 @media (min-width: 600px) {
-    .content__wrapper {
+    .place__wrapper {
         grid-auto-flow: column;
         grid-auto-columns: 1fr;
     }
@@ -241,7 +241,7 @@ li {
     }
     
     /*내용*/
-    .content__wrapper {
+    .place__wrapper {
         /* grid-column-gap: 3rem; */
         display: grid;
         gap: 1.38889vw;
