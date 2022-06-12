@@ -80,6 +80,8 @@ const AnimalHome = () => {
   //date state를 변화시킬 수 있는 dispatch 함수들
   const dataId = useRef(0);
 
+  
+
   const tabClickHandler=(index)=>{
     setActiveIndex(index);
   };

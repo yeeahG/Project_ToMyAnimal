@@ -288,6 +288,7 @@ li {
     .list_day {
         grid-auto-flow: column;
         grid-auto-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
     }
     
     .etc h2 {
