@@ -91,7 +91,7 @@ const AnimalLog = () => {
 
       {isOpen ?
       <div className='input__container'>
-        <Write />
+        <Write isOpen={isOpen} />
       </div>
         :
       <>
