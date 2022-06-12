@@ -2,6 +2,7 @@ package com.example.tomyanimal.config;
 
 import com.example.tomyanimal.security.CustomUserDetailsService;
 import com.example.tomyanimal.security.JwtAuthenticationEntryPoint;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 // 메소드 보안
 @EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     CustomUserDetailsService customUserDetailsService;
@@ -30,6 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     // JwtAuthenticationEntryPoint : 인증 절차 없이 자원에 엑세스 하면 클라이언트에게 401 오류 반환
     private JwtAuthenticationEntryPoint unauthorizedHandler;
+
+//    @Autowired
+//    private CustomOAuth2UserService customOAuth2UserService;
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
@@ -53,14 +58,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    HttpSecurity 구성과 같은 보안 기능을 구성하는데 사용
 //    csrf, sessionManagement등의 보호 기능 및 규칙을 추가 할 수 있음
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
+        http.cors().and().csrf().disable()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().authorizeRequests()
                 .antMatchers("/", "/favicon.ico", "/**/*.png", "/**/*.gif", "/**/*.svg", "/**/*.jpg", "/**/*.html",
                         "/**/*.css", "/**/*.js")
                 .permitAll().antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/user/checkUsernameAvailability", "/api/user/checkEmailAvailability").permitAll()
                 .antMatchers(HttpMethod.GET, "/board/**", "/api/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/board/**").permitAll().anyRequest().authenticated().and();
+                .antMatchers(HttpMethod.POST, "/board/**").permitAll().anyRequest().authenticated().and()
+                .formLogin()
+                .loginPage("/api/auth/siginin") // 로그인 페이지 주소 설정
+                .defaultSuccessUrl("/")
+                .and()
+                .logout().logoutUrl("/")
+                .and();
+//                .oauth2Login().userInfoEndpoint().userService(customOAuth2UserService);
+                
 
     }
 }
