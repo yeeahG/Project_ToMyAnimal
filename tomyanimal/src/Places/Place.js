@@ -14,6 +14,40 @@ const Place = () => {
 
   const [isLoading, setisLoading] = useState(true);
 
+  /*Tab menu*/
+  const [activeIndex, setActiveIndex]=useState(0);
+
+  const tabClickHandler=(index)=>{
+    setActiveIndex(index);
+  };
+
+  const tabContArr=[
+    {
+      tabTitle:(
+        <li className={activeIndex===0 ? "is-active" : ""} onClick={()=>tabClickHandler(0)}>전체 </li>
+      ),
+      tabCont:(
+        <div><PlaceList placeData={placeData} isLoading={isLoading} /></div>
+      )
+    },
+    {
+      tabTitle:(
+        <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}> 서울</li>
+      ),
+      tabCont:(
+        <div> 서울지역 </div>
+      )
+    },
+    {
+      tabTitle:(
+        <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}>대구</li>
+      ),
+      tabCont:(
+        <div> 대구지역 </div>
+      )
+    }
+  ];
+
   //console.log(placeData);
 
   useEffect(() => {
@@ -57,48 +91,42 @@ const Place = () => {
         <Map />
       </div>
 
+      <Header 
+        setType={setType} setRatings={setRatings} setCoordinates={setCoordinates}
+      />
+
       <div className='place__content'>
 
         <div className='left__menu'>
           <ul className='menu__wrap'>
             <li className='menu__list'>지역들</li>
-            <div className='collection'>
-              <a className='collection__content'>전체</a>
-            </div>
-            <div className='collection'>
-              <a className='collection__content' href='/places/seoul'>Seoul</a>
-            </div>
-            <div className='collection'>
-              <a className='collection__content' href='/places/daegu'>Daegu</a>
-            </div>
+            {tabContArr.map((section, index)=>{
+              return section.tabTitle
+            })}
+
           </ul>
         </div>
 
         <div className='content__wrapper'>
           <div className='place__form'>
-            
-            <Header 
-              setType={setType} setRatings={setRatings} setCoordinates={setCoordinates}
-            />
-
-            <PlaceList placeData={placeData} isLoading={isLoading} />
+            {tabContArr[activeIndex].tabCont}
           </div>
 
-          <div className='info__details'>
+          {/*<div className='info__details'>
 
             <div className='details__description'>
               <h1>이름</h1>
-              {/* {places[0].title} */}
-              <p>주소</p>
+               {places[0].title}
+              {/* <p>주소</p> */}
               {/* {places[0].addr} */}
               {/* {places?.map(elm => {
                 elm.title
                 elm.addr
-              })} */}
+              })}
 
             </div>
 
-            <div className='stack'>
+            {/* <div className='stack'>
               <button className='details__btn' aria-expanded="false">
                 <span>리뷰</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="14.255" height="14.255">
@@ -109,12 +137,13 @@ const Place = () => {
                 <p>세부내용
                 </p>
               </div>
-            </div>
+            </div> 
 
-          </div>
+          </div>*/}
+
+          
 
         </div>
-
         
 
 
