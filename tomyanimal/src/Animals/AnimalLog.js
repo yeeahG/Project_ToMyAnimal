@@ -47,8 +47,8 @@ const dummyData = [
 ]
 
 const sortOptionList = [
-    {value: "latest", name: "최신순"},
-    {value: "oldest", name: "오래된 순"},
+  {value: "latest", name: "최신순"},
+  {value: "oldest", name: "오래된 순"},
 ]
 
 const AnimalLog = () => {
@@ -78,10 +78,6 @@ const AnimalLog = () => {
   return (
     <>
       <div className='navi__container'>
-        <select>
-          <option value='latest' name='최신순'>최신순</option>
-          <option value='oldest' name='오래된순'>오래된순</option>
-        </select>
         <ControlMenu 
           value={sortType} 
           onChange={setSortType}

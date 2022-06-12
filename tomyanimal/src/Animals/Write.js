@@ -10,7 +10,6 @@ const Write = () => {
   
   return (
     <div>
-        {/* <form onSubmit={submitHandler}> */}
         <form>
             <div className='title__container'>
                 <span>Title </span>
