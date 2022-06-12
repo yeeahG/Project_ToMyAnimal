@@ -1,5 +1,6 @@
 import React from 'react'
 import PlaceDetail from './PlaceDetail';
+import './Places.css'
 
 const PlaceList = ( {placeData, isLoading} ) => {
   //console.log(placeData[0]);
@@ -14,11 +15,10 @@ const PlaceList = ( {placeData, isLoading} ) => {
   ) */}
 
   return (
-    <div>
-      PlaceList
-      {placeData && placeData.map((place, i) => <PlaceDetail place={place} key={i}/>
+    <div className='place__detail__list'>
+      {placeData && placeData.map((place, i) => 
+        <PlaceDetail place={place} key={i}/>
       )}
-      
     </div>
   )
 }
