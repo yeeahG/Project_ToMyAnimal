@@ -24,10 +24,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation group: 'com.auth0', name: 'java-jwt', version: '3.10.3'
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.3'
 	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.12.4'
 
 
