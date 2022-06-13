@@ -1,8 +1,7 @@
-package team1.toMyAnimal.domain;
+package team1.toMyAnimal.domain.dto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import team1.toMyAnimal.domain.member.Role;
 import team1.toMyAnimal.domain.member.RoleType;
@@ -15,7 +14,6 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-@Profile("local")
 public class InitDB {
     private final RoleRepository roleRepository;
 

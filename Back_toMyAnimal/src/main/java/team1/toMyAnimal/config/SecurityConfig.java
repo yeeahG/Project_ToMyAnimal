@@ -1,6 +1,8 @@
 package team1.toMyAnimal.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -8,29 +10,48 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import team1.toMyAnimal.security.CustomUserDetailsService;
+import team1.toMyAnimal.security.JwtAuthenticationFilter;
+import team1.toMyAnimal.security.handler.CustomAccessDeniedHandler;
+import team1.toMyAnimal.security.handler.CustomAuthenticationEntryPoint;
+import team1.toMyAnimal.service.sign.TokenService;
 
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final TokenService tokenService;
+    private final CustomUserDetailsService userDetailsService;
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        super.configure(web);
+        web.ignoring().mvcMatchers("/exception/**");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .httpBasic().disable() // 1
-                .formLogin().disable() // 2
-                .csrf().disable() // 3
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 4
+                .httpBasic().disable()
+                .formLogin().disable()
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll(); // 5
+                .antMatchers(HttpMethod.POST, "/api/signin", "/api/signup").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/api/members/{id}/**").access("@memberGuard.check(#id)")
+                .anyRequest().hasAnyRole("ADMIN")
+                .and()
+                .exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler())
+                .and()
+                .exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+                .and()
+                .addFilterBefore(new JwtAuthenticationFilter(tokenService, userDetailsService), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder(); // 6
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }
