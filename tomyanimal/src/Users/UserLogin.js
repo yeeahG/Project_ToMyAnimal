@@ -5,6 +5,7 @@ import './UserLogin.css'
 import axios from 'axios';
 
 const LOGIN_URL = 'https://jsonplaceholder.typicode.com/posts';
+// axios.defaults.withCredentials = true;
 
 const UserLogin = ({Login, error}) => {
     const [details, setDetails] = useState({id:"", password: ""});
