@@ -28,8 +28,8 @@ public class SignService {
     public void signUp(SignUpRequest req) {
         validateSignUpInfo(req);
         memberRepository.save(SignUpRequest.toEntity(req,
-                roleRepository.findByRoleType(RoleType.ROLE_USER).orElseThrow(RoleNotFoundException::new),
-                passwordEncoder));
+        roleRepository.findByRoleType(RoleType.ROLE_USER).orElseThrow(RoleNotFoundException::new),
+        passwordEncoder));
     }
 
     public SignInResponse signIn(SignInRequest req) {
@@ -49,6 +49,7 @@ public class SignService {
     }
 
     private void validatePassword(SignInRequest req, Member member) {
+
         if(!passwordEncoder.matches(req.getUserPassword(), member.getUserPassword())) {
             throw new LoginFailureException();
         }

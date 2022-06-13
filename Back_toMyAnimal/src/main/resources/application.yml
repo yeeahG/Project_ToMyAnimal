@@ -1,6 +1,5 @@
 spring:
   profiles:
-    active: local
     include: secret
 
   jackson:
@@ -13,17 +12,18 @@ spring:
     username: root
     url: jdbc:mysql://localhost:3306/team1
   jpa:
-    show-sql: 'true'
+    show-sql: true
     hibernate:
       ddl-auto: create
     properties:
       hibernate:
-        format_sql: 'true'
+        format_sql: true
+#    defer-datasource-initialization: true
   sql:
     init:
       mode: always
   freemaker:
-    cache: 'false'
+    cache: false
   devtools:
     livereload:
       enabled: 'true'
