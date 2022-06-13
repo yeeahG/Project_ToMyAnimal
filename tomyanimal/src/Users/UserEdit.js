@@ -1,15 +1,19 @@
 import React from 'react'
+import { useLocation } from "react-router";
 
-const UserEdit = (users, isOpen) => {
-    console.log(users);
+const UserEdit = () => {
+  // const location = useLocation();
 
-    const cancleHandler = () => {
+  // const username = location.userInfo.userName;
+  // const usercontact = location.userInfo.userPhoneNumberOrUserId;
 
-    }
+
+  const cancleHandler = () => {
+
+  }
 
   return (
     <>
-
       <div className='userinfo__table'>
         <table>
           <tbody>
@@ -29,7 +33,7 @@ const UserEdit = (users, isOpen) => {
 
       <div className='welcome'>
         <button className='welcome__btn'>수정하기</button>
-        <button className='welcome__btn' onClick={isOpen === false}>취소</button>
+        <button className='welcome__btn'>취소</button>
       </div>
 
     </>

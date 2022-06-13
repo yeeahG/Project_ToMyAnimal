@@ -1,27 +1,52 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import { useNavigate } from 'react-router-dom';
 import UserEdit from './UserEdit'
+import { userData } from './data'
 import './UserHome.css'
+import ReadOnlyRow from './components/ReadOnlyRow';
+import EditableRow from './components/EditableRow';
 
 const UserAccount = () => {
+  const [isOpen, setOpen] = useState(false);
+  const [user, setUser] = useState(userData);
+
+  //console.log(userData);
+
+  const [editContactId, setEditContactId] = useState(null);
+  const [editFormData, setEditFormData] = useState({
+    name: "", 
+    contact: "",
+  });
+
+  const data = [
+    {
+      "id": 1, 
+      "name": "Yeji Kim",
+      "contact": "01011112222",
+    },
+    {
+      "id": 2, 
+      "name": "Junseok Lee",
+      "contact": "01022342234",
+    },
+  ]
+
   const navigate = useNavigate();
 
-  const [isOpen, setOpen] = useState(false);
+  //1
+  // useEffect(() => {
+  //   axios({
+  //     method: 'get', 
+  //     // url: 'http://localhost:8084/api/auth/',
+  //     url: 'https://jsonplaceholder.typicode.com/posts',
+  //   }).then((user) => {
+  //     setUser(user.data);
+  //   })
+  // }, []);
+  // console.log(user[0]);
   
-  const [user, setUser] = useState([]);
-  useEffect(() => {
-    axios({
-      method: 'get', 
-      // url: 'http://localhost:8084/api/auth/',
-      url: 'https://jsonplaceholder.typicode.com/posts',
-    }).then((user) => {
-      setUser(user.data);
-    })
-  }, []);
-  //console.log(user);
-  console.log(user.data);
-  
+  //2
   //useEffect( async () => {
   //     (
   //         async () => {
@@ -30,6 +55,16 @@ const UserAccount = () => {
   //         }
   //     )();
   // }, []);
+
+  /*
+  useEffect(() => {
+    const getUser = async () => {
+      const {data: res} = await axios.get('https://jsonplaceholder.typicode.com/posts');
+      setUser(res);
+    };
+    getUser();
+  }, [])
+  */
 
     
   const Logout = () => {
@@ -43,34 +78,73 @@ const UserAccount = () => {
   }
 
   //EDIT
-  const editHandler = (e) => {
+  // const editHandler = (e) => {
+  //   e.preventDefault();
+
+  //   user.history.push('/UserEdit')({
+  //     pathname: '/UserEdit',
+  //     userInfo: {
+  //       userName: user[0].userId,
+  //       userPhoneNumberOrUserId: user[0].title,
+  //     },
+  //   });
+  // }
+
+  const handleEditFormSubmit = (e) => {
     e.preventDefault();
 
-    user.history.push('/UserEdit')({
-      pathname: '/UserEdit',
-      userInfo: {
-        userName: user[0].userId,
-        userPhoneNumberOrUserId: user[0].title,
-      },
-    });
+    const editedContact = {
+      id: editContactId,
+      name: editFormData.name,
+      contact: editFormData.contact
+    }
+
+    const newContacts = [...user];
+    const index = user.findIndex((user) => user.id === editContactId);
+    newContacts[index] = editedContact;
+
+    setUser(newContacts);
+    setEditContactId(null);
   }
-
   
+  const handleEditFormChange = (e) => {
+    e.preventDefault();
 
+    const fieldName = e.target.getAttribute("name")
+    const fieldValue = e.target.value;
+    
+    const newFormData = { ...editFormData };
+    newFormData[fieldName]=fieldValue;
+    
+    setEditFormData(newFormData);
+  };
+  
+  const handleEditClick = (e, user) => {
+    e.preventDefault();
+    setEditContactId(user.id);
+
+    const formValues = {
+      name: user.name,
+      contact: user.contact,
+    }
+
+    setEditFormData(formValues);
+  };
 
         
   return (
   <div className='userinfo__content'>
     <div className='userinfo__subtitle'>
+      {/* <h1>{user.length} Details</h1> */}
       <h1>Details</h1>
       {/* <button onClick={editHandler}>Edit</button> */}
       <button onClick={()=>setOpen(!isOpen)}>
-          {isOpen ? "X" : "Edit"}
+        {isOpen ? "X" : "Edit"}
       </button>
     </div>
 
     {isOpen ?
-      <UserEdit isOpen={isOpen}/>
+      <UserEdit isOpen={isOpen} />
       :
     <>
       <div className='userinfo__table'>
@@ -78,14 +152,22 @@ const UserAccount = () => {
           <tbody>
             <tr>
               <td>Name </td>
-              {/* <td>userName</td> */}
-              {/* <td>{user[0].userId}</td> */}
+              {/*<td>{user[0].title}</td>*/}
             </tr>
             <tr>
               <td>Contact </td>
-              {/* <td>email or phonenumebr</td> */}
-              {/* <td> {user[0].title}</td> */}
+              {/*<td>{user[0].body}</td>*/}
             </tr>
+            
+            {/*
+            {user.map(user => 
+            <tr key={user.id}>
+              <td>Contact </td>
+              <td>
+                {user.title}
+              </td>
+            </tr>
+            )}*/}
           </tbody>
         </table>
       </div>
@@ -100,6 +182,36 @@ const UserAccount = () => {
       </div>
     </>
     }
+    
+
+    <form onSubmit={handleEditFormSubmit}>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {userData.map((user) => (
+            <Fragment>
+              {editContactId === user.id ? (
+              <EditableRow 
+                editFormData={editFormData}
+                handleEditFormChange={handleEditFormChange}
+              />
+              ) : (
+              <ReadOnlyRow 
+                user={user} 
+                handleEditClick={handleEditClick}
+              />
+              )}
+            </Fragment>
+          ))}
+        </tbody>
+      </table>
+    </form>
 
     {localStorage.getItem('userinfo')}&nbsp;
     GET method로 userName, userPhoneNumberOrUserId 가져오기
