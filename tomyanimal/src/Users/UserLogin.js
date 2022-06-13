@@ -13,7 +13,7 @@ const UserLogin = ({Login, error}) => {
     const navigate = useNavigate();
 
 
-      /*
+    /*
     const submitHandler = async (e) => {
         e.preventDefault();
         
@@ -87,7 +87,7 @@ const UserLogin = ({Login, error}) => {
 
 
     const goToMain = () => {
-        navigate('/')
+        navigate.push('/')
     }
 
     
@@ -100,6 +100,7 @@ const UserLogin = ({Login, error}) => {
     const submitHandler = async e => {
         e.preventDefault();
         
+        // const {data} = await axios.post('http://localhost:8084/api/auth/signin', userdata, {withCredentials: true});
         const {data} = await axios.post('http://localhost:8084/api/auth/signin', userdata);
 
         console.log(axios.defaults.headers.common['Authorization'] = `Bearer ${data['accessToken']}`);
