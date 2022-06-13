@@ -26,6 +26,17 @@ const UserHome = () => {
       tabCont:(
         <div> <AnimalAccount/> </div>
       )
+    },
+    {
+      tabTitle:(
+        <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}> Sign out</li>
+      ),
+      tabCont:(
+        <div> 
+          <p>탈퇴하기</p>
+          <p>비밀번호 재 확인 후 확인창 띄우고 삭제</p>
+        </div>
+      )
     }
   ];
 
