@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import dummy from './data.json'
-import Edit from './Edit';
 import './AnimalInfo.css'
 
 const Read = ( {dummyData, diaryList, getProcessedList} ) => {
