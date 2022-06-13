@@ -9,7 +9,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @EqualsAndHashCode
-@IdClass(MemberRole.class)
+@IdClass(MemberRoleId.class)
 public class MemberRole {
 
     @Id
