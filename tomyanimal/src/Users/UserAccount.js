@@ -4,6 +4,7 @@ import './UserHome.css'
 
 const UserAccount = () => {
     const navigate = useNavigate();
+    
     const Logout = () => {
         // console.log("log out");
         // setUser({name: "", id: ""});
@@ -16,8 +17,7 @@ const UserAccount = () => {
 
         
   return (
-
-    <div className='userinfo__content'>
+  <div className='userinfo__content'>
     <div className='userinfo__subtitle'>
       <h1>Details</h1>
       <button>Edit</button>
@@ -40,6 +40,7 @@ const UserAccount = () => {
     </div>
       {localStorage.getItem('userinfo')}&nbsp;
       GET method로 userName, userPhoneNumberOrUserId 가져오기
+      POST 로 회원정보 수정
 
     <div className='welcome'>
       <button onClick={Logout} className='welcome__btn'>

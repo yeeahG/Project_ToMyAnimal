@@ -1,13 +1,13 @@
 import React from 'react'
-import AnimalInfo from './AnimalInfo'
 import User from '../Users/User'
+import AnimalHome from './AnimalHome'
 
 const Animal = () => {
   return (
     <div>
       <main>
         {localStorage.getItem('logintoken') ?
-        <AnimalInfo />
+        <AnimalHome />
         :
         <User />
         }

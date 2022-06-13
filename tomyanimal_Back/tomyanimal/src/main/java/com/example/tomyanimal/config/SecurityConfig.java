@@ -35,17 +35,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // JwtAuthenticationEntryPoint : 인증 절차 없이 자원에 엑세스 하면 클라이언트에게 401 오류 반환
     private JwtAuthenticationEntryPoint unauthorizedHandler;
 
-//    @Autowired
-<<<<<<< Updated upstream
-//    private CustomOAuth2UserService customOAuth2UserService;
-=======
 //    private  CustomLogInSuccessHandler customLogInSuccessHandler;
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter();
     }
->>>>>>> Stashed changes
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
@@ -82,20 +77,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/favicon.ico", "/**/*.png", "/**/*.gif", "/**/*.svg", "/**/*.jpg", "/**/*.html",
                         "/**/*.css", "/**/*.js")
-<<<<<<< Updated upstream
-                .permitAll().antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/user/checkUsernameAvailability", "/api/user/checkEmailAvailability").permitAll()
-                .antMatchers(HttpMethod.GET, "/board/**", "/api/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/board/**").permitAll().anyRequest().authenticated().and()
-                .formLogin()
-                .loginPage("/api/auth/siginin") // 로그인 페이지 주소 설정
-                .defaultSuccessUrl("/")
-                .and()
-                .logout().logoutUrl("/")
-                .and();
-//                .oauth2Login().userInfoEndpoint().userService(customOAuth2UserService);
-                
-=======
                 .permitAll()
                 .antMatchers("/api/auth/**")
                 .permitAll()
@@ -112,7 +93,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                            System.out.println("exception : " + exception.getMessage());
 //                            response.sendRedirect("/login");
 //                        }).permitAll();
->>>>>>> Stashed changes
 
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
