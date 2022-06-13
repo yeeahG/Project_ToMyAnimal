@@ -6,7 +6,7 @@ import UserLogin from './UserLogin'
 
 const User = () => {
     const style = {
-        margin: "5vw"
+      margin: "5vw auto"
     }
 
     // useEffect( async () => {
@@ -21,14 +21,14 @@ const User = () => {
 
 
   return (
-    <div className='login__container'>
-        {localStorage.getItem('logintoken') ? 
-        <UserHome />
+    <div>
+      {localStorage.getItem('logintoken') ? 
+      <UserHome />
         :
-        <div className='user__container'style={style}>
-          <UserLogin />
-        </div>
-        }
+      <div className='user__container'>
+        <UserLogin />
+      </div>
+      }
     </div>
   )
 }
