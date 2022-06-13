@@ -33,9 +33,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // JwtAuthenticationEntryPoint : 인증 절차 없이 자원에 엑세스 하면 클라이언트에게 401 오류 반환
     private JwtAuthenticationEntryPoint unauthorizedHandler;
 
-//    @Autowired
-//    private CustomOAuth2UserService customOAuth2UserService;
-
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
@@ -67,16 +64,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css", "/**/*.js")
                 .permitAll().antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/user/checkUsernameAvailability", "/api/user/checkEmailAvailability").permitAll()
-                .antMatchers(HttpMethod.GET, "/board/**", "/api/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/board/**").permitAll().anyRequest().authenticated().and();
-//                .formLogin()
-//                .loginPage("/api/auth/signin") // 로그인 페이지 주소 설정
-//                .defaultSuccessUrl("/")
-//                .and()
-//                .logout().logoutUrl("/")
-//                .and();
-//                .oauth2Login().userInfoEndpoint().userService(customOAuth2UserService);
-                
+                .antMatchers(HttpMethod.GET, "/api/**").permitAll()
+                .antMatchers(HttpMethod.POST).permitAll().anyRequest().authenticated().and();
 
     }
 }

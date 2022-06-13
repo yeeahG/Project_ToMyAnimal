@@ -13,7 +13,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Member extends Time{
+public class Member{
 
 
     @Id
@@ -51,11 +51,5 @@ public class Member extends Time{
         this.userPassword = password;
     }
 
-    // 회원정보 수정 기능
-    public Member update(String userPhoneNumber, String userPassword){
-        this.userPhoneNumber=userPhoneNumber;
-        this.userPassword = userPassword;
-        return this;
-    }
 
 }
