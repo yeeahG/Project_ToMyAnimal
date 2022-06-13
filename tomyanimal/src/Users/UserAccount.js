@@ -3,17 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import './UserHome.css'
 
 const UserAccount = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
     
-    const Logout = () => {
-        // console.log("log out");
-        // setUser({name: "", id: ""});
-        
-        // localStorage.clear();
-        //localStorage.removeItem('logininfo');
-        localStorage.removeItem('logintoken');
-        navigate.push('/')
-        }
+  const Logout = () => {
+    // console.log("log out");
+    // setUser({name: "", id: ""});
+  
+    // localStorage.clear();
+    //localStorage.removeItem('logininfo');
+    localStorage.removeItem('logintoken');
+    navigate.push('/')
+  }
 
         
   return (

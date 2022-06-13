@@ -28,6 +28,9 @@ const AnimalAccount = () => {
 
     <div className='welcome'>
       <button className='welcome__btn'>
+        <a href="/">ADD</a>
+      </button>
+      <button className='welcome__btn'>
         <a href="/">Home</a>
       </button>
     </div>
