@@ -5,9 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import team1.toMyAnimal.domain.dto.SignInRequest;
-import team1.toMyAnimal.domain.dto.SignInResponse;
-import team1.toMyAnimal.domain.dto.SignUpRequest;
+import team1.toMyAnimal.domain.dto.request.SignInRequest;
+import team1.toMyAnimal.domain.dto.response.SignInResponse;
+import team1.toMyAnimal.domain.dto.request.SignUpRequest;
 import team1.toMyAnimal.domain.member.Member;
 import team1.toMyAnimal.domain.member.RoleType;
 import team1.toMyAnimal.exception.*;
@@ -28,8 +28,8 @@ public class SignService {
     public void signUp(SignUpRequest req) {
         validateSignUpInfo(req);
         memberRepository.save(SignUpRequest.toEntity(req,
-                roleRepository.findByRoleType(RoleType.ROLE_USER).orElseThrow(RoleNotFoundException::new),
-                passwordEncoder));
+        roleRepository.findByRoleType(RoleType.ROLE_USER).orElseThrow(RoleNotFoundException::new),
+        passwordEncoder));
     }
 
     public SignInResponse signIn(SignInRequest req) {
@@ -49,6 +49,7 @@ public class SignService {
     }
 
     private void validatePassword(SignInRequest req, Member member) {
+
         if(!passwordEncoder.matches(req.getUserPassword(), member.getUserPassword())) {
             throw new LoginFailureException();
         }
