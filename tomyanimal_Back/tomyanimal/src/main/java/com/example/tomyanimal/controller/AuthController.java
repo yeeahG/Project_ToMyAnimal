@@ -1,5 +1,7 @@
 package com.example.tomyanimal.controller;
 
+// 로그인 및 가입
+
 import com.example.tomyanimal.exception.AppException;
 import com.example.tomyanimal.model.Member;
 import com.example.tomyanimal.model.Role;
@@ -28,8 +30,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collections;
-
-// 로그인 및 가입
 
 @RestController
 @RequestMapping("/api/auth")
@@ -65,11 +65,11 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
         if (memberRepository.existsByUserId(signUpRequest.getUserId())) {
-            return new ResponseEntity(new ApiResponse(false, "UserID is already taken!"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new ApiResponse(false, "이미 존재하는 아이디 입니다."), HttpStatus.BAD_REQUEST);
         }
 
         if (memberRepository.existsByUserPhoneNumber(signUpRequest.getPhoneNumber())) {
-            return new ResponseEntity(new ApiResponse(false, "This Phone Number already in use!"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new ApiResponse(false, "이미 존재하는 휴대폰 번호입니다."), HttpStatus.BAD_REQUEST);
         }
 
         // Creating user's account
@@ -79,7 +79,7 @@ public class AuthController {
         member.setUserPassword(passwordEncoder.encode(member.getUserPassword()));
 
         Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
-                .orElseThrow(() -> new AppException("User Role not set."));
+                .orElseThrow(() -> new AppException("유저 권한이 설정되지 않았습니다."));
 
         member.setRoles(Collections.singleton(userRole));
 
@@ -90,6 +90,6 @@ public class AuthController {
         URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/users/{userId}")
                 .buildAndExpand(result.getUserId()).toUri();
 
-        return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
+        return ResponseEntity.created(location).body(new ApiResponse(true, "등록이 완료되었습니다."));
     }
 }
