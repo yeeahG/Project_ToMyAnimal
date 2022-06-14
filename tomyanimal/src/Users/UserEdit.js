@@ -8,7 +8,6 @@ const UserEdit = () => {
   // const usercontact = location.userInfo.userPhoneNumberOrUserId;
 
 
-
   return (
     <>
       <div className='userinfo__table'>

@@ -52,8 +52,8 @@ const sortOptionList = [
 ]
 
 const AnimalLog = () => {
-  const [sortType, setSortType] = useState('latest');
   const [logs, setLogs] = useState(dummyData);
+  const [sortType, setSortType] = useState('latest');
   const [isOpen, setOpen] = useState(false);
 
   const diaryList = useContext(DiaryStateContext);
@@ -95,7 +95,7 @@ const AnimalLog = () => {
       </div>
         :
       <>
-        <Read dummyData={dummyData} diaryList={diaryList} getProcessedList={getProcessedList} />
+        <Read diaryList={diaryList} getProcessedList={getProcessedList} />
       </>
       }
 
