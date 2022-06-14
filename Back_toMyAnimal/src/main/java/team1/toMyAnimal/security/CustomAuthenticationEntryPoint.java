@@ -1,4 +1,4 @@
-package team1.toMyAnimal.security.handler;
+package team1.toMyAnimal.security;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

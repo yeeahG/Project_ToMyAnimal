@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import team1.toMyAnimal.security.CustomUserDetailsService;
 import team1.toMyAnimal.security.JwtAuthenticationFilter;
 import team1.toMyAnimal.security.handler.CustomAccessDeniedHandler;
-import team1.toMyAnimal.security.handler.CustomAuthenticationEntryPoint;
+import team1.toMyAnimal.security.CustomAuthenticationEntryPoint;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -22,6 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final TokenHelper accessTokenHelper;
     private final CustomUserDetailsService userDetailsService;
+
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -31,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .cors().and()
                 .httpBasic().disable()
                 .formLogin().disable()
                 .csrf().disable()
@@ -53,4 +55,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
+
 }

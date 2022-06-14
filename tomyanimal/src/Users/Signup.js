@@ -21,7 +21,7 @@ const Signup = () => {
 
     const onSubmitSignUp = async () => {
         const item = {
-          phoneNumber: phoneNumber,
+          userPhoneNumber: phoneNumber,
           userId: signinId,
           userName: username,
           userPassword: signinPassword,
@@ -31,7 +31,7 @@ const Signup = () => {
         if( phoneNumber!="" || signinId!="" || username!="" || signinPassword!="" || signinPasswordCheck!="") {
           // if (signinPassword === signinPasswordCheck) {
     
-            await fetch('http://localhost:8084/api/auth/signup', {
+            await fetch('http://localhost:8084/api/signup', {
               method: 'POST',
               // credentials: 'include',
               // mode: 'no-cors',

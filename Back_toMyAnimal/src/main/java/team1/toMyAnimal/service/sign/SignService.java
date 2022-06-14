@@ -1,20 +1,22 @@
 package team1.toMyAnimal.service.sign;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team1.toMyAnimal.config.TokenHelper;
 import team1.toMyAnimal.domain.dto.request.SignInRequest;
-import team1.toMyAnimal.domain.dto.response.SignInResponse;
 import team1.toMyAnimal.domain.dto.request.SignUpRequest;
+import team1.toMyAnimal.domain.dto.response.SignInResponse;
 import team1.toMyAnimal.domain.dto.sign.RefreshTokenResponse;
 import team1.toMyAnimal.domain.member.Member;
+import team1.toMyAnimal.domain.member.Role;
 import team1.toMyAnimal.domain.member.RoleType;
 import team1.toMyAnimal.exception.*;
 import team1.toMyAnimal.repository.member.MemberRepository;
 import team1.toMyAnimal.repository.role.RoleRepository;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -29,9 +31,11 @@ public class SignService {
     @Transactional
     public void signUp(SignUpRequest req) {
         validateSignUpInfo(req);
-        memberRepository.save(SignUpRequest.toEntity(req,
-        roleRepository.findByRoleType(RoleType.ROLE_USER).orElseThrow(RoleNotFoundException::new),
-        passwordEncoder));
+        String encodedPassword = passwordEncoder.encode(req.getUserPassword());
+        List<Role> roles = List.of(roleRepository.findByRoleType(RoleType.ROLE_USER).orElseThrow(RoleNotFoundException::new));
+        memberRepository.save(
+                new Member(req.getUserId(), encodedPassword, req.getUserName(), req.getUserPhoneNumber(), roles)
+        );
     }
 
     @Transactional(readOnly = true)
@@ -73,4 +77,6 @@ public class SignService {
     private String createSubject(Member member) {
         return String.valueOf(member.getId());
     }
+
+
 }
