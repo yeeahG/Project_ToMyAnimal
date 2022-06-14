@@ -1,13 +1,18 @@
 import React, { Fragment, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import dummy from './data.json'
+import EditLog from './components/EditLog';
+import ReadLog from './components/ReadLog';
 import './AnimalInfo.css'
 
-const Read = ( {dummyData, diaryList, getProcessedList} ) => {
-    const [logs, setLogs] = useState(getProcessedList);
+const Read = ( {diaryList, getProcessedList} ) => {
+    // const [logs, setLogs] = useState(getProcessedList);
+    const [logs, setLogs] = useState(diaryList);
     const [edited, setEdited] = useState(false);
 
-    const [editContactId, setEditContactId] = useState(null);
+    console.log(diaryList[0].id);
+
+    const [editContactId, setEditContactId] = useState(1);
     const [editFormData, setEditFormData] = useState({
       title: "", 
       content: "",
@@ -18,6 +23,36 @@ const Read = ( {dummyData, diaryList, getProcessedList} ) => {
     const goEdit = () => {
       setEdited(true);
     }
+
+    const handleEditFormSubmit = (e) => {
+      e.preventDefault();
+  
+      const editedContact = {
+        id: editContactId,
+        title: editFormData.title,
+        content: editFormData.content
+      }
+  
+      const newContacts = [...logs];
+      const index = logs.findIndex((it) => it.id === editContactId);
+      newContacts[index] = editedContact;
+      setLogs(newContacts);
+      setEditContactId(null);
+    }
+
+
+    const handleEditFormChange = (e) => {
+      e.preventDefault();
+      
+      const fieldName = e.target.getAttribute("name")
+      const fieldValue = e.target.value;
+      
+      const newFormData = { ...editFormData };
+      newFormData[fieldName]=fieldValue;
+      
+      setEditFormData(newFormData);
+    };
+
 
     const handleEditClick = (e, logs) => {
       e.preventDefault();
@@ -30,6 +65,12 @@ const Read = ( {dummyData, diaryList, getProcessedList} ) => {
   
       setEditFormData(formValues);
     };
+
+    const handleCancelClick = () => {
+      setEditContactId(null);
+    }
+
+    
   
 
   return (
@@ -61,45 +102,30 @@ const Read = ( {dummyData, diaryList, getProcessedList} ) => {
           ))}
         </ul>*/}
 
-
-      {getProcessedList().map((log) => (
+      <form onSubmit={handleEditFormSubmit}>
+      {getProcessedList().map((logs) => (
         <Fragment>
-        {editContactId === log.id ? (
-          <li key={log.id}>
-          <div className='log__content'>
-            <h3>Day {log.date}</h3>
-          </div>
-          <p>
-            <input 
-              type='text' required='required' 
-              placeholder='title' 
-              name='title'
-              value={editFormData.title}
-            />
-          </p>
-          <p>
-            <input 
-              type='text' required='required' 
-              placeholder='content' 
-              name='content'
-              value={editFormData.content}
-            />
-          </p>
-          </li>
+        {editContactId === logs.id ? (
+        <li>
+          <EditLog 
+            logs={logs}
+            editFormData={editFormData}
+            handleEditFormChange={handleEditFormChange}
+            handleCancelClick={handleCancelClick}
+          />
+        </li>
         )
           :
           (
-        <li key={log.id}>
-          <div className='log__content'>
-            <h3>Day {log.day}</h3>
-            <button onClick={(e) => handleEditClick(e, logs)}>edit</button>
-          </div>
-          <p>{log.title}</p>
-          <p>{log.content}</p>
+        <li>
+          <ReadLog 
+            logs={logs} handleEditClick={handleEditClick}
+          />
         </li>
           )}
         </Fragment>
       ))}
+      </form>
 
     </div>
   )
