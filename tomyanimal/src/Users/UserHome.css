@@ -174,10 +174,29 @@ li {
     overflow-y: hidden;
 }
 
-tbody
-{display:flex}
+tbody {
+    display:flex;
+    width: 100%;
+    margin: 0 1rem;
+}
 
-th,td{display:block}
+th,td {
+    display:block;
+    
+}
+
+tr {
+    width: 100%;
+}
+
+/*ANIMAL*/
+.animal__detail__form {
+    display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
 
 
 @media (min-width: 900px) {
