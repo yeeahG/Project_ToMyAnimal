@@ -73,6 +73,7 @@ ul {
 li {
     display: list-item;
     text-align: -webkit-match-parent;
+    list-style: none;
 }
 
 .left__menu {
@@ -263,6 +264,14 @@ li {
 .log__content {
     display: flex;
     justify-content: space-between;
+}
+
+.log__list__container {
+    max-width: 50rem;
+}
+
+.log__list__container li {
+    border-bottom: 1px solid;
 }
 
 /**/
