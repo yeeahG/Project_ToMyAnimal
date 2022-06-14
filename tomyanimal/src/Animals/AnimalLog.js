@@ -57,7 +57,7 @@ const AnimalLog = () => {
   const [isOpen, setOpen] = useState(false);
 
   const diaryList = useContext(DiaryStateContext);
-  //console.log(diaryList);
+  //console.log(diaryList.id);
 
   //filter 적용
   const getProcessedList = () => {

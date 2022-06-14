@@ -4,7 +4,8 @@ const EditLog = ( {logs, editFormData, handleEditFormChange, handleCancelClick} 
   return (
     <div>
         <div className='log__content'>
-            <h3>Day {logs.date}</h3>
+            <h3>Day {logs.id}</h3>
+            <p>{logs.date}</p>
             <button type='submit'>Save</button>
             <button type='button' onClick={handleCancelClick}>Cancel</button>
         </div>
@@ -18,7 +19,7 @@ const EditLog = ( {logs, editFormData, handleEditFormChange, handleCancelClick} 
             />
         </p>
         <p>
-            <input 
+            <textarea 
               type='text' required='required' 
               placeholder='content' 
               name='content'

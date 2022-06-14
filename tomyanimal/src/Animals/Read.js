@@ -1,16 +1,16 @@
 import React, { Fragment, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import dummy from './data.json'
 import EditLog from './components/EditLog';
 import ReadLog from './components/ReadLog';
 import './AnimalInfo.css'
 
 const Read = ( {diaryList, getProcessedList} ) => {
-    // const [logs, setLogs] = useState(getProcessedList);
-    const [logs, setLogs] = useState(diaryList);
+    const [logs, setLogs] = useState(getProcessedList);
+    // const [logs, setLogs] = useState(diaryList);
     const [edited, setEdited] = useState(false);
 
-    console.log(diaryList[0].id);
+    //console.log(logs);
 
     const [editContactId, setEditContactId] = useState(1);
     const [editFormData, setEditFormData] = useState({
@@ -70,7 +70,6 @@ const Read = ( {diaryList, getProcessedList} ) => {
       setEditContactId(null);
     }
 
-    
   
 
   return (
@@ -102,7 +101,8 @@ const Read = ( {diaryList, getProcessedList} ) => {
           ))}
         </ul>*/}
 
-      <form onSubmit={handleEditFormSubmit}>
+      <form onSubmit={handleEditFormSubmit} className='log__list__container'>
+        {/* {logs.map((logs) => ( */}
       {getProcessedList().map((logs) => (
         <Fragment>
         {editContactId === logs.id ? (
