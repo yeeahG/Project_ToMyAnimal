@@ -3,6 +3,7 @@ package team1.toMyAnimal.exception;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -33,14 +34,14 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(MemberIdAlreadyExistsException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public Response memberEmailAlreadyExistsException(MemberIdAlreadyExistsException e) {
-        return Response.failure(-1005, e.getMessage() + "은 중복된 이메일 입니다.");
+    public Response memberIDAlreadyExistsException(MemberIdAlreadyExistsException e) {
+        return Response.failure(-1005, e.getMessage() + "은 중복된 ID 입니다.");
     }
 
     @ExceptionHandler(MemberPhoneNumberAlreadyExistsException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public Response memberNicknameAlreadyExistsException(MemberPhoneNumberAlreadyExistsException e) { // 5
-        return Response.failure(-1006, e.getMessage() + "은 중복된 닉네임 입니다.");
+    public Response memberPhoneNumberAlreadyExistsException(MemberPhoneNumberAlreadyExistsException e) { // 5
+        return Response.failure(-1006, e.getMessage() + "은 중복된 휴대 전화 번호 입니다.");
     }
 
     @ExceptionHandler(MemberNotFoundException.class)
@@ -65,5 +66,11 @@ public class ExceptionAdvice {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public Response accessDeniedException() {
         return Response.failure(-1002, "접근이 거부되었습니다.");
+    }
+
+    @ExceptionHandler(MissingRequestHeaderException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Response missingRequestHeaderException(MissingRequestHeaderException e) {
+        return Response.failure(-1009, e.getHeaderName() + " 요청 헤더가 누락되었습니다.");
     }
 }
