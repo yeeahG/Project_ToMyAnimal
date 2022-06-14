@@ -10,12 +10,13 @@ import team1.toMyAnimal.domain.member.Member;
 @NoArgsConstructor
 public class MemberDto {
     private Long id;
-    private String email;
-    private String username;
-    private String nickname;
+    private String userId;
+    private String userName;
+    private String userPhoneNumber;
+    private String userPassword;
 
     public static MemberDto toDto(Member member) {
-        return new MemberDto(member.getId(), member.getUserId(), member.getUserName(), member.getUserPhoneNumber());
+        return new MemberDto(member.getId(), member.getUserId(), member.getUserName(),member.getUserPassword(), member.getUserPhoneNumber());
     }
 
 }
