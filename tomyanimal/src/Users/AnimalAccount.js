@@ -43,7 +43,7 @@ const AnimalAccount = ( ) => {
     </div>
 
 
-    {!animal? 
+    {localStorage.getItem("animalinfo")? 
       <form>
         <table className='animal__detail__form'>
           <thead>

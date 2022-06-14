@@ -1,10 +1,16 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const AnimalAdd = () => {
     const [animalName, setAnimalName] = useState("");
     const [animalId, setAnimalId] = useState("");
     const [animalAge, setAnimalAge] = useState("");
     const [animalWeight, setAnimalWeight] = useState("");
+
+    const [error, setError] = useState("");
+
+    let localStorage = window.localStorage;
+    const navigate = useNavigate();
 
 
     const registerAnimal = async () => {
@@ -15,12 +21,37 @@ const AnimalAdd = () => {
             animalWeight: animalWeight
         }
         console.log(animal);
+
+        if(animalName!="" || animalId!="" || animalAge!="" || animalWeight!="" ) {
+            await fetch('https://jsonplaceholder.typicode.com/posts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;',
+                },
+                body: JSON.stringify(animal),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log('성공:', data);
+              })
+
+            .catch((error) => {
+                console.error('실패:', error);
+                });
+
+            localStorage.setItem("animalinfo", JSON.stringify(animal))
+            alert('가입이 완료되었습니다')
+            navigate('/')
+        } else {
+            setError("모든 항목을 입력하세요")
+        }
     }
 
 
   return (
     <div>
         <div className='animal__register__container'>
+            {error}
             <input label="이름" name="animalname" placeholder="이름" required onChange={(e) => setAnimalName(e.target.value)} />
             <input label="등록번호" name="animalId" placeholder="등록번호" required onChange={(e) => setAnimalId(e.target.value)} />
             <input label="나이" name="age" placeholder="나이" required onChange={(e) => setAnimalAge(e.target.value)}/>
