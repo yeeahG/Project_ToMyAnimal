@@ -143,7 +143,6 @@ const UserAccount = () => {
     <div className='userinfo__subtitle'>
       {/* <h1>{user.length} Details</h1> */}
       <h1>Details</h1>
-      {/* <button onClick={editHandler}>Edit</button> */}
       <button onClick={()=>setOpen(!isOpen)}>
         {isOpen ? "X" : "Edit"}
       </button>
@@ -201,7 +200,6 @@ const UserAccount = () => {
           <tr>
             <th>Name</th>
             <th>Contact</th>
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
