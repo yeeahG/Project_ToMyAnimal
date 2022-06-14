@@ -5,6 +5,7 @@ import './UserLogin.css'
 import axios from 'axios';
 
 const LOGIN_URL = 'https://jsonplaceholder.typicode.com/posts';
+// axios.defaults.withCredentials = true;
 
 const UserLogin = ({Login, error}) => {
     const [details, setDetails] = useState({id:"", password: ""});
@@ -13,7 +14,7 @@ const UserLogin = ({Login, error}) => {
     const navigate = useNavigate();
 
 
-      /*
+    /*
     const submitHandler = async (e) => {
         e.preventDefault();
         
@@ -85,11 +86,6 @@ const UserLogin = ({Login, error}) => {
         // })
     //}
 
-
-    const goToMain = () => {
-        navigate('/')
-    }
-
     
     const userdata = {
         userPhoneNumberOrUserId: details.id,
@@ -100,13 +96,14 @@ const UserLogin = ({Login, error}) => {
     const submitHandler = async e => {
         e.preventDefault();
         
+        // const {data} = await axios.post('http://localhost:8084/api/auth/signin', userdata, {withCredentials: true});
         const {data} = await axios.post('http://localhost:8084/api/auth/signin', userdata);
 
-        console.log(axios.defaults.headers.common['Authorization'] = `Bearer ${data['accessToken']}`);
+        //console.log(axios.defaults.headers.common['Authorization'] = `Bearer ${data['accessToken']}`);
         const jwt = axios.defaults.headers.common['Authorization'] = `${data['accessToken']}`;
         localStorage.setItem('logintoken', jwt);
         if (jwt) {
-            goToMain();
+            navigate('/')
         } else {
             alert("다시 로그인해주세요")
         }
@@ -114,7 +111,7 @@ const UserLogin = ({Login, error}) => {
 
  
     return (
-    <div>
+    <div className='login__container'>
 
         <form onSubmit={submitHandler}>
             <div className='login__form'>

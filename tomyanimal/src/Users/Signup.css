@@ -75,7 +75,7 @@ input:focus+:after {
 @media (min-width: 900px) {
     .signContainer {
         max-width: 30.5556vw;
-        margin: 0px auto;
+        margin: 5vw auto;
     }
 
     .signContainer h2 {

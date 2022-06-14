@@ -1,3 +1,10 @@
+.login__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  
+    margin: 5vw;
+}
+
 .login__form h2 {
     font-size: 8.8vw;
     font-weight: 700;
@@ -76,6 +83,10 @@
 }
 
 @media (min-width: 900px) {
+    .login__container {
+        max-width: 30.5556vw;
+        margin: 5vw auto;
+    }    
     .login__form h2 {
         position: relative;
         margin: 0px;
