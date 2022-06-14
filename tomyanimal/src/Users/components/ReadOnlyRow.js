@@ -6,7 +6,7 @@ const ReadOnlyRow = ( {user, handleEditClick}) => {
       <td>{user.name}</td>
       <td>{user.contact}</td>
       <td>
-        <button 
+        <button
           type='button' 
           onClick={(e) => handleEditClick(e, user)}
         >

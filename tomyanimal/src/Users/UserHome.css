@@ -165,6 +165,20 @@ li {
     background-color: #559df2;
 }
 
+/*Edit*/
+.account__detail__form {
+    display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+tbody
+{display:flex}
+
+th,td{display:block}
+
 
 @media (min-width: 900px) {
     .userinfo__container {

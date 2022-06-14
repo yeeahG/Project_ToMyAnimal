@@ -90,6 +90,19 @@ const UserAccount = () => {
   //   });
   // }
 
+  
+  const handleEditFormChange = (e) => {
+    e.preventDefault();
+    
+    const fieldName = e.target.getAttribute("name")
+    const fieldValue = e.target.value;
+    
+    const newFormData = { ...editFormData };
+    newFormData[fieldName]=fieldValue;
+    
+    setEditFormData(newFormData);
+  };
+  
   const handleEditFormSubmit = (e) => {
     e.preventDefault();
 
@@ -100,24 +113,12 @@ const UserAccount = () => {
     }
 
     const newContacts = [...user];
-    const index = user.findIndex((user) => user.id === editContactId);
+    const index = user.findIndex((it) => it.id === editContactId);
     newContacts[index] = editedContact;
-
     setUser(newContacts);
     setEditContactId(null);
   }
-  
-  const handleEditFormChange = (e) => {
-    e.preventDefault();
 
-    const fieldName = e.target.getAttribute("name")
-    const fieldValue = e.target.value;
-    
-    const newFormData = { ...editFormData };
-    newFormData[fieldName]=fieldValue;
-    
-    setEditFormData(newFormData);
-  };
   
   const handleEditClick = (e, user) => {
     e.preventDefault();
@@ -130,6 +131,11 @@ const UserAccount = () => {
 
     setEditFormData(formValues);
   };
+
+  
+  const handleCancelClick = () => {
+    setEditContactId(null);
+  }
 
         
   return (
@@ -184,8 +190,8 @@ const UserAccount = () => {
     }
     
 
-    <form onSubmit={handleEditFormSubmit}>
-      <table>
+    <form onSubmit={handleEditFormSubmit} >
+      <table className='account__detail__form'>
         <thead>
           <tr>
             <th>Name</th>
@@ -194,12 +200,13 @@ const UserAccount = () => {
           </tr>
         </thead>
         <tbody>
-          {userData.map((user) => (
+          {user.map((user) => (
             <Fragment>
               {editContactId === user.id ? (
               <EditableRow 
                 editFormData={editFormData}
                 handleEditFormChange={handleEditFormChange}
+                handleCancelClick={handleCancelClick}
               />
               ) : (
               <ReadOnlyRow 
