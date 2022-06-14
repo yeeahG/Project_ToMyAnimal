@@ -24,8 +24,4 @@ public class MemberService {
         memberRepository.delete(member);
     }
 
-    private boolean notExistsMember(Long id) {
-        return !memberRepository.existsById(id);
-    }
-
 }

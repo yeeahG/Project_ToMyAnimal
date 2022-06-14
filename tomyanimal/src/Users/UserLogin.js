@@ -87,7 +87,7 @@ const UserLogin = ({Login, error}) => {
 
     
     const userdata = {
-        userPhoneNumberOrUserId: details.id,
+        userId: details.id,
         userPassword: details.password
     }
     
@@ -96,7 +96,7 @@ const UserLogin = ({Login, error}) => {
         e.preventDefault();
         
         // const {data} = await axios.post('http://localhost:8084/api/auth/signin', userdata, {withCredentials: true});
-        const {data} = await axios.post('http://localhost:8084/api/auth/signin', userdata);
+        const {data} = await axios.post('http://localhost:8084/api/signin', userdata);
 
         //console.log(axios.defaults.headers.common['Authorization'] = `Bearer ${data['accessToken']}`);
         const jwt = axios.defaults.headers.common['Authorization'] = `${data['accessToken']}`;
