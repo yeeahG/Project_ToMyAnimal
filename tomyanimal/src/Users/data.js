@@ -4,9 +4,9 @@ export const userData = [
         "name": "Yeji Kim",
         "contact": "01011112222",
       },
-      {
-        "id": 2, 
-        "name": "Junseok Lee",
-        "contact": "01022342234",
-      },
+      // {
+      //   "id": 2, 
+      //   "name": "Junseok Lee",
+      //   "contact": "01022342234",
+      // },
 ]

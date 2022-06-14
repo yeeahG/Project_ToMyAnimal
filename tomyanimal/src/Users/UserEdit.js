@@ -8,9 +8,6 @@ const UserEdit = () => {
   // const usercontact = location.userInfo.userPhoneNumberOrUserId;
 
 
-  const cancleHandler = () => {
-
-  }
 
   return (
     <>

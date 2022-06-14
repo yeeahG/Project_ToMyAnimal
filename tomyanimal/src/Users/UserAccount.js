@@ -155,14 +155,19 @@ const UserAccount = () => {
     <>
       <div className='userinfo__table'>
         <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Contact</th>
+            </tr>
+          </thead>
+
           <tbody>
             <tr>
-              <td>Name </td>
-              {/*<td>{user[0].title}</td>*/}
+              <td>user[0].title</td>
             </tr>
             <tr>
-              <td>Contact </td>
-              {/*<td>{user[0].body}</td>*/}
+              <td>user[0].body</td>
             </tr>
             
             {/*
@@ -219,6 +224,15 @@ const UserAccount = () => {
         </tbody>
       </table>
     </form>
+
+    <div className='welcome'>
+      <button onClick={Logout} className='welcome__btn'>
+        <a href="/user">Logout</a>
+      </button>
+      <button className='welcome__btn'>
+        <a href="/">Home</a>
+      </button>
+    </div>
 
     {localStorage.getItem('userinfo')}&nbsp;
     GET method로 userName, userPhoneNumberOrUserId 가져오기
