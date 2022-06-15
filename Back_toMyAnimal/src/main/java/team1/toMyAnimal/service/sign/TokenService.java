@@ -1,7 +1,6 @@
 package team1.toMyAnimal.service.sign;
 
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import team1.toMyAnimal.security.handler.JwtHandler;
