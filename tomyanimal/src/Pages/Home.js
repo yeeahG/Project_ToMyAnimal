@@ -12,12 +12,21 @@ const Home = () => {
       
       <Banner />
 
-      <main>
-        <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-        Nulla interdum nibh orci, id pharetra metus pellentesque quis. 
-        Donec non tristique nunc. Cras tincidunt pretium nunc et congue. 
-        </p>
+      <main className='main__contaiiner'>
+        <div className='main__text'>
+          <h2>Check up everyday</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Nulla interdum nibh orci, id pharetra metus pellentesque quis. 
+          </p>
+          <a href='/animal' className='main__btn'>Check your Animal</a>
+        </div>
+        <div className='main__image'>
+          <span className='box__image'>
+            <span></span>
+            <img />
+          </span>
+        </div>
       </main>
 
       <section className='yBZdR'>
