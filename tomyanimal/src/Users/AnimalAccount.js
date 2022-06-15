@@ -5,7 +5,13 @@ import './UserHome.css'
 
 const AnimalAccount = ( ) => {
   const [animal, setAnimal] = useState([]);
-  //console.log(animal);
+  console.log(animal);
+
+  const [editContactId, setEditContactId] = useState(null);
+  const [editFormData, setEditFormData] = useState({
+    name: "", 
+    contact: "",
+  });
 
   useEffect(() => {
     axios({
@@ -55,14 +61,16 @@ const AnimalAccount = ( ) => {
             </tr>
           </thead>
 
+          {animal.map((it) => 
+          
           <tbody>
             <tr>
-              <td>GET method로 animalname, age, 등등 가져오기</td>
-              <td>GET method로 animalname, age, 등등 가져오기</td>
-              <td>GET method로 animalname, age, 등등 가져오기</td>
-              <td>GET method로 animalname, age, 등등 가져오기</td>
+              <td>{it.userId}</td>
+              <td>{it.title}</td>
+              <td>{it.title}</td>
             </tr>
           </tbody>
+          )}
         </table>
       </form>
     :
