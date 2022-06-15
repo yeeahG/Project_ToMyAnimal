@@ -40,34 +40,34 @@ const Write = () => {
   return (
     <div>
       <form>
-          <div className='title__container'>
-              <span>Title </span>
-              <input 
-                name="title" 
-                placeholder='Title'
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-              <span>Day </span>
-              <input 
-                type="date" name='date' value={date} 
-                onChange={(e) => setDate(e.target.value)}
-              />
-          </div>
-            <p>
-              <textarea 
-                name="content" 
-                placeholder='What about your animal?'
-                ref={contentRef}
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-              />
-            </p>
-            <p><input type="file" accept="image/*"/></p>
-      </form>
+        <div className='title__container'>
+          <span>Title </span>
+          <input 
+            name="title" 
+            placeholder='Title'
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <span>Day </span>
+          <input 
+            type="date" name='date' value={date} 
+            onChange={(e) => setDate(e.target.value)}
+          />
+      </div>
+      <p>
+        <textarea 
+          name="content" 
+          placeholder='What about your animal?'
+          ref={contentRef}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
+      </p>
+      <p><input type="file" accept="image/*"/></p>
+    </form>
 
-      {/* <input type="submit" value="upload" className='upload__btn' /> */}
-      <button className='upload__btn'onClick={submitHandler} >write</button>
+    {/* <input type="submit" value="upload" className='upload__btn' /> */}
+    <button className='upload__btn'onClick={submitHandler} >write</button>
   </div>
   )
 }
