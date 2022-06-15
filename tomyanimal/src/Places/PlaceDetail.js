@@ -2,7 +2,7 @@ import React from 'react'
 import './Places.css'
 
 const PlaceDetail = ( {place} ) => {
-    console.log(place);
+  //console.log(place);
   return (
     <div className='place__detail__container'> 
       <div className='place__title'>
@@ -12,6 +12,7 @@ const PlaceDetail = ( {place} ) => {
       <div className='place__addr'>
         {place.addr}
       </div>
+      <p>{place.rating}</p>
       <div className='place__detail__review'>
         <p>Review</p>
       </div>
