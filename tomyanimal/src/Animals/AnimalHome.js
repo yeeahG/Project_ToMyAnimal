@@ -3,7 +3,6 @@ import AnimalPage from './AnimalPage';
 import AnimalLog from './AnimalLog';
 import CheckUp from './CheckUp';
 import './AnimalInfo.css'
-
 import {logData} from './components/data'
 
 const reducer = (state, action) => {
