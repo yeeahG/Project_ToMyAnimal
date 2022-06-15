@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import dummy from './data.json'
 import EditLog from './components/EditLog';
@@ -6,7 +6,7 @@ import ReadLog from './components/ReadLog';
 import './AnimalInfo.css'
 
 const Read = ( {diaryList, getProcessedList} ) => {
-    const [logs, setLogs] = useState(getProcessedList);
+    const [logs, setLogs] = useState(diaryList);
     // const [logs, setLogs] = useState(diaryList);
     const [edited, setEdited] = useState(false);
 
@@ -70,6 +70,12 @@ const Read = ( {diaryList, getProcessedList} ) => {
       setEditContactId(null);
     }
 
+    const dataId = useRef(0);
+
+    console.log(getProcessedList());
+    console.log(getProcessedList()[0].id);
+    console.log(logs);
+
   
 
   return (
@@ -103,7 +109,7 @@ const Read = ( {diaryList, getProcessedList} ) => {
 
       <form onSubmit={handleEditFormSubmit} className='log__list__container'>
         {/* {logs.map((logs) => ( */}
-      {getProcessedList().map((logs) => (
+      {getProcessedList().map((logs, idx) => (
         <Fragment>
         {editContactId === logs.id ? (
         <li>
@@ -120,6 +126,7 @@ const Read = ( {diaryList, getProcessedList} ) => {
         <li>
           <ReadLog 
             logs={logs} handleEditClick={handleEditClick}
+            getProcessedList={getProcessedList}
           />
         </li>
           )}
