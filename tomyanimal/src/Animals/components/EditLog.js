@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EditLog = ( {logs, editFormData, handleEditFormChange, handleCancelClick} ) => {
+const EditLog = ( {logs, editFormData, handleEditFormChange, handleCancelClick,  id,  title, content, date} ) => {
   return (
     <div>
         <div className='log__content'>
@@ -10,22 +10,22 @@ const EditLog = ( {logs, editFormData, handleEditFormChange, handleCancelClick} 
             <button type='button' onClick={handleCancelClick}>Cancel</button>
         </div>
         <p>
-            <input 
-              type='text' required='required' 
-              placeholder='title' 
-              name='title'
-              value={editFormData.title}
-              onChange={handleEditFormChange}
-            />
+          <input 
+            type='text' required='required' 
+            placeholder='title' 
+            name='title'
+            value={editFormData.title}
+            onChange={handleEditFormChange}
+          />
         </p>
         <p>
-            <textarea 
-              type='text' required='required' 
-              placeholder='content' 
-              name='content'
-              value={editFormData.content}
-              onChange={handleEditFormChange}
-            />
+          <textarea 
+            type='text' required='required' 
+            placeholder='content' 
+            name='content'
+            value={editFormData.content}
+            onChange={handleEditFormChange}
+          />
         </p>
     </div>
   )

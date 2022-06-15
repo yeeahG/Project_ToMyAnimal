@@ -58,6 +58,7 @@ const AnimalLog = () => {
 
   const diaryList = useContext(DiaryStateContext);
   //console.log(diaryList.id);
+  //console.log(diaryList);
 
   //filter 적용
   const getProcessedList = () => {
@@ -71,7 +72,10 @@ const AnimalLog = () => {
     }
 
 
-    const sortedList = diaryList.sort(compare);
+    //const sortedList = diaryList.sort(compare);
+
+    const copyList = JSON.parse(JSON.stringify(diaryList));
+    const sortedList = copyList.sort(compare);
     return sortedList;
   }
 
@@ -95,7 +99,9 @@ const AnimalLog = () => {
       </div>
         :
       <>
-        <Read diaryList={diaryList} getProcessedList={getProcessedList} />
+      {getProcessedList().map((it) => (
+        <Read diaryList={diaryList} key={it.id} {...it}/>
+      ))}
       </>
       }
 

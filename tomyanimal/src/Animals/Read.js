@@ -5,14 +5,22 @@ import EditLog from './components/EditLog';
 import ReadLog from './components/ReadLog';
 import './AnimalInfo.css'
 
-const Read = ( {diaryList, getProcessedList} ) => {
-    const [logs, setLogs] = useState(diaryList);
+const Read = ( {diaryList, id,  title, content, date} ) => {
+    //const [logs, setLogs] = useState(diaryList);
+    const [logs, setLogs] = useState({
+      id: id,
+      title: title,
+      content: content, 
+      date: date
+    });
     // const [logs, setLogs] = useState(diaryList);
+    //console.log(logs.id);
+
+
     const [edited, setEdited] = useState(false);
 
-    //console.log(logs);
 
-    const [editContactId, setEditContactId] = useState(1);
+    const [editContactId, setEditContactId] = useState(null);
     const [editFormData, setEditFormData] = useState({
       title: "", 
       content: "",
@@ -56,11 +64,11 @@ const Read = ( {diaryList, getProcessedList} ) => {
 
     const handleEditClick = (e, logs) => {
       e.preventDefault();
-      setEditContactId(logs.id);
+      setEditContactId(id);
   
       const formValues = {
-        title: logs.title,
-        content: logs.content,
+        title: title,
+        content: content,
       }
   
       setEditFormData(formValues);
@@ -69,12 +77,9 @@ const Read = ( {diaryList, getProcessedList} ) => {
     const handleCancelClick = () => {
       setEditContactId(null);
     }
-
-    const dataId = useRef(0);
-
-    console.log(getProcessedList());
-    console.log(getProcessedList()[0].id);
-    console.log(logs);
+    // console.log(getProcessedList());
+    // console.log(getProcessedList()[0].id);
+    //console.log(logs);
 
   
 
@@ -109,12 +114,13 @@ const Read = ( {diaryList, getProcessedList} ) => {
 
       <form onSubmit={handleEditFormSubmit} className='log__list__container'>
         {/* {logs.map((logs) => ( */}
-      {getProcessedList().map((logs, idx) => (
+      {/* {getProcessedList().map((logs, idx) => ( */}
         <Fragment>
         {editContactId === logs.id ? (
         <li>
           <EditLog 
             logs={logs}
+            key={id} title={title} content={content} date={date}
             editFormData={editFormData}
             handleEditFormChange={handleEditFormChange}
             handleCancelClick={handleCancelClick}
@@ -122,16 +128,17 @@ const Read = ( {diaryList, getProcessedList} ) => {
         </li>
         )
           :
-          (
+        (
         <li>
           <ReadLog 
             logs={logs} handleEditClick={handleEditClick}
-            getProcessedList={getProcessedList}
+            key={id} title={title} content={content} date={date}
+            // getProcessedList={getProcessedList}
           />
         </li>
           )}
         </Fragment>
-      ))}
+      {/* ))} */}
       </form>
 
     </div>
