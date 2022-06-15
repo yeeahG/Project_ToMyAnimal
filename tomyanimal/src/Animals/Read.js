@@ -16,10 +16,7 @@ const Read = ( {diaryList, id,  title, content, date} ) => {
     // const [logs, setLogs] = useState(diaryList);
     //console.log(logs.id);
 
-
     const [edited, setEdited] = useState(false);
-
-
     const [editContactId, setEditContactId] = useState(null);
     const [editFormData, setEditFormData] = useState({
       title: "", 
@@ -31,6 +28,7 @@ const Read = ( {diaryList, id,  title, content, date} ) => {
     const goEdit = () => {
       setEdited(true);
     }
+    
 
     const handleEditFormSubmit = (e) => {
       e.preventDefault();
@@ -113,7 +111,7 @@ const Read = ( {diaryList, id,  title, content, date} ) => {
         </ul>*/}
 
       <form onSubmit={handleEditFormSubmit} className='log__list__container'>
-        {/* {logs.map((logs) => ( */}
+      {/* {logs.map((logs) => ( */}
       {/* {getProcessedList().map((logs, idx) => ( */}
         <Fragment>
         {editContactId === logs.id ? (

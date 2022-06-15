@@ -13,6 +13,7 @@ const Write = () => {
 
   //일기저장
   const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
   //내용을 안적으면 저장이 안되게 하는 기능을 위해
   const contentRef = useRef();
   
@@ -31,39 +32,43 @@ const Write = () => {
       return;
     }
 
-    onCreate(date, content);
+    onCreate(date, content, title);
     navigate('/animal')
     alert("작성이 완료되었습니다. ")
-    
   }
   
   return (
     <div>
-        <form>
-            <div className='title__container'>
-                <span>Title </span>
-                <input type="text" name="title"></input>
-                <span>Day </span>
-                <input 
-                  type="date" name='date' value={date} 
-                  onChange={(e) => setDate(e.target.value)}
-                />
-            </div>
-              <p>
-                <textarea 
-                  name="content" 
-                  placeholder='What about your animal?'
-                  ref={contentRef}
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                />
-              </p>
-              <p><input type="file" accept="image/*"/></p>
-        </form>
+      <form>
+        <div className='title__container'>
+          <span>Title </span>
+          <input 
+            name="title" 
+            placeholder='Title'
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <span>Day </span>
+          <input 
+            type="date" name='date' value={date} 
+            onChange={(e) => setDate(e.target.value)}
+          />
+      </div>
+      <p>
+        <textarea 
+          name="content" 
+          placeholder='What about your animal?'
+          ref={contentRef}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
+      </p>
+      <p><input type="file" accept="image/*"/></p>
+    </form>
 
-        {/* <input type="submit" value="upload" className='upload__btn' /> */}
-        <button className='upload__btn'onClick={submitHandler} >write</button>
-    </div>
+    {/* <input type="submit" value="upload" className='upload__btn' /> */}
+    <button className='upload__btn'onClick={submitHandler} >write</button>
+  </div>
   )
 }
 
