@@ -1,6 +1,7 @@
 package team1.toMyAnimal.service.sign;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,10 +32,10 @@ public class SignService {
     @Transactional
     public void signUp(SignUpRequest req) {
         validateSignUpInfo(req);
-        String encodedPassword = passwordEncoder.encode(req.getUserPassword());
+        String encodedPassword = passwordEncoder.encode(req.getPassword());
         List<Role> roles = List.of(roleRepository.findByRoleType(RoleType.ROLE_USER).orElseThrow(RoleNotFoundException::new));
         memberRepository.save(
-                new Member(req.getUserId(), encodedPassword, req.getUserName(), req.getUserPhoneNumber(), roles)
+                new Member(req.getUserId(), encodedPassword, req.getUsername(), req.getUserPhoneNumber(), roles)
         );
     }
 

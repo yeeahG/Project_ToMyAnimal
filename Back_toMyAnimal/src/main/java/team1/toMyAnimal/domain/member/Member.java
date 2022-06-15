@@ -29,24 +29,24 @@ public class Member extends EntityDate {
     private String userPhoneNumber;
 
     @Column(nullable = false, length = 20)
-    private String userName;
+    private String username;
 
     private String userPassword;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<MemberRole> roles;
 
-    public Member(String id, String phoneNumber, String name, String password, List<Role> roles){
+    public Member(String id, String phoneNumber, String username, String password, List<Role> roles){
         this.userId = id;
         this.userPhoneNumber = phoneNumber;
-        this.userName = name;
+        this.username = username;
         this.userPassword = password;
         this.roles = roles.stream().map(r -> new MemberRole(this, r)).collect(toSet());
 
     }
 
-    public void updateUserInfo(String phoneNumber, String name) {
+    public void updateUserInfo(String phoneNumber, String username) {
         this.userPhoneNumber = phoneNumber;
-        this.userName = name;
+        this.username = username;
     }
 }

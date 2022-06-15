@@ -16,7 +16,7 @@ public class MemberDto {
     private String userPassword;
 
     public static MemberDto toDto(Member member) {
-        return new MemberDto(member.getId(), member.getUserId(), member.getUserName(),member.getUserPassword(), member.getUserPhoneNumber());
+        return new MemberDto(member.getId(), member.getUserId(), member.getUsername(),member.getUserPassword(), member.getUserPhoneNumber());
     }
 
 }
