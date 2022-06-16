@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import Banner from './Banner'
 import mainimage from '../img/home.png'
 import  { ReactComponent as Homeimg } from '../img/Home2.svg'
@@ -8,6 +8,26 @@ const Home = () => {
   const upButton = () => {
     return window.scrollTo(0,0)
   }
+
+  const scrollRef = useRef(null);
+  const [isDrag, setIsDrag] = useState(false);
+  const [startX, setStartX] = useState();
+
+  const onDragStart = (e) => {
+    e.preventDefault();
+    setIsDrag(true);
+    setStartX(e.pageX + scrollRef.current.scrollLeft);
+  }
+
+  const onDragEnd = () => {
+    setIsDrag(false);
+  };
+
+  const onDragMove = (e) => {
+    if (isDrag) {
+    scrollRef.current.scrollLeft = startX - e.pageX;
+    }
+  };
 
   return (
     <div>
@@ -20,18 +40,25 @@ const Home = () => {
 
       <div className='slide__feature'>
         <h2>OUR SERVICES</h2>
-        <div className='slide__container'>
+        <div 
+          className='slide__container' 
+          ref={scrollRef}
+          onMouseDown={onDragStart}
+          onMouseUp={onDragEnd}
+          onMouseLeave={onDragEnd}
+          onMouseMove={onDragMove}
+          >
           <div className='slide__content'>
             <img />
             <p>01</p>
             <div>
-              <h3>Animal</h3>
+              <h3 className='slide__subtitle'>Animal</h3>
             </div>
           </div>
           <div className='slide__content hidden'>
             <p>02</p>
             <div>
-              <h3>Check up</h3>
+              <h3  className='slide__subtitle'>Check up</h3>
             </div>
             <img />
           </div>
@@ -39,13 +66,13 @@ const Home = () => {
             <img />
             <p>03</p>
             <div>
-              <h3>Animal</h3>
+              <h3 className='slide__subtitle'>Recommend</h3>
             </div>
           </div>
           <div className='slide__content hidden'>
             <p>04</p>
             <div>
-              <h3>Check up</h3>
+              <h3 className='slide__subtitle'>Check up</h3>
             </div>
             <img />
           </div>
