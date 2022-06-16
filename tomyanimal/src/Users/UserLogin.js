@@ -97,11 +97,19 @@ const UserLogin = ({Login, error}) => {
         e.preventDefault();
         
         // const {data} = await axios.post('http://localhost:8084/api/auth/signin', userdata, {withCredentials: true});
-        const {data} = await axios.post('http://localhost:8084/api/signin', userdata);
+        const data = await axios.post('http://localhost:8084/api/signin', userdata);
+        //console.log(data);
+        //console.log(data.data.result.data['accessToken']);
 
         //console.log(axios.defaults.headers.common['Authorization'] = `Bearer ${data['accessToken']}`);
-        const jwt = axios.defaults.headers.common['Authorization'] = `${data['accessToken']}`;
+        // const jwt = axios.defaults.headers.common['Authorization'] = `${data['accessToken']}`;
+        const jwt = axios.defaults.headers.common['Authorization'] = data.data.result.data['accessToken'];
         localStorage.setItem('logintoken', jwt);
+
+        console.log(data.data.result.data['member']);
+        localStorage.setItem('id', data.data.result.data['member']);
+        // localStorage.setItem('id', jwt);
+
         if (jwt) {
             navigate('/')
         } else {

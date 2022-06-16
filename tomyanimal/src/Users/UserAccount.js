@@ -9,7 +9,7 @@ import EditableRow from './components/EditableRow';
 
 const UserAccount = () => {
   const [isOpen, setOpen] = useState(false);
-  const [user, setUser] = useState(userData);
+  const [user, setUser] = useState();
 
   //console.log(userData);
 
@@ -32,20 +32,25 @@ const UserAccount = () => {
     },
   ]
 
+  const loginId = localStorage.getItem('id');
+  //console.log(loginId);
+
   const navigate = useNavigate();
 
   //1
-  // useEffect(() => {
-  //   axios({
-  //     method: 'get', 
-  //     // url: 'http://localhost:8084/api/auth/',
-  //     url: 'https://jsonplaceholder.typicode.com/posts',
-  //   }).then((user) => {
-  //     setUser(user.data);
-  //   })
-  // }, []);
-  // console.log(user[0]);
+  useEffect(() => {
+    axios({
+      method: 'get', 
+      // url: 'https://jsonplaceholder.typicode.com/posts',
+      url: 'http://localhost:8084/api/members/' + loginId,
+    }).then((user) => {
+      setUser(user.data);
+    })
+  }, []);
+  //console.log(user['data']);
   
+  //console.log(user.result.data['userId']);
+
   //2
   //useEffect( async () => {
   //     (
@@ -199,7 +204,7 @@ const UserAccount = () => {
           </tr>
         </thead>
         <tbody>
-          {user.map((user) => (
+          {/* {user.map((user) => (
             <Fragment>
               {editContactId === user.id ? (
               <EditableRow 
@@ -214,7 +219,8 @@ const UserAccount = () => {
                 />
                 )}
             </Fragment>
-          ))}
+          ))} */}
+          <ReadOnlyRow />
         </tbody>
       </table>
     </form>
