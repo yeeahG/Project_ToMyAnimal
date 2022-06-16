@@ -6,24 +6,11 @@ import { placeData } from './placeData'
 import PlaceList from './PlaceList'
 import './Places.css'
 
-const sortOptionList = [
-  {value: "hospital", name: "동물병원"},
-  {value: "school", name: "훈련소"},
-]
-
-const ratingOptionList = [
-  {value: "perfect", name: "4.0"},
-  {value: "great", name: "3.0"},
-  {value: "good", name: "2.0"},
-  {value: "not good", name: "1.0"}
-]
 
 const Place = () => {
   const [places, setPlaces] = useState('동물병원');
 
   const [coordinates, setCoordinates] = useState({ lat:0, lng:0});
-  const [type, setType] = useState('Hospital');
-  const [ratings, setRatings] =useState("");
 
   const [isLoading, setisLoading] = useState(true);
 
@@ -107,16 +94,6 @@ const Place = () => {
       {/* <Header 
         setType={setType} setRatings={setRatings} setCoordinates={setCoordinates}
       /> */}
-      <ControlMenu 
-        value={type} 
-        onChange={setType}
-        optionList={sortOptionList}
-      />
-      <ControlMenu 
-        value={ratings} 
-        onChange={setRatings}
-        optionList={ratingOptionList}
-      />
 
       <div className='place__content'>
 

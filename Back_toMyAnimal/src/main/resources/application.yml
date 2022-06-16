@@ -13,7 +13,7 @@ spring:
     username: root
     url: jdbc:mysql://localhost:3306/team1
   jpa:
-    show-sql: true
+    show-sql: false
     hibernate:
       ddl-auto: create
     properties:
