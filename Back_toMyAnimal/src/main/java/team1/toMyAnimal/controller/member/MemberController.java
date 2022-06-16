@@ -26,4 +26,5 @@ public class MemberController {
         memberService.delete(id);
         return Response.success();
     }
+
 }

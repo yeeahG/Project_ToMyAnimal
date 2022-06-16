@@ -42,6 +42,8 @@ public class Member extends EntityDate {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<MemberRole> roles;
 
+    // Pet pet ?
+
 //    id, 폰번호, 이름, 비밀번호 , 권한
     public Member(String id, String phoneNumber, String username, String password, List<Role> roles){
         this.userId = id;

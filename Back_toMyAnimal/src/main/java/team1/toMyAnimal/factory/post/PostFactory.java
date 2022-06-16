@@ -24,6 +24,6 @@ public class PostFactory {
     }
 
     public static Post createPostWithImages(List<Image> images) {
-        return new Post("title", "content", createMember(), createCategory(), images);
+        return new Post("title", "content",createMember(), createCategory(), images);
     }
 }
