@@ -7,8 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import team1.toMyAnimal.domain.dto.post.PostCreateRequest;
 import team1.toMyAnimal.domain.dto.post.PostCreateResponse;
+import team1.toMyAnimal.domain.dto.post.PostDto;
 import team1.toMyAnimal.domain.post.Image;
 import team1.toMyAnimal.domain.post.Post;
+import team1.toMyAnimal.exception.PostNotFoundException;
 import team1.toMyAnimal.repository.category.CategoryRepository;
 import team1.toMyAnimal.repository.member.MemberRepository;
 import team1.toMyAnimal.repository.post.PostRepository;
@@ -41,5 +43,9 @@ public class PostService {
 
     private void uploadImages(List<Image> images, List<MultipartFile> fileImages) {
         IntStream.range(0, images.size()).forEach(i -> fileService.upload(fileImages.get(i), images.get(i).getUniqueName()));
+    }
+
+    public PostDto read(Long id) {
+        return PostDto.toDto(postRepository.findById(id).orElseThrow(PostNotFoundException::new));
     }
 }

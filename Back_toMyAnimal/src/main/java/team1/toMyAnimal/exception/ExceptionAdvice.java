@@ -2,6 +2,7 @@ package team1.toMyAnimal.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -86,5 +87,18 @@ public class ExceptionAdvice {
     public Response cannotConvertNestedStructureException(CannotConvertNestedStructureException e) {
         log.info("e = {}", e.getMessage());
         return Response.failure(-1011, "중첩 구조 변환에 실패하였습니다.");
+    }
+
+    @ExceptionHandler(BindException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Response bindException(BindException e) {
+        return Response.failure(-1003, e.getBindingResult().getFieldError().getDefaultMessage());
+    }
+
+    @ExceptionHandler(FileUploadFailureException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Response fileUploadFailureException(FileUploadFailureException e) {
+        log.info("e = {}", e.getMessage());
+        return Response.failure(-1014, "파일 업로드에 실패하였습니다.");
     }
 }
