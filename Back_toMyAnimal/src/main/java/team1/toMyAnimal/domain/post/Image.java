@@ -5,9 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import team1.toMyAnimal.exception.UnsupportedImageFormatException;
 
 import javax.persistence.*;
 import java.util.Arrays;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -31,7 +33,7 @@ public class Image {
 
     private final static String supportedExtension[] = {"jpg", "jpeg", "gif", "bmp", "png"};
 
-    public image(String originName) {
+    public Image(String originName) {
         this.uniqueName = generateUniqueName(extractExtension(originName));
         this.originName = originName;
     }
@@ -42,10 +44,15 @@ public class Image {
         }
     }
 
+    private String generateUniqueName(String extension){
+        return UUID.randomUUID().toString() + "." + extension;
+    }
+
     private String extractExtension(String originName) {
         try {
             String ext = originName.substring(originName.lastIndexOf(".") + 1);
-            if ((isSupportedFormat(ext)) return ext){
+            if(isSupportedFormat(ext)){
+                return ext;
             }
         }catch (StringIndexOutOfBoundsException e) {}
         throw new UnsupportedImageFormatException();
