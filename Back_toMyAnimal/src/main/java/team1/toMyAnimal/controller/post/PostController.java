@@ -29,4 +29,11 @@ public class PostController {
     public Response read(@PathVariable Long id) {
         return Response.success(postService.read(id));
     }
+
+    @DeleteMapping("/api/posts/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Response delete(@PathVariable Long id) {
+        postService.delete(id);
+        return Response.success();
+    }
 }
