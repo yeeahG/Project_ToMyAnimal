@@ -139,59 +139,55 @@ const UserAccount = () => {
 
         
   return (
-  <div className='userinfo__content'>
+  <div>
+
     <div className='userinfo__subtitle'>
-      {/* <h1>{user.length} Details</h1> */}
       <h1>Details</h1>
-      <button onClick={()=>setOpen(!isOpen)}>
-        {isOpen ? "X" : "Edit"}
-      </button>
     </div>
 
-    {isOpen ?
-      <UserEdit isOpen={isOpen} />
-      :
-    <>
-      <div className='userinfo__table'>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Contact</th>
-            </tr>
-          </thead>
+    <div className='userinfo__content'>
+      {/* <div className='userinfo__subtitle'>
+        <h1>Details</h1>
+        <button onClick={()=>setOpen(!isOpen)}>
+        {isOpen ? "X" : "Edit"}
+        </button>
+      </div> */}
 
-          <tbody>
-            <tr>
-              <td>user[0].title</td>
-            </tr>
-            <tr>
-              <td>user[0].body</td>
-            </tr>
+      {/* {isOpen ?
+        <UserEdit isOpen={isOpen} />
+        :
+      <>
+        <div className='userinfo__table'>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Contact</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>user[0].title</td>
+              </tr>
+              <tr>
+                <td>user[0].body</td>
+              </tr>
             
-            {/*
-            {user.map(user => 
-            <tr key={user.id}>
-              <td>Contact </td>
-              <td>
-                {user.title}
-              </td>
-            </tr>
-            )}*/}
-          </tbody>
-        </table>
-      </div>
+            </tbody>
+          </table>
+        </div>
 
-      <div className='welcome'>
-        <button onClick={Logout} className='welcome__btn'>
-          <a href="/user">Logout</a>
-        </button>
-        <button className='welcome__btn'>
-          <a href="/">Home</a>
-        </button>
-      </div>
-    </>
-    }
+        <div className='welcome'>
+          <button onClick={Logout} className='welcome__btn'>
+            <a href="/user">Logout</a>
+          </button>
+          <button className='welcome__btn'>
+            <a href="/">Home</a>
+          </button>
+        </div>
+      </>
+      } */}
     
 
     <form onSubmit={handleEditFormSubmit} >
@@ -215,8 +211,8 @@ const UserAccount = () => {
               <ReadOnlyRow 
                 user={user} 
                 handleEditClick={handleEditClick}
-              />
-              )}
+                />
+                )}
             </Fragment>
           ))}
         </tbody>
@@ -236,6 +232,7 @@ const UserAccount = () => {
     GET method로 userName, userPhoneNumberOrUserId 가져오기
     PUT or PATCH 로 회원정보 수정
 
+  </div>
   </div>
   )
 }
