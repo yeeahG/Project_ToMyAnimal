@@ -14,16 +14,21 @@
     
 .title__btn {
     position: relative;
-    display: flex;
+    /* display: flex; */
     gap: 0.5rem;
     align-items: center;
     justify-content: space-between;
     text-align: left;
     align-self: start;
     cursor: pointer;
+    color: transparent;
+	-webkit-text-stroke-width: 1px;
+	-webkit-text-stroke-color: #f7f6f2 ;
 }
     
 .title__btn p {
+    font-family: 'Ultra', serif;
+    font-size: 4rem;
     height: 2.5rem;
     width: auto;
     margin-bottom: 2rem;
@@ -63,9 +68,6 @@
     
 .text__input {
     flex: 1 1 100%;
-}
-    
-.text__input input {
     width: 100%;
     border: none;
     border-radius: 0;
@@ -111,10 +113,10 @@ a {
     .footer__inner {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr;
-        padding: 6rem 2rem 1rem 1rem;
+        padding: 4rem 2rem 1rem 1rem;
     }
     .title__btn p {
-        height: 6.5rem;
+        /* height: 6.5rem; */
     }
     .footer__text {
         margin-bottom: 6rem;

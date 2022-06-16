@@ -1,8 +1,13 @@
+.nav__wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
 .nav__form {
     width: 100%;
-    position: sticky;
+    position: fixed;
     top: 0px;
-    z-index: 3;
+    z-index: 99;
     background: white;
 }
 
@@ -10,16 +15,23 @@
     display: flex;
     -webkit-box-pack: justify;
     justify-content: space-between;
-    z-index: 9;
-    position: sticky;
 }
 
 #menu-btn {
+    font-size: 30px;
+}
+
+#title-btn a {
+    font-family: 'Ultra', cursive;
     font-size: 40px;
+    font-weight: 900;
+    /* color: transparent;
+	-webkit-text-stroke-width: 1px;
+	-webkit-text-stroke-color: #000 ; */
 }
 
 #login-btn {
-    font-size: 40px;
+    font-size: 30px;
 }
 
 

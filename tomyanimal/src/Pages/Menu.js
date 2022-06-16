@@ -13,19 +13,23 @@ const Menu = () => {
     }
 
   return (
-    <div>
+    <div className='nav__wrapper'>
         <header className='nav__form'>
 
             <div className='nav__container'>
                 <button id='menu-btn' onClick={()=>toggleMenu()}>menu</button>
-                <button id='menu-btn'>
-                    <a  href='/'>To.</a>
+                <button id='title-btn'>
+                    <a href='/'>To.</a>
                 </button>
                 <button id='login-btn'>
-                    <a href='/user'>User</a>
+                    <a href='/user'>user</a>
                 </button>
             </div>
 
+            <div className="Container__StyledContainer heASqm">
+                {/* <div className="space__styledSpace djzxvY"></div> */}
+                <div className="Border__StyeldBorder klPBwl"></div>
+            </div>
         </header>
 
         <section className={isOpen ? "show-menu" : "hide-menu"}>
@@ -59,10 +63,6 @@ const Menu = () => {
             </div>
         </section>
 
-        <div className="Container__StyledContainer heASqm">
-            <div className="space__styledSpace djzxvY"></div>
-            <div className="Border__StyeldBorder klPBwl"></div>
-        </div>
 
     </div>
   )

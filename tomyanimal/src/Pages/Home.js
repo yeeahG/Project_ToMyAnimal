@@ -81,7 +81,7 @@ const Home = () => {
       </div>
       
 
-      <main className='main__contaiiner'>
+      <main className='main__container'>
         <div className='main__text'>
           <h2>Check up everyday</h2>
           <p>
