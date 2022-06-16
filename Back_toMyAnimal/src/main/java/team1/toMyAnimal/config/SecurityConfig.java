@@ -22,12 +22,8 @@ import team1.toMyAnimal.security.CustomAuthenticationEntryPoint;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
     private final TokenHelper accessTokenHelper;
     private final CustomUserDetailsService userDetailsService;
-
-
-
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -47,6 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/signin", "/api/signup", "/api/refresh-token").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/**").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/api/members/{id}/**").access("@memberGuard.check(#id)")
+                .antMatchers(HttpMethod.POST, "/api/categories/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/categories/**").hasRole("ADMIN")
                 .anyRequest().hasAnyRole("ADMIN")
                 .and()
                 .exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler())
