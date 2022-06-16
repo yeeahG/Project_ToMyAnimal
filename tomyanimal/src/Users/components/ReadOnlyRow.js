@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ReadOnlyRow = ( {pn, us, handleEditClick}) => {
+const ReadOnlyRow = ( {userPhone, userName, handleEditClick}) => {
   return (
   <>
     <tr>
@@ -8,8 +8,8 @@ const ReadOnlyRow = ( {pn, us, handleEditClick}) => {
       <td>{user.contact}</td> */}
       {/* <td>{user.result.data['userName']}</td>
       <td>{user.result.data['userPhoneNumber']}</td> */}
-      <td>{pn}</td>
-      <td>{us}</td>
+      <td>{userName}</td>
+      <td>{userPhone}</td>
 
     </tr>
     <button

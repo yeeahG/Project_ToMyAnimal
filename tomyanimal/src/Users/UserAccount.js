@@ -11,8 +11,8 @@ const UserAccount = () => {
   const [isOpen, setOpen] = useState(false);
   const [user, setUser] = useState();
   //const [userInfo, setUserInfo] = useState(userInfo);
-  const [pn, setPn] = useState();
-  const [us, setUS] = useState();
+  const [userName, setUserName] = useState();
+  const [userPhone, setUserPhone] = useState();
 
   //console.log(userData);
   //console.log(userInfo);
@@ -51,8 +51,9 @@ const UserAccount = () => {
       url: 'http://localhost:8084/api/members/' + loginId,
     }).then((user) => {
       setUser(user);
-      setPn(user.data.result.data['userPhoneNumber'])
-      setUS(user.data.result.data['userName'])
+      setUserName(user.data.result.data['userName'])
+      setUserPhone(user.data.result.data['userPhoneNumber'])
+      localStorage.setItem('userInfo', JSON.stringify(user.data.result.data));
     })
   }, []);
   //console.log(user.result.data['userName']);
@@ -227,7 +228,7 @@ const UserAccount = () => {
                 )}
             </Fragment>
           ))} */}
-          <ReadOnlyRow pn={pn} us={us}/>
+          <ReadOnlyRow userPhone={userPhone} userName={userName}/>
         </tbody>
       </table>
     </form>

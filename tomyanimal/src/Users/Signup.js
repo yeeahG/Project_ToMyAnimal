@@ -55,11 +55,11 @@ const Signup = () => {
     
             .catch((error) => {
               console.error('실패:', error);
-              });
+            });
         
             localStorage.setItem("userinfo", JSON.stringify(item))
             alert('가입이 완료되었습니다')
-            navigate('/login')
+            navigate('/user')
     
           // } else {
           //   setError("비밀번호가 일치하지 않습니다")
