@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import team1.toMyAnimal.aop.AssignMemberId;
 import team1.toMyAnimal.controller.response.Response;
 import team1.toMyAnimal.domain.dto.post.PostCreateRequest;
+import team1.toMyAnimal.domain.dto.post.PostUpdateRequest;
 import team1.toMyAnimal.service.post.PostService;
 
 import javax.validation.Valid;
@@ -35,5 +36,13 @@ public class PostController {
     public Response delete(@PathVariable Long id) {
         postService.delete(id);
         return Response.success();
+    }
+
+    @PutMapping("/api/posts/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Response update(
+            @PathVariable Long id,
+            @Valid @ModelAttribute PostUpdateRequest req) {
+        return Response.success(postService.update(id, req));
     }
 }
