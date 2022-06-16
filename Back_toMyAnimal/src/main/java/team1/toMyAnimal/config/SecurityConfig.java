@@ -31,7 +31,6 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
     private final TokenHelper accessTokenHelper;
     private final CustomUserDetailsService userDetailsService;
 
@@ -56,6 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/signin", "/api/signup", "/api/refresh-token").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/**").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/api/members/{id}/**").access("@memberGuard.check(#id)")
+                .antMatchers(HttpMethod.POST, "/api/categories/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/categories/**").hasRole("ADMIN")
                 .anyRequest().hasAnyRole("ADMIN")
                 .and()
                 .exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler())
