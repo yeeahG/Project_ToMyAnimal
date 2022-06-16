@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import team1.toMyAnimal.aop.AssignMemberId;
 import team1.toMyAnimal.controller.response.Response;
 import team1.toMyAnimal.domain.dto.post.PostCreateRequest;
 import team1.toMyAnimal.service.post.PostService;
@@ -18,6 +19,7 @@ public class PostController {
 
     @PostMapping("/api/posts")
     @ResponseStatus(HttpStatus.CREATED)
+    @AssignMemberId
     public Response create(@Valid @ModelAttribute PostCreateRequest req) {
         return Response.success(postService.create(req));
     }
