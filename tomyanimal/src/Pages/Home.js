@@ -14,6 +14,46 @@ const Home = () => {
       
       <Banner />
 
+      <section>
+        
+      </section>
+
+      <div className='slide__feature'>
+        <h2>OUR SERVICES</h2>
+        <div className='slide__container'>
+          <div className='slide__content'>
+            <img />
+            <p>01</p>
+            <div>
+              <h3>Animal</h3>
+            </div>
+          </div>
+          <div className='slide__content hidden'>
+            <p>02</p>
+            <div>
+              <h3>Check up</h3>
+            </div>
+            <img />
+          </div>
+          <div className='slide__content hidden'>
+            <img />
+            <p>03</p>
+            <div>
+              <h3>Animal</h3>
+            </div>
+          </div>
+          <div className='slide__content hidden'>
+            <p>04</p>
+            <div>
+              <h3>Check up</h3>
+            </div>
+            <img />
+          </div>
+        </div>
+
+      </div>
+      
+
       <main className='main__contaiiner'>
         <div className='main__text'>
           <h2>Check up everyday</h2>
