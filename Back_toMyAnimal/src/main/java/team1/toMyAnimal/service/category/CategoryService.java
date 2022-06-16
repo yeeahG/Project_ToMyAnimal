@@ -24,6 +24,7 @@ public class CategoryService {
 
     @Transactional
     public void create(CategoryCreateRequest req) {
+        System.out.println("요청 : " + req);
         categoryRepository.save(CategoryCreateRequest.toEntity(req, categoryRepository));
     }
 
