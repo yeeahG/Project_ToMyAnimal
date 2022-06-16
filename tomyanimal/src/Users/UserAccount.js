@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState, Fragment } from 'react'
+import React, { useEffect, useState, Fragment, useReducer } from 'react'
 import { useNavigate } from 'react-router-dom';
 import UserEdit from './UserEdit'
 import { userData } from './data'
@@ -10,14 +10,20 @@ import EditableRow from './components/EditableRow';
 const UserAccount = () => {
   const [isOpen, setOpen] = useState(false);
   const [user, setUser] = useState();
+  //const [userInfo, setUserInfo] = useState(userInfo);
+  const [pn, setPn] = useState();
+  const [us, setUS] = useState();
 
   //console.log(userData);
+  //console.log(userInfo);
 
   const [editContactId, setEditContactId] = useState(null);
   const [editFormData, setEditFormData] = useState({
     name: "", 
     contact: "",
   });
+
+  // const [data, dispatch] = useReducer(User, dummyData);
 
   const data = [
     {
@@ -44,11 +50,12 @@ const UserAccount = () => {
       // url: 'https://jsonplaceholder.typicode.com/posts',
       url: 'http://localhost:8084/api/members/' + loginId,
     }).then((user) => {
-      setUser(user.data);
+      setUser(user);
+      setPn(user.data.result.data['userPhoneNumber'])
+      setUS(user.data.result.data['userName'])
     })
   }, []);
-  //console.log(user['data']);
-  
+  //console.log(user.result.data['userName']);
   //console.log(user.result.data['userId']);
 
   //2
@@ -220,7 +227,7 @@ const UserAccount = () => {
                 )}
             </Fragment>
           ))} */}
-          <ReadOnlyRow />
+          <ReadOnlyRow pn={pn} us={us}/>
         </tbody>
       </table>
     </form>
