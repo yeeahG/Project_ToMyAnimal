@@ -10,7 +10,6 @@ import team1.toMyAnimal.domain.common.EntityDate;
 import team1.toMyAnimal.domain.member.Member;
 
 import javax.persistence.*;
-import javax.swing.text.StringContent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +18,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post extends EntityDate {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -43,18 +41,17 @@ public class Post extends EntityDate {
     @OneToMany(mappedBy = "post", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Image> images;
 
-    public Post(String title, String content, Member member, Category category, List<Image> images){
+    public Post(String title, String content, Member member, Category category, List<Image> images) {
         this.title = title;
         this.content = content;
         this.member = member;
         this.category = category;
         this.images = new ArrayList<>();
         addImages(images);
-
     }
 
-    private void addImages(List<Image> added) {
-        added.stream().forEach( i -> {
+    private void addImages(List<Image> added) { // 5
+        added.stream().forEach(i -> {
             images.add(i);
             i.initPost(this);
         });
