@@ -11,6 +11,7 @@
     -webkit-box-pack: justify;
     justify-content: space-between;
     z-index: 9;
+    position: sticky;
 }
 
 #menu-btn {
@@ -126,5 +127,8 @@
 @media (max-width: 900px) {
     #menu-wrapper {
         width: 86%;
+    }
+    .nav__container {
+        margin: 0 2rem;
     }
 }
