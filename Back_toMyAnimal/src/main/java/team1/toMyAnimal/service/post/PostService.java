@@ -30,6 +30,7 @@ public class PostService {
 
     @Transactional
     public PostCreateResponse create(PostCreateRequest req) {
+        System.out.println(req);
         Post post = postRepository.save(
                 PostCreateRequest.toEntity(
                         req,

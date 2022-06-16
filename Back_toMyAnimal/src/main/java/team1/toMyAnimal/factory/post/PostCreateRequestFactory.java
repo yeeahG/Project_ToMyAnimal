@@ -28,10 +28,6 @@ public class PostCreateRequestFactory {
         return new PostCreateRequest("title", content, 1L, 1L, List.of());
     }
 
-    public static PostCreateRequest createPostCreateRequestWithPrice(Long price) {
-        return new PostCreateRequest("title", "content", 1L, 1L, List.of());
-    }
-
     public static PostCreateRequest createPostCreateRequestWithMemberId(Long memberId) {
         return new PostCreateRequest("title", "content", memberId, 1L, List.of());
     }
