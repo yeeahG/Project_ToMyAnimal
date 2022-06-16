@@ -35,7 +35,7 @@ public class SignService {
         String encodedPassword = passwordEncoder.encode(req.getPassword());
         List<Role> roles = List.of(roleRepository.findByRoleType(RoleType.ROLE_USER).orElseThrow(RoleNotFoundException::new));
         memberRepository.save(
-                new Member(req.getUserId(), encodedPassword, req.getUsername(), req.getUserPhoneNumber(), roles)
+                new Member(req.getUserId(), req.getUserPhoneNumber(), req.getUsername(), encodedPassword, roles)
         );
     }
 
