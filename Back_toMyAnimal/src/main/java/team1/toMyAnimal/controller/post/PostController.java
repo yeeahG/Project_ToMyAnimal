@@ -3,10 +3,7 @@ package team1.toMyAnimal.controller.post;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import team1.toMyAnimal.controller.response.Response;
 import team1.toMyAnimal.domain.dto.post.PostCreateRequest;
 import team1.toMyAnimal.service.post.PostService;
@@ -23,5 +20,11 @@ public class PostController {
     @ResponseStatus(HttpStatus.CREATED)
     public Response create(@Valid @ModelAttribute PostCreateRequest req) {
         return Response.success(postService.create(req));
+    }
+
+    @GetMapping("/api/posts/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Response read(@PathVariable Long id) {
+        return Response.success(postService.read(id));
     }
 }
