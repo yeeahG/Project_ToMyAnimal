@@ -73,12 +73,8 @@ const UserHome = () => {
         </div>
 
 
-        <div className='userinfo__content'>
+        <div className='account__content'>
           <div>{tabContArr[activeIndex].tabCont}</div>
-        </div>
-
-        <div className='animalinfo__content'>
-     
         </div>
 
       </section>
