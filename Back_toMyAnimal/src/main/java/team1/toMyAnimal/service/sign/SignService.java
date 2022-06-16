@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team1.toMyAnimal.config.TokenHelper;
+import team1.toMyAnimal.domain.dto.member.MemberDto;
 import team1.toMyAnimal.domain.dto.request.SignInRequest;
 import team1.toMyAnimal.domain.dto.request.SignUpRequest;
 import team1.toMyAnimal.domain.dto.response.SignInResponse;
@@ -41,12 +42,15 @@ public class SignService {
 
     @Transactional(readOnly = true)
     public SignInResponse signIn(SignInRequest req) {
+
         Member member = memberRepository.findByUserId(req.getUserId()).orElseThrow(MemberNotFoundException::new);
         validatePassword(req, member);
         String subject = createSubject(member);
         String accessToken = accessTokenHelper.createToken(subject);
         String refreshToken = refreshTokenHelper.createToken(subject);
-        return new SignInResponse(accessToken, refreshToken);
+        Long memberId = member.getId();
+
+        return new SignInResponse(accessToken, refreshToken, memberId);
     }
 
     public RefreshTokenResponse refreshToken(String rToken) {
