@@ -23,8 +23,8 @@ const Signup = () => {
         const item = {
           userPhoneNumber: phoneNumber,
           userId: signinId,
-          userName: username,
-          userPassword: signinPassword,
+          username: username,
+          password: signinPassword,
         }
         console.log(item);
     

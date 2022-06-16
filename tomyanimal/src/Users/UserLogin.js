@@ -89,7 +89,7 @@ const UserLogin = ({Login, error}) => {
     
     const userdata = {
         userId: details.id,
-        userPassword: details.password
+        password: details.password
     }
     
     
