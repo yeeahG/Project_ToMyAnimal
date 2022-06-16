@@ -32,10 +32,11 @@ public class SignService {
     @Transactional
     public void signUp(SignUpRequest req) {
         validateSignUpInfo(req);
+
         String encodedPassword = passwordEncoder.encode(req.getPassword());
         List<Role> roles = List.of(roleRepository.findByRoleType(RoleType.ROLE_USER).orElseThrow(RoleNotFoundException::new));
         memberRepository.save(
-                new Member(req.getUserId(), encodedPassword, req.getUsername(), req.getUserPhoneNumber(), roles)
+                new Member(req.getUserId(), req.getUserPhoneNumber(), req.getUsername(), encodedPassword, roles)
         );
     }
 
@@ -57,26 +58,26 @@ public class SignService {
     }
 
     private void validateRefreshToken(String rToken) {
-        if(!refreshTokenHelper.validate(rToken)) {
+        if (!refreshTokenHelper.validate(rToken)) {
             throw new AuthenticationEntryPointException();
         }
     }
 
     private void validateSignUpInfo(SignUpRequest req) {
-        if(memberRepository.existsByUserId(req.getUserId()))
+        if (memberRepository.existsByUserId(req.getUserId()))
             throw new MemberIdAlreadyExistsException(req.getUserId());
-        if(memberRepository.existsByUserPhoneNumber(req.getUserPhoneNumber()))
+        if (memberRepository.existsByUserPhoneNumber(req.getUserPhoneNumber()))
             throw new MemberPhoneNumberAlreadyExistsException(req.getUserPhoneNumber());
     }
 
     private void validatePassword(SignInRequest req, Member member) {
-        if(!passwordEncoder.matches(req.getUserPassword(), member.getUserPassword())) {
+        if (!passwordEncoder.matches(req.getPassword(), member.getPassword())) {
             throw new LoginFailureException();
         }
     }
 
     private String createSubject(Member member) {
-        return String.valueOf(member.getId());
+        return String.valueOf(member.getUserId());
     }
 
 

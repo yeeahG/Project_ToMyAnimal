@@ -13,10 +13,11 @@ public class MemberDto {
     private String userId;
     private String userName;
     private String userPhoneNumber;
-    private String userPassword;
+    private String password;
 
+    //    id, 폰번호, 이름, 비밀번호 , 권한
     public static MemberDto toDto(Member member) {
-        return new MemberDto(member.getId(), member.getUserId(), member.getUsername(),member.getUserPassword(), member.getUserPhoneNumber());
+        return new MemberDto(member.getId(), member.getUserId(), member.getUserPhoneNumber(), member.getUsername(), member.getPassword());
     }
 
 }

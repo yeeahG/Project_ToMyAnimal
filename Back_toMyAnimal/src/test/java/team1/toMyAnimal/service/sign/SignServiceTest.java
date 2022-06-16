@@ -43,8 +43,6 @@ public class SignServiceTest {
     PasswordEncoder passwordEncoder;
     @Mock TokenService tokenService;
 
-    @Mock
-    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Test
     void signUpTest() {
@@ -61,6 +59,7 @@ public class SignServiceTest {
 
         System.out.println("rare password : " + req.getPassword());
         System.out.println("encoded password : " + passwordEncoder.encode(req.getPassword()));
+        System.out.println(passwordEncoder.matches(req.getPassword(), passwordEncoder.encode(req.getPassword())));
 
     }
 
