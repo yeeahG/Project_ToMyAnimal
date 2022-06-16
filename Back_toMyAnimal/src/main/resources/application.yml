@@ -3,6 +3,10 @@ spring:
     active: local
     include: secret
 
+# 사진 multipart 용량
+    servlet.multipart.max-file-size: 5MB
+    servlet.multipart.max-request-size: 5MB
+
   jackson:
     time-zone: UTC
     serialization:
