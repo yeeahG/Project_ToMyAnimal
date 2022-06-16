@@ -37,3 +37,4 @@ out/
 .vscode/
 
 application-secret.yml
+/src/test/resources/static/*
