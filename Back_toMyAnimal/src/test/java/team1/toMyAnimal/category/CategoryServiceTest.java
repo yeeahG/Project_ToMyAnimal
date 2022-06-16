@@ -13,6 +13,8 @@ import team1.toMyAnimal.repository.category.CategoryRepository;
 import team1.toMyAnimal.service.category.CategoryService;
 
 import java.util.List;
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
@@ -20,6 +22,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static team1.toMyAnimal.factory.category.CategoryCreateRequestFactory.createCategoryCreateRequest;
+import static team1.toMyAnimal.factory.category.CategoryFactory.createCategory;
 
 @ExtendWith(MockitoExtension.class)
 class CategoryServiceTest {
@@ -63,19 +66,19 @@ class CategoryServiceTest {
     @Test
     void deleteTest() {
         // given
-        given(categoryRepository.existsById(anyLong())).willReturn(true);
+        given(categoryRepository.findById(anyLong())).willReturn(Optional.of(createCategory()));
 
         // when
         categoryService.delete(1L);
 
         // then
-        verify(categoryRepository).deleteById(anyLong());
+        verify(categoryRepository).delete(any());
     }
 
     @Test
     void deleteExceptionByCategoryNotFoundTest() {
         // given
-        given(categoryRepository.existsById(anyLong())).willReturn(false);
+        given(categoryRepository.findById(anyLong())).willReturn(Optional.ofNullable(null));
 
         // when, then
         assertThatThrownBy(() -> categoryService.delete(1L)).isInstanceOf(CategoryNotFoundException.class);
