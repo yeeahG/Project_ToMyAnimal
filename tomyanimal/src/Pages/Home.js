@@ -1,5 +1,7 @@
 import React from 'react'
 import Banner from './Banner'
+import mainimage from '../img/home.png'
+import  { ReactComponent as Homeimg } from '../img/Home2.svg'
 import './Home.css'
 
 const Home = () => {
@@ -11,6 +13,46 @@ const Home = () => {
     <div>
       
       <Banner />
+
+      <section>
+        
+      </section>
+
+      <div className='slide__feature'>
+        <h2>OUR SERVICES</h2>
+        <div className='slide__container'>
+          <div className='slide__content'>
+            <img />
+            <p>01</p>
+            <div>
+              <h3>Animal</h3>
+            </div>
+          </div>
+          <div className='slide__content hidden'>
+            <p>02</p>
+            <div>
+              <h3>Check up</h3>
+            </div>
+            <img />
+          </div>
+          <div className='slide__content hidden'>
+            <img />
+            <p>03</p>
+            <div>
+              <h3>Animal</h3>
+            </div>
+          </div>
+          <div className='slide__content hidden'>
+            <p>04</p>
+            <div>
+              <h3>Check up</h3>
+            </div>
+            <img />
+          </div>
+        </div>
+
+      </div>
+      
 
       <main className='main__contaiiner'>
         <div className='main__text'>
@@ -24,7 +66,8 @@ const Home = () => {
         <div className='main__image'>
           <span className='box__image'>
             <span></span>
-            <img />
+            {/* <img src={mainimage} /> */}
+            <Homeimg />
           </span>
         </div>
       </main>
