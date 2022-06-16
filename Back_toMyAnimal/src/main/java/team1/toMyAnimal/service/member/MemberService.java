@@ -18,6 +18,8 @@ public class MemberService {
         return MemberDto.toDto(memberRepository.findById(id).orElseThrow(MemberNotFoundException::new));
     }
 
+    // update?
+
     @Transactional
     public void delete(Long id) {
         Member member = memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);
