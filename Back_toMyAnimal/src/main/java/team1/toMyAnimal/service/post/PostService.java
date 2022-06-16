@@ -5,9 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import team1.toMyAnimal.domain.dto.post.PostCreateRequest;
-import team1.toMyAnimal.domain.dto.post.PostCreateResponse;
-import team1.toMyAnimal.domain.dto.post.PostDto;
+import team1.toMyAnimal.domain.dto.post.*;
 import team1.toMyAnimal.domain.post.Image;
 import team1.toMyAnimal.domain.post.Post;
 import team1.toMyAnimal.exception.PostNotFoundException;
@@ -60,4 +58,14 @@ public class PostService {
     private void deleteImages(List<Image> images) {
         images.stream().forEach(i -> fileService.delete(i.getUniqueName()));
     }
+
+    @Transactional
+    public PostUpdateResponse update(Long id, PostUpdateRequest req) {
+        Post post = postRepository.findById(id).orElseThrow(PostNotFoundException::new);
+        Post.ImageUpdatedResult result = post.update(req);
+        uploadImages(result.getAddedImages(), result.getAddedImageFiles());
+        deleteImages(result.getDeletedImages());
+        return new PostUpdateResponse(id);
+    }
+
 }
