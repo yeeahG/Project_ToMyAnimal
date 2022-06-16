@@ -1,5 +1,7 @@
 import React from 'react'
 import Banner from './Banner'
+import mainimage from '../img/home.png'
+import  { ReactComponent as Homeimg } from '../img/Home2.svg'
 import './Home.css'
 
 const Home = () => {
@@ -24,7 +26,8 @@ const Home = () => {
         <div className='main__image'>
           <span className='box__image'>
             <span></span>
-            <img />
+            {/* <img src={mainimage} /> */}
+            <Homeimg />
           </span>
         </div>
       </main>

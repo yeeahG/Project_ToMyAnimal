@@ -77,6 +77,12 @@
     width: 100%;
     max-width: 20rem;
     overflow: hidden;
+    /* border: 1px solid; */
+}
+
+.main__image img {
+    overflow: hidden;
+    width: 100%;
 }
 
 .box__image {
@@ -130,6 +136,6 @@
 
 
     .main__image {
-        max-width: 24rem;
+        max-width: 30rem;
     }
 }
