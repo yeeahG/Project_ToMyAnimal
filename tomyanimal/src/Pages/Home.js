@@ -25,13 +25,13 @@ const Home = () => {
             <img />
             <p>01</p>
             <div>
-              <h3>Animal</h3>
+              <h3 className='slide__subtitle'>Animal</h3>
             </div>
           </div>
           <div className='slide__content hidden'>
             <p>02</p>
             <div>
-              <h3>Check up</h3>
+              <h3  className='slide__subtitle'>Check up</h3>
             </div>
             <img />
           </div>
@@ -39,13 +39,13 @@ const Home = () => {
             <img />
             <p>03</p>
             <div>
-              <h3>Animal</h3>
+              <h3 className='slide__subtitle'>Recommend</h3>
             </div>
           </div>
           <div className='slide__content hidden'>
             <p>04</p>
             <div>
-              <h3>Check up</h3>
+              <h3 className='slide__subtitle'>Check up</h3>
             </div>
             <img />
           </div>
