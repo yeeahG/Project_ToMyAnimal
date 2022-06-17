@@ -2,17 +2,20 @@ package team1.toMyAnimal.service.pet;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import team1.toMyAnimal.domain.dto.pet.PetCreateRequest;
 import team1.toMyAnimal.domain.dto.pet.PetCreateResponse;
+import team1.toMyAnimal.domain.dto.pet.PetDto;
 import team1.toMyAnimal.domain.pet.Pet;
+import team1.toMyAnimal.exception.PetNotFoundException;
 import team1.toMyAnimal.repository.member.MemberRepository;
 import team1.toMyAnimal.repository.pet.PetRepository;
 import team1.toMyAnimal.service.post.FileService;
 
-import javax.transaction.Transactional;
+
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class PetService {
     private final PetRepository petRepository;
@@ -24,5 +27,9 @@ public class PetService {
     public PetCreateResponse create(PetCreateRequest req){
         Pet pet = petRepository.save(PetCreateRequest.toEntity(req, memberRepository));
         return new PetCreateResponse(pet.getId());
+    }
+
+    public PetDto read(Long id) {
+        return PetDto.toDto(petRepository.findById(id).orElseThrow(PetNotFoundException::new));
     }
 }
