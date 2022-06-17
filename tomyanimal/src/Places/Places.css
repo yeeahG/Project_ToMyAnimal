@@ -89,6 +89,7 @@ li {
 /*=====================FILTER=====================*/
 .control__menu {
     display: flex;
+    margin: 1rem 0;
 }
 
 /*=====================PLACE CONTENT=====================*/
@@ -149,7 +150,7 @@ li {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     /* background-color: rgb(239, 236, 229); */
-    background-color: #f7f6f2;
+    /* background-color: #f7f6f2; */
 }
 
 .place__detail__container {

@@ -15,6 +15,7 @@ const PlaceDetail = ( {place} ) => {
       <p>{place.rating}</p>
       <div className='place__detail__review'>
         <p>Review</p>
+        <div></div>
       </div>
     </div>
   )
