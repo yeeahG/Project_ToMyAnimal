@@ -369,6 +369,7 @@ li {
     /*반려동물 정보 내용*/
     .content__wrapper {
         grid-column-gap: 3rem;
+        width: 55vw;
     }
 
     .animal__blob {
@@ -376,6 +377,10 @@ li {
     }
 
     /*log*/
+    .log__wrapper {
+        width: 55vw;
+    }
+    
     .list_day {
         grid-column-gap: 3rem;
     }
