@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team1.toMyAnimal.domain.common.EntityDate;
+import team1.toMyAnimal.domain.dto.member.MemberUpdateRequest;
 import team1.toMyAnimal.domain.pet.Pet;
 
 import javax.persistence.*;
@@ -55,8 +56,8 @@ public class Member extends EntityDate {
     }
 
     // 회원 정보 수정
-    public void updateUserInfo(String phoneNumber, String username) {
-        this.userPhoneNumber = phoneNumber;
-        this.username = username;
+    public void updateUserInfo(MemberUpdateRequest req) {
+        this.userPhoneNumber = req.getPhoneNumber;
+        this.username = req.getUsername;
     }
 }
