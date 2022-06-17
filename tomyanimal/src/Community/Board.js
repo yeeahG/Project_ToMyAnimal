@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Read from './components/Read'
+import axios from 'axios';
 import './Board.css'
 
 const Board = () => {
+    const [article, setArticle] = useState([]);
+
+    useEffect(() => {
+        axios({
+          method: 'get', 
+          url: 'https://jsonplaceholder.typicode.com/posts',
+        }).then((article) => {
+            setArticle(article.data);
+        })
+      }, []);
+    
+
   return (
     <div className='log__wrapper'>
 
@@ -20,14 +33,14 @@ const Board = () => {
                 1
                 /
                 {/* 총 글 갯수 */}
-                100
+                {article.length}
             </div>
             <div className='control__menu'>
                 control
             </div>
         </div>
         
-        <Read />
+        <Read article={article} />
     </div>
   )
 }

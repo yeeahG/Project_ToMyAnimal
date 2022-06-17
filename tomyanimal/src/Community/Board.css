@@ -2,3 +2,32 @@
 .list__board table {
     display: block;
 }
+
+/*==================READ==================*/
+.board__index {
+    display: flex;
+}
+
+.list__board tbody { 
+    margin: 0;
+}
+
+.board__content {
+    display: flex;
+}
+
+.paging .paging__number {
+    display: flex;
+}
+
+.paging__number ol {
+    list-style : true;
+    margin: 0;
+    padding: 0;
+}
+
+.paging__number li {
+    list-style : true;
+    margin: 0;
+    padding: 0;
+}

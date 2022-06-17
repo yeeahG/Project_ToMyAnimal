@@ -2,7 +2,9 @@ import React from 'react'
 
 const Article = () => {
   return (
-    <div>Article</div>
+    <div>
+        Article 본문
+    </div>
   )
 }
 
