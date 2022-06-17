@@ -16,8 +16,10 @@ public class PetDto {
     private Long id;
     private String registrationNumber;
     private String petName;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date petAge;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date birthday;
+
     private Long weight;
     private MemberDto member;
 
@@ -26,7 +28,7 @@ public class PetDto {
                 pet.getId(),
                 pet.getRegistrationNumber(),
                 pet.getPetName(),
-                pet.getPetAge(),
+                pet.getBirthday(),
                 pet.getWeight(),
                 MemberDto.toDto(pet.getMember())
         );

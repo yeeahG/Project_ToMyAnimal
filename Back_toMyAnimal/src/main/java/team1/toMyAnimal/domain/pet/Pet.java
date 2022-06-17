@@ -27,8 +27,8 @@ public class Pet {
 //    @Column(nullable = false)
     private String petName;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date petAge;
+    private Date birthday;
+
 
     private Long weight;
 
@@ -37,10 +37,10 @@ public class Pet {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Member member;
 
-    public Pet(String registrationNumber, String petName, Date petAge, Long weight, Member member){
+    public Pet(String registrationNumber, String petName, Date birthday, Long weight, Member member){
         this.registrationNumber = registrationNumber;
         this.petName = petName;
-        this.petAge = petAge;
+        this.birthday = birthday;
         this.weight = weight;
         this.member = member;
     }
