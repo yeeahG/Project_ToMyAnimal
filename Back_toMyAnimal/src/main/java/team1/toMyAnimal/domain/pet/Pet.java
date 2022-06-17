@@ -5,9 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
 import team1.toMyAnimal.domain.member.Member;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -24,6 +26,7 @@ public class Pet {
 //    @Column(nullable = false)
     private String petName;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date petAge;
 
     private Long weight;
