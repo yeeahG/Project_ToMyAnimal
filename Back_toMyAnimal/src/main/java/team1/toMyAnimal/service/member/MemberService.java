@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team1.toMyAnimal.domain.dto.member.MemberDto;
+import team1.toMyAnimal.domain.dto.member.MemberUpdateRequest;
+import team1.toMyAnimal.domain.dto.member.MemberUpdateResponse;
 import team1.toMyAnimal.domain.member.Member;
 import team1.toMyAnimal.exception.MemberNotFoundException;
 import team1.toMyAnimal.repository.member.MemberRepository;
@@ -24,6 +26,14 @@ public class MemberService {
     public void delete(Long id) {
         Member member = memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);
         memberRepository.delete(member);
+    }
+
+    @Transactional
+    public MemberUpdateResponse update(Long id, MemberUpdateRequest req) {
+        Member member = memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);
+        member.updateUserInfo(req);
+        return new MemberUpdateResponse(id);
+
     }
 
 }

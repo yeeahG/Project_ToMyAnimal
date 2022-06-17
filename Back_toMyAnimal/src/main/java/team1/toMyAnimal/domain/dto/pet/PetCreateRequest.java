@@ -3,12 +3,14 @@ package team1.toMyAnimal.domain.dto.pet;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import team1.toMyAnimal.domain.pet.Pet;
 import team1.toMyAnimal.exception.MemberNotFoundException;
 import team1.toMyAnimal.repository.member.MemberRepository;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Null;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -21,6 +23,7 @@ public class PetCreateRequest {
     private String petName;
 
     private Date birthday;
+
 
     private Long weight;
 

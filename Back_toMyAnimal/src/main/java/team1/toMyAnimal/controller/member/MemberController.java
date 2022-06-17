@@ -5,7 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import team1.toMyAnimal.controller.response.Response;
+import team1.toMyAnimal.domain.dto.member.MemberUpdateRequest;
 import team1.toMyAnimal.service.member.MemberService;
+
+import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,5 +29,13 @@ public class MemberController {
         memberService.delete(id);
         return Response.success();
     }
+
+    @PutMapping("/api/member/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Response update(@PathVariable Long id, @Valid @RequestBody MemberUpdateRequest req) {
+        memberService.update(id, req);
+        return Response.success();
+    }
+
 
 }
