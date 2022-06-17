@@ -1,6 +1,5 @@
 package team1.toMyAnimal.domain.pet;
 
-import com.fasterxml.jackson.databind.DatabindException;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,12 +17,11 @@ public class Pet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "pet_id")
     private Long id;
 
     private String registrationNumber;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String petName;
 
     private Date petAge;
@@ -41,12 +39,6 @@ public class Pet {
         this.petAge = petAge;
         this.weight = weight;
         this.member = member;
-    }
-
-
-    private String updatePetInfo() {
-
-        return "";
     }
 
 }

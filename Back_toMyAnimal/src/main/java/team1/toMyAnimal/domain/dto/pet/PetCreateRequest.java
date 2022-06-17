@@ -8,25 +8,23 @@ import team1.toMyAnimal.exception.MemberNotFoundException;
 import team1.toMyAnimal.repository.member.MemberRepository;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Null;
 import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class PetCreateRequest {
-    @NotBlank(message = "펫 등록번호를 입력해주세요.")
     private String registrationNumber;
 
+    @NotBlank(message = "펫의 이름을 등록해주세요")
     private String petName;
 
     private Date petAge;
 
     private Long weight;
 
-    @NotNull(message = "주인분의 아이디를 입력해주세요")
-    @PositiveOrZero(message = "올바른 회원 아이디를 입력해주세요.")
+    @Null
     private Long memberId;
 
     public static Pet toEntity(PetCreateRequest req, MemberRepository memberRepository) {
