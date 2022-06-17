@@ -159,6 +159,11 @@ li {
     white-space: pre-wrap;
 }
 
+.place__title {
+    display: flex;
+    justify-content: space-between;
+}
+
 .place__detail__review {
     display: flex
 }

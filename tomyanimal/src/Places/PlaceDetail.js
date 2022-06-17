@@ -9,13 +9,13 @@ const PlaceDetail = ( {place} ) => {
         <h2>{place.title}</h2>
         <p>{place.type}</p>
       </div>
+      <p>Keyword</p>
       <div className='place__addr'>
         {place.addr}
       </div>
-      <p>{place.rating}</p>
       <div className='place__detail__review'>
         <p>Review</p>
-        <div></div>
+        <p>{place.rating}</p>
       </div>
     </div>
   )
