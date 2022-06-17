@@ -31,9 +31,9 @@ const Board = () => {
 
     const indexOfLast = currentPage * postsPerPage;
     const indexOfFirst = indexOfLast - postsPerPage;
-    const currentPosts = (posts) => {
+    const currentPosts = (article) => {
         let currentPosts = 0;
-        currentPosts = posts.slice(indexOfFirst, indexOfLast);
+        currentPosts = article.slice(indexOfFirst, indexOfLast);
         return currentPosts;
     };
     
@@ -79,7 +79,8 @@ const Board = () => {
                     </tr>
                 </thead>
 
-                {article.map((it) => 
+                {/* {article.map((it) =>  */}
+                {currentPosts(article).map((it) => 
                 <Read key={it.id} {...it}/>
                 )}
             </table>

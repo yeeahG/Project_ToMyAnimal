@@ -1,10 +1,16 @@
 import React from 'react'
 
 const Pagination = ( {postsPerPage, totalPosts, paginate} ) => {
+    const pageNumbers = [];
+
+    for (let i=1; i<=Math.ceil(totalPosts / postsPerPage); i++) {
+        pageNumbers.push(i);
+    }
+
   return (
     <div className='paging'>
         <div className='paging__number'>
-            <ol>
+            {/* <ol>
                 <li></li>
                 <li></li>
                 <li></li>
@@ -12,7 +18,18 @@ const Pagination = ( {postsPerPage, totalPosts, paginate} ) => {
                 <li></li>
                 <li>...</li>
                 <li>마지막페이지</li>
-            </ol>
+            </ol> */}
+
+            <ul>
+            {pageNumbers.map( (number) => (
+                <li>
+                    <span onClick={() => paginate(number)}>
+                        {number}
+                    </span>
+                </li>
+            ))}
+            </ul>
+
         </div>
     </div>
   )
