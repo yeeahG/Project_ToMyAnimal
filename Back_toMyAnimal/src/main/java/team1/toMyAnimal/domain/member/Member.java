@@ -57,7 +57,7 @@ public class Member extends EntityDate {
 
     // 회원 정보 수정
     public void updateUserInfo(MemberUpdateRequest req) {
-        this.userPhoneNumber = req.getPhoneNumber;
-        this.username = req.getUsername;
+        this.userPhoneNumber = req.getUserPhoneNumber();
+        this.username = req.getUsername();
     }
 }
