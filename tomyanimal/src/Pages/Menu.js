@@ -12,6 +12,10 @@ const Menu = () => {
         document.getElementById("menu-wrapper").style.background = "#FF6458";
     }
 
+    const bgTurnBack = () => {
+        document.getElementById("menu-wrapper").style.background = "#fe81b9";
+    }
+
   return (
     <div className='nav__wrapper'>
         <header className='nav__form'>
@@ -42,7 +46,10 @@ const Menu = () => {
                     </svg>
                 </button>
 
-                <div className="menu__list" id="menu-list" onMouseOver={()=>bgChange()}>
+                <div 
+                    className="menu__list" id="menu-list" 
+                    onMouseOver={()=>bgChange()} onMouseOut={() => bgTurnBack()}
+                >
                     <div>
                         <a className="menu__name" id="home" href="/">Home</a>
                     </div>
@@ -50,7 +57,7 @@ const Menu = () => {
                         <a className="menu__name" id="animal" href="/animal">My animal</a>
                     </div>
                     <div>
-                        <a className="menu__name" id="furniture" href="/">What</a>
+                        <a className="menu__name" id="furniture" href="/community">What</a>
                     </div>
                     <div>
                         <a className="menu__name" id="places" href="/places/all">Where is</a>

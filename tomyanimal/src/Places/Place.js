@@ -103,7 +103,6 @@ const Place = () => {
             {tabContArr.map((section, index)=>{
               return section.tabTitle
             })}
-
           </ul>
         </div>
 
@@ -141,13 +140,8 @@ const Place = () => {
 
           </div>*/}
 
-          
-
         </div>
         
-
-
-
       </div>
 
 

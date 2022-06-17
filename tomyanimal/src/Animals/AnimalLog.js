@@ -80,7 +80,7 @@ const AnimalLog = () => {
   }
 
   return (
-    <>
+    <div className='log__wrapper'>
       <div className='navi__container'>
         <ControlMenu 
           value={sortType} 
@@ -110,7 +110,7 @@ const AnimalLog = () => {
       <h2>New section</h2>
       </section>
     
-    </>
+    </div>
   )
 }
 

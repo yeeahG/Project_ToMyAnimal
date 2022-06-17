@@ -18,7 +18,7 @@ const ratingOptionList = [
 
 const PlaceList = ( {placeData, isLoading} ) => {
   const [type, setType] = useState('all');
-  const [ratings, setRatings] =useState(4);
+  const [ratings, setRatings] =useState();
   //console.log(placeData[0]);
 
   {/*
@@ -31,11 +31,15 @@ const PlaceList = ( {placeData, isLoading} ) => {
   ) */}
 
   const getProcessedList = () => {
-    
-    // if(type === 'hospital') {
-      //   return 
-      // }
-      
+    //시설종류
+    const typeCallBack = (item) => {
+      if(type === 'hospital') {
+        return item.type === '동물병원';
+      } else {
+        return item.type === '훈련소';
+      }
+    }
+          
     //별점
     const filterCallBack = (item) => {
       switch (ratings) {
@@ -43,15 +47,21 @@ const PlaceList = ( {placeData, isLoading} ) => {
           return parseInt(item.rating) >= 4;
         case 'good' : 
           return parseInt(item.rating) >= 3;
-        default :
+        case 'soso' : 
           return parseInt(item.rating) <= 2;
+        default :
+          return parseInt(item.rating) >= 1;
       }
     }
-        
-    const copyList = JSON.parse(JSON.stringify(placeData));
-    const sortedList = copyList.filter((it) => filterCallBack(it));
-    return sortedList;
 
+    const copyList = JSON.parse(JSON.stringify(placeData));
+    const typeList =  type === 'all' ? copyList : copyList.filter((it) => typeCallBack(it))
+    const sortedList = typeList.filter((it) => filterCallBack(it));
+    return sortedList;
+        
+    // const copyList = JSON.parse(JSON.stringify(placeData));
+    // const sortedList = copyList.filter((it) => filterCallBack(it));
+    // return sortedList;
   }
 
   return (
