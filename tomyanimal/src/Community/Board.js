@@ -17,8 +17,6 @@ const Board = () => {
     const [data, dispatch] = useReducer(article);
     const [sortType, setSortType] = useState('latest');
 
-    console.log(article);
-
     useEffect(() => {
         axios({
           method: 'get', 
