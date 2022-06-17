@@ -26,7 +26,7 @@ const Read = () => {
                     <td>
                         <span>
                             <span>
-                                <a>제목</a>
+                                <a href='/community/board/1'>제목</a>
                                 <a>댓글수</a>
                                 <span>사진첨부되면 아이콘으로</span>
                                 <span>새글이면 아이콘으로</span>
