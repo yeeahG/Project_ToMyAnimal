@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
+import team1.toMyAnimal.domain.dto.pet.PetUpdateRequest;
 import team1.toMyAnimal.domain.member.Member;
 
 import javax.persistence.*;
@@ -42,6 +43,12 @@ public class Pet {
         this.petAge = petAge;
         this.weight = weight;
         this.member = member;
+    }
+
+    public void update (PetUpdateRequest req) {
+        this.registrationNumber = req.getRegistrationNumber();
+        this.petName = req.getPetName();
+        this.weight = req.getWeight();
     }
 
 }

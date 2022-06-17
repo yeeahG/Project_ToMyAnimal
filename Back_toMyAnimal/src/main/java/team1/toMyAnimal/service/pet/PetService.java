@@ -36,6 +36,7 @@ public class PetService {
     @Transactional
     public PetUpdateResponse update(Long id, PetUpdateRequest req) {
         Pet pet = petRepository.findById(id).orElseThrow(PetNotFoundException::new);
+        pet.update(req);
         return new PetUpdateResponse(id);
     }
 }
