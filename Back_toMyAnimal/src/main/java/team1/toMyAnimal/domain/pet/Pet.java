@@ -1,5 +1,6 @@
 package team1.toMyAnimal.domain.pet;
 
+import com.fasterxml.jackson.databind.DatabindException;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import team1.toMyAnimal.domain.member.Member;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -19,12 +21,12 @@ public class Pet {
     @Column(name = "pet_id")
     private Long id;
 
-    private String petId;
+    private String registrationNumber;
 
     @Column(nullable = false)
     private String petName;
 
-    private String petAge;
+    private Date petAge;
 
     private Long weight;
 
@@ -33,5 +35,18 @@ public class Pet {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Member member;
 
+    public Pet(String registrationNumber, String petName, Date petAge, Long weight, Member member){
+        this.registrationNumber = registrationNumber;
+        this.petName = petName;
+        this.petAge = petAge;
+        this.weight = weight;
+        this.member = member;
+    }
+
+
+    private String updatePetInfo() {
+
+        return "";
+    }
 
 }
