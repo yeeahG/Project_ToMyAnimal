@@ -32,4 +32,11 @@ public class PetService {
     public PetDto read(Long id) {
         return PetDto.toDto(petRepository.findById(id).orElseThrow(PetNotFoundException::new));
     }
+
+    @Transactional
+    public void delete(Long id) {
+        Pet pet = petRepository.findById(id).orElseThrow(PetNotFoundException::new);
+        petRepository.delete(pet);
+    }
+
 }
