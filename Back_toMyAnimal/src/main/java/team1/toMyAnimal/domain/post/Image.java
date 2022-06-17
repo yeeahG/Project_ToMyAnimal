@@ -29,7 +29,7 @@ public class Image {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Post post; // 1
+    private Post post;
 
     private final static String supportedExtension[] = {"jpg", "jpeg", "gif", "bmp", "png"}; // 2
 

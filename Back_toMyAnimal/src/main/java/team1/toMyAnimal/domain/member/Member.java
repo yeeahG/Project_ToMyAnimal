@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team1.toMyAnimal.domain.common.EntityDate;
+import team1.toMyAnimal.domain.pet.Pet;
 
 import javax.persistence.*;
 
@@ -42,7 +43,6 @@ public class Member extends EntityDate {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<MemberRole> roles;
 
-    // Pet pet ?
 
 //    id, 폰번호, 이름, 비밀번호 , 권한
     public Member(String id, String phoneNumber, String username, String password, List<Role> roles){
@@ -54,6 +54,7 @@ public class Member extends EntityDate {
 
     }
 
+    // 회원 정보 수정
     public void updateUserInfo(String phoneNumber, String username) {
         this.userPhoneNumber = phoneNumber;
         this.username = username;
