@@ -20,7 +20,7 @@ public class PetCreateRequest {
     @NotBlank(message = "펫의 이름을 등록해주세요")
     private String petName;
 
-    private Date petAge;
+    private Date birthday;
 
     private Long weight;
 
@@ -31,7 +31,7 @@ public class PetCreateRequest {
         return new Pet(
                 req.registrationNumber,
                 req.petName,
-                req.petAge,
+                req.birthday,
                 req.weight,
                 memberRepository.findById(req.getMemberId()).orElseThrow(MemberNotFoundException::new));
     }
