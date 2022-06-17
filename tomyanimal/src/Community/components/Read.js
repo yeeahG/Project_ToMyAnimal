@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Read = ( {id, title} ) => {
+const Read = ( {props, id, title, body, userId} ) => {
     const navigate = useNavigate();
     // const [article, setArticle] = useState([]);
 
@@ -14,6 +14,7 @@ const Read = ( {id, title} ) => {
     //         setArticle(article.data);
     //     })
     //   }, []);
+
     const goDetail = () => {
         navigate(`/community/board/${id}`)
     }
@@ -30,7 +31,11 @@ const Read = ( {id, title} ) => {
                 <span>
                     <span>
                         {/* <a href='/community/board/{id}'>{it.title}</a> */}
-                        <a onClick={goDetail}>{title}</a>
+                        <span
+                            onClick={goDetail} 
+                            title={title} body={body} 
+                            className='board__title'
+                        >{title}</span>
                         <a>댓글수</a>
                         <span>사진첨부되면 아이콘으로</span>
                         <span>새글이면 아이콘으로</span>
@@ -38,7 +43,8 @@ const Read = ( {id, title} ) => {
                 </span>
             </td>
             <td>
-                <a>작성자이름</a>
+                {/* <a>작성자이름</a> */}
+                <a>{userId}</a>
             </td>
             <td>
                 <span>작성시간</span>

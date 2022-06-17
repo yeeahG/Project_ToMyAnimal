@@ -16,6 +16,10 @@
     display: flex;
 }
 
+.board__title {
+    cursor: pointer;
+}
+
 .paging .paging__number {
     display: flex;
 }
