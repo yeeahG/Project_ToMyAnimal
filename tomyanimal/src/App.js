@@ -7,6 +7,7 @@ import Animal from './Animals/Animal';
 import Place from './Places/Place';
 import Footer from './Pages/Footer';
 import './App.css';
+import Community from './Community/Community';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/animal" element={<Animal />} />
+            <Route path="/community" element={<Community />} />
             <Route path="/places/:id" element={<Place />} />
             <Route path="/user" element={<User />} />
             <Route path="/register" element={<Signup />} />
