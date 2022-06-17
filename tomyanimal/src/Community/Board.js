@@ -1,10 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import Read from './components/Read'
 import axios from 'axios';
 import './Board.css'
+import ControlMenu from '../Pages/ControlMenu';
+
+const sortOptionList = [
+    {value: "latest", name: "최신순"},
+    {value: "oldest", name: "오래된 순"},
+]
+
+//상태관리를 담을 context
+export const ArticleStateContext = React.createContext();
 
 const Board = () => {
     const [article, setArticle] = useState([]);
+    const [data, dispatch] = useReducer(article);
+    const [sortType, setSortType] = useState('latest');
+
+    console.log(article);
 
     useEffect(() => {
         axios({
@@ -36,7 +49,11 @@ const Board = () => {
                 {article.length}
             </div>
             <div className='control__menu'>
-                control
+                <ControlMenu 
+                value={sortType}
+                onChange={setSortType}
+                optionList={sortOptionList}
+                />
             </div>
         </div>
 
