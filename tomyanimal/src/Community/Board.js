@@ -3,6 +3,7 @@ import Read from './components/Read'
 import axios from 'axios';
 import './Board.css'
 import ControlMenu from '../Pages/ControlMenu';
+import Pagination from './components/Pagination';
 
 const sortOptionList = [
     {value: "latest", name: "최신순"},
@@ -16,6 +17,8 @@ const Board = () => {
     const [article, setArticle] = useState([]);
     const [data, dispatch] = useReducer(article);
     const [sortType, setSortType] = useState('latest');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage, setPostsPerPage] = useState(10);
 
     useEffect(() => {
         axios({
@@ -25,6 +28,14 @@ const Board = () => {
             setArticle(article.data);
         })
       }, []);
+
+    const indexOfLast = currentPage * postsPerPage;
+    const indexOfFirst = indexOfLast - postsPerPage;
+    const currentPosts = (article) => {
+        let currentPosts = 0;
+        currentPosts = article.slice(indexOfFirst, indexOfLast);
+        return currentPosts;
+    };
     
 
   return (
@@ -68,27 +79,19 @@ const Board = () => {
                     </tr>
                 </thead>
 
-                {article.map((it) => 
+                {/* {article.map((it) =>  */}
+                {currentPosts(article).map((it) => 
                 <Read key={it.id} {...it}/>
                 )}
             </table>
         </div>
 
         {/* <Read article={article} /> */}
-
-        <div className='paging'>
-            <div className='paging__number'>
-                <ol>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li>...</li>
-                    <li>마지막페이지</li>
-                </ol>
-            </div>
-        </div>
+        <Pagination 
+            postsPerPage={postsPerPage}
+            totalPosts={article.length}
+            paginate={setCurrentPage}
+        />
     </div>
   )
 }

@@ -22,16 +22,25 @@
 
 .paging .paging__number {
     display: flex;
+    justify-content: center;
 }
 
-.paging__number ol {
+/* .paging__number ol {
     list-style : true;
+    margin: 0;
+    padding: 0;
+} */
+
+.paging__number ul {
+    list-style: none;
     margin: 0;
     padding: 0;
 }
 
 .paging__number li {
-    list-style : true;
     margin: 0;
     padding: 0;
+    border: 0;
+    float: left;
+    cursor: pointer;
 }
