@@ -232,18 +232,20 @@ const UserAccount = () => {
             </Fragment>
           ))} */}
            {/* {editContactId === user.data.result.data['userId'] ? ( */}
+          <Fragment>
            {editContactId === tmpId ? (
-              <EditableRow 
-                editFormData={editFormData}
-                handleEditFormChange={handleEditFormChange}
-                handleCancelClick={handleCancelClick}
-              />
+             <EditableRow 
+             editFormData={editFormData}
+              handleEditFormChange={handleEditFormChange}
+              handleCancelClick={handleCancelClick}
+            />
            ) : (
           <ReadOnlyRow 
             userPhone={userPhone} userName={userName}
             handleEditClick={handleEditClick}
           />
           )}
+          </Fragment>
         </tbody>
       </table>
     </form>
