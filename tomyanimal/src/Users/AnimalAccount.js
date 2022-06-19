@@ -52,6 +52,7 @@ const AnimalAccount = ( ) => {
 
     <div className='animalinfo__subtitle'>
       <h1>About My Animal</h1>
+      animal.userid === 로그인시의 userid면 Animal info 불러오기
     </div>
 
   <div className='animalinfo__content'>

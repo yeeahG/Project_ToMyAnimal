@@ -204,6 +204,11 @@ tr {
     justify-content: space-between; */
 }
 
+.animal__banner svg {
+    position: relative;
+    left: 90%;
+}
+
 .animal__banner .arrow {
     width: 50px;
 }
@@ -226,7 +231,7 @@ tr {
     display: -webkit-box;
     display: -ms-flexbox;
     overflow-x: scroll;
-    width: 1000px;
+    width: 50vw;
 }
 
 
