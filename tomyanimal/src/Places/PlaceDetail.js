@@ -9,7 +9,8 @@ const PlaceDetail = ( {place} ) => {
         <h2>{place.title}</h2>
         <p>{place.type}</p>
       </div>
-      <p>Keyword</p>
+      {/* <p>Keyword</p> */}
+      <p className='place__keyword'>{place.keyword}</p>
       <div className='place__addr'>
         {place.addr}
       </div>
