@@ -38,8 +38,9 @@ const UserAccount = () => {
     },
   ]
 
-  const loginId = localStorage.getItem('id');
+  const loginId = localStorage.getItem('userid');
   //console.log(loginId);
+  const tmpId = localStorage.getItem('uesrinfo[userid]');
 
   const navigate = useNavigate();
 
@@ -51,7 +52,7 @@ const UserAccount = () => {
       url: 'http://localhost:8084/api/members/' + loginId,
     }).then((user) => {
       setUser(user);
-      setUserName(user.data.result.data['userName'])
+      setUserName(user.data.result.data['userName']) 
       setUserPhone(user.data.result.data['userPhoneNumber'])
       localStorage.setItem('userInfo', JSON.stringify(user.data.result.data));
     })
@@ -135,7 +136,9 @@ const UserAccount = () => {
   
   const handleEditClick = (e, user) => {
     e.preventDefault();
-    setEditContactId(user.id);
+    // setEditContactId(user.id);
+    // setEditContactId(user.data.result.data['userId']);
+    setEditContactId(tmpId);
 
     const formValues = {
       name: user.name,
@@ -228,7 +231,21 @@ const UserAccount = () => {
                 )}
             </Fragment>
           ))} */}
-          <ReadOnlyRow userPhone={userPhone} userName={userName}/>
+           {/* {editContactId === user.data.result.data['userId'] ? ( */}
+          <Fragment>
+           {editContactId === tmpId ? (
+             <EditableRow 
+             editFormData={editFormData}
+              handleEditFormChange={handleEditFormChange}
+              handleCancelClick={handleCancelClick}
+            />
+           ) : (
+          <ReadOnlyRow 
+            userPhone={userPhone} userName={userName}
+            handleEditClick={handleEditClick}
+          />
+          )}
+          </Fragment>
         </tbody>
       </table>
     </form>
