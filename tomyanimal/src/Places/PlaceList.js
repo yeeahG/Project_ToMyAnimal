@@ -15,10 +15,17 @@ const ratingOptionList = [
   {value: "soso", name: "2.0이하"},
 ]
 
+const keywordOptionList = [
+  {value: "action", name: "행동교정"},
+  {value: "seulgaegol", name: "슬개골"},
+  {value: "tnr", name: "중성화"},
+]
+
 
 const PlaceList = ( {placeData, isLoading} ) => {
   const [type, setType] = useState('all');
   const [ratings, setRatings] =useState();
+  const [keyword, setKeyword] = useState();
   //console.log(placeData[0]);
 
   {/*
@@ -50,7 +57,7 @@ const PlaceList = ( {placeData, isLoading} ) => {
         case 'soso' : 
           return parseInt(item.rating) <= 2;
         default :
-          return parseInt(item.rating) >= 1;
+          return parseInt(item.rating) >= 0;
       }
     }
 
@@ -76,6 +83,11 @@ const PlaceList = ( {placeData, isLoading} ) => {
         value={ratings} 
         onChange={setRatings}
         optionList={ratingOptionList}
+      />
+      <ControlMenu 
+        value={keyword} 
+        onChange={setKeyword}
+        optionList={keywordOptionList}
       />
     </div>
 
