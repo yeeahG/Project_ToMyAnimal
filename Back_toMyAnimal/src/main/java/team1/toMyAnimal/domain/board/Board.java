@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import team1.toMyAnimal.domain.common.EntityDate;
 import team1.toMyAnimal.domain.dto.board.BoardUpdateRequest;
 import team1.toMyAnimal.domain.member.Member;
 
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Board {
+public class Board extends EntityDate {
 
 
     @Id

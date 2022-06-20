@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team1.toMyAnimal.domain.board.Board;
 import team1.toMyAnimal.domain.dto.board.BoardDto;
+import team1.toMyAnimal.domain.dto.board.BoardUpdateRequest;
 import team1.toMyAnimal.domain.dto.board.BoardUpdateResponse;
-import team1.toMyAnimal.domain.dto.post.PostUpdateRequest;
 import team1.toMyAnimal.exception.BoardNotFoundException;
 import team1.toMyAnimal.repository.board.BoardRepository;
 import team1.toMyAnimal.repository.member.MemberRepository;
@@ -35,7 +35,7 @@ public class BoardService {
     }
 
     @Transactional
-    public BoardUpdateResponse update(Long id, PostUpdateRequest req) {
+    public BoardUpdateResponse update(Long id, BoardUpdateRequest req) {
         Board board = boardRepository.findById(id).orElseThrow(BoardNotFoundException::new);
 
         return new BoardUpdateResponse(id);
