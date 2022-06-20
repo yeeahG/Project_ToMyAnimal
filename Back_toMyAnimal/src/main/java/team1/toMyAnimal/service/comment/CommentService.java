@@ -28,10 +28,12 @@ public class CommentService {
         );
     }
 
+    @Transactional
     public void create(CommentCreateRequest req) {
         commentRepository.save(CommentCreateRequest.toEntity(req, memberRepository, postRepository, commentRepository));
     }
 
+    @Transactional
     public void delete(Long id) {
         Comment comment = commentRepository.findById(id).orElseThrow(CommentNotFoundException::new);
         comment.findDeletableComment().ifPresentOrElse(commentRepository::delete, comment::delete);

@@ -11,7 +11,6 @@ import team1.toMyAnimal.domain.member.Member;
 import team1.toMyAnimal.domain.post.Post;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
