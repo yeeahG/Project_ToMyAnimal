@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team1.toMyAnimal.domain.comment.Comment;
 import team1.toMyAnimal.domain.dto.comment.CommentDto;
+import team1.toMyAnimal.domain.dto.comment.CommentReadCondition;
 import team1.toMyAnimal.repository.comment.CommentRepository;
 import team1.toMyAnimal.repository.member.MemberRepository;
 import team1.toMyAnimal.repository.post.PostRepository;
