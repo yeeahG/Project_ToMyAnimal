@@ -65,15 +65,19 @@ public class Comment {
     }
 
     private Comment findDeletableCommentByParent() {
-        return isDeletableParent() ? getParent().findDeletableCommentByParent() : this;
+        if (isDeletedParent()) {
+            Comment deletableParent = getParent().findDeletableCommentByParent();
+            if(getParent().getChildren().size() == 1) return deletableParent;
+        }
+        return this;
     }
 
     private boolean hasChildren() {
         return getChildren().size() != 0;
     }
 
-    private boolean isDeletableParent() {
-        return getParent() != null && getParent().isDeleted() && getParent().getChildren().size() == 1;
+    private boolean isDeletedParent() {
+        return getParent() != null && getParent().isDeleted();
     }
 }
 
