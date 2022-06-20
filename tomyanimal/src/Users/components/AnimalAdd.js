@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const AnimalAdd = () => {
@@ -6,6 +7,7 @@ const AnimalAdd = () => {
     const [animalId, setAnimalId] = useState("");
     const [animalAge, setAnimalAge] = useState("");
     const [animalWeight, setAnimalWeight] = useState("");
+    const [animalPhoto, setAnimalPhoto] = useState("");
 
     const [error, setError] = useState("");
 
@@ -20,18 +22,33 @@ const AnimalAdd = () => {
             petName: animalName,
             registrationNumber: animalId,
             birthday: animalAge,
-            weight: animalWeight
+            weight: animalWeight,
+            addedImages: animalPhoto
         }
-        console.log(animal);
+        //console.log(animal);
+
+        const formData = new FormData()
+        formData.set('id', animal.id)
+        formData.set('petName', animal.petName)
+        formData.set('registrationNumber', animal.registrationNumber)
+        formData.set('birthday', animal.birthday)
+        formData.set('weight', animal.weight)
+
+        const photoFile = document.getElementById('photo')
+        formData.append("addedImages", photoFile.files[0]);
 
         if(animalName!="" && animalId!="" && animalAge!="" && animalWeight!="" ) {
+
             // await fetch('https://jsonplaceholder.typicode.com/posts', {
+            /*
             await fetch('http://localhost:8084/api/pets', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json;',
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': localStorage.getItem('logintoken'),
                 },
-                body: JSON.stringify(animal),
+                //body: JSON.stringify(animal),
+                body: formData,
             })
             .then((response) => response.json())
             .then((data) => {
@@ -43,8 +60,30 @@ const AnimalAdd = () => {
             });
 
             localStorage.setItem("animalinfo", JSON.stringify(animal))
+            console.log(formData);
+
             alert('가입이 완료되었습니다')
             navigate('/user')
+            */
+            axios.post('http://localhost:8084/api/pets', formData, {
+               headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': localStorage.getItem('logintoken'),
+               }
+            })
+           .then((data) => {
+             console.log('성공:', data);
+           })
+
+           .catch((error) => {
+               console.error('실패:', error);
+           });
+
+           localStorage.setItem("animalinfo", JSON.stringify(animal))
+           console.log(formData);
+
+           alert('등록이 완료되었습니다')
+           navigate('/user')    
         } else {
             setError("모든 항목을 입력하세요")
         }
@@ -68,6 +107,7 @@ const AnimalAdd = () => {
 
                 <tbody>
                     <tr>
+                        <td><input label="사진" name="photo" id="photo" placeholder="사진" type='file' onChange={(e) => setAnimalPhoto(e.target.files)} /></td>
                         <td><input label="이름" name="animalname" placeholder="이름" required onChange={(e) => setAnimalName(e.target.value)} /></td>
                         <td><input label="등록번호" name="animalId" placeholder="등록번호" required onChange={(e) => setAnimalId(e.target.value)} /></td>
                         <td><input label="생일" name="age" placeholder="나이" type='date' required onChange={(e) => setAnimalAge(e.target.value)}/></td>
