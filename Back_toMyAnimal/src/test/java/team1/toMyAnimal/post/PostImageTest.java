@@ -1,7 +1,7 @@
 package team1.toMyAnimal.post;
 
 import org.junit.jupiter.api.Test;
-import team1.toMyAnimal.domain.post.Image;
+import team1.toMyAnimal.image.PostImage;
 import team1.toMyAnimal.domain.post.Post;
 import team1.toMyAnimal.exception.UnsupportedImageFormatException;
 
@@ -13,7 +13,7 @@ import static team1.toMyAnimal.factory.post.ImageFactory.createImageWithOriginNa
 import static team1.toMyAnimal.factory.post.PostFactory.createPost;
 
 
-class ImageTest {
+class PostImageTest {
 
     @Test
     void createImageTest() {
@@ -47,28 +47,28 @@ class ImageTest {
     @Test
     void initPostTest() {
         // given
-        Image image = createImage();
+        PostImage postImage = createImage();
 
         // when
         Post post = createPost();
-        image.initPost(post);
+        postImage.initPost(post);
 
         // then
-        assertThat(image.getPost()).isSameAs(post);
+        assertThat(postImage.getPost()).isSameAs(post);
     }
 
     @Test
     void initPostNotChangedTest() {
         // given
-        Image image = createImage();
-        image.initPost(createPost());
+        PostImage postImage = createImage();
+        postImage.initPost(createPost());
 
         // when
         Post post = createPost();
-        image.initPost(post);
+        postImage.initPost(post);
 
         // then
-        assertThat(image.getPost()).isNotSameAs(post);
+        assertThat(postImage.getPost()).isNotSameAs(post);
     }
 
 }

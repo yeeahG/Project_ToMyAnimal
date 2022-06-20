@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
-import team1.toMyAnimal.domain.post.Image;
+import team1.toMyAnimal.image.PostImage;
 import team1.toMyAnimal.domain.post.Post;
 import team1.toMyAnimal.exception.CategoryNotFoundException;
 import team1.toMyAnimal.exception.MemberNotFoundException;
@@ -46,7 +46,7 @@ public class PostCreateRequest {
                 req.content,
                 memberRepository.findById(req.getMemberId()).orElseThrow(MemberNotFoundException::new),
                 categoryRepository.findById(req.getCategoryId()).orElseThrow(CategoryNotFoundException::new),
-                req.images.stream().map(i -> new Image(i.getOriginalFilename())).collect(toList())
+                req.images.stream().map(i -> new PostImage(i.getOriginalFilename())).collect(toList())
         );
     }
 }

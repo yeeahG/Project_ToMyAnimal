@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import team1.toMyAnimal.domain.dto.member.MemberDto;
+import team1.toMyAnimal.domain.image.PostImageDto;
 import team1.toMyAnimal.domain.post.Post;
 
 import java.time.LocalDateTime;
@@ -18,7 +19,7 @@ public class PostDto {
     private String title;
     private String content;
     private MemberDto member;
-    private List<ImageDto> images;
+    private List<PostImageDto> images;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime createdAt;
@@ -31,7 +32,7 @@ public class PostDto {
                 post.getTitle(),
                 post.getContent(),
                 MemberDto.toDto(post.getMember()),
-                post.getImages().stream().map(i -> ImageDto.toDto(i)).collect(toList()),
+                post.getPostImages().stream().map(i -> PostImageDto.toDto(i)).collect(toList()),
                 post.getCreatedAt(),
                 post.getModifiedAt()
         );

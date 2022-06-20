@@ -7,7 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.multipart.MultipartFile;
-import team1.toMyAnimal.service.post.LocalFileService;
+import team1.toMyAnimal.service.image.LocalFileService;
 
 import java.io.File;
 import java.io.IOException;
