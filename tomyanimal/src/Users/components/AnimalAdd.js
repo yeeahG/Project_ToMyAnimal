@@ -12,18 +12,21 @@ const AnimalAdd = () => {
     let localStorage = window.localStorage;
     const navigate = useNavigate();
 
+    const loginId = localStorage.getItem('userid');
 
     const registerAnimal = async () => {
         const animal = {
-            animalName: animalName,
-            animalId: animalId,
-            animalAge: animalAge,
-            animalWeight: animalWeight
+            id: loginId,
+            petName: animalName,
+            registrationNumber: animalId,
+            birthday: animalAge,
+            weight: animalWeight
         }
         console.log(animal);
 
         if(animalName!="" && animalId!="" && animalAge!="" && animalWeight!="" ) {
-            await fetch('https://jsonplaceholder.typicode.com/posts', {
+            // await fetch('https://jsonplaceholder.typicode.com/posts', {
+            await fetch('http://localhost:8084/api/pets', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;',
@@ -33,11 +36,11 @@ const AnimalAdd = () => {
             .then((response) => response.json())
             .then((data) => {
               console.log('성공:', data);
-              })
+            })
 
             .catch((error) => {
                 console.error('실패:', error);
-                });
+            });
 
             localStorage.setItem("animalinfo", JSON.stringify(animal))
             alert('가입이 완료되었습니다')
@@ -67,7 +70,7 @@ const AnimalAdd = () => {
                     <tr>
                         <td><input label="이름" name="animalname" placeholder="이름" required onChange={(e) => setAnimalName(e.target.value)} /></td>
                         <td><input label="등록번호" name="animalId" placeholder="등록번호" required onChange={(e) => setAnimalId(e.target.value)} /></td>
-                        <td><input label="나이" name="age" placeholder="나이" required onChange={(e) => setAnimalAge(e.target.value)}/></td>
+                        <td><input label="생일" name="age" placeholder="나이" type='date' required onChange={(e) => setAnimalAge(e.target.value)}/></td>
                         <td><input label="무게" name="kg" placeholder="무게" required onChange={(e) => setAnimalWeight(e.target.value)} /></td>
                     </tr>
                 </tbody>

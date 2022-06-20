@@ -86,9 +86,10 @@ const AnimalAccount = ( ) => {
           {animal.map((it) => 
           <tbody>
             <tr>
-              <td>{it.userId}</td>
-              <td>{it.title}</td>
-              <td>{it.title}</td>
+              <td>{it.petName}</td>
+              <td>{it.registrationNumber}</td>
+              <td>{it.birthday} </td>
+              <td>{it.weight}</td>
             </tr>
           </tbody>
           )}
