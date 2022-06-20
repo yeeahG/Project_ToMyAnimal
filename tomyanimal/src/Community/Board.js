@@ -4,7 +4,7 @@ import axios from 'axios';
 import './Board.css'
 import ControlMenu from '../Pages/ControlMenu';
 import Pagination from './components/Pagination';
-
+ 
 const sortOptionList = [
     {value: "latest", name: "최신순"},
     {value: "oldest", name: "오래된 순"},
