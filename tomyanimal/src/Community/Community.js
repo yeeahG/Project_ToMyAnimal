@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Board from './Board';
 
-const Community = () => {
+const Community = () => { 
     const [activeIndex, setActiveIndex]=useState(0);
 
     const tabClickHandler=(index)=>{
