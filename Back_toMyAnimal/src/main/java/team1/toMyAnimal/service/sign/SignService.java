@@ -1,15 +1,13 @@
 package team1.toMyAnimal.service.sign;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team1.toMyAnimal.config.TokenHelper;
-import team1.toMyAnimal.domain.dto.member.MemberDto;
-import team1.toMyAnimal.domain.dto.request.SignInRequest;
-import team1.toMyAnimal.domain.dto.request.SignUpRequest;
-import team1.toMyAnimal.domain.dto.response.SignInResponse;
+import team1.toMyAnimal.domain.dto.sign.SignInRequest;
+import team1.toMyAnimal.domain.dto.sign.SignUpRequest;
+import team1.toMyAnimal.domain.dto.sign.SignInResponse;
 import team1.toMyAnimal.domain.dto.sign.RefreshTokenResponse;
 import team1.toMyAnimal.domain.member.Member;
 import team1.toMyAnimal.domain.member.Role;

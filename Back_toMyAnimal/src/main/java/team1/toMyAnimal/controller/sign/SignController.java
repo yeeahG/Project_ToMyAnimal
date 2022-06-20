@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import team1.toMyAnimal.controller.response.Response;
-import team1.toMyAnimal.domain.dto.request.SignInRequest;
-import team1.toMyAnimal.domain.dto.request.SignUpRequest;
+import team1.toMyAnimal.domain.dto.sign.SignInRequest;
+import team1.toMyAnimal.domain.dto.sign.SignUpRequest;
 import team1.toMyAnimal.service.sign.SignService;
 
 import javax.validation.Valid;
