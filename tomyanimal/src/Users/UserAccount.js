@@ -40,6 +40,7 @@ const UserAccount = () => {
 
   const loginId = localStorage.getItem('userid');
   //console.log(loginId);
+  const token = localStorage.getItem('logintoken');
 
   const navigate = useNavigate();
 
@@ -79,6 +80,24 @@ const UserAccount = () => {
   }, [])
   */
 
+  // const [stateUser, setUsertState] = useState([]);
+
+  // const getUser = () => {
+  //   axios
+  //     .get('http://localhost:8084/api/members/' + loginId)
+  //     .then(data => {
+  //       let customer = data.data;
+  //       setUsertState(
+  //         {
+  //           id: customer.id,
+  //           userName: customer.userName,
+  //           userPhone: customer.userPhone
+  //         }
+  //       )
+  //     })
+  //     .catch(err => alert(err));
+  // }
+
     
   const Logout = () => {
     // localStorage.clear();
@@ -113,16 +132,15 @@ const UserAccount = () => {
     setEditFormData(newFormData);
   };
   
-  const handleEditFormSubmit = (e) => {
+  const handleEditFormSubmit = async (e) => {
     e.preventDefault();
 
     const editedContact = {
       id: loginId,
-      userId: user.data.result.data['userId'],
-      password: user.data.result.data['password'],
       username: editFormData.name,
       userPhoneNumber: editFormData.contact,
     }
+    console.log(editedContact);
 
     // const newContacts = [...user];
     // const index = user.findIndex((it) => it.loginId === editContactId);
@@ -132,17 +150,19 @@ const UserAccount = () => {
 
     //put or patch methond
     //ERROR남 작동에는 문제없음
+    /* 보류*/
     axios.put('http://localhost:8084/api/member/' + loginId, editedContact,{
       headers: {
         "Access-Control-Allow-Origin": "*",
-        'Authorization': 'Bearer ' + localStorage.getItem('logintoken'),
+        'Authorization': localStorage.getItem('logintoken'),
         'Content-Type': 'application/json'
       }
     })
     .then( function (response){
       console.log(response);
       setUser(response.data);
-      setEditContactId(null);
+      setEditContactId(null); 
+      alert('수정이 완료되었습니다')
 
       /*
       const userClone = [editedContact];
@@ -151,12 +171,41 @@ const UserAccount = () => {
       setUser(userClone);
       setEditContactId(null);
       */
-      
-    })
-    .catch(function (error) {
-      console.log(error.message);
-    });
     
+    })
+     .catch(function (error) {
+      console.log(error.message);
+     });
+
+
+    // axios
+    //   .put(`http://localhost:8084/api/member/${loginId}`, editedContact)
+    //   .then(d => {
+    //     // setUser(d.data);
+    //     console.log(d);
+    //   })
+    //   .catch(err => alert(err));
+
+    /*
+    await fetch('http://localhost:8084/api/member/' + loginId, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json;',
+        "Authorization": localStorage.getItem('logintoken'),
+        'Access-Control-Allow-Origin': '*',
+      },
+      body: JSON.stringify(editedContact),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('성공:', data);
+      })
+    .catch((error) => {
+      console.error('실패:', error);
+    });
+    alert('수정이 완료되었습니다')
+    */
+
   }
 
   
