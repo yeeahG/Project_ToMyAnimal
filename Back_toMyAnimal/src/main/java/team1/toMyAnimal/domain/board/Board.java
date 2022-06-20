@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import team1.toMyAnimal.domain.dto.board.BoardUpdateRequest;
 import team1.toMyAnimal.domain.member.Member;
 
 import javax.persistence.*;
