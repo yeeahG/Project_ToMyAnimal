@@ -14,7 +14,6 @@ import team1.toMyAnimal.image.PetImage;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +32,7 @@ public class Pet {
 
     private String petName;
 
-    private LocalDate birthday;
+    private String birthday;
 
     private Long weight;
 
@@ -45,7 +44,7 @@ public class Pet {
     @OneToMany(mappedBy = "pet", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<PetImage> petImages;
 
-    public Pet(String registrationNumber, String petName, LocalDate birthday, Long weight, Member member, List<PetImage> petImages){
+    public Pet(String registrationNumber, String petName, String birthday, Long weight, Member member, List<PetImage> petImages){
         this.registrationNumber = registrationNumber;
         this.petName = petName;
         this.birthday = birthday;

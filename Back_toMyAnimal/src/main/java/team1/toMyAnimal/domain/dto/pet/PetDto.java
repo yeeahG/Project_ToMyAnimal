@@ -21,7 +21,7 @@ public class PetDto {
     private Long id;
     private String registrationNumber;
     private String petName;
-    private LocalDate birthday;
+    private String birthday;
     private Long weight;
     private MemberDto member;
     private List<PetImageDto> images;
