@@ -71,11 +71,11 @@ const Board = () => {
 
                 <thead>
                     <tr className='board__index'>
-                        <th>id</th>
-                        <th>글제목</th>
-                        <th>글쓴이</th>
-                        <th>작성일</th>
-                        <th>조회</th>
+                        <th style={{width:'5%'}}>id</th>
+                        <th style={{width:'75%'}}>글제목</th>
+                        <th style={{width:'8%'}}>글쓴이</th>
+                        <th style={{width:'7%'}}>작성일</th>
+                        <th style={{width:'5%'}}>조회</th>
                     </tr>
                 </thead>
 

@@ -3,6 +3,14 @@
     display: block;
 }
 
+
+/*==================BOARD==================*/
+.board__index {
+    table-layout: fixed;
+    word-break: break-all;
+    width: 844.8px;
+}
+
 /*==================READ==================*/
 .board__index {
     display: flex;
@@ -37,7 +45,7 @@
 .write__article {
     float: right;
     position: absolute;
-    right: 0%;
+    right: 20%;
 }
 
 /* .paging__number ol {
