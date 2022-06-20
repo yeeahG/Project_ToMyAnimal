@@ -22,7 +22,7 @@ const AnimalAdd = () => {
         }
         console.log(animal);
 
-        if(animalName!="" || animalId!="" || animalAge!="" || animalWeight!="" ) {
+        if(animalName!="" && animalId!="" && animalAge!="" && animalWeight!="" ) {
             await fetch('https://jsonplaceholder.typicode.com/posts', {
                 method: 'POST',
                 headers: {
@@ -53,22 +53,22 @@ const AnimalAdd = () => {
         <div className='animal__register__container'>
             {error}
 
-            <table>
+            <table className='account__detail__form'>
                 <thead>
                     <tr>
-                        <td>Name</td>
-                        <td>No ID</td>
-                        <td>Age</td>
-                        <td>Weight</td>
+                        <th>Name</th>
+                        <th>No ID</th>
+                        <th>Age</th>
+                        <th>Weight</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr>
-                        <input label="이름" name="animalname" placeholder="이름" required onChange={(e) => setAnimalName(e.target.value)} />
-                        <input label="등록번호" name="animalId" placeholder="등록번호" required onChange={(e) => setAnimalId(e.target.value)} />
-                        <input label="나이" name="age" placeholder="나이" required onChange={(e) => setAnimalAge(e.target.value)}/>
-                        <input label="무게" name="kg" placeholder="무게" required onChange={(e) => setAnimalWeight(e.target.value)} />
+                        <td><input label="이름" name="animalname" placeholder="이름" required onChange={(e) => setAnimalName(e.target.value)} /></td>
+                        <td><input label="등록번호" name="animalId" placeholder="등록번호" required onChange={(e) => setAnimalId(e.target.value)} /></td>
+                        <td><input label="나이" name="age" placeholder="나이" required onChange={(e) => setAnimalAge(e.target.value)}/></td>
+                        <td><input label="무게" name="kg" placeholder="무게" required onChange={(e) => setAnimalWeight(e.target.value)} /></td>
                     </tr>
                 </tbody>
             </table>

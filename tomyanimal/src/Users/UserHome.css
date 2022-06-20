@@ -222,9 +222,13 @@ tr {
     display: grid;
     grid-row-gap: 2rem;
     padding: 1rem 1rem 4rem;
-    max-width: 30rem;
+    /* max-width: 30rem; */
     width: 100%;
     align-self: center;
+}
+
+.animal__register__container {
+    margin-bottom: 2rem;
 }
 
 .animal__detail__form {
@@ -234,6 +238,7 @@ tr {
     overflow-x: scroll;
     width: 50vw;
 }
+
 
 
 @media (min-width: 900px) {
