@@ -40,7 +40,6 @@ const UserAccount = () => {
 
   const loginId = localStorage.getItem('userid');
   //console.log(loginId);
-  const tmpId = localStorage.getItem('uesrinfo[userid]');
 
   const navigate = useNavigate();
 
@@ -82,9 +81,6 @@ const UserAccount = () => {
 
     
   const Logout = () => {
-    // console.log("log out");
-    // setUser({name: "", id: ""});
-  
     // localStorage.clear();
     //localStorage.removeItem('logininfo');
     localStorage.removeItem('logintoken');
@@ -126,11 +122,31 @@ const UserAccount = () => {
       contact: editFormData.contact
     }
 
-    const newContacts = [...user];
-    const index = user.findIndex((it) => it.id === editContactId);
-    newContacts[index] = editedContact;
-    setUser(newContacts);
-    setEditContactId(null);
+    // const newContacts = [...user];
+    // const index = user.findIndex((it) => it.loginId === editContactId);
+    // newContacts[index] = editedContact;
+    // setUser(newContacts);
+    // setEditContactId(null);
+
+    //put or patch methond
+    //ERROR남 작동에는 문제없음
+    axios.put('http://localhost:8084/api/members/' + loginId, editedContact,{
+      headers: {"Access-Control-Allow-Origin": "*"} 
+    })
+    .then(function (response) {
+      console.log(response);
+
+      const userClone = [editedContact];
+      const index = userClone.indexOf(response);
+      userClone[index] = editedContact
+      setUser(userClone);
+      setEditContactId(null);
+
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
   }
 
   
@@ -138,11 +154,11 @@ const UserAccount = () => {
     e.preventDefault();
     // setEditContactId(user.id);
     // setEditContactId(user.data.result.data['userId']);
-    setEditContactId(tmpId);
+    setEditContactId(loginId);
 
     const formValues = {
-      name: user.name,
-      contact: user.contact,
+      name: userName,
+      contact: userPhone,
     }
 
     setEditFormData(formValues);
@@ -231,9 +247,10 @@ const UserAccount = () => {
                 )}
             </Fragment>
           ))} */}
-           {/* {editContactId === user.data.result.data['userId'] ? ( */}
+
+           {/* {editContactId === loginId ? ( */}
           <Fragment>
-           {editContactId === tmpId ? (
+           {editContactId === loginId ? (
              <EditableRow 
              editFormData={editFormData}
               handleEditFormChange={handleEditFormChange}

@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom';
 import AnimalAdd from './components/AnimalAdd';
 import './UserHome.css'
 
 const AnimalAccount = ( ) => {
   const [animal, setAnimal] = useState([]);
   //console.log(animal);
+  
 
   const [editContactId, setEditContactId] = useState(null);
   const [editFormData, setEditFormData] = useState({
@@ -13,17 +15,26 @@ const AnimalAccount = ( ) => {
     contact: "",
   });
 
+  const navigate = useNavigate();
+
+  const loginId = localStorage.getItem('userid');
+
   useEffect(() => {
     axios({
       method: 'get', 
-      // url: 'http://localhost:8084/api/auth/',
-      url: 'https://jsonplaceholder.typicode.com/posts',
+      url: 'http://localhost:8084/api/pets/' + loginId,
+      // url: 'https://jsonplaceholder.typicode.com/posts',
     }).then((animal) => {
       setAnimal(animal.data);
     })
   }, []);
 
   //console.log(animal[0]);
+  console.log(animal);
+
+  const gotoLog = () => {
+    navigate('/animal')
+  }
 
   return (
   <div>
@@ -34,7 +45,9 @@ const AnimalAccount = ( ) => {
       </h2>
       <svg 
         className='arrow'
-        viewBox="0 0 26 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+        viewBox="0 0 26 21" fill="none" xmlns="http://www.w3.org/2000/svg"
+        onClick={gotoLog}
+      >
         <line 
           x1="0.753418" y1="10.1284" x2="24.7946" y2="10.1284" 
           stroke="white" strokeWidth="1.5"></line>
@@ -57,7 +70,7 @@ const AnimalAccount = ( ) => {
 
   <div className='animalinfo__content'>
     {/* {localStorage.getItem("animalinfo")?  */}
-    {(animal != "" )?
+    {(animal != "" ) ?
     <>
       <form>
         <table className='animal__detail__form'>
