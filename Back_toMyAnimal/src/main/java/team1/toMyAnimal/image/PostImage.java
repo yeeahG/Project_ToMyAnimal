@@ -1,10 +1,11 @@
-package team1.toMyAnimal.domain.post;
+package team1.toMyAnimal.image;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import team1.toMyAnimal.domain.post.Post;
 import team1.toMyAnimal.exception.UnsupportedImageFormatException;
 
 import javax.persistence.*;
@@ -15,7 +16,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Image {
+public class PostImage {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,7 +34,7 @@ public class Image {
 
     private final static String supportedExtension[] = {"jpg", "jpeg", "gif", "bmp", "png"}; // 2
 
-    public Image(String originName) {
+    public PostImage(String originName) {
         this.uniqueName = generateUniqueName(extractExtension(originName));
         this.originName = originName;
     }

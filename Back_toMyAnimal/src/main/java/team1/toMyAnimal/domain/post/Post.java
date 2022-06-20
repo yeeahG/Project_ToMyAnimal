@@ -11,6 +11,7 @@ import team1.toMyAnimal.domain.category.Category;
 import team1.toMyAnimal.domain.common.EntityDate;
 import team1.toMyAnimal.domain.dto.post.PostUpdateRequest;
 import team1.toMyAnimal.domain.member.Member;
+import team1.toMyAnimal.image.PostImage;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -45,63 +46,63 @@ public class Post extends EntityDate {
     private Category category;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<Image> images;
+    private List<PostImage> postImages;
 
-    public Post(String title, String content, Member member, Category category, List<Image> images) {
+    public Post(String title, String content, Member member, Category category, List<PostImage> postImages) {
         this.title = title;
         this.content = content;
         this.member = member;
         this.category = category;
-        this.images = new ArrayList<>();
-        addImages(images);
+        this.postImages = new ArrayList<>();
+        addImages(postImages);
     }
 
     public ImageUpdatedResult update(PostUpdateRequest req) {
         this.title = req.getTitle();
         this.content = req.getContent();
         ImageUpdatedResult result = findImageUpdatedResult(req.getAddedImages(), req.getDeletedImages());
-        addImages(result.getAddedImages());
-        deleteImages(result.getDeletedImages());
+        addImages(result.getAddedPostImages());
+        deleteImages(result.getDeletedPostImages());
         return result;
     }
 
-    private void addImages(List<Image> added) {
+    private void addImages(List<PostImage> added) {
         added.stream().forEach(i -> {
-            images.add(i);
+            postImages.add(i);
             i.initPost(this);
         });
     }
 
-    private void deleteImages(List<Image> deleted) {
-        deleted.stream().forEach(di -> this.images.remove(di));
+    private void deleteImages(List<PostImage> deleted) {
+        deleted.stream().forEach(di -> this.postImages.remove(di));
     }
 
     private ImageUpdatedResult findImageUpdatedResult(List<MultipartFile> addedImageFiles, List<Long> deletedImageIds) {
-        List<Image> addedImages = convertImageFilesToImages(addedImageFiles);
-        List<Image> deletedImages = convertImageIdsToImages(deletedImageIds);
-        return new ImageUpdatedResult(addedImageFiles, addedImages, deletedImages);
+        List<PostImage> addedPostImages = convertImageFilesToImages(addedImageFiles);
+        List<PostImage> deletedPostImages = convertImageIdsToImages(deletedImageIds);
+        return new ImageUpdatedResult(addedImageFiles, addedPostImages, deletedPostImages);
     }
 
-    private List<Image> convertImageIdsToImages(List<Long> imageIds) {
+    private List<PostImage> convertImageIdsToImages(List<Long> imageIds) {
         return imageIds.stream()
                 .map(id -> convertImageIdToImage(id))
                 .filter(i -> i.isPresent())
                 .map(i -> i.get())
                 .collect(toList());
     }
-    private Optional<Image> convertImageIdToImage(Long id) {
-        return this.images.stream().filter(i -> i.getId().equals(id)).findAny();
+    private Optional<PostImage> convertImageIdToImage(Long id) {
+        return this.postImages.stream().filter(i -> i.getId().equals(id)).findAny();
     }
 
-    private List<Image> convertImageFilesToImages(List<MultipartFile> imageFiles) {
-        return imageFiles.stream().map(imageFile -> new Image(imageFile.getOriginalFilename())).collect(toList());
+    private List<PostImage> convertImageFilesToImages(List<MultipartFile> imageFiles) {
+        return imageFiles.stream().map(imageFile -> new PostImage(imageFile.getOriginalFilename())).collect(toList());
     }
 
     @Getter
     @AllArgsConstructor
     public static class ImageUpdatedResult {
         private List<MultipartFile> addedImageFiles;
-        private List<Image> addedImages;
-        private List<Image> deletedImages;
+        private List<PostImage> addedPostImages;
+        private List<PostImage> deletedPostImages;
     }
 }

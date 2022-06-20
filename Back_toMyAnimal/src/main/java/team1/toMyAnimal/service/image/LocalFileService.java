@@ -1,4 +1,4 @@
-package team1.toMyAnimal.service.post;
+package team1.toMyAnimal.service.image;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -16,11 +16,11 @@ import java.io.IOException;
 public class LocalFileService implements FileService {
 
     @Value("${upload.image.location}")
-    private String location;
+    private String postLocation;
 
     @PostConstruct
     void postConstruct() {
-        File dir = new File(location);
+        File dir = new File(postLocation);
         if (!dir.exists()) {
             dir.mkdir();
         }
@@ -29,7 +29,7 @@ public class LocalFileService implements FileService {
     @Override
     public void upload(MultipartFile file, String filename) {
         try {
-            file.transferTo(new File(location + filename));
+            file.transferTo(new File(postLocation + filename));
         } catch(IOException e) {
             throw new FileUploadFailureException(e);
         }
@@ -37,6 +37,6 @@ public class LocalFileService implements FileService {
 
     @Override
     public void delete(String filename) {
-        new File(location + filename).delete();
+        new File(postLocation + filename).delete();
     }
 }

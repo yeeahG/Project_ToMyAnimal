@@ -14,7 +14,7 @@ import team1.toMyAnimal.exception.UnsupportedImageFormatException;
 import team1.toMyAnimal.repository.category.CategoryRepository;
 import team1.toMyAnimal.repository.member.MemberRepository;
 import team1.toMyAnimal.repository.post.PostRepository;
-import team1.toMyAnimal.service.post.FileService;
+import team1.toMyAnimal.service.image.FileService;
 import team1.toMyAnimal.service.post.PostService;
 
 import java.util.List;
