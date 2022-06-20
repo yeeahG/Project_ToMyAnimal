@@ -28,7 +28,7 @@ public class BoardController {
     @GetMapping("/api/board/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Response read(@PathVariable Long id) {
-        return Response.success(read(id));}
+        return Response.success(boardService.read(id));}
 
     @DeleteMapping("/api/board/{id}")
     @ResponseStatus(HttpStatus.OK)

@@ -9,9 +9,9 @@ import team1.toMyAnimal.exception.BoardNotFoundException;
 import team1.toMyAnimal.repository.board.BoardRepository;
 import team1.toMyAnimal.repository.member.MemberRepository;
 
-@RequiredArgsConstructor
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class BoardService {
     private final BoardRepository boardRepository;
     private final MemberRepository memberRepository;
@@ -35,6 +35,7 @@ public class BoardService {
     @Transactional
     public BoardUpdateResponse update(Long id, BoardUpdateRequest req) {
         Board board = boardRepository.findById(id).orElseThrow(BoardNotFoundException::new);
+        board.update(req);
         return new BoardUpdateResponse(id);
     }
 }

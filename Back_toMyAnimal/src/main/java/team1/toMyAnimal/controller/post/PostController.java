@@ -8,6 +8,7 @@ import team1.toMyAnimal.aop.AssignMemberId;
 import team1.toMyAnimal.controller.response.Response;
 import team1.toMyAnimal.domain.dto.post.PostCreateRequest;
 import team1.toMyAnimal.domain.dto.post.PostUpdateRequest;
+import team1.toMyAnimal.domain.member.Member;
 import team1.toMyAnimal.service.post.PostService;
 
 import javax.validation.Valid;
