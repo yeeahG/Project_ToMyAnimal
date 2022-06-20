@@ -117,9 +117,9 @@ const UserAccount = () => {
     e.preventDefault();
 
     const editedContact = {
-      id: editContactId,
-      name: editFormData.name,
-      contact: editFormData.contact
+      // userId: editContactId,
+      userPhoneNumber: editFormData.contact,
+      username: editFormData.name
     }
 
     // const newContacts = [...user];
@@ -130,7 +130,7 @@ const UserAccount = () => {
 
     //put or patch methond
     //ERROR남 작동에는 문제없음
-    axios.put('http://localhost:8084/api/members/' + loginId, editedContact,{
+    axios.put('http://localhost:8084/api/member/' + loginId, { editedContact,
       headers: {"Access-Control-Allow-Origin": "*"} 
     })
     .then(function (response) {
