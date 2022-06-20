@@ -1,14 +1,17 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AnimalAdd from './components/AnimalAdd';
 import './UserHome.css'
 
 const AnimalAccount = ( ) => {
   const [animal, setAnimal] = useState([]);
-  //console.log(animal);
-  
 
+  const [petNumber, setPetnum] = useState();
+  const [petBTD, setPetBTD] = useState();
+  const [petKg, setPetKg] = useState();
+
+  
   const [editContactId, setEditContactId] = useState(null);
   const [editFormData, setEditFormData] = useState({
     name: "", 
@@ -19,18 +22,54 @@ const AnimalAccount = ( ) => {
 
   const loginId = localStorage.getItem('userid');
 
+
+  /*
   useEffect(() => {
     axios({
       method: 'get', 
       url: 'http://localhost:8084/api/pets/' + loginId,
       // url: 'https://jsonplaceholder.typicode.com/posts',
+      headers: {Authorization: localStorage.getItem('logintoken')}
     }).then((animal) => {
       setAnimal(animal.data);
+
+      console.log(animal.data);
+
+    }).then((error) => {
+      console.log(error.message)
     })
   }, []);
+  */
 
-  //console.log(animal[0]);
-  console.log(animal);
+
+  axios.get('http://localhost:8084/api/pets/3', 
+            { headers: { Authorization: localStorage.getItem('logintoken') } 
+            })
+    .then(response => {
+    //setAnimal(response);
+    setPetnum(response.data.result.data['registrationNumber'])
+    setPetBTD(response.data.result.data['birthday'])
+    setPetKg(response.data.result.data['weight'])
+  })
+  .catch((error) => {
+    console.log('error ' + error);
+  });
+
+/*
+  axios.get('http://localhost:8084/api/pets' + loginId, {
+    headers: {
+     'Content-Type': 'multipart/form-data',
+     'Authorization': localStorage.getItem('logintoken'),
+    }
+  })
+  .then((data) => {
+    console.log('성공:', data);
+    setAnimal(data.data);
+  })
+  .catch((error) => {
+      console.error('실패:', error);
+  });
+  */
 
   const gotoLog = () => {
     navigate('/animal')
@@ -70,7 +109,7 @@ const AnimalAccount = ( ) => {
 
   <div className='animalinfo__content'>
     {/* {localStorage.getItem("animalinfo")?  */}
-    {(animal != "" ) ?
+    {(animal !== "" ) ?
     <>
       <form>
         <table className='animal__detail__form'>
@@ -83,16 +122,27 @@ const AnimalAccount = ( ) => {
             </tr>
           </thead>
 
-          {animal.map((it) => 
+          {/*
+          {animal.map((it) =>
           <tbody>
             <tr>
+              {animal}
               <td>{it.petName}</td>
               <td>{it.registrationNumber}</td>
               <td>{it.birthday} </td>
               <td>{it.weight}</td>
             </tr>
           </tbody>
-          )}
+           )}
+          */}
+
+          <tbody>
+            <tr>
+              <td>{petNumber}</td>
+              <td>{petBTD}</td>
+              <td>{petKg}</td>
+            </tr>
+          </tbody>
         </table>
       </form>
 
