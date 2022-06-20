@@ -207,6 +207,7 @@ tr {
 .animal__banner svg {
     position: relative;
     left: 90%;
+    cursor: pointer;
 }
 
 .animal__banner .arrow {

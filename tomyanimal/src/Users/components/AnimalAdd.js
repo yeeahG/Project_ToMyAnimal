@@ -41,7 +41,7 @@ const AnimalAdd = () => {
 
             localStorage.setItem("animalinfo", JSON.stringify(animal))
             alert('가입이 완료되었습니다')
-            navigate('/')
+            navigate('/user')
         } else {
             setError("모든 항목을 입력하세요")
         }
@@ -52,10 +52,26 @@ const AnimalAdd = () => {
     <div>
         <div className='animal__register__container'>
             {error}
-            <input label="이름" name="animalname" placeholder="이름" required onChange={(e) => setAnimalName(e.target.value)} />
-            <input label="등록번호" name="animalId" placeholder="등록번호" required onChange={(e) => setAnimalId(e.target.value)} />
-            <input label="나이" name="age" placeholder="나이" required onChange={(e) => setAnimalAge(e.target.value)}/>
-            <input label="무게" name="kg" placeholder="무게" required onChange={(e) => setAnimalWeight(e.target.value)} />
+
+            <table>
+                <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td>No ID</td>
+                        <td>Age</td>
+                        <td>Weight</td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <input label="이름" name="animalname" placeholder="이름" required onChange={(e) => setAnimalName(e.target.value)} />
+                        <input label="등록번호" name="animalId" placeholder="등록번호" required onChange={(e) => setAnimalId(e.target.value)} />
+                        <input label="나이" name="age" placeholder="나이" required onChange={(e) => setAnimalAge(e.target.value)}/>
+                        <input label="무게" name="kg" placeholder="무게" required onChange={(e) => setAnimalWeight(e.target.value)} />
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <div className='welcome'>
