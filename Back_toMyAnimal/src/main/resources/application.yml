@@ -3,9 +3,14 @@ spring:
     active: local
     include: secret
 
-# 사진 multipart 용량
-    servlet.multipart.max-file-size: 5MB
-    servlet.multipart.max-request-size: 5MB
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+  # 사진 multipart 용량
+  servlet.multipart.max-file-size: 5MB
+  servlet.multipart.max-request-size: 5MB
 
   jackson:
     time-zone: UTC
@@ -42,5 +47,7 @@ server:
 logging:
   level:
     org:
+      springframework:
+        web: DEBUG
       hibernate:
         SQL: DEBUG
