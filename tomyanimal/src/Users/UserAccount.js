@@ -117,9 +117,11 @@ const UserAccount = () => {
     e.preventDefault();
 
     const editedContact = {
-      id: editContactId,
-      name: editFormData.name,
-      contact: editFormData.contact
+      id: loginId,
+      userId: user.data.result.data['userId'],
+      password: user.data.result.data['password'],
+      username: editFormData.name,
+      userPhoneNumber: editFormData.contact,
     }
 
     // const newContacts = [...user];
@@ -130,23 +132,31 @@ const UserAccount = () => {
 
     //put or patch methond
     //ERROR남 작동에는 문제없음
-    axios.put('http://localhost:8084/api/members/' + loginId, editedContact,{
-      headers: {"Access-Control-Allow-Origin": "*"} 
+    axios.put('http://localhost:8084/api/member/' + loginId, editedContact,{
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        'Authorization': 'Bearer ' + localStorage.getItem('logintoken'),
+        'Content-Type': 'application/json'
+      }
     })
-    .then(function (response) {
+    .then( function (response){
       console.log(response);
+      setUser(response.data);
+      setEditContactId(null);
 
+      /*
       const userClone = [editedContact];
       const index = userClone.indexOf(response);
       userClone[index] = editedContact
       setUser(userClone);
       setEditContactId(null);
-
+      */
+      
     })
     .catch(function (error) {
-      console.log(error);
+      console.log(error.message);
     });
-
+    
   }
 
   
@@ -222,7 +232,7 @@ const UserAccount = () => {
       } */}
     
 
-    <form onSubmit={handleEditFormSubmit} >
+    <form onSubmit={handleEditFormSubmit} method="PUT">
       <table className='account__detail__form'>
         <thead>
           <tr>
