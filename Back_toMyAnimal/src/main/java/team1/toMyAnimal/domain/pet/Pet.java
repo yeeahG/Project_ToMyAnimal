@@ -1,17 +1,24 @@
 package team1.toMyAnimal.domain.pet;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 import team1.toMyAnimal.domain.dto.pet.PetUpdateRequest;
 import team1.toMyAnimal.domain.member.Member;
+import team1.toMyAnimal.image.PetImage;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
 
 @Entity
 @Getter
@@ -24,11 +31,9 @@ public class Pet {
 
     private String registrationNumber;
 
-//    @Column(nullable = false)
     private String petName;
 
-    private Date birthday;
-
+    private LocalDate birthday;
 
     private Long weight;
 
@@ -37,18 +42,67 @@ public class Pet {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Member member;
 
-    public Pet(String registrationNumber, String petName, Date birthday, Long weight, Member member){
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<PetImage> petImages;
+
+    public Pet(String registrationNumber, String petName, LocalDate birthday, Long weight, Member member, List<PetImage> petImages){
         this.registrationNumber = registrationNumber;
         this.petName = petName;
         this.birthday = birthday;
         this.weight = weight;
         this.member = member;
+        this.petImages = new ArrayList<>();
+        addImages(petImages);
     }
 
-    public void update (PetUpdateRequest req) {
+    public ImageUpdatedResult update (PetUpdateRequest req) {
         this.registrationNumber = req.getRegistrationNumber();
         this.petName = req.getPetName();
         this.weight = req.getWeight();
+        ImageUpdatedResult result = findImageUpdatedResult(req.getAddedImages(), req.getDeletedImages());
+        addImages(result.getAddedPetImages());
+        deleteImages(result.getDeletedPetImages());
+        return result;
+    }
+
+    private void addImages(List<PetImage> added) {
+        added.stream().forEach(i -> {
+            petImages.add(i);
+            i.initPet(this);
+        });
+    }
+
+    private void deleteImages(List<PetImage> deleted) {
+        deleted.stream().forEach(di -> this.petImages.remove(di));
+    }
+
+    private ImageUpdatedResult findImageUpdatedResult(List<MultipartFile> addedImageFiles, List<Long> deletedImageIds) {
+        List<PetImage> addedPetImages = convertImageFilesToImages(addedImageFiles);
+        List<PetImage> deletedPetImages = convertImageIdsToImages(deletedImageIds);
+        return new ImageUpdatedResult(addedImageFiles, addedPetImages, deletedPetImages);
+    }
+
+    private List<PetImage> convertImageIdsToImages(List<Long> imageIds) {
+        return imageIds.stream()
+                .map(id -> convertImageIdToImage(id))
+                .filter(i -> i.isPresent())
+                .map(i -> i.get())
+                .collect(toList());
+    }
+    private Optional<PetImage> convertImageIdToImage(Long id) {
+        return this.petImages.stream().filter(i -> i.getId().equals(id)).findAny();
+    }
+
+    private List<PetImage> convertImageFilesToImages(List<MultipartFile> imageFiles) {
+        return imageFiles.stream().map(imageFile -> new PetImage(imageFile.getOriginalFilename())).collect(toList());
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public static class ImageUpdatedResult {
+        private List<MultipartFile> addedImageFiles;
+        private List<PetImage> addedPetImages;
+        private List<PetImage> deletedPetImages;
     }
 
 }

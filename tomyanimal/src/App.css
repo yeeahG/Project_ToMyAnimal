@@ -6,18 +6,15 @@
 .App {
   /* text-align: center; */
   overflow: hidden;
-  overflow-y: scroll;
-}
-
-.App::-webkit-scrollbar { 
-  width: 2px;
-  height: 5px;
 }
 
 body {
   -ms-overflow-style:none; 
 }
 
+body::-webkit-scrollbar { 
+  display:none; 
+}
 
 
 a, button {

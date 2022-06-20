@@ -16,11 +16,11 @@ import java.io.IOException;
 public class LocalFileService implements FileService {
 
     @Value("${upload.image.location}")
-    private String postLocation;
+    private String location;
 
     @PostConstruct
     void postConstruct() {
-        File dir = new File(postLocation);
+        File dir = new File(location);
         if (!dir.exists()) {
             dir.mkdir();
         }
@@ -29,7 +29,7 @@ public class LocalFileService implements FileService {
     @Override
     public void upload(MultipartFile file, String filename) {
         try {
-            file.transferTo(new File(postLocation + filename));
+            file.transferTo(new File(location + filename));
         } catch(IOException e) {
             throw new FileUploadFailureException(e);
         }
@@ -37,6 +37,6 @@ public class LocalFileService implements FileService {
 
     @Override
     public void delete(String filename) {
-        new File(postLocation + filename).delete();
+        new File(location + filename).delete();
     }
 }
