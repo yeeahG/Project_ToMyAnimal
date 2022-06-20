@@ -28,7 +28,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
-#    defer-datasource-initialization: true
+        default_batch_fetch_size: 100
+  #    defer-datasource-initialization: true
   sql:
     init:
       mode: always
@@ -48,6 +49,6 @@ logging:
   level:
     org:
       springframework:
-        web: DEBUG
+        web:
       hibernate:
         SQL: DEBUG
