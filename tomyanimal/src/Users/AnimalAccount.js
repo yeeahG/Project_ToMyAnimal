@@ -16,7 +16,7 @@ const AnimalAccount = ( ) => {
   useEffect(() => {
     axios({
       method: 'get', 
-      // url: 'http://localhost:8084/api/auth/',
+      // url: 'http://localhost:8084/api/pets',
       url: 'https://jsonplaceholder.typicode.com/posts',
     }).then((animal) => {
       setAnimal(animal.data);
