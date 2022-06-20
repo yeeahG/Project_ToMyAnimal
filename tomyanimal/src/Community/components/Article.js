@@ -126,7 +126,7 @@ const Article = ( {title, body} ) => {
                             <span>댓글내용</span>
                             <img/>
                           </div>
-                          <div>
+                          <div className='reply__reply'>
                             <button>답글</button>
                           </div>
                         </div>

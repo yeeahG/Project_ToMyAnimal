@@ -22,12 +22,12 @@ const Read = ( {props, id, title, body, userId} ) => {
   return (
     <tbody>
         <tr className='board__content'>
-            <td>
+            <td style={{width:'5%'}}>
                 <div>
                     <div>{id}</div>
                 </div>
             </td>
-            <td>
+            <td style={{width:'80%'}}>
                 <span>
                     <span>
                         {/* <a href='/community/board/{id}'>{it.title}</a> */}
@@ -37,19 +37,19 @@ const Read = ( {props, id, title, body, userId} ) => {
                             className='board__title'
                         >{title}</span>
                         <a>댓글수</a>
-                        <span>사진첨부되면 아이콘으로</span>
-                        <span>새글이면 아이콘으로</span>
+                        <span>사진</span>
+                        <span>New</span>
                     </span>
                 </span>
             </td>
-            <td>
+            <td style={{width:'5%'}}>
                 {/* <a>작성자이름</a> */}
                 <a>{userId}</a>
             </td>
-            <td>
+            <td style={{width:'5%'}}>
                 <span>작성시간</span>
             </td>
-            <td>
+            <td style={{width:'5%'}}>
                 <span>조회수</span>
             </td>
         </tr>
