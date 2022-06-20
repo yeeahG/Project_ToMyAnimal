@@ -6,10 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import team1.toMyAnimal.domain.common.EntityDate;
 import team1.toMyAnimal.domain.member.Member;
 import team1.toMyAnimal.domain.post.Post;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +20,7 @@ import java.util.Optional;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Slf4j
-public class Comment {
+public class Comment extends EntityDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -79,6 +81,7 @@ public class Comment {
     private boolean isDeletedParent() {
         return getParent() != null && getParent().isDeleted();
     }
+
 }
 
 
