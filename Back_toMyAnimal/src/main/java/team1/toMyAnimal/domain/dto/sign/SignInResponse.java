@@ -1,4 +1,4 @@
-package team1.toMyAnimal.domain.dto.response;
+package team1.toMyAnimal.domain.dto.sign;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
