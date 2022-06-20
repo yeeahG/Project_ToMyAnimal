@@ -1,14 +1,19 @@
 package team1.toMyAnimal.domain.dto.pet;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 import team1.toMyAnimal.domain.dto.member.MemberDto;
+import team1.toMyAnimal.domain.image.PetImageDto;
 import team1.toMyAnimal.domain.pet.Pet;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Data
 @AllArgsConstructor
@@ -16,21 +21,21 @@ public class PetDto {
     private Long id;
     private String registrationNumber;
     private String petName;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date birthday;
-
+    private LocalDate birthday;
     private Long weight;
     private MemberDto member;
+    private List<PetImageDto> images;
 
     public static PetDto toDto(Pet pet){
+
         return new PetDto(
                 pet.getId(),
                 pet.getRegistrationNumber(),
                 pet.getPetName(),
                 pet.getBirthday(),
                 pet.getWeight(),
-                MemberDto.toDto(pet.getMember())
+                MemberDto.toDto(pet.getMember()),
+                pet.getPetImages().stream().map(i -> PetImageDto.toDto(i)).collect(toList())
         );
     }
 }

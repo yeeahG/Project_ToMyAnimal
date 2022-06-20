@@ -8,7 +8,6 @@ import Place from './Places/Place';
 import Footer from './Pages/Footer';
 import './App.css';
 import Community from './Community/Community';
-import Article from './Community/components/Article';
 
 function App() {
   return (
@@ -21,8 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/animal" element={<Animal />} />
-            <Route path="/community/:id" element={<Community />} />
-            <Route path="/community/board/:id" element={<Article />} />
+            <Route path="/community" element={<Community />} />
             <Route path="/places/:id" element={<Place />} />
             <Route path="/user" element={<User />} />
             <Route path="/register" element={<Signup />} />

@@ -1,14 +1,14 @@
 package team1.toMyAnimal.factory.post;
 
 
-import team1.toMyAnimal.domain.post.Image;
+import team1.toMyAnimal.image.PostImage;
 
 public class ImageFactory {
-    public static Image createImage() {
-        return new Image("origin_filename.jpg");
+    public static PostImage createImage() {
+        return new PostImage("origin_filename.jpg");
     }
 
-    public static Image createImageWithOriginName(String originName) {
-        return new Image(originName);
+    public static PostImage createImageWithOriginName(String originName) {
+        return new PostImage(originName);
     }
 }

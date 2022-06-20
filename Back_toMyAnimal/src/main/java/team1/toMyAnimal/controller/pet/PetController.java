@@ -12,6 +12,7 @@ import team1.toMyAnimal.domain.dto.post.PostUpdateRequest;
 import team1.toMyAnimal.service.pet.PetService;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 
 @RestController
 @RequiredArgsConstructor

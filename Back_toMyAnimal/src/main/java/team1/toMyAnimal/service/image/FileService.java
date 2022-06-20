@@ -1,4 +1,4 @@
-package team1.toMyAnimal.service.post;
+package team1.toMyAnimal.service.image;
 
 import org.springframework.web.multipart.MultipartFile;
 

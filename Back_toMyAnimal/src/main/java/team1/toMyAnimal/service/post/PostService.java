@@ -6,12 +6,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import team1.toMyAnimal.domain.dto.post.*;
-import team1.toMyAnimal.domain.post.Image;
+import team1.toMyAnimal.image.PostImage;
 import team1.toMyAnimal.domain.post.Post;
 import team1.toMyAnimal.exception.PostNotFoundException;
 import team1.toMyAnimal.repository.category.CategoryRepository;
 import team1.toMyAnimal.repository.member.MemberRepository;
 import team1.toMyAnimal.repository.post.PostRepository;
+import team1.toMyAnimal.service.image.FileService;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -35,12 +36,12 @@ public class PostService {
                         categoryRepository
                 )
         );
-        uploadImages(post.getImages(), req.getImages());
+        uploadImages(post.getPostImages(), req.getImages());
         return new PostCreateResponse(post.getId());
     }
 
-    private void uploadImages(List<Image> images, List<MultipartFile> fileImages) {
-        IntStream.range(0, images.size()).forEach(i -> fileService.upload(fileImages.get(i), images.get(i).getUniqueName()));
+    private void uploadImages(List<PostImage> postImages, List<MultipartFile> fileImages) {
+        IntStream.range(0, postImages.size()).forEach(i -> fileService.upload(fileImages.get(i), postImages.get(i).getUniqueName()));
     }
 
     public PostDto read(Long id) {
@@ -50,20 +51,20 @@ public class PostService {
     @Transactional
     public void delete(Long id) {
         Post post = postRepository.findById(id).orElseThrow(PostNotFoundException::new);
-        deleteImages(post.getImages());
+        deleteImages(post.getPostImages());
         postRepository.delete(post);
     }
 
-    private void deleteImages(List<Image> images) {
-        images.stream().forEach(i -> fileService.delete(i.getUniqueName()));
+    private void deleteImages(List<PostImage> postImages) {
+        postImages.stream().forEach(i -> fileService.delete(i.getUniqueName()));
     }
 
     @Transactional
     public PostUpdateResponse update(Long id, PostUpdateRequest req) {
         Post post = postRepository.findById(id).orElseThrow(PostNotFoundException::new);
         Post.ImageUpdatedResult result = post.update(req);
-        uploadImages(result.getAddedImages(), result.getAddedImageFiles());
-        deleteImages(result.getDeletedImages());
+        uploadImages(result.getAddedPostImages(), result.getAddedImageFiles());
+        deleteImages(result.getDeletedPostImages());
         return new PostUpdateResponse(id);
     }
 

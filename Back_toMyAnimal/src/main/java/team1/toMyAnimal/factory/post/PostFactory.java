@@ -2,7 +2,7 @@ package team1.toMyAnimal.factory.post;
 
 import team1.toMyAnimal.domain.category.Category;
 import team1.toMyAnimal.domain.member.Member;
-import team1.toMyAnimal.domain.post.Image;
+import team1.toMyAnimal.image.PostImage;
 import team1.toMyAnimal.domain.post.Post;
 
 import java.util.List;
@@ -19,11 +19,11 @@ public class PostFactory {
         return new Post("title", "content", member, category, List.of());
     }
 
-    public static Post createPostWithImages(Member member, Category category, List<Image> images) {
-        return new Post("title", "content", member, category, images);
+    public static Post createPostWithImages(Member member, Category category, List<PostImage> postImages) {
+        return new Post("title", "content", member, category, postImages);
     }
 
-    public static Post createPostWithImages(List<Image> images) {
-        return new Post("title", "content",createMember(), createCategory(), images);
+    public static Post createPostWithImages(List<PostImage> postImages) {
+        return new Post("title", "content",createMember(), createCategory(), postImages);
     }
 }

@@ -57,7 +57,7 @@ const Menu = () => {
                         <a className="menu__name" id="animal" href="/animal">My animal</a>
                     </div>
                     <div>
-                        <a className="menu__name" id="furniture" href="/community/board">What</a>
+                        <a className="menu__name" id="furniture" href="/community">What</a>
                     </div>
                     <div>
                         <a className="menu__name" id="places" href="/places/all">Where is</a>
