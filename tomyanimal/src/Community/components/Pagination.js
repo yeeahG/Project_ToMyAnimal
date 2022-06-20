@@ -31,6 +31,11 @@ const Pagination = ( {postsPerPage, totalPosts, paginate} ) => {
             </ul>
 
         </div>
+
+        <div className='write__article'>
+            <button>글쓰기</button>
+            <button>내글</button>
+        </div>
     </div>
   )
 }

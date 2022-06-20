@@ -14,15 +14,30 @@
 
 .board__content {
     display: flex;
+    table-layout: fixed;
+    word-break: break-all;
 }
 
 .board__title {
     cursor: pointer;
+    width: 80%;
+}
+
+/*==================PAGINATION==================*/
+.paging {
+    display: flex;
+    justify-content: center;
 }
 
 .paging .paging__number {
     display: flex;
     justify-content: center;
+}
+
+.write__article {
+    float: right;
+    position: absolute;
+    right: 0%;
 }
 
 /* .paging__number ol {
@@ -43,4 +58,33 @@
     border: 0;
     float: left;
     cursor: pointer;
+}
+
+/*==================ARTICLE==================*/
+.userinfo__subtitle  {
+    background-color: #fe81b9;
+    color: #f7f6f2;
+}
+
+.comment__info {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.comment__info .post__box {
+    width: 600px;
+}
+
+.reply__reply {
+    border: 1px solid;
+    border-radius: 20px;
+    width: 35px;
+    text-align: center;
+}
+
+.box__textarea textarea {
+    resize: none;
+    height: 70px;
+    width: 100%;
+    overflow-y: scroll;
 }
