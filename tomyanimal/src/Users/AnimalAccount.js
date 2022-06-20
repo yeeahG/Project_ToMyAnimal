@@ -42,7 +42,7 @@ const AnimalAccount = ( ) => {
   */
 
 
-  axios.get('http://localhost:8084/api/pets/3', 
+  axios.get('http://localhost:8084/api/pets/1', 
             { headers: { Authorization: localStorage.getItem('logintoken') } 
             })
     .then(response => {
@@ -73,6 +73,11 @@ const AnimalAccount = ( ) => {
 
   const gotoLog = () => {
     navigate('/animal')
+  }
+
+  const localDelete = () => {
+    localStorage.removeItem('animalinfo');
+    navigate('/user')
   }
 
   return (
@@ -108,8 +113,8 @@ const AnimalAccount = ( ) => {
     </div>
 
   <div className='animalinfo__content'>
-    {/* {localStorage.getItem("animalinfo")?  */}
-    {(animal !== "" ) ?
+    {/* {(animal !== "" ) ? */}
+    {localStorage.getItem("animalinfo")?  
     <>
       <form>
         <table className='animal__detail__form'>
@@ -152,6 +157,9 @@ const AnimalAccount = ( ) => {
         </button>
         <button className='welcome__btn'>
           <a href="/">Home</a>
+        </button>
+        <button className='welcome__btn' onClick={localDelete}>
+          <a href="/">Delete</a>
         </button>
       </div>
     </>
