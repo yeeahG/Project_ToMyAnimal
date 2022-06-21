@@ -9,6 +9,10 @@ import medicine from '../img/medicine.png'
 
 
 const Home = () => {
+  const downButton = () => {
+    return window.scrollTo(0,600)
+  }
+
   const upButton = () => {
     return window.scrollTo(0,0)
   }
@@ -36,7 +40,7 @@ const Home = () => {
   return (
     <div>
       
-      <Banner />
+      <Banner downButton={downButton}/>
 
       <section className='desc__container'>
         <div className='desc__title'>
@@ -78,7 +82,7 @@ const Home = () => {
               </div>
               <p>01</p>
               <div>
-                <h3 className='slide__subtitle'>Animal</h3>
+                <h3 className='slide__subtitle'>About my pet</h3>
               </div>
             </div>
             <div className='slide__content'>

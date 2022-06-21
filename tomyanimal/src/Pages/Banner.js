@@ -2,7 +2,7 @@ import React from 'react'
 import bannerimg from '../img/dog.png'
 import './Banner.css'
 
-const Banner = () => {
+const Banner = ( {downButton} ) => {
   return (
     <div>
 
@@ -43,7 +43,10 @@ const Banner = () => {
         </section>
 
         <section className='yBZdR'>
-            <button aria-label="button" className="down__btn">
+            <button 
+                aria-label="button" className="down__btn" 
+                onClick={downButton}
+            >
 
                 <svg className='fCMfUw' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 1L18 18L35 1" stroke="black" strokeWidth="1"/>
