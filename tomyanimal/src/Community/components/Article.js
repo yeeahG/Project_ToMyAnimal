@@ -158,19 +158,21 @@ const Article = ( {title, body} ) => {
                       <div className='comment__section'>
                         {com.map((it) => 
                         <div className='comment__info'>
-                          <div>
+                          <div className='comment__user'>
                             {/*사용자*/}
                             <span>{it.id}</span>
                             <span>{userName}</span>
                             <span>날짜</span>
                           </div>
-                          <div className='post__box'>
-                            {/*<span>댓글내용</span>*/}
-                            <span>{it.body}</span>
-                            <img/>
-                          </div>
-                          <div className='reply__reply'>
-                            <button>답글</button>
+                          <div className='comment__reply'>
+                            <div className='post__box'>
+                              {/*<span>댓글내용</span>*/}
+                              <span>{it.body}</span>
+                              <img/>
+                            </div>
+                            <div className='reply__reply'>
+                              <button>답글</button>
+                            </div>
                           </div>
                         </div>
                         )}

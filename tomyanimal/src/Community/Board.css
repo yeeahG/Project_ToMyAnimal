@@ -82,14 +82,22 @@
     margin: auto 0;
 }
 
+.comment__view ul {
+    padding-right: 40px;
+}
+
 .comment__info {
-    display: flex;
     justify-content: flex-start;
 }
 
-.comment__info .post__box {
-    width: 600px;
+.comment__user {
+    display: flex;
 }
+
+.comment__reply {
+    display: flex;
+}
+
 
 .reply__reply button {
     border: 1px solid;
