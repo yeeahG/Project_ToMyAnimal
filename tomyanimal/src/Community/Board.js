@@ -54,7 +54,7 @@ const Board = () => {
     <div className='log__wrapper'>
 
         <div className='userinfo__subtitle'>
-            <a href='/community'>
+            <a href='/community/board'>
                 <h1>Board</h1>
             </a>
             <p>Write everything</p>
@@ -112,7 +112,7 @@ const Board = () => {
             paginate={setCurrentPage}
         /> 
         
-
+        {localStorage.getItem('logintoken') ?
         <div className='write__article'>
             <button onClick={addArticle}>글쓰기</button>
             <button onClick={openButton}>
@@ -120,6 +120,8 @@ const Board = () => {
             </button>
             <button>내글</button>
         </div>
+        :
+        ""}
         
         </>
         }

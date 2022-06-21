@@ -43,31 +43,29 @@ const Read = ( {props, id, title, body, userId} ) => {
                     <div>{id}</div>
                 </div>
             </td>
-            <td style={{width:'80%'}}>
-                <span>
-                    <span>
-                        {/* <a href='/community/board/{id}'>{it.title}</a> */}
-                        <span
-                            onClick={goDetail} 
-                            title={title} body={body} 
-                            co={comment}
-                            className='board__title'
-                        >{title}</span>
-                        {/*<a>댓글수</a>*/}
-                        <a>{comment.length}</a>
-                        <span>New</span>
-                    </span>
+            <td style={{width:'75%', textAlign: 'left'}}>
+                <span className='title__span'>
+                    {/* <a href='/community/board/{id}'>{it.title}</a> */}
+                    <span
+                        onClick={goDetail} 
+                        title={title} body={body} 
+                        co={comment}
+                        className='board__title'
+                    >{title}</span>
+                    {/*<a>댓글수</a>*/}
+                    <a>{comment.length}</a>
+                    <span>New</span>
                 </span>
             </td>
-            <td style={{width:'5%'}}>
+            <td style={{width:'7.5%'}}>
                 {/* <a>작성자이름</a> */}
                 <a>{userId}</a>
             </td>
-            <td style={{width:'5%'}}>
+            <td style={{width:'7.5%'}}>
                 <span>작성시간</span>
             </td>
             <td style={{width:'5%'}}>
-                <span>조회수</span>
+                <span>0</span>
             </td>
         </tr>
     </tbody>
