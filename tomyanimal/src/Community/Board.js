@@ -18,6 +18,7 @@ const Board = () => {
     const [article, setArticle] = useState([]);
     const [data, dispatch] = useReducer(article);
     const [sortType, setSortType] = useState('latest');
+
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(10);
     const [isOpen, setOpen] = useState(false);
@@ -29,14 +30,39 @@ const Board = () => {
         }).then((article) => {
             setArticle(article.data);
         })
-      }, []);
+    }, []);
 
+    
+    const getProcessedList = () => {
+        const compare = (a,b) => {
+            if(sortType === 'latest') {
+                return parseInt(b.id) - parseInt(a.id);
+            } else {
+                return parseInt(a.id) - parseInt(b.id);
+            }
+        }
+        
+        const copyList = JSON.parse(JSON.stringify(article));
+        const sortedList = copyList.sort(compare);
+        return sortedList;
+    }
+    
     const indexOfLast = currentPage * postsPerPage;
     const indexOfFirst = indexOfLast - postsPerPage;
     const currentPosts = (article) => {
         let currentPosts = 0;
         currentPosts = article.slice(indexOfFirst, indexOfLast);
-        return currentPosts;
+
+        const compare = (a,b) => {
+            if(sortType === 'latest') {
+                return parseInt(b.id) - parseInt(a.id);
+            } else {
+                return parseInt(a.id) - parseInt(b.id);
+            }
+        }
+
+        const sortedList = currentPosts.sort(compare)
+        return sortedList;
     };
 
     const addArticle = async () => {
@@ -48,6 +74,7 @@ const Board = () => {
     const openButton = ()=> {
     setOpen(!isOpen)
     }
+
     
 
   return (
@@ -80,6 +107,7 @@ const Board = () => {
                 value={sortType}
                 onChange={setSortType}
                 optionList={sortOptionList}
+                article={article}
                 />
             </div>
         </div>
@@ -98,6 +126,7 @@ const Board = () => {
                 </thead>
 
                 {/* {article.map((it) =>  */}
+                {/*{getProcessedList().map((it) => */}
                 {currentPosts(article).map((it) => 
                 <Read key={it.id} {...it}/>
                 )}

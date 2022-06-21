@@ -25,7 +25,7 @@ const Read = ( {props, id, title, body, userId} ) => {
         })
     }, []);
     
-    console.log(comment);
+    //console.log(comment);
     const goDetail = () => {
         navigate(`/community/board/${id}`, { 
             state: {
@@ -34,6 +34,7 @@ const Read = ( {props, id, title, body, userId} ) => {
                 postId: comment.postId
             }})
     }
+    
     
   return (
     <tbody>
