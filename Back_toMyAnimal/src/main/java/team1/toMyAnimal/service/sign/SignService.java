@@ -16,6 +16,8 @@ import team1.toMyAnimal.exception.*;
 import team1.toMyAnimal.repository.member.MemberRepository;
 import team1.toMyAnimal.repository.role.RoleRepository;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
@@ -79,6 +81,11 @@ public class SignService {
 
     private String createSubject(Member member) {
         return String.valueOf(member.getId());
+    }
+
+    public void logout(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        session.invalidate();
     }
 
 
