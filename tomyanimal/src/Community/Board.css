@@ -22,6 +22,11 @@
     display: flex;
     table-layout: fixed;
     word-break: break-all;
+    text-align: center;
+}
+
+.title__span {
+    text-align: left;
 }
 
 .board__title {
