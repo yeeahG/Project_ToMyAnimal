@@ -110,9 +110,17 @@ const Board = () => {
             postsPerPage={postsPerPage}
             totalPosts={article.length}
             paginate={setCurrentPage}
-            addArticle={addArticle}
-            openButton={openButton}
         /> 
+        
+
+        <div className='write__article'>
+            <button onClick={addArticle}>글쓰기</button>
+            <button onClick={openButton}>
+                {isOpen ? "" : "Write"}
+            </button>
+            <button>내글</button>
+        </div>
+        
         </>
         }
     </div>
