@@ -1,8 +1,12 @@
 import React, { useRef, useState } from 'react'
 import Banner from './Banner'
-import mainimage from '../img/home.png'
+import withdog from '../img/withdog.png'
 import  { ReactComponent as Homeimg } from '../img/Home2.svg'
 import './Home.css'
+import dogcat from '../img/dogcat.png'
+import hospital from '../img/hospital.png'
+import medicine from '../img/medicine.png'
+
 
 const Home = () => {
   const upButton = () => {
@@ -49,32 +53,42 @@ const Home = () => {
           onMouseMove={onDragMove}
           >
           <div className='slide__content'>
-            <img />
+            <div className='img__box odd'>
+              {/* <img src={dogcat} /> */}
+            </div>
             <p>01</p>
             <div>
               <h3 className='slide__subtitle'>Animal</h3>
             </div>
           </div>
-          <div className='slide__content hidden'>
+          <div className='slide__content'>
             <p>02</p>
-            <div>
+            <h3 >Check</h3>
+            {/* <div>
               <h3  className='slide__subtitle'>Check up</h3>
+            </div> */}
+            <div className='img__box even'>
+              {/* <img src={medicine} /> */}
             </div>
-            <img />
           </div>
-          <div className='slide__content hidden'>
-            <img />
+          <div className='slide__content'>
+            <div className='img__box sec__odd'>
+              <img />
+            </div>
             <p>03</p>
             <div>
               <h3 className='slide__subtitle'>Recommend</h3>
             </div>
           </div>
-          <div className='slide__content hidden'>
+          <div className='slide__content'>
             <p>04</p>
-            <div>
+            <h3>Together</h3>
+            {/* <div>
               <h3 className='slide__subtitle'>Check up</h3>
+            </div> */}
+            <div className='img__box sec__even'>
+              <img />
             </div>
-            <img />
           </div>
         </div>
 
@@ -94,7 +108,8 @@ const Home = () => {
           <span className='box__image'>
             <span></span>
             {/* <img src={mainimage} /> */}
-            <Homeimg />
+            {/* <Homeimg /> */}
+            <img src={withdog} />
           </span>
         </div>
       </main>
