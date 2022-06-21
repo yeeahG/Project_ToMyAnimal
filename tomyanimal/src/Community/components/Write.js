@@ -13,26 +13,27 @@ const Write = ( {openButton} ) => {
         const newPost = {
             title: newTitle,
             body: newContent,
-            userId: "yeji"
+            userId: localStorage.getItem('usename'),
+            date: new Date()
         }
+        console.log(newPost);
 
         if(newTitle != "" || newContent != "") {
-            await axios.post('https://jsonplaceholder.typicode.com/posts', post)
-            .then((response) => response.json())
+            await axios.post('https://jsonplaceholder.typicode.com/posts', newPost)
             .then((data) => {
                 console.log('성공:', data);
+                setPost(data);
             })
-  
+            
             .catch((error) => {
                 console.error('실패:', error);
             });
-            setPost(newPost);
-            console.log(post);
             alert('작성이 완료되었습니다')
         } else {
             setError("한 글자 이상 입력하세요")
         }
     }
+    console.log(post.data);
 
   return (
     <div className='write__box'>
@@ -49,6 +50,8 @@ const Write = ( {openButton} ) => {
         <div className='write__container'>
             <textarea 
                 className='board__write'
+                type='text'
+                name='content'
                 onChange={(e) => {setNewContent(e.target.value)}}
             />
         </div>

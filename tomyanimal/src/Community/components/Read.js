@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 const Read = ( {props, id, title, body, userId} ) => {
     const navigate = useNavigate();
     // const [article, setArticle] = useState([]);
+    const [comment, setComment] = useState([])
+    const userName = localStorage.getItem('usename')
 
     // useEffect(() => {
     //     axios({
@@ -15,8 +17,22 @@ const Read = ( {props, id, title, body, userId} ) => {
     //     })
     //   }, []);
 
+
+    useEffect(() => {
+        axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments/`)
+        .then((response)=> {
+          setComment(response.data);
+        })
+    }, []);
+    
+    console.log(comment);
     const goDetail = () => {
-        navigate(`/community/board/${id}`)
+        navigate(`/community/board/${id}`, { 
+            state: {
+                name: comment.name,
+                id: comment.id,
+                postId: comment.postId
+            }})
     }
     
   return (
@@ -34,10 +50,11 @@ const Read = ( {props, id, title, body, userId} ) => {
                         <span
                             onClick={goDetail} 
                             title={title} body={body} 
+                            co={comment}
                             className='board__title'
                         >{title}</span>
-                        <a>댓글수</a>
-                        <span>사진</span>
+                        {/*<a>댓글수</a>*/}
+                        <a>{comment.length}</a>
                         <span>New</span>
                     </span>
                 </span>

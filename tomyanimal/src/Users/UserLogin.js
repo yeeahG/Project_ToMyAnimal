@@ -107,6 +107,7 @@ const UserLogin = ({Login, error}) => {
         localStorage.setItem('userid', data.data.result.data['member']);
         // console.log(data.data.result.data['member']);
         // localStorage.setItem('id', jwt);
+        localStorage.setItem('usename', data.data.result.data['userName']);
 
         if (jwt) {
             navigate('/')
