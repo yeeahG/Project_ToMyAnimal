@@ -8,6 +8,8 @@ import team1.toMyAnimal.domain.dto.sign.SignInRequest;
 import team1.toMyAnimal.domain.dto.sign.SignUpRequest;
 import team1.toMyAnimal.service.sign.SignService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import static team1.toMyAnimal.controller.response.Response.success;
@@ -34,5 +36,11 @@ public class SignController {
     @ResponseStatus(HttpStatus.OK)
     public Response refreshToken(@RequestHeader(value = "Authorization") String refreshToken) {
         return success(signService.refreshToken(refreshToken));
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest req) throws Exception {
+        signService.logout(req);
+        return "logout success";
     }
 }

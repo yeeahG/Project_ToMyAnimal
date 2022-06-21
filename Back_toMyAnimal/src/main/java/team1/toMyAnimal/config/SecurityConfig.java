@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/posts/**","/api/members/**","/api/categories/**","/api/comments/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/posts/**", "/api/members/**", "/api/categories/**", "/api/comments/**", "/logout").permitAll()
                 .antMatchers(HttpMethod.GET, "/image/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/pets/{id}").authenticated()
                 .antMatchers(HttpMethod.GET, "/api/board/{id}").access("@boardGuard.check(#id)")
@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/categories/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/pets").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/comments").authenticated()
-                .antMatchers(HttpMethod.POST,"/api/board").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/board").authenticated()
                 .antMatchers(HttpMethod.DELETE, "/api/members/{id}/**").access("@memberGuard.check(#id)")
                 .antMatchers(HttpMethod.DELETE, "/api/categories/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/posts/{id}").access("@postGuard.check(#id)")
@@ -66,8 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint())
                 .and()
-                .addFilterBefore(new JwtAuthenticationFilter(accessTokenHelper, userDetailsService), UsernamePasswordAuthenticationFilter.class)
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll();
+                .addFilterBefore(new JwtAuthenticationFilter(accessTokenHelper, userDetailsService), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
