@@ -4,6 +4,7 @@ import axios from 'axios';
 import './Board.css'
 import ControlMenu from '../Pages/ControlMenu';
 import Pagination from './components/Pagination';
+import Write from './components/Write'
  
 const sortOptionList = [
     {value: "latest", name: "최신순"},
@@ -19,6 +20,7 @@ const Board = () => {
     const [sortType, setSortType] = useState('latest');
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(10);
+    const [isOpen, setOpen] = useState(false);
 
     useEffect(() => {
         axios({
@@ -36,6 +38,16 @@ const Board = () => {
         currentPosts = article.slice(indexOfFirst, indexOfLast);
         return currentPosts;
     };
+
+    const addArticle = async () => {
+        const post = {title: "New", body: "Hello world", userId: "yeji"}
+        await axios.post('https://jsonplaceholder.typicode.com/posts', post)
+        setArticle([post, ...article]);
+    }
+
+    const openButton = ()=> {
+    setOpen(!isOpen)
+    }
     
 
   return (
@@ -47,7 +59,13 @@ const Board = () => {
             </a>
             <p>Write everything</p>
         </div>
-        
+
+        {isOpen ?
+        <div className='input__container'>
+            <Write openButton={openButton} />
+        </div>
+        :
+        <>
         <div className='add_info'>
             <div className='count__item'>
                 새글
@@ -85,13 +103,18 @@ const Board = () => {
                 )}
             </table>
         </div>
+        
 
         {/* <Read article={article} /> */}
         <Pagination 
             postsPerPage={postsPerPage}
             totalPosts={article.length}
             paginate={setCurrentPage}
-        />
+            addArticle={addArticle}
+            openButton={openButton}
+        /> 
+        </>
+        }
     </div>
   )
 }
