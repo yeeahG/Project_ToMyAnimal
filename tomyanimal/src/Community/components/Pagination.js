@@ -33,13 +33,14 @@ const Pagination = ( {postsPerPage, totalPosts, paginate, addArticle, openButton
 
         </div>
 
+        {/*
         <div className='write__article'>
             <button onClick={addArticle}>글쓰기</button>
             <button onClick={openButton}>
                 {isOpen ? "" : "Write"}
             </button>
             <button>내글</button>
-        </div>
+        </div> */}
     </div>
   )
 }

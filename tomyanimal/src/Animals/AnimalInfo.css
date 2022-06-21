@@ -196,10 +196,10 @@ li {
 }
 
 .input__container textarea {
-    resize: vertical;
-    width: 70vw;
+    resize: none;
+    width: 80vw;
     border: none;
-    min-height: 100px;
+    height: 300px;
 }
 
 
@@ -388,6 +388,7 @@ li {
 
     .input__container textarea  {
         width: 100%;
+        height: 300px;
     }
 
     /**/
