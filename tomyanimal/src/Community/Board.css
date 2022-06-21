@@ -70,6 +70,11 @@
 .userinfo__subtitle  {
     background-color: #fe81b9;
     color: #f7f6f2;
+    padding: 0 1rem;
+}
+
+.userinfo__subtitle p {
+    margin: auto 0;
 }
 
 .comment__info {
@@ -81,10 +86,11 @@
     width: 600px;
 }
 
-.reply__reply {
+.reply__reply button {
     border: 1px solid;
     border-radius: 20px;
     width: 35px;
+    height: 35px;
     text-align: center;
 }
 
@@ -104,6 +110,8 @@
     font-size: 20px;
     line-height: 24px;
     vertical-align: middle;
+    border-bottom: 1px solid;
+    width: 90vw;
 }
 
 
@@ -121,14 +129,14 @@
         display: block;
     }
 
+    .write__head input {
+        width: 100%;
+    }
+
     .write__container {
         padding: 19px 27px 30px;
         box-sizing: border-box;
         border-radius: 2px;
-        
     }
-
-
-
 
 }

@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const Article = ( {title, body} ) => {
   const {id} = useParams();
-  console.log(id);
+  //console.log(id);
+  const location = useLocation();
+  const name = location.state.name;
+  const bid = location.state.id;
+  const postId = location.state.postId;
+
 
   const [data, setData] = useState({})
+  const [com, setCom] = useState([])
+  const [comtext, setComText] = useState("")
+  const [error, setError] = useState("");
   //useContext로 저장해야 id로 내용 불러오기가능
+  const userName = localStorage.getItem('usename')
 
   useEffect(() => {
     axios.get('https://jsonplaceholder.typicode.com/posts/'+id)
@@ -15,6 +24,40 @@ const Article = ( {title, body} ) => {
       setData(response.data);
     })
   }, []);
+
+  
+  useEffect(() => {
+    axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments/`)
+    .then((response)=> {
+      setCom(response.data);
+      //console.log(com);
+    })
+  }, []);
+
+
+  const addComment = async () => {
+    const newComment = {
+      body: comtext,
+      userId: localStorage.getItem('usename'),
+      date: new Date()
+    }
+    console.log(newComment);
+
+    if(comtext != "" ) {
+      await axios.post('https://jsonplaceholder.typicode.com/posts/${id}/comments/', newComment)
+      .then((data) => {
+        console.log('성공:', data);
+        setCom([newComment, ...com]);
+      })
+        
+      .catch((error) => {
+        console.error('실패:', error);
+      });
+      alert('작성이 완료되었습니다')
+    } else {
+        setError("한 글자 이상 입력하세요")
+    }
+  }
   
   return (
     <div>
@@ -79,7 +122,7 @@ const Article = ( {title, body} ) => {
                     <span>작성시간</span>
                     <span>
                       댓글
-                      <a>0</a>
+                      {/*<a>{comment.length}</a>*/}
                     </span>
                   </div>
                 </div>
@@ -113,23 +156,24 @@ const Article = ( {title, body} ) => {
                     <li>
 
                       <div className='comment__section'>
-                        <div className='profile__tbumb'>
-                          <img />
-                        </div>
+                        {com.map((it) => 
                         <div className='comment__info'>
                           <div>
-                            {/* 닉네임 클릭시 사용자의 정보 open */}
-                            <a>사용자1</a>
+                            {/*사용자*/}
+                            <span>{it.id}</span>
+                            <span>{userName}</span>
                             <span>날짜</span>
                           </div>
                           <div className='post__box'>
-                            <span>댓글내용</span>
+                            {/*<span>댓글내용</span>*/}
+                            <span>{it.body}</span>
                             <img/>
                           </div>
                           <div className='reply__reply'>
                             <button>답글</button>
                           </div>
                         </div>
+                        )}
                       </div>
 
                     </li>
@@ -151,20 +195,21 @@ const Article = ( {title, body} ) => {
                 <div className='comment__write__area'>
 
                   <div className='box__textarea'>
-                    <textarea></textarea>
+                    {error}
+                    <textarea 
+                      type='text'
+                      name='comment' 
+                      onChange={(e) => setComText(e.target.value)} />
                   </div>
 
                   <div className='comment__write__menu'>
-                    <div className='area__l'>
-                      <input type='file'></input>
-                    </div>
                     <div className='area__r'>
                       <span>
                         <span>0</span>
                         <span>/</span>
                         <span>총글자수</span>
                       </span>
-                      <button>등록</button>
+                      <button onClick={addComment}>등록</button>
                     </div>
                   </div>
                 </div>
