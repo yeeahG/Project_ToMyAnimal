@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import team1.toMyAnimal.aop.AssignMemberId;
 import team1.toMyAnimal.controller.response.Response;
 import team1.toMyAnimal.domain.dto.post.PostCreateRequest;
+import team1.toMyAnimal.domain.dto.post.PostReadCondition;
 import team1.toMyAnimal.domain.dto.post.PostUpdateRequest;
 import team1.toMyAnimal.domain.member.Member;
 import team1.toMyAnimal.service.post.PostService;
@@ -30,6 +31,12 @@ public class PostController {
     @ResponseStatus(HttpStatus.OK)
     public Response read(@PathVariable Long id) {
         return Response.success(postService.read(id));
+    }
+
+    @GetMapping("/api/posts")
+    @ResponseStatus(HttpStatus.OK)
+    public Response readAll(@Valid PostReadCondition cond) {
+        return Response.success(postService.readAll(cond));
     }
 
     @DeleteMapping("/api/posts/{id}")

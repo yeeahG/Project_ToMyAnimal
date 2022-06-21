@@ -48,6 +48,12 @@ public class PostService {
         return PostDto.toDto(postRepository.findById(id).orElseThrow(PostNotFoundException::new));
     }
 
+    public PostListDto readAll(PostReadCondition cond) {
+        return PostListDto.toDto(
+                postRepository.findAllByCondition(cond)
+        );
+    }
+
     @Transactional
     public void delete(Long id) {
         Post post = postRepository.findById(id).orElseThrow(PostNotFoundException::new);
