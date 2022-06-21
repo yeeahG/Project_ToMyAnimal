@@ -3,7 +3,9 @@ import Read from './components/Read'
 import axios from 'axios';
 import './Board.css'
 import ControlMenu from '../Pages/ControlMenu';
-
+import Pagination from './components/Pagination';
+import Write from './components/Write'
+ 
 const sortOptionList = [
     {value: "latest", name: "최신순"},
     {value: "oldest", name: "오래된 순"},
@@ -16,6 +18,9 @@ const Board = () => {
     const [article, setArticle] = useState([]);
     const [data, dispatch] = useReducer(article);
     const [sortType, setSortType] = useState('latest');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage, setPostsPerPage] = useState(10);
+    const [isOpen, setOpen] = useState(false);
 
     useEffect(() => {
         axios({
@@ -25,6 +30,24 @@ const Board = () => {
             setArticle(article.data);
         })
       }, []);
+
+    const indexOfLast = currentPage * postsPerPage;
+    const indexOfFirst = indexOfLast - postsPerPage;
+    const currentPosts = (article) => {
+        let currentPosts = 0;
+        currentPosts = article.slice(indexOfFirst, indexOfLast);
+        return currentPosts;
+    };
+
+    const addArticle = async () => {
+        const post = {title: "New", body: "Hello world", userId: "yeji"}
+        await axios.post('https://jsonplaceholder.typicode.com/posts', post)
+        setArticle([post, ...article]);
+    }
+
+    const openButton = ()=> {
+    setOpen(!isOpen)
+    }
     
 
   return (
@@ -36,7 +59,13 @@ const Board = () => {
             </a>
             <p>Write everything</p>
         </div>
-        
+
+        {isOpen ?
+        <div className='input__container'>
+            <Write openButton={openButton} />
+        </div>
+        :
+        <>
         <div className='add_info'>
             <div className='count__item'>
                 새글
@@ -60,35 +89,40 @@ const Board = () => {
 
                 <thead>
                     <tr className='board__index'>
-                        <th>id</th>
-                        <th>글제목</th>
-                        <th>글쓴이</th>
-                        <th>작성일</th>
-                        <th>조회</th>
+                        <th style={{width:'5%'}}>id</th>
+                        <th style={{width:'75%'}}>글제목</th>
+                        <th style={{width:'8%'}}>글쓴이</th>
+                        <th style={{width:'7%'}}>작성일</th>
+                        <th style={{width:'5%'}}>조회</th>
                     </tr>
                 </thead>
 
-                {article.map((it) => 
+                {/* {article.map((it) =>  */}
+                {currentPosts(article).map((it) => 
                 <Read key={it.id} {...it}/>
                 )}
             </table>
         </div>
+        
 
         {/* <Read article={article} /> */}
+        <Pagination 
+            postsPerPage={postsPerPage}
+            totalPosts={article.length}
+            paginate={setCurrentPage}
+        /> 
+        
 
-        <div className='paging'>
-            <div className='paging__number'>
-                <ol>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li>...</li>
-                    <li>마지막페이지</li>
-                </ol>
-            </div>
+        <div className='write__article'>
+            <button onClick={addArticle}>글쓰기</button>
+            <button onClick={openButton}>
+                {isOpen ? "" : "Write"}
+            </button>
+            <button>내글</button>
         </div>
+        
+        </>
+        }
     </div>
   )
 }

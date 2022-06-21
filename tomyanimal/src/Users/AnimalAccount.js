@@ -1,29 +1,84 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import AnimalAdd from './components/AnimalAdd';
 import './UserHome.css'
 
 const AnimalAccount = ( ) => {
   const [animal, setAnimal] = useState([]);
-  //console.log(animal);
 
+  const [petNumber, setPetnum] = useState();
+  const [petBTD, setPetBTD] = useState();
+  const [petKg, setPetKg] = useState();
+
+  
   const [editContactId, setEditContactId] = useState(null);
   const [editFormData, setEditFormData] = useState({
     name: "", 
     contact: "",
   });
 
+  const navigate = useNavigate();
+
+  const loginId = localStorage.getItem('userid');
+
+
+  /*
   useEffect(() => {
     axios({
       method: 'get', 
-      // url: 'http://localhost:8084/api/auth/',
-      url: 'https://jsonplaceholder.typicode.com/posts',
+      url: 'http://localhost:8084/api/pets/' + loginId,
+      // url: 'https://jsonplaceholder.typicode.com/posts',
+      headers: {Authorization: localStorage.getItem('logintoken')}
     }).then((animal) => {
       setAnimal(animal.data);
+
+      console.log(animal.data);
+
+    }).then((error) => {
+      console.log(error.message)
     })
   }, []);
+  */
 
-  //console.log(animal[0]);
+
+  axios.get('http://localhost:8084/api/pets/1', 
+            { headers: { Authorization: localStorage.getItem('logintoken') } 
+            })
+    .then(response => {
+    //setAnimal(response);
+    setPetnum(response.data.result.data['registrationNumber'])
+    setPetBTD(response.data.result.data['birthday'])
+    setPetKg(response.data.result.data['weight'])
+  })
+  .catch((error) => {
+    console.log('error ' + error);
+  });
+
+/*
+  axios.get('http://localhost:8084/api/pets' + loginId, {
+    headers: {
+     'Content-Type': 'multipart/form-data',
+     'Authorization': localStorage.getItem('logintoken'),
+    }
+  })
+  .then((data) => {
+    console.log('성공:', data);
+    setAnimal(data.data);
+  })
+  .catch((error) => {
+      console.error('실패:', error);
+  });
+  */
+
+  const gotoLog = () => {
+    navigate('/animal')
+  }
+
+  const localDelete = () => {
+    localStorage.removeItem('animalinfo');
+    navigate('/user')
+  }
 
   return (
   <div>
@@ -34,7 +89,9 @@ const AnimalAccount = ( ) => {
       </h2>
       <svg 
         className='arrow'
-        viewBox="0 0 26 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+        viewBox="0 0 26 21" fill="none" xmlns="http://www.w3.org/2000/svg"
+        onClick={gotoLog}
+      >
         <line 
           x1="0.753418" y1="10.1284" x2="24.7946" y2="10.1284" 
           stroke="white" strokeWidth="1.5"></line>
@@ -52,11 +109,12 @@ const AnimalAccount = ( ) => {
 
     <div className='animalinfo__subtitle'>
       <h1>About My Animal</h1>
+      animal.userid === 로그인시의 userid면 Animal info 불러오기
     </div>
 
   <div className='animalinfo__content'>
-    {/* {localStorage.getItem("animalinfo")?  */}
-    {(animal != "" )?
+    {/* {(animal !== "" ) ? */}
+    {localStorage.getItem("animalinfo")?  
     <>
       <form>
         <table className='animal__detail__form'>
@@ -69,15 +127,27 @@ const AnimalAccount = ( ) => {
             </tr>
           </thead>
 
-          {animal.map((it) => 
+          {/*
+          {animal.map((it) =>
           <tbody>
             <tr>
-              <td>{it.userId}</td>
-              <td>{it.title}</td>
-              <td>{it.title}</td>
+              {animal}
+              <td>{it.petName}</td>
+              <td>{it.registrationNumber}</td>
+              <td>{it.birthday} </td>
+              <td>{it.weight}</td>
             </tr>
           </tbody>
-          )}
+           )}
+          */}
+
+          <tbody>
+            <tr>
+              <td>{petNumber}</td>
+              <td>{petBTD}</td>
+              <td>{petKg}</td>
+            </tr>
+          </tbody>
         </table>
       </form>
 
@@ -87,6 +157,9 @@ const AnimalAccount = ( ) => {
         </button>
         <button className='welcome__btn'>
           <a href="/">Home</a>
+        </button>
+        <button className='welcome__btn' onClick={localDelete}>
+          <a href="/">Delete</a>
         </button>
       </div>
     </>

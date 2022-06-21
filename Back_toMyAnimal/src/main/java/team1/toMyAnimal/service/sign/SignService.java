@@ -1,15 +1,13 @@
 package team1.toMyAnimal.service.sign;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team1.toMyAnimal.config.TokenHelper;
-import team1.toMyAnimal.domain.dto.member.MemberDto;
-import team1.toMyAnimal.domain.dto.request.SignInRequest;
-import team1.toMyAnimal.domain.dto.request.SignUpRequest;
-import team1.toMyAnimal.domain.dto.response.SignInResponse;
+import team1.toMyAnimal.domain.dto.sign.SignInRequest;
+import team1.toMyAnimal.domain.dto.sign.SignUpRequest;
+import team1.toMyAnimal.domain.dto.sign.SignInResponse;
 import team1.toMyAnimal.domain.dto.sign.RefreshTokenResponse;
 import team1.toMyAnimal.domain.member.Member;
 import team1.toMyAnimal.domain.member.Role;
@@ -18,6 +16,8 @@ import team1.toMyAnimal.exception.*;
 import team1.toMyAnimal.repository.member.MemberRepository;
 import team1.toMyAnimal.repository.role.RoleRepository;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
@@ -81,6 +81,11 @@ public class SignService {
 
     private String createSubject(Member member) {
         return String.valueOf(member.getId());
+    }
+
+    public void logout(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        session.invalidate();
     }
 
 

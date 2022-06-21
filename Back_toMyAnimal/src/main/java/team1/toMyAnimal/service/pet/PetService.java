@@ -13,6 +13,7 @@ import team1.toMyAnimal.repository.pet.PetRepository;
 import team1.toMyAnimal.service.image.FileService;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -40,6 +41,7 @@ public class PetService {
     public PetDto read(Long id){
         return PetDto.toDto(petRepository.findById(id).orElseThrow(PetNotFoundException::new));
     }
+
 
     @Transactional
     public void delete(Long id) {

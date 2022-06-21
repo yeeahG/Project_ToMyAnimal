@@ -38,8 +38,9 @@ const UserAccount = () => {
     },
   ]
 
-  const loginId = localStorage.getItem('id');
+  const loginId = localStorage.getItem('userid');
   //console.log(loginId);
+  const token = localStorage.getItem('logintoken');
 
   const navigate = useNavigate();
 
@@ -51,7 +52,7 @@ const UserAccount = () => {
       url: 'http://localhost:8084/api/members/' + loginId,
     }).then((user) => {
       setUser(user);
-      setUserName(user.data.result.data['userName'])
+      setUserName(user.data.result.data['userName']) 
       setUserPhone(user.data.result.data['userPhoneNumber'])
       localStorage.setItem('userInfo', JSON.stringify(user.data.result.data));
     })
@@ -79,11 +80,26 @@ const UserAccount = () => {
   }, [])
   */
 
+  // const [stateUser, setUsertState] = useState([]);
+
+  // const getUser = () => {
+  //   axios
+  //     .get('http://localhost:8084/api/members/' + loginId)
+  //     .then(data => {
+  //       let customer = data.data;
+  //       setUsertState(
+  //         {
+  //           id: customer.id,
+  //           userName: customer.userName,
+  //           userPhone: customer.userPhone
+  //         }
+  //       )
+  //     })
+  //     .catch(err => alert(err));
+  // }
+
     
   const Logout = () => {
-    // console.log("log out");
-    // setUser({name: "", id: ""});
-  
     // localStorage.clear();
     //localStorage.removeItem('logininfo');
     localStorage.removeItem('logintoken');
@@ -116,30 +132,92 @@ const UserAccount = () => {
     setEditFormData(newFormData);
   };
   
-  const handleEditFormSubmit = (e) => {
+  const handleEditFormSubmit = async (e) => {
     e.preventDefault();
 
     const editedContact = {
-      id: editContactId,
-      name: editFormData.name,
-      contact: editFormData.contact
+      id: loginId,
+      username: editFormData.name,
+      userPhoneNumber: editFormData.contact,
     }
+    console.log(editedContact);
 
-    const newContacts = [...user];
-    const index = user.findIndex((it) => it.id === editContactId);
-    newContacts[index] = editedContact;
-    setUser(newContacts);
-    setEditContactId(null);
+    // const newContacts = [...user];
+    // const index = user.findIndex((it) => it.loginId === editContactId);
+    // newContacts[index] = editedContact;
+    // setUser(newContacts);
+    // setEditContactId(null);
+
+    //put or patch methond
+    //ERROR남 작동에는 문제없음
+    /* 보류*/
+    axios.put('http://localhost:8084/api/member/' + loginId, editedContact,{
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        'Authorization': localStorage.getItem('logintoken'),
+        'Content-Type': 'application/json'
+      }
+    })
+    .then( function (response){
+      console.log(response);
+      setUser(response.data);
+      setEditContactId(null); 
+      alert('수정이 완료되었습니다')
+
+      /*
+      const userClone = [editedContact];
+      const index = userClone.indexOf(response);
+      userClone[index] = editedContact
+      setUser(userClone);
+      setEditContactId(null);
+      */
+    
+    })
+     .catch(function (error) {
+      console.log(error.message);
+     });
+
+
+    // axios
+    //   .put(`http://localhost:8084/api/member/${loginId}`, editedContact)
+    //   .then(d => {
+    //     // setUser(d.data);
+    //     console.log(d);
+    //   })
+    //   .catch(err => alert(err));
+
+    /*
+    await fetch('http://localhost:8084/api/member/' + loginId, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json;',
+        "Authorization": localStorage.getItem('logintoken'),
+        'Access-Control-Allow-Origin': '*',
+      },
+      body: JSON.stringify(editedContact),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('성공:', data);
+      })
+    .catch((error) => {
+      console.error('실패:', error);
+    });
+    alert('수정이 완료되었습니다')
+    */
+
   }
 
   
   const handleEditClick = (e, user) => {
     e.preventDefault();
-    setEditContactId(user.id);
+    // setEditContactId(user.id);
+    // setEditContactId(user.data.result.data['userId']);
+    setEditContactId(loginId);
 
     const formValues = {
-      name: user.name,
-      contact: user.contact,
+      name: userName,
+      contact: userPhone,
     }
 
     setEditFormData(formValues);
@@ -203,7 +281,7 @@ const UserAccount = () => {
       } */}
     
 
-    <form onSubmit={handleEditFormSubmit} >
+    <form onSubmit={handleEditFormSubmit} method="PUT">
       <table className='account__detail__form'>
         <thead>
           <tr>
@@ -228,7 +306,22 @@ const UserAccount = () => {
                 )}
             </Fragment>
           ))} */}
-          <ReadOnlyRow userPhone={userPhone} userName={userName}/>
+
+           {/* {editContactId === loginId ? ( */}
+          <Fragment>
+           {editContactId === loginId ? (
+             <EditableRow 
+             editFormData={editFormData}
+              handleEditFormChange={handleEditFormChange}
+              handleCancelClick={handleCancelClick}
+            />
+           ) : (
+          <ReadOnlyRow 
+            userPhone={userPhone} userName={userName}
+            handleEditClick={handleEditClick}
+          />
+          )}
+          </Fragment>
         </tbody>
       </table>
     </form>

@@ -1,6 +1,12 @@
 /*==================List==================*/
-.list__board table {
-    display: block;
+
+
+
+/*==================BOARD==================*/
+.board__index {
+    table-layout: fixed;
+    word-break: break-all;
+    width: 844.8px;
 }
 
 /*==================READ==================*/
@@ -14,24 +20,115 @@
 
 .board__content {
     display: flex;
+    table-layout: fixed;
+    word-break: break-all;
 }
 
 .board__title {
     cursor: pointer;
+    width: 80%;
+}
+
+/*==================PAGINATION==================*/
+.paging {
+    display: flex;
+    justify-content: center;
 }
 
 .paging .paging__number {
     display: flex;
+    justify-content: center;
 }
 
-.paging__number ol {
+.write__article {
+    float: right;
+    position: absolute;
+    right: 20%;
+}
+
+/* .paging__number ol {
     list-style : true;
+    margin: 0;
+    padding: 0;
+} */
+
+.paging__number ul {
+    list-style: none;
     margin: 0;
     padding: 0;
 }
 
 .paging__number li {
-    list-style : true;
     margin: 0;
     padding: 0;
+    border: 0;
+    float: left;
+    cursor: pointer;
+}
+
+/*==================ARTICLE==================*/
+.userinfo__subtitle  {
+    background-color: #fe81b9;
+    color: #f7f6f2;
+}
+
+.comment__info {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.comment__info .post__box {
+    width: 600px;
+}
+
+.reply__reply {
+    border: 1px solid;
+    border-radius: 20px;
+    width: 35px;
+    text-align: center;
+}
+
+.box__textarea textarea {
+    resize: none;
+    height: 70px;
+    width: 100%;
+    overflow-y: scroll;
+    resize: none;
+}
+
+/*==================WRITE==================*/
+.write__head input {
+    height: 24px;
+    margin-right: 10px;
+    border: none;
+    font-size: 20px;
+    line-height: 24px;
+    vertical-align: middle;
+}
+
+
+.write__container board__write {
+    border: none;
+    width: 100%;
+    overflow: none;
+    min-height: 300px;
+}
+
+
+
+@media (min-width: 900px) {
+    .list__board table {
+        display: block;
+    }
+
+    .write__container {
+        padding: 19px 27px 30px;
+        box-sizing: border-box;
+        border-radius: 2px;
+        
+    }
+
+
+
+
 }

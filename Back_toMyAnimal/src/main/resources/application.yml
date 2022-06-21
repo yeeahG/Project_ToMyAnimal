@@ -3,9 +3,14 @@ spring:
     active: local
     include: secret
 
-# 사진 multipart 용량
-    servlet.multipart.max-file-size: 5MB
-    servlet.multipart.max-request-size: 5MB
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+  # 사진 multipart 용량
+  servlet.multipart.max-file-size: 5MB
+  servlet.multipart.max-request-size: 5MB
 
   jackson:
     time-zone: UTC
@@ -23,7 +28,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
-#    defer-datasource-initialization: true
+        default_batch_fetch_size: 100
+  #    defer-datasource-initialization: true
   sql:
     init:
       mode: always
@@ -42,5 +48,7 @@ server:
 logging:
   level:
     org:
+      springframework:
+        web:
       hibernate:
         SQL: DEBUG

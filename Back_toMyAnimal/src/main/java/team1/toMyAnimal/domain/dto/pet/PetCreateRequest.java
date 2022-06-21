@@ -27,10 +27,10 @@ public class PetCreateRequest {
     @NotBlank(message = "펫의 이름을 등록해주세요")
     private String petName;
 
-    private LocalDate birthday;
+    private String birthday;
 
 
-    private Long weight;
+    private double weight;
 
     @Null
     private Long memberId;

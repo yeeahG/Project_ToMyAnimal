@@ -49,9 +49,59 @@
     padding: 2rem 6rem 4rem 0;
 }
 
-.slide__content img {
+
+.desc__container {
+
+}
+
+.desc__title {
+    font-size: 7rem;
+}
+
+.desc__content {
+    display: grid;
+    grid-gap: 1rem;
+    padding: 4rem 1rem 4rem 1rem;
+}
+
+.part__one {
+    font-size: 1.5rem;
+}
+
+.img__box {
+    width: auto;
+    height: 350px;
+    border: 1px solid;
+}
+
+.odd {
+    background-image: url('../img/cat1.jpg');
+    background-repeat: no-repeat;
+}
+
+.odd img {
+    object-fit: cover;
+}
+
+.even {
+    background-image: url('../img/dog2.jpg');
+    background-repeat: no-repeat;
+}
+
+.sec__odd {
+    background-image: url('../img/medicine.png');
+    background-repeat: no-repeat;
+}
+
+
+.even img {
+    /* background-color: #FFE67C; */
+    object-fit: cover;
+}
+
+
+.slide__content p {
     width: 600px;
-    height: 300px;
 }
 
 .slide__subtitle {
@@ -148,23 +198,16 @@
     .main__image {
         grid-column: 2;
     }
-}
 
-@media (max-width: 900px) {
-    .slide__container {
-        display: block;
-        width: 100%;
-        margin: 0 auto;
-        overflow: hidden;
-    }
-    .slide__content {
-        display: block;
-        width: auto;
-        padding: 4rem;
-        align-items: center;
+    .desc__title {
+        font-size: 3rem;
     }
 
+    .odd, .sec__odd, .even, .sec__even {
+
+    }
 }
+
 
 @media (min-width: 900px) {
     .up_btn {
@@ -174,15 +217,12 @@
     .up_btn svg {
         width: 6.80556vw;
     }
-
-    .slide__feature {
-        padding: 5vw 5vw;
-    }
-
+    
+    
     .main__container {
         padding: 5vw 5vw;
     }
-
+    
     .main__text {
         font-size: 4rem;
         letter-spacing: -0.05ch;;
@@ -202,4 +242,51 @@
     .main__image {
         max-width: 30rem;
     }
+    
+    .desc__container {
+        margin: 0px 5vw;
+    }
+    
+    .desc__title {
+        font-size: 5rem;
+    }
+
+    .desc__content {
+        grid-template-columns: 2fr 1fr 1fr;
+    }
+
+    .slide__service {
+        margin: 0px 5vw;
+    }
+    .slide__title {
+        font-size: 5rem;
+    }
+    .slide__title p {
+        margin-bottom: 0;
+    }
+    
+    .slide__feature {
+        padding: 2vw 0;
+    }
+}
+
+
+@media (max-width: 900px) {
+    .slide__container {
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+    .slide__content {
+        display: block;
+        width: auto;
+        padding: 4rem;
+        align-items: center;
+    }
+
+    .odd, .sec__odd, .even, .sec__even {
+        width: 630px;
+    }
+
 }
