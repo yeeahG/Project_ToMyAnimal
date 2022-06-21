@@ -1,7 +1,5 @@
 /*==================List==================*/
-.list__board table {
-    display: block;
-}
+
 
 
 /*==================BOARD==================*/
@@ -95,4 +93,41 @@
     height: 70px;
     width: 100%;
     overflow-y: scroll;
+}
+
+/*==================WRITE==================*/
+.write__head input {
+    height: 24px;
+    margin-right: 10px;
+    border: none;
+    font-size: 20px;
+    line-height: 24px;
+    vertical-align: middle;
+}
+
+
+.write__container board__write {
+    border: none;
+    width: 100%;
+    overflow: none;
+    min-height: 300px;
+}
+
+
+
+@media (min-width: 900px) {
+    .list__board table {
+        display: block;
+    }
+
+    .write__container {
+        padding: 19px 27px 30px;
+        box-sizing: border-box;
+        border-radius: 2px;
+        
+    }
+
+
+
+
 }
