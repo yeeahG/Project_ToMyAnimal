@@ -22,7 +22,7 @@ public class PetDto {
     private String registrationNumber;
     private String petName;
     private String birthday;
-    private Long weight;
+    private double weight;
     private MemberDto member;
     private List<PetImageDto> images;
 
