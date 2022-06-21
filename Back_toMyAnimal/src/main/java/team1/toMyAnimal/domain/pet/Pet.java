@@ -34,7 +34,7 @@ public class Pet {
 
     private String birthday;
 
-    private Long weight;
+    private double weight;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
@@ -44,7 +44,7 @@ public class Pet {
     @OneToMany(mappedBy = "pet", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<PetImage> petImages;
 
-    public Pet(String registrationNumber, String petName, String birthday, Long weight, Member member, List<PetImage> petImages){
+    public Pet(String registrationNumber, String petName, String birthday, double weight, Member member, List<PetImage> petImages){
         this.registrationNumber = registrationNumber;
         this.petName = petName;
         this.birthday = birthday;

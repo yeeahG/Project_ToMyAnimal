@@ -30,7 +30,7 @@ public class PetCreateRequest {
     private String birthday;
 
 
-    private Long weight;
+    private double weight;
 
     @Null
     private Long memberId;

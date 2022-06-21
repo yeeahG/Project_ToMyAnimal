@@ -15,7 +15,7 @@ import java.util.List;
 public class PetUpdateRequest {
     private String registrationNumber;
     private String petName;
-    private Long weight;
+    private double weight;
     private List<MultipartFile> addedImages = new ArrayList<>();
     private List<Long> deletedImages = new ArrayList<>();
 }
