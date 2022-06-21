@@ -38,61 +38,82 @@ const Home = () => {
       
       <Banner />
 
-      <section>
-        
-      </section>
-
-      <div className='slide__feature'>
-        <h2>OUR SERVICES</h2>
-        <div 
-          className='slide__container' 
-          ref={scrollRef}
-          onMouseDown={onDragStart}
-          onMouseUp={onDragEnd}
-          onMouseLeave={onDragEnd}
-          onMouseMove={onDragMove}
-          >
-          <div className='slide__content'>
-            <div className='img__box odd'>
-              {/* <img src={dogcat} /> */}
-            </div>
-            <p>01</p>
-            <div>
-              <h3 className='slide__subtitle'>Animal</h3>
-            </div>
-          </div>
-          <div className='slide__content'>
-            <p>02</p>
-            <h3 >Check</h3>
-            {/* <div>
-              <h3  className='slide__subtitle'>Check up</h3>
-            </div> */}
-            <div className='img__box even'>
-              {/* <img src={medicine} /> */}
-            </div>
-          </div>
-          <div className='slide__content'>
-            <div className='img__box sec__odd'>
-              <img />
-            </div>
-            <p>03</p>
-            <div>
-              <h3 className='slide__subtitle'>Recommend</h3>
-            </div>
-          </div>
-          <div className='slide__content'>
-            <p>04</p>
-            <h3>Together</h3>
-            {/* <div>
-              <h3 className='slide__subtitle'>Check up</h3>
-            </div> */}
-            <div className='img__box sec__even'>
-              <img />
-            </div>
-          </div>
+      <section className='desc__container'>
+        <div className='desc__title'>
+          <div>care &</div>
+          <div>give love </div>
         </div>
 
-      </div>
+        <div className='desc__content'>
+          <div className='part__one'>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis dui augue. Donec sed feugiat leo. Proin et lacus ac orci vestibulum condimentum. Praesent sit amet venenatis felis. Ut in diam eget lectus mattis convallis vitae sed orci. Nunc scelerisque velit a mi mollis, quis vestibulum nulla luctus. </p>
+          </div>
+          <div className='part__two'>
+            <p>In leo odio, posuere non pulvinar vel, consectetur vitae augue. Praesent quis nibh facilisis, venenatis ex quis, posuere eros.  Pellentesque eu malesuada enim.</p>
+          </div>
+          <div className='part__three'>
+            <p>In pretium, elit in commodo posuere, libero lectus varius lacus, sit amet sodales magna quam vitae turpis. Duis hendrerit, tellus ut pharetra hendrerit, arcu massa tincidunt purus, eu fermentum nisi quam vitae dolor.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className='slide__service'>
+
+        <div className='slide__title'>
+          <p>our services</p>
+        </div>
+        
+        <div className='slide__feature'>
+          <div 
+            className='slide__container' 
+            ref={scrollRef}
+            onMouseDown={onDragStart}
+            onMouseUp={onDragEnd}
+            onMouseLeave={onDragEnd}
+            onMouseMove={onDragMove}
+            >
+            <div className='slide__content'>
+              <div className='img__box odd'>
+                {/* <img src={dogcat} /> */}
+              </div>
+              <p>01</p>
+              <div>
+                <h3 className='slide__subtitle'>Animal</h3>
+              </div>
+            </div>
+            <div className='slide__content'>
+              <p>02</p>
+              <h3 >Check</h3>
+              {/* <div>
+                <h3  className='slide__subtitle'>Check up</h3>
+              </div> */}
+              <div className='img__box even'>
+                {/* <img src={medicine} /> */}
+              </div>
+            </div>
+            <div className='slide__content'>
+              <div className='img__box sec__odd'>
+                <img />
+              </div>
+              <p>03</p>
+              <div>
+                <h3 className='slide__subtitle'>Recommend</h3>
+              </div>
+            </div>
+            <div className='slide__content'>
+              <p>04</p>
+              <h3>Together</h3>
+              {/* <div>
+                <h3 className='slide__subtitle'>Check up</h3>
+              </div> */}
+              <div className='img__box sec__even'>
+                <img />
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
       
 
       <main className='main__container'>
