@@ -7,6 +7,7 @@ import './UserHome.css'
 const AnimalAccount = ( ) => {
   const [animal, setAnimal] = useState([]);
 
+  const [petName, setPetName] = useState();
   const [petNumber, setPetnum] = useState();
   const [petBTD, setPetBTD] = useState();
   const [petKg, setPetKg] = useState();
@@ -43,10 +44,11 @@ const AnimalAccount = ( ) => {
 
 
   axios.get('http://localhost:8084/api/pets/1', 
-            { headers: { Authorization: localStorage.getItem('logintoken') } 
-            })
+        { headers: { Authorization: localStorage.getItem('logintoken') } 
+        })
     .then(response => {
     //setAnimal(response);
+    setPetName(response.data.result.data['petName'])
     setPetnum(response.data.result.data['registrationNumber'])
     setPetBTD(response.data.result.data['birthday'])
     setPetKg(response.data.result.data['weight'])
@@ -143,6 +145,7 @@ const AnimalAccount = ( ) => {
 
           <tbody>
             <tr>
+              <td>{petName}</td>
               <td>{petNumber}</td>
               <td>{petBTD}</td>
               <td>{petKg}</td>

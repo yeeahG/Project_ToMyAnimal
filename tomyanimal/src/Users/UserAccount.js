@@ -55,6 +55,7 @@ const UserAccount = () => {
       setUserName(user.data.result.data['userName']) 
       setUserPhone(user.data.result.data['userPhoneNumber'])
       localStorage.setItem('userInfo', JSON.stringify(user.data.result.data));
+      localStorage.setItem('usename', user.data.result.data['userName']);
     })
   }, []);
   //console.log(user.result.data['userName']);

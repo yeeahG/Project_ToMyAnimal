@@ -164,7 +164,6 @@ const Article = ( {title, body} ) => {
                           <div className='comment__user'>
                             {/*사용자*/}
                             <span>{it.id}</span>
-                            <span>{userName}</span>
                             <a>{postId}</a>
                             <span>날짜</span>
                           </div>
