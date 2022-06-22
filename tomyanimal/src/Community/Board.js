@@ -32,6 +32,8 @@ const Board = () => {
         })
     }, []);
 
+    const indexOfLast = currentPage * postsPerPage;
+    const indexOfFirst = indexOfLast - postsPerPage;
     
     const getProcessedList = () => {
         const compare = (a,b) => {
@@ -44,11 +46,12 @@ const Board = () => {
         
         const copyList = JSON.parse(JSON.stringify(article));
         const sortedList = copyList.sort(compare);
-        return sortedList;
+        
+        let currentPosts = 0;
+        currentPosts = sortedList.slice(indexOfFirst, indexOfLast);
+        return currentPosts;
     }
     
-    const indexOfLast = currentPage * postsPerPage;
-    const indexOfFirst = indexOfLast - postsPerPage;
     const currentPosts = (article) => {
         let currentPosts = 0;
         currentPosts = article.slice(indexOfFirst, indexOfLast);
@@ -126,9 +129,9 @@ const Board = () => {
                 </thead>
 
                 {/* {article.map((it) =>  */}
-                {/*{getProcessedList().map((it) => */}
-                {currentPosts(article).map((it) => 
-                <Read key={it.id} {...it}/>
+                {/*{currentPosts(article).map((it) => */}
+                {getProcessedList().map((it) => 
+                <Read key={it.id} {...it} />
                 )}
             </table>
         </div>

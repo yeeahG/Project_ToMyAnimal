@@ -9,6 +9,7 @@ const Article = ( {title, body} ) => {
   const name = location.state.name;
   const bid = location.state.id;
   const postId = location.state.postId;
+  const view = location.state.view;
 
 
   const [data, setData] = useState({})
@@ -118,10 +119,13 @@ const Article = ( {title, body} ) => {
                   <div className='content__info'>
                     {/* <a>글쓴이이름</a> */}
                     <a>{data.userId}</a>
+                    <a>{postId}</a>
                     <span>조회수</span>
+                    <span>{view}</span>
                     <span>작성시간</span>
                     <span>
                       댓글
+                      {com.length}
                       {/*<a>{comment.length}</a>*/}
                     </span>
                   </div>
