@@ -12,13 +12,6 @@ import javax.validation.constraints.PositiveOrZero;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PetReadCondition {
-    @NotNull(message = "페이지 번호를 입력해주세요.")
-    @PositiveOrZero
-    private Integer page;
-
-    @NotNull(message = "페이지 크기를 입력해주세요.")
-    private Integer size;
-
     @Null
     private Long memberId;
 }
