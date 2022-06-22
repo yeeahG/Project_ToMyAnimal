@@ -8,6 +8,7 @@ const AnimalAccount = ( ) => {
   const [animal, setAnimal] = useState([]);
 
   const [petPhoto, setPetPhoto] = useState();
+  const [petId, setPetId] = useState();
   const [petName, setPetName] = useState();
   const [petNumber, setPetnum] = useState();
   const [petBTD, setPetBTD] = useState();
@@ -46,23 +47,26 @@ const AnimalAccount = ( ) => {
 
   /*axios.get('http://localhost:8084/api/pets' + loginId,*/
   useEffect(() => {
-    axios.get('http://localhost:8084/api/pets/3', { 
+    axios.get('http://localhost:8084/api/pets/5', { 
       headers: { 
         Authorization: localStorage.getItem('logintoken') 
       } 
     })
     .then(response => {
       //setAnimal(response.data);
+      setPetId(response.data.result.data['id'])
       setPetName(response.data.result.data['petName'])
       setPetnum(response.data.result.data['registrationNumber'])
       setPetBTD(response.data.result.data['birthday'])
       setPetKg(response.data.result.data['weight'])
+
     })
     .catch((error) => {
       console.log('error ', error);
     });
   }, []);
 
+  console.log(petId);
 
   const gotoLog = () => {
     navigate('/animal')
@@ -71,7 +75,7 @@ const AnimalAccount = ( ) => {
   const animalDelete = async () => {
     localStorage.removeItem('animalinfo');
 
-    axios.delete('http://localhost:8084/api/pets/3', {
+    axios.delete('http://localhost:8084/api/pets/4', {
       headers: {
         'Content-Type': 'multipart/form-data',
         'Authorization': localStorage.getItem('logintoken'),
@@ -121,7 +125,7 @@ const AnimalAccount = ( ) => {
 
   <div className='animalinfo__content'>
     {/*{localStorage.getItem("animalinfo")?  */}
-    {petNumber ? 
+    {petId ? 
     <>
       <form>
         <table className='animal__detail__form'>
