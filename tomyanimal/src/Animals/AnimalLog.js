@@ -6,45 +6,9 @@ import Write from './Write';
 import Read from './Read';
 import './AnimalInfo.css'
 import ControlMenu from '../Pages/ControlMenu';
+import Pagination from '../Community/components/Pagination';
 
 
-const dummyData = [
-    {
-      id:1, 
-      emotion: 1,
-      title: "산책",
-      content: "Today 1",
-      date: 1652940360079,
-    },
-    {
-      id:2, 
-      emotion: 2,
-      title: "간식",
-      content: "Today 2",
-      date: 1652940360082,
-    },
-    {
-      id:3, 
-      emotion: 3,
-      title: "병원",
-      content: "Today 3",
-      date: 1652940360182,
-    },
-    {
-      id:4, 
-      emotion: 4,
-      title: "공원",
-      content: "Today 4",
-      date: 1652940360192,
-    },
-    {
-      id:5, 
-      emotion: 2,
-      title: "미용",
-      content: "Today 5",
-      date: 1852940360192,
-    },
-]
 
 const sortOptionList = [
   {value: "latest", name: "최신순"},
@@ -52,13 +16,20 @@ const sortOptionList = [
 ]
 
 const AnimalLog = () => {
-  const [logs, setLogs] = useState(dummyData);
+  //const [logs, setLogs] = useState(dummyData);
   const [sortType, setSortType] = useState('latest');
   const [isOpen, setOpen] = useState(false);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(10);
 
   const diaryList = useContext(DiaryStateContext);
   //console.log(diaryList.id);
   //console.log(diaryList);
+
+  
+  const indexOfLast = currentPage * postsPerPage;
+  const indexOfFirst = indexOfLast - postsPerPage;
 
   //filter 적용
   const getProcessedList = () => {
@@ -71,12 +42,19 @@ const AnimalLog = () => {
       }
     }
 
-
-    //const sortedList = diaryList.sort(compare);
-
     const copyList = JSON.parse(JSON.stringify(diaryList));
     const sortedList = copyList.sort(compare);
-    return sortedList;
+    
+    let currentPosts = 0;
+    currentPosts = sortedList.slice(indexOfFirst, indexOfLast);
+    return currentPosts;
+
+
+    //const sortedList = diaryList.sort(compare);
+    /*
+    const copyList = JSON.parse(JSON.stringify(diaryList));
+    const sortedList = copyList.sort(compare);
+    return sortedList;*/
   }
 
   return (
@@ -102,8 +80,17 @@ const AnimalLog = () => {
       {getProcessedList().map((it) => (
         <Read diaryList={diaryList} key={it.id} {...it}/>
       ))}
+
+      <Pagination 
+        postsPerPage={postsPerPage}
+        totalPosts={diaryList.length}
+        paginate={setCurrentPage}
+      /> 
+
       </>
       }
+
+      
 
 
       <section className='etc'>
