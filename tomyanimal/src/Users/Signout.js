@@ -1,6 +1,25 @@
 import React from 'react'
+import axios from 'axios';
  
 const Signout = () => {
+  const userid = localStorage.getItem('userid')
+
+  const userDelete = async () => {
+    axios.delete(`http://localhost:8084/api/members/${userid}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('logintoken'),
+      }
+    })
+    .then((data) => {
+      console.log('성공:', data);
+      localStorage.clear();
+    })
+    .catch((error) => {
+      console.error('실패:', error);
+    });
+  }
+  
   return (
     <div>
       <div className='userinfo__subtitle'>
@@ -21,6 +40,12 @@ const Signout = () => {
             </tr>
           </thead>
         </form>
+
+        <div className='welcome'>
+          <button className='welcome__btn' onClick={userDelete}>
+            <a href="/">Delete</a>
+          </button>
+        </div>
       </div>
     </div>
   )
