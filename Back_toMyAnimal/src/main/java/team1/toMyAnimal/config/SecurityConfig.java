@@ -41,26 +41,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
 
-                .antMatchers(HttpMethod.GET, "/api/posts/**", "/api/members/**", "/api/categories/**", "/api/comments/**", "/logout").permitAll()
-                .antMatchers(HttpMethod.GET, "/image/**").permitAll()
+                // GET
                 .antMatchers(HttpMethod.GET, "/api/pets/{id}").authenticated()
                 .antMatchers(HttpMethod.GET, "/api/board/{id}").access("@boardGuard.check(#id)")
-                .antMatchers(HttpMethod.POST, "/api/posts").authenticated()
-                .antMatchers(HttpMethod.POST, "/api/signin", "/api/signup", "/api/refresh-token").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/categories/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "/api/pets").authenticated()
-                .antMatchers(HttpMethod.POST, "/api/comments").authenticated()
-                .antMatchers(HttpMethod.POST, "/api/board").authenticated()
-                .antMatchers(HttpMethod.DELETE, "/api/members/{id}/**").access("@memberGuard.check(#id)")
-                .antMatchers(HttpMethod.DELETE, "/api/categories/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/api/posts/**", "/api/members/**", "/api/categories/**", "/api/comments/**", "/logout").permitAll()
+                .antMatchers(HttpMethod.GET, "/image/**").permitAll()
+
+                //DELETE
                 .antMatchers(HttpMethod.DELETE, "/api/posts/{id}").access("@postGuard.check(#id)")
                 .antMatchers(HttpMethod.DELETE, "/api/pets/{id}").access("@petGuard.check(#id)")
                 .antMatchers(HttpMethod.DELETE, "/api/comments/{id}").access("@commentGuard.check(#id)")
                 .antMatchers(HttpMethod.DELETE, "/api/board/{id}").access("@boardGuard.check(#id)")
+                .antMatchers(HttpMethod.DELETE, "/api/members/{id}/**").access("@memberGuard.check(#id)")
+                .antMatchers(HttpMethod.DELETE, "/api/categories/**").hasRole("ADMIN")
+
+                // PUT
                 .antMatchers(HttpMethod.PUT, "/api/pets/{id}").access("@petGuard.check(#id)")
                 .antMatchers(HttpMethod.PUT, "/api/posts/{id}").access("@postGuard.check(#id)")
                 .antMatchers(HttpMethod.PUT, "/api/member/{id}").access("@memberGuard.check(#id)")
                 .antMatchers(HttpMethod.PUT, "/api/board/{id}").access("@boardGuard.check(#id)")
+
+                // POST
+                .antMatchers(HttpMethod.POST, "/api/posts").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/signin", "/api/signup", "/api/refresh-token").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/pets").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/comments").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/board").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/categories/**").hasRole("ADMIN")
+
                 .anyRequest().hasAnyRole("ADMIN")
                 .and()
                 .exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler())
