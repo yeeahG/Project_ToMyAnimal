@@ -1,25 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import Write from './Write.js'
 
-const Pagination = ( {postsPerPage, totalPosts, paginate} ) => {
+const Pagination = ( {postsPerPage, totalPosts, paginate, addArticle, openButton} ) => {
+    const [isOpen, setOpen] = useState(false);
+    const navigate = useNavigate();
     const pageNumbers = [];
 
     for (let i=1; i<=Math.ceil(totalPosts / postsPerPage); i++) {
         pageNumbers.push(i);
     }
 
+    const goWrite = () => {
+        console.log("Wrtie!");
+        navigate('/write')
+    }
+    
+    const userid = localStorage.getItem('userid');
+
   return (
     <div className='paging'>
         <div className='paging__number'>
-            {/* <ol>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li>...</li>
-                <li>마지막페이지</li>
-            </ol> */}
-
             <ul>
             {pageNumbers.map( (number) => (
                 <li className='pagination'>
@@ -32,10 +33,14 @@ const Pagination = ( {postsPerPage, totalPosts, paginate} ) => {
 
         </div>
 
+        {/*
         <div className='write__article'>
-            <button>글쓰기</button>
+            <button onClick={addArticle}>글쓰기</button>
+            <button onClick={openButton}>
+                {isOpen ? "" : "Write"}
+            </button>
             <button>내글</button>
-        </div>
+        </div> */}
     </div>
   )
 }

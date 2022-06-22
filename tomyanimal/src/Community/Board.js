@@ -4,6 +4,7 @@ import axios from 'axios';
 import './Board.css'
 import ControlMenu from '../Pages/ControlMenu';
 import Pagination from './components/Pagination';
+import Write from './components/Write'
  
 const sortOptionList = [
     {value: "latest", name: "최신순"},
@@ -17,8 +18,10 @@ const Board = () => {
     const [article, setArticle] = useState([]);
     const [data, dispatch] = useReducer(article);
     const [sortType, setSortType] = useState('latest');
+
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(10);
+    const [isOpen, setOpen] = useState(false);
 
     useEffect(() => {
         axios({
@@ -27,27 +30,72 @@ const Board = () => {
         }).then((article) => {
             setArticle(article.data);
         })
-      }, []);
+    }, []);
 
     const indexOfLast = currentPage * postsPerPage;
     const indexOfFirst = indexOfLast - postsPerPage;
+    
+    const getProcessedList = () => {
+        const compare = (a,b) => {
+            if(sortType === 'latest') {
+                return parseInt(b.id) - parseInt(a.id);
+            } else {
+                return parseInt(a.id) - parseInt(b.id);
+            }
+        }
+        
+        const copyList = JSON.parse(JSON.stringify(article));
+        const sortedList = copyList.sort(compare);
+        
+        let currentPosts = 0;
+        currentPosts = sortedList.slice(indexOfFirst, indexOfLast);
+        return currentPosts;
+    }
+    
     const currentPosts = (article) => {
         let currentPosts = 0;
         currentPosts = article.slice(indexOfFirst, indexOfLast);
-        return currentPosts;
+
+        const compare = (a,b) => {
+            if(sortType === 'latest') {
+                return parseInt(b.id) - parseInt(a.id);
+            } else {
+                return parseInt(a.id) - parseInt(b.id);
+            }
+        }
+
+        const sortedList = currentPosts.sort(compare)
+        return sortedList;
     };
+
+    const addArticle = async () => {
+        const post = {title: "New", body: "Hello world", userId: "yeji"}
+        await axios.post('https://jsonplaceholder.typicode.com/posts', post)
+        setArticle([post, ...article]);
+    }
+
+    const openButton = ()=> {
+    setOpen(!isOpen)
+    }
+
     
 
   return (
     <div className='log__wrapper'>
 
         <div className='userinfo__subtitle'>
-            <a href='/community'>
+            <a href='/community/board'>
                 <h1>Board</h1>
             </a>
             <p>Write everything</p>
         </div>
-        
+
+        {isOpen ?
+        <div className='input__container'>
+            <Write openButton={openButton} />
+        </div>
+        :
+        <>
         <div className='add_info'>
             <div className='count__item'>
                 새글
@@ -62,6 +110,7 @@ const Board = () => {
                 value={sortType}
                 onChange={setSortType}
                 optionList={sortOptionList}
+                article={article}
                 />
             </div>
         </div>
@@ -80,18 +129,34 @@ const Board = () => {
                 </thead>
 
                 {/* {article.map((it) =>  */}
-                {currentPosts(article).map((it) => 
-                <Read key={it.id} {...it}/>
+                {/*{currentPosts(article).map((it) => */}
+                {getProcessedList().map((it) => 
+                <Read key={it.id} {...it} />
                 )}
             </table>
         </div>
+        
 
         {/* <Read article={article} /> */}
         <Pagination 
             postsPerPage={postsPerPage}
             totalPosts={article.length}
             paginate={setCurrentPage}
-        />
+        /> 
+        
+        {localStorage.getItem('logintoken') ?
+        <div className='write__article'>
+            <button onClick={addArticle}>글쓰기</button>
+            <button onClick={openButton}>
+                {isOpen ? "" : "Write"}
+            </button>
+            <button>내글</button>
+        </div>
+        :
+        ""}
+        
+        </>
+        }
     </div>
   )
 }
