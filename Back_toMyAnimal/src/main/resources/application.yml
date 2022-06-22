@@ -22,12 +22,12 @@ spring:
     username: root
     url: jdbc:mysql://localhost:3306/team1
   jpa:
-    show-sql: false
+#    show-sql: true
     hibernate:
       ddl-auto: create
     properties:
       hibernate:
-        format_sql: true
+#        format_sql: true
         default_batch_fetch_size: 100
   #    defer-datasource-initialization: true
   sql:
