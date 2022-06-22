@@ -23,7 +23,6 @@ const AnimalAdd = () => {
             registrationNumber: animalId,
             birthday: animalAge,
             weight: animalWeight,
-            addedImages: animalPhoto
         }
         //console.log(animal);
 
@@ -34,8 +33,8 @@ const AnimalAdd = () => {
         formData.set('birthday', animal.birthday)
         formData.set('weight', animal.weight)
 
-        const photoFile = document.getElementById('photo')
-        formData.append("addedImages", photoFile.files[0]);
+        //const photoFile = document.getElementById('photo')
+        //formData.append("addedImages", photoFile.files[0]);
 
         if(animalName!="" && animalId!="" && animalAge!="" && animalWeight!="" ) {
 
