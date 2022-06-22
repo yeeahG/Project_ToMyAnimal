@@ -6,20 +6,15 @@ const Read = ( {props, id, title, body, userId} ) => {
     const navigate = useNavigate();
     // const [article, setArticle] = useState([]);
     const [comment, setComment] = useState([])
+    const [view, setView] = useState(0);
     const userName = localStorage.getItem('usename')
-
-    // useEffect(() => {
-    //     axios({
-    //       method: 'get', 
-    //       url: 'https://jsonplaceholder.typicode.com/posts',
-    //     }).then((article) => {
-    //         setArticle(article.data);
-    //     })
-    //   }, []);
 
 
     useEffect(() => {
-        axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments/`)
+        axios({
+            method: 'get', 
+            url: `https://jsonplaceholder.typicode.com/posts/${id}/comments/`
+        })
         .then((response)=> {
           setComment(response.data);
         })
@@ -31,8 +26,10 @@ const Read = ( {props, id, title, body, userId} ) => {
             state: {
                 name: comment.name,
                 id: comment.id,
-                postId: comment.postId
+                postId: comment.postId,
+                view: view
             }})
+        setView(+1)
     }
     
     
@@ -66,7 +63,7 @@ const Read = ( {props, id, title, body, userId} ) => {
                 <span>작성시간</span>
             </td>
             <td style={{width:'5%'}}>
-                <span>0</span>
+                <span>{view}</span>
             </td>
         </tr>
     </tbody>
