@@ -42,7 +42,7 @@ const Article = ( {title, body} ) => {
       userId: localStorage.getItem('usename'),
       date: new Date()
     }
-    console.log(newComment);
+    //console.log(newComment);
 
     if(comtext != "" ) {
       await axios.post('https://jsonplaceholder.typicode.com/posts/${id}/comments/', newComment)
@@ -119,7 +119,6 @@ const Article = ( {title, body} ) => {
                   <div className='content__info'>
                     {/* <a>글쓴이이름</a> */}
                     <a>{data.userId}</a>
-                    <a>{postId}</a>
                     <span>조회수</span>
                     <span>{view}</span>
                     <span>작성시간</span>
@@ -166,6 +165,7 @@ const Article = ( {title, body} ) => {
                             {/*사용자*/}
                             <span>{it.id}</span>
                             <span>{userName}</span>
+                            <a>{postId}</a>
                             <span>날짜</span>
                           </div>
                           <div className='comment__reply'>
