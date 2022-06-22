@@ -45,7 +45,7 @@ const dummyData = [
   },
   {
     id:2, 
-    title: "간식",
+    title: "간식10개줌",
     content: "Today 2",
     date: 1652940360082,
   },
@@ -63,6 +63,48 @@ const dummyData = [
   },
   {
     id:5, 
+    title: "미용",
+    content: "Today 5",
+    date: 1852940360192,
+  },
+  {
+    id:6, 
+    title: "미용",
+    content: "Today 5",
+    date: 1852940360192,
+  },
+  {
+    id:7, 
+    title: "미용",
+    content: "Today 5",
+    date: 1852940360192,
+  },
+  {
+    id:8, 
+    title: "미용",
+    content: "Today 5",
+    date: 1852940360192,
+  },
+  {
+    id:9, 
+    title: "미용",
+    content: "Today 5",
+    date: 1852940360192,
+  },
+  {
+    id:10, 
+    title: "미용",
+    content: "Today 5",
+    date: 1852940360192,
+  },
+  {
+    id:12, 
+    title: "미용",
+    content: "Today 5",
+    date: 1852940360192,
+  },
+  {
+    id:13, 
     title: "미용",
     content: "Today 5",
     date: 1852940360192,
