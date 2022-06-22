@@ -7,6 +7,7 @@ import './UserHome.css'
 const AnimalAccount = ( ) => {
   const [animal, setAnimal] = useState([]);
 
+  const [petPhoto, setPetPhoto] = useState();
   const [petName, setPetName] = useState();
   const [petNumber, setPetnum] = useState();
   const [petBTD, setPetBTD] = useState();
@@ -43,42 +44,46 @@ const AnimalAccount = ( ) => {
   */
 
 
-  axios.get('http://localhost:8084/api/pets/1', 
-        { headers: { Authorization: localStorage.getItem('logintoken') } 
-        })
+  /*axios.get('http://localhost:8084/api/pets' + loginId,*/
+  useEffect(() => {
+    axios.get('http://localhost:8084/api/pets/2', { 
+      headers: { 
+        Authorization: localStorage.getItem('logintoken') 
+      } 
+    })
     .then(response => {
-    //setAnimal(response);
-    setPetName(response.data.result.data['petName'])
-    setPetnum(response.data.result.data['registrationNumber'])
-    setPetBTD(response.data.result.data['birthday'])
-    setPetKg(response.data.result.data['weight'])
-  })
-  .catch((error) => {
-    console.log('error ' + error);
-  });
+      //setAnimal(response.data);
+      setPetName(response.data.result.data['petName'])
+      setPetnum(response.data.result.data['registrationNumber'])
+      setPetBTD(response.data.result.data['birthday'])
+      setPetKg(response.data.result.data['weight'])
+    })
+    .catch((error) => {
+      console.log('error ', error);
+    });
+  }, []);
 
-/*
-  axios.get('http://localhost:8084/api/pets' + loginId, {
-    headers: {
-     'Content-Type': 'multipart/form-data',
-     'Authorization': localStorage.getItem('logintoken'),
-    }
-  })
-  .then((data) => {
-    console.log('성공:', data);
-    setAnimal(data.data);
-  })
-  .catch((error) => {
-      console.error('실패:', error);
-  });
-  */
 
   const gotoLog = () => {
     navigate('/animal')
   }
 
-  const localDelete = () => {
+  const animalDelete = async () => {
     localStorage.removeItem('animalinfo');
+
+    axios.delete('http://localhost:8084/api/pets/2', {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': localStorage.getItem('logintoken'),
+      }
+    })
+    .then((data) => {
+      console.log('성공:', data);
+    })
+    .catch((error) => {
+      console.error('실패:', error);
+    });
+
     navigate('/user')
   }
 
@@ -115,8 +120,8 @@ const AnimalAccount = ( ) => {
     </div>
 
   <div className='animalinfo__content'>
-    {/* {(animal !== "" ) ? */}
-    {localStorage.getItem("animalinfo")?  
+    {/*{localStorage.getItem("animalinfo")?  */}
+    {petNumber ? 
     <>
       <form>
         <table className='animal__detail__form'>
@@ -161,7 +166,7 @@ const AnimalAccount = ( ) => {
         <button className='welcome__btn'>
           <a href="/">Home</a>
         </button>
-        <button className='welcome__btn' onClick={localDelete}>
+        <button className='welcome__btn' onClick={animalDelete}>
           <a href="/">Delete</a>
         </button>
       </div>

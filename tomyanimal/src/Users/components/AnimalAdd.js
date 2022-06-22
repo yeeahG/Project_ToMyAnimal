@@ -89,6 +89,16 @@ const AnimalAdd = () => {
         }
     }
 
+    //image upload
+    const onChangeImg  = (e) => {
+        e.preventDefault();
+
+        if(e.target.files){
+            const uploadFile = e.target.files[0]
+            console.log(uploadFile)
+        }
+    }
+
 
   return (
     <div>
@@ -107,7 +117,8 @@ const AnimalAdd = () => {
 
                 <tbody>
                     <tr>
-                        <td><input label="사진" name="photo" id="photo" placeholder="사진" type='file' onChange={(e) => setAnimalPhoto(e.target.files)} /></td>
+                        {/*<td><input label="사진" name="photo" id="photo" placeholder="사진" type='file' onChange={(e) => setAnimalPhoto(e.target.files)} /></td>*/}
+                        <td><input label="사진" name="photo" id="photo" placeholder="사진" type='file' onChange={onChangeImg} /></td>
                         <td><input label="이름" name="animalname" placeholder="이름" required onChange={(e) => setAnimalName(e.target.value)} /></td>
                         <td><input label="등록번호" name="animalId" placeholder="등록번호" required onChange={(e) => setAnimalId(e.target.value)} /></td>
                         <td><input label="생일" name="age" placeholder="나이" type='date' required onChange={(e) => setAnimalAge(e.target.value)}/></td>
