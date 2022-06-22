@@ -7,9 +7,10 @@ import axios from 'axios';
 const LOGIN_URL = 'https://jsonplaceholder.typicode.com/posts';
 // axios.defaults.withCredentials = true;
 
-const UserLogin = ({Login, error}) => {
+const UserLogin = ({Login}) => {
     const [details, setDetails] = useState({id:"", password: ""});
     const [jwt, setJwt] = useState("", "jwt");
+    const [error, setError] = useState("");
     // const { setAuth } = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -96,22 +97,26 @@ const UserLogin = ({Login, error}) => {
     const submitHandler = async e => {
         e.preventDefault();
         
-        // const {data} = await axios.post('http://localhost:8084/api/auth/signin', userdata, {withCredentials: true});
-        const data = await axios.post('http://localhost:8084/api/signin', userdata);
-        //console.log(data);
-        //console.log(data.data.result.data['accessToken']);
-        // const jwt = axios.defaults.headers.common['Authorization'] = `${data['accessToken']}`;
-        const jwt = axios.defaults.headers.common['Authorization'] = data.data.result.data['accessToken'];
-        localStorage.setItem('logintoken', jwt);
-
-        localStorage.setItem('userid', data.data.result.data['member']);
-        // console.log(data.data.result.data['member']);
-        // localStorage.setItem('id', jwt);
-
-        if (jwt) {
-            navigate('/')
-        } else {
-            alert("다시 로그인해주세요")
+        try {
+            // const {data} = await axios.post('http://localhost:8084/api/auth/signin', userdata, {withCredentials: true});
+            const data = await axios.post('http://localhost:8084/api/signin', userdata);
+            //console.log(data);
+            //console.log(data.data.result.data['accessToken']);
+            // const jwt = axios.defaults.headers.common['Authorization'] = `${data['accessToken']}`;
+            const jwt = axios.defaults.headers.common['Authorization'] = data.data.result.data['accessToken'];
+            localStorage.setItem('logintoken', jwt);
+    
+            localStorage.setItem('userid', data.data.result.data['member']);
+            // console.log(data.data.result.data['member']);
+            // localStorage.setItem('id', jwt);
+    
+            if (jwt) {
+                navigate('/')
+            } else {
+                alert("다시 로그인해주세요")
+            }
+        } catch(error) {
+            setError(error)
         }
     }
 
@@ -122,7 +127,7 @@ const UserLogin = ({Login, error}) => {
         <form onSubmit={submitHandler}>
             <div className='login__form'>
                 <h2>Login</h2>
-                {/*{(error !== "") ? ( <div className='error'>Enter a correct ID and PASSWORD</div> ) : ""}*/}
+                <p>{(error !== "") ? ( <div className='error'>올바른 아이디 및 비밀번호를 입력하세요</div> ) : ""}</p>
                 <div className='login__input'>
                     <label htmlFor="id">Id : </label>
                     <input 

@@ -101,7 +101,7 @@ const UserAccount = () => {
 
     
   const Logout = () => {
-    // localStorage.clear();
+    localStorage.clear();
     //localStorage.removeItem('logininfo');
     localStorage.removeItem('logintoken');
     navigate.push('/')
