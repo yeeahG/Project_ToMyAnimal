@@ -9,6 +9,7 @@ import Footer from './Pages/Footer';
 import './App.css';
 import Community from './Community/Community';
 import Article from './Community/components/Article';
+import Admin from './Admin/Admin';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/places/:id" element={<Place />} />
             <Route path="/user" element={<User />} />
             <Route path="/register" element={<Signup />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
 
           <Footer />

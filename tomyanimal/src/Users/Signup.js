@@ -85,10 +85,10 @@ const Signup = () => {
         </button>
       </div>
 
-      <div>
+      {/*<div>
         <h3>USER INFO</h3>
         {localStorage.userinfo}
-      </div>
+      </div>*/}
 
 
     </div>
