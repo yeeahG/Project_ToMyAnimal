@@ -21,7 +21,7 @@ const AnimalLog = () => {
   const [isOpen, setOpen] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(10);
+  const [postsPerPage, setPostsPerPage] = useState(5);
 
   const diaryList = useContext(DiaryStateContext);
   //console.log(diaryList.id);
