@@ -4,6 +4,7 @@ import AnimalLog from './AnimalLog';
 import CheckUp from './CheckUp';
 import './AnimalInfo.css'
 import {logData} from './components/data'
+import Log from './Practice/Log';
 
 const reducer = (state, action) => {
   //state 상태관리 로직들
@@ -65,49 +66,37 @@ const dummyData = [
     id:5, 
     title: "미용",
     content: "Today 5",
-    date: 1852940360192,
+    date: 1654902400000,
   },
   {
     id:6, 
-    title: "미용",
+    title: "카페",
     content: "Today 5",
-    date: 1852940360192,
+    date: 1655912400000,
   },
   {
     id:7, 
     title: "미용",
     content: "Today 5",
-    date: 1852940360192,
+    date: 1655922400000,
   },
   {
     id:8, 
     title: "미용",
     content: "Today 5",
-    date: 1852940360192,
+    date: 1655932400000,
   },
   {
     id:9, 
     title: "미용",
     content: "Today 5",
-    date: 1852940360192,
+    date: 1655942300000,
   },
   {
     id:10, 
     title: "미용",
     content: "Today 5",
-    date: 1852940360192,
-  },
-  {
-    id:12, 
-    title: "미용",
-    content: "Today 5",
-    date: 1852940360192,
-  },
-  {
-    id:13, 
-    title: "미용",
-    content: "Today 5",
-    date: 1852940360192,
+    date: 1655942400000,
   },
 ]
 
@@ -146,9 +135,9 @@ const AnimalHome = () => {
         <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}>Check up</li>
       ),
       tabCont:(
-        <div> <CheckUp /> </div>
+        <div> <Log /> </div>
       )
-    }
+    },
   ];
 
 
