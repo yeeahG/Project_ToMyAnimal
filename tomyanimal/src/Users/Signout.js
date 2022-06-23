@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
  
 const Signout = () => {
+  const [username, setUSername] = useState("");
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
   const [error, setError] = useState("");
@@ -14,6 +15,7 @@ const Signout = () => {
       method: 'get', 
       url: 'http://localhost:8084/api/members/' + userid,
     }).then((user) => {
+      setUSername(user.data.result.data['userName']) 
       setPassword(user.data.result.data['userPhoneNumber']) 
     })
   }, []);
@@ -28,6 +30,7 @@ const Signout = () => {
     .then((data) => {
       console.log('성공:', data);
       localStorage.clear();
+      alert("탈퇴가 완료되었습니다")
     })
     .catch((error) => {
       console.error('실패:', error);
@@ -68,6 +71,7 @@ const Signout = () => {
             </thead>
             <tbody>
               <tr>
+                <td>{username}</td>
                 <td>
                   <input
                     placeholder='연락처를 입력하세요' 
