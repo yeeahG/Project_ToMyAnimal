@@ -48,14 +48,16 @@ const UserAccount = () => {
   useEffect(() => {
     axios({
       method: 'get', 
-      // url: 'https://jsonplaceholder.typicode.com/posts',
-      url: 'http://localhost:8084/api/members/' + loginId,
+      url: `http://localhost:8084/api/members?memberId=${loginId}`,
+      headers: {
+        Authorization: localStorage.getItem('logintoken') 
+      }
     }).then((user) => {
       setUser(user);
       setUserName(user.data.result.data['userName']) 
       setUserPhone(user.data.result.data['userPhoneNumber'])
-      localStorage.setItem('userInfo', JSON.stringify(user.data.result.data));
       localStorage.setItem('usename', user.data.result.data['userName']);
+      localStorage.setItem('userInfo', JSON.stringify(user.data.result.data));
     })
   }, []);
   //console.log(user.result.data['userName']);

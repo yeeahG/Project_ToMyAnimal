@@ -22,17 +22,16 @@ const Log = () => {
 
     const loginId = localStorage.getItem('userid');
 
-    {/*'http://localhost:8084/api/board/' + loginId, { */}
+    {/* https://jsonplaceholder.typicode.com/posts
+     */}
   useEffect(() => {
     axios.get(
-      'https://jsonplaceholder.typicode.com/posts', {
+      'http://localhost:8084/api/my-board?memberId=' +loginId, {
       headers: { 
         Authorization: localStorage.getItem('logintoken') 
       }
     }).then((log) => {
       setDiaryList(log.data);
-    }).then((error) => {
-      console.error('실패:', error);
     })
   }, []);
 

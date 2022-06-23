@@ -106,6 +106,7 @@ const UserLogin = ({Login}) => {
             const jwt = axios.defaults.headers.common['Authorization'] = data.data.result.data['accessToken'];
             localStorage.setItem('logintoken', jwt);
     
+            localStorage.setItem('userInfo', JSON.stringify(data.data.result.data));
             localStorage.setItem('userid', data.data.result.data['member']);
             // console.log(data.data.result.data['member']);
             // localStorage.setItem('id', jwt);

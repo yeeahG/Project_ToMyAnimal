@@ -47,7 +47,7 @@ const AnimalAccount = ( ) => {
 
   /*axios.get('http://localhost:8084/api/pets' + loginId,*/
   useEffect(() => {
-    axios.get('http://localhost:8084/api/pets' + loginId, { 
+    axios.get('http://localhost:8084/api/my-pet?memberId=' + loginId, { 
       headers: { 
         Authorization: localStorage.getItem('logintoken') 
       } 
