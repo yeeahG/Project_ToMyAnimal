@@ -22,16 +22,16 @@ public class MemberService {
     }
 
     @Transactional
-    public void delete(MemberReadCondition cond) {
-        Member member = memberRepository.findById(cond.getMemberId()).orElseThrow(MemberNotFoundException::new);
+    public void delete(Long id) {
+        Member member = memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);
         memberRepository.delete(member);
     }
 
     @Transactional
-    public MemberUpdateResponse update(MemberReadCondition cond, MemberUpdateRequest req) {
-        Member member = memberRepository.findById(cond.getMemberId()).orElseThrow(MemberNotFoundException::new);
+    public MemberUpdateResponse update(Long id, MemberUpdateRequest req) {
+        Member member = memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);
         member.updateUserInfo(req);
-        return new MemberUpdateResponse(cond.getMemberId());
+        return new MemberUpdateResponse(id);
 
     }
 

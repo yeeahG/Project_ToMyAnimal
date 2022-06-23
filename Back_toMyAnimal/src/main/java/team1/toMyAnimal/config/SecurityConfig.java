@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/comments").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/board").authenticated()
 
-                .antMatchers(HttpMethod.DELETE, "/api/members/{id}/**").access("@memberGuard.check(#id)")
+                .antMatchers(HttpMethod.DELETE, "/api/members/{id}").access("@memberGuard.check(#id)")
                 .antMatchers(HttpMethod.DELETE, "/api/categories/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/posts/{id}").access("@postGuard.check(#id)")
                 .antMatchers(HttpMethod.DELETE, "/api/pets/{id}").access("@petGuard.check(#id)")

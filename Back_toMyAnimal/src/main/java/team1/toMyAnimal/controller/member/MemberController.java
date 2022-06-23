@@ -27,17 +27,17 @@ public class MemberController {
     }
 
 
-    @DeleteMapping("/api/members")
+    @DeleteMapping("/api/members/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Response delete(@Valid MemberReadCondition cond) {
-        memberService.delete(cond);
+    public Response delete(@PathVariable Long id) {
+        memberService.delete(id);
         return Response.success();
     }
 
-    @PutMapping("/api/members")
+    @PutMapping("/api/member/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Response update(@Valid MemberReadCondition cond, @Valid @RequestBody MemberUpdateRequest req) {
-        memberService.update(cond, req);
+    public Response update(@PathVariable Long id, @Valid @RequestBody MemberUpdateRequest req) {
+        memberService.update(id, req);
         return Response.success();
     }
 
