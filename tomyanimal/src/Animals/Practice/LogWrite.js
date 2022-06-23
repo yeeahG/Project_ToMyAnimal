@@ -64,10 +64,10 @@ const LogWrite = () => {
                 onChange={(e) => setTitle(e.target.value)}
             />
             <span>Day </span>
-            <input 
+            {/* <input 
                 type="date" name='date' value={date} 
                 onChange={(e) => setDate(e.target.value)}
-            />
+            /> */}
             </div>
             <p>
                 <textarea 

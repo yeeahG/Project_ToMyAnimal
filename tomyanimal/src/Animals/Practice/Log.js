@@ -18,27 +18,34 @@ const Log = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(5);
 
-    const [logList, seLogList] = useState([]);
+    //const [logList, setLogList] = useState([]);
+    const [logId, setLogId] = useState("");
+    const [logTitle, setLogTitle] = useState("");
+    const [logContent, setLogContent] = useState("");
 
     const userId = localStorage.getItem('userid');
 
     {/* http://localhost:8084/api/my-board?memberId=${userId}
   https://jsonplaceholder.typicode.com/posts */}
-  useEffect(() => {
-    axios({
-      method: 'get', 
-      url: `https://jsonplaceholder.typicode.com/posts`,
+
+    axios.get(`http://localhost:8084/api/my-board?memberId=${userId}`, {
       headers: {
         Authorization: localStorage.getItem('logintoken') 
       }
-    }).then((result) => {
-      seLogList(result);
-    })  .catch((error) => {
-      console.log('error ', error);
+    }).then((response) => {
+      setLogId(response.data.result.data[0].id);
+      setLogTitle(response.data.result.data[0].title)
+      setLogContent(response.data.result.data[0].content)
+    }).catch((error) => {
+      console.error(error);
     });
-  }, []);
-  
-  console.log(logList);
+
+//console.log(response);
+
+  const logList = [
+    {id: logId, title: logTitle, content: logContent}
+  ]
+
 
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
@@ -54,8 +61,8 @@ const Log = () => {
       }
     }
   
-    const copyList = JSON.parse(JSON.stringify(logList));
-    const sortedList = copyList.sort(compare);
+    //const copyList = JSON.parse(JSON.stringify(logList));
+    const sortedList = logList.sort(compare);
       
     let currentPosts = 0;
     currentPosts = sortedList.slice(indexOfFirst, indexOfLast);
@@ -83,12 +90,12 @@ const Log = () => {
       </div>
         :
       <>
-        {/* {getProcessedList().map((it) => (
-          <LogGet key={it.id} {...it}/>
-        ))} */}
-        {logList.map((it) => (
+        {getProcessedList().map((it) => (
           <LogGet key={it.id} {...it}/>
         ))}
+        {/* {logList.map((it) => (
+          <LogGet key={it.id} {...it}/>
+        ))}*/}
 
         <Pagination 
           postsPerPage={postsPerPage}
