@@ -51,7 +51,7 @@
 
 
 .desc__container {
-
+    margin: 0px 5vw;
 }
 
 .desc__title {
@@ -99,6 +99,9 @@
     object-fit: cover;
 }
 
+.slide__service {
+    margin: 0px 5vw;
+}
 
 .slide__content p {
     width: 600px;
@@ -190,6 +193,10 @@
 }
 
 @media (min-width: 600px) {
+    .slide__title p {
+        font-size: 3rem;
+    }
+
     .main__container {
         grid-auto-columns: 1fr;
         grid-auto-flow: column dense;
@@ -281,7 +288,7 @@
     .slide__content {
         display: block;
         width: auto;
-        padding: 4rem;
+        /*padding: 4rem;*/
         align-items: center;
     }
 
