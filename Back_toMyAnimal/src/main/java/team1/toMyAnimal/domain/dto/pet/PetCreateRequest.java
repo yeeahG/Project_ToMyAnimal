@@ -11,9 +11,7 @@ import team1.toMyAnimal.repository.member.MemberRepository;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Null;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
