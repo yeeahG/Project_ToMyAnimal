@@ -6,7 +6,7 @@ const LogRead = (  {logs, id,  title, content, date, handleEditClick} ) => {
         <>
             <div className='log__content'>
             <h3>Day {logs.id}</h3>
-            <p>{logs.date}</p>
+            {/* <p>{logs.date}</p> */}
                 <button onClick={handleEditClick}>edit</button>
             </div>
             <p>{logs.title}</p>

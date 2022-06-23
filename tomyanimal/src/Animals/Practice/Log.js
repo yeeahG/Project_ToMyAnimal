@@ -18,24 +18,27 @@ const Log = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(5);
 
-    const [diaryList, setDiaryList] = useState([]);
+    const [logList, seLogList] = useState([]);
 
-    const loginId = localStorage.getItem('userid');
+    const userId = localStorage.getItem('userid');
 
-    {/* https://jsonplaceholder.typicode.com/posts
-     */}
+    {/* http://localhost:8084/api/my-board?memberId=${userId}
+  https://jsonplaceholder.typicode.com/posts */}
   useEffect(() => {
-    axios.get(
-      'http://localhost:8084/api/my-board?memberId=' +loginId, {
-      headers: { 
+    axios({
+      method: 'get', 
+      url: `https://jsonplaceholder.typicode.com/posts`,
+      headers: {
         Authorization: localStorage.getItem('logintoken') 
       }
-    }).then((log) => {
-      setDiaryList(log.data);
-    })
+    }).then((result) => {
+      seLogList(result);
+    })  .catch((error) => {
+      console.log('error ', error);
+    });
   }, []);
-
-  //console.log(diaryList);
+  
+  console.log(logList);
 
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
@@ -51,7 +54,7 @@ const Log = () => {
       }
     }
   
-    const copyList = JSON.parse(JSON.stringify(diaryList));
+    const copyList = JSON.parse(JSON.stringify(logList));
     const sortedList = copyList.sort(compare);
       
     let currentPosts = 0;
@@ -80,13 +83,16 @@ const Log = () => {
       </div>
         :
       <>
-        {getProcessedList().map((it) => (
+        {/* {getProcessedList().map((it) => (
+          <LogGet key={it.id} {...it}/>
+        ))} */}
+        {logList.map((it) => (
           <LogGet key={it.id} {...it}/>
         ))}
 
         <Pagination 
           postsPerPage={postsPerPage}
-          totalPosts={diaryList.length}
+          totalPosts={logList.length}
           paginate={setCurrentPage}
         /> 
 

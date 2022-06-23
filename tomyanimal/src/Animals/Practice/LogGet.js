@@ -2,12 +2,11 @@ import React, { Fragment, useState } from 'react'
 import LogEdit from './LogEdit';
 import LogRead from './LogRead';
 
-const LogGet = ( {id,  title, content, date} ) => {
+const LogGet = ( {id,  title, content} ) => {
   const [logs, setLogs] = useState({
     id: id,
     title: title,
     content: content, 
-    date: date
   });
   //console.log(logs);
 
@@ -72,7 +71,7 @@ const LogGet = ( {id,  title, content, date} ) => {
           <LogEdit 
             logs={logs}
             editFormData={editFormData}
-            key={id} title={title} content={content} date={date}
+            key={id} title={title} content={content}
             handleEditFormChange={handleEditFormChange}
             handleCancelClick={handleCancelClick}
           />
@@ -83,7 +82,7 @@ const LogGet = ( {id,  title, content, date} ) => {
         <li>
           <LogRead 
             logs={logs} 
-            key={id} title={title} content={content} date={date}
+            key={id} title={title} content={content}
             handleEditClick={handleEditClick}
           />
         </li>

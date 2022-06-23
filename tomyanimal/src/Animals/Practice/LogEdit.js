@@ -6,7 +6,7 @@ const LogEdit = ( {logs, handleCancelClick, editFormData, handleEditFormChange} 
     <div>
         <div className='log__content'>
             <h3>Day {logs.id}</h3>
-            <p>{logs.date}</p>
+            {/* <p>{logs.date}</p> */}
             <button type='submit'>Save</button>
             <button type='button' onClick={handleCancelClick}>Cancel</button>
         </div>
