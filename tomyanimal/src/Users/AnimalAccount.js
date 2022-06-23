@@ -66,7 +66,7 @@ const AnimalAccount = ( ) => {
     });
   }, []);
 
-  console.log(petId);
+  //console.log(petId);
 
   const gotoLog = () => {
     navigate('/animal')
