@@ -31,6 +31,8 @@ const Log = () => {
       }
     }).then((log) => {
       setDiaryList(log.data);
+    }).then((error) => {
+      console.error('실패:', error);
     })
   }, []);
 
