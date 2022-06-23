@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team1.toMyAnimal.domain.dto.member.MemberDto;
+import team1.toMyAnimal.domain.dto.member.MemberReadCondition;
 import team1.toMyAnimal.domain.dto.member.MemberUpdateRequest;
 import team1.toMyAnimal.domain.dto.member.MemberUpdateResponse;
 import team1.toMyAnimal.domain.member.Member;
@@ -16,8 +17,8 @@ import team1.toMyAnimal.repository.member.MemberRepository;
 public class MemberService {
     private final MemberRepository memberRepository;
 
-    public MemberDto read(Long id) {
-        return MemberDto.toDto(memberRepository.findById(id).orElseThrow(MemberNotFoundException::new));
+    public MemberDto read(MemberReadCondition cond) {
+        return MemberDto.toDto(memberRepository.findById(cond.getMemberId()).orElseThrow(MemberNotFoundException::new));
     }
 
     @Transactional

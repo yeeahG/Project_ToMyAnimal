@@ -8,10 +8,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import team1.toMyAnimal.security.CustomUserDetailsService;
@@ -44,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/posts/**", "/api/members/**", "/api/categories/**", "/api/comments/**", "/logout").permitAll()
                 .antMatchers(HttpMethod.GET, "/image/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/my-pet").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/my-board").authenticated()
                 .antMatchers(HttpMethod.GET, "/api/pets/{id}").authenticated()
                 .antMatchers(HttpMethod.GET, "/api/board/{id}").access("@boardGuard.check(#id)")
 
@@ -54,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/comments").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/board").authenticated()
 
-                .antMatchers(HttpMethod.DELETE, "/api/members/{id}/**").access("@memberGuard.check(#id)")
+                .antMatchers(HttpMethod.DELETE, "/api/members/{id}").access("@memberGuard.check(#id)")
                 .antMatchers(HttpMethod.DELETE, "/api/categories/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/posts/{id}").access("@postGuard.check(#id)")
                 .antMatchers(HttpMethod.DELETE, "/api/pets/{id}").access("@petGuard.check(#id)")

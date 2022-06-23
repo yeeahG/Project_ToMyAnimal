@@ -9,6 +9,8 @@ import team1.toMyAnimal.exception.BoardNotFoundException;
 import team1.toMyAnimal.repository.board.BoardRepository;
 import team1.toMyAnimal.repository.member.MemberRepository;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -24,6 +26,10 @@ public class BoardService {
 
     public BoardDto read(Long id) {
         return BoardDto.toDto(boardRepository.findById(id).orElseThrow(BoardNotFoundException::new));
+    }
+
+    public List<BoardDto> readAll(BoardReadCondition cond) {
+        return BoardDto.toDtoList(boardRepository.findByIdWithMember(cond.getMemberId()));
     }
 
     @Transactional
