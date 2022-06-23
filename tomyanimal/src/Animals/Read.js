@@ -39,10 +39,13 @@ const Read = ( {diaryList, id,  title, content, date} ) => {
         content: editFormData.content
       }
   
-      const newContacts = [...logs];
+      /*const newContacts = [...logs];
       const index = logs.findIndex((it) => it.id === editContactId);
       newContacts[index] = editedContact;
       setLogs(newContacts);
+      setEditContactId(null);*/
+
+      setLogs(editedContact);
       setEditContactId(null);
     }
 
