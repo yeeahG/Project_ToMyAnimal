@@ -47,7 +47,7 @@ const AnimalAccount = ( ) => {
 
   /*axios.get('http://localhost:8084/api/pets' + loginId,*/
   useEffect(() => {
-    axios.get('http://localhost:8084/api/pets/5', { 
+    axios.get('http://localhost:8084/api/pets' + loginId, { 
       headers: { 
         Authorization: localStorage.getItem('logintoken') 
       } 
@@ -75,7 +75,7 @@ const AnimalAccount = ( ) => {
   const animalDelete = async () => {
     localStorage.removeItem('animalinfo');
 
-    axios.delete('http://localhost:8084/api/pets/4', {
+    axios.delete('http://localhost:8084/api/pets' + loginId, {
       headers: {
         'Content-Type': 'multipart/form-data',
         'Authorization': localStorage.getItem('logintoken'),
