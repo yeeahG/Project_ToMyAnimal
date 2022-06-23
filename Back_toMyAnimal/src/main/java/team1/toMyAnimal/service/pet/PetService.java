@@ -26,7 +26,7 @@ public class PetService {
     private final FileService fileService;
 
     @Transactional
-    public PetCreateResponse create(PetCreateRequest req){
+    public PetCreateResponse create(PetCreateRequest req) {
         Pet pet = petRepository.save(PetCreateRequest.toEntity(req, memberRepository));
         uploadImages(pet.getPetImages(), req.getImages());
         return new PetCreateResponse(pet.getId());
@@ -36,14 +36,14 @@ public class PetService {
         IntStream.range(0, petImages.size()).forEach(i -> fileService.upload(fileImages.get(i), petImages.get(i).getUniqueName()));
     }
 
-    public PetDto read(Long id){
+    public PetDto read(Long id) {
         return PetDto.toDto(petRepository.findById(id).orElseThrow(PetNotFoundException::new));
     }
 
-    public List<PetSimpleDto> readAll(PetReadCondition cond){
+    public List<PetDto> readAll(PetReadCondition cond) {
+        System.out.println("memberId: " + cond.getMemberId());
         return PetSimpleDto.toDto(petRepository.findWithMemberById(cond.getMemberId()));
     }
-
 
     @Transactional
     public void delete(Long id) {
@@ -51,10 +51,10 @@ public class PetService {
         deleteImages(pet.getPetImages());
         petRepository.delete(pet);
     }
+
     private void deleteImages(List<PetImage> petImages) {
         petImages.stream().forEach(i -> fileService.delete(i.getUniqueName()));
     }
-
 
     @Transactional
     public PetUpdateResponse update(Long id, PetUpdateRequest req) {

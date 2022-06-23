@@ -10,6 +10,5 @@ import javax.validation.constraints.Null;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PetReadCondition {
-    @Null
     private Long memberId;
 }

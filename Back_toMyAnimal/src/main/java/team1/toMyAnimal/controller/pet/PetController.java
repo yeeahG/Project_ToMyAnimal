@@ -2,6 +2,7 @@ package team1.toMyAnimal.controller.pet;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import team1.toMyAnimal.aop.AssignMemberId;
@@ -9,12 +10,9 @@ import team1.toMyAnimal.controller.response.Response;
 import team1.toMyAnimal.domain.dto.pet.PetCreateRequest;
 import team1.toMyAnimal.domain.dto.pet.PetReadCondition;
 import team1.toMyAnimal.domain.dto.pet.PetUpdateRequest;
-import team1.toMyAnimal.domain.dto.post.PostUpdateRequest;
-import team1.toMyAnimal.domain.member.Member;
 import team1.toMyAnimal.service.pet.PetService;
 
 import javax.validation.Valid;
-import java.text.ParseException;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,7 +34,7 @@ public class PetController {
         return Response.success(petService.read(id));
     }
 
-    @GetMapping("/api/my-pet/")
+    @GetMapping("/api/my-pet")
     @ResponseStatus(HttpStatus.OK)
     public Response readAll(@Valid PetReadCondition cond) {
         return Response.success(petService.readAll(cond));

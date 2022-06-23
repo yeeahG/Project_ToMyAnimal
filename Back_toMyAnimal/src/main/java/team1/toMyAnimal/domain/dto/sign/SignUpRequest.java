@@ -17,8 +17,6 @@ import java.util.List;
 @NoArgsConstructor
 public class SignUpRequest {
     @NotBlank(message = "ID를 입력해주세요.")
-
-
     private String userId;
 
     @NotBlank(message = "휴대폰 번호를 입력해주세요")

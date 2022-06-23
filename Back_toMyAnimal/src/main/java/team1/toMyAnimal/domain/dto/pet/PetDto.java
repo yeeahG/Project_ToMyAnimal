@@ -6,11 +6,6 @@ import team1.toMyAnimal.domain.dto.member.MemberDto;
 import team1.toMyAnimal.domain.image.PetImageDto;
 import team1.toMyAnimal.domain.pet.Pet;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -35,7 +30,7 @@ public class PetDto {
                 pet.getBirthday(),
                 pet.getWeight(),
                 MemberDto.toDto(pet.getMember()),
-                pet.getPetImages().stream().map(i -> PetImageDto.toDto(i)).collect(toList())
+                pet.getPetImages().stream().map(p -> PetImageDto.toDto(p)).collect(toList())
         );
     }
 }

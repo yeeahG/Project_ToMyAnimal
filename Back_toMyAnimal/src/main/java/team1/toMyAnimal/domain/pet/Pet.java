@@ -12,7 +12,6 @@ import team1.toMyAnimal.domain.member.Member;
 import team1.toMyAnimal.image.PetImage;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
