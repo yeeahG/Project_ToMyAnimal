@@ -58,36 +58,38 @@ const Signout = () => {
       <p>input.password === DB의 userid password ? 탈퇴창 : error</p>
       <div className='userinfo__content'>
         {error}
-        <form onSubmit={checkHandler}>
-          <thead>
-            <tr>
-              <th>id</th>
-              <th>Name</th>
-              <th>Contact</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <input
-                  placeholder='연락처를 입력하세요' 
-                  onChange={(e) => setCheckPassword(e.target.value)}
-                />
-              </td>
-            </tr>
-          </tbody>
-          <input type="submit" className='welcome__btn' value="SEND" />
+        <form onSubmit={checkHandler} className='signout__form'>
+          <table className='signout__table'>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Contact</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input
+                    placeholder='연락처를 입력하세요' 
+                    onChange={(e) => setCheckPassword(e.target.value)}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div className='welcome'>
+            <input type="submit" className='welcome__btn' value="SEND" />
+            {isOpen ?
+              <button className='welcome__btn' onClick={userDelete}>
+                <a href="/">Delete</a>
+              </button>
+            :
+            ""
+            }
+          </div>
         </form>
 
-        {isOpen ?
-        <div className='welcome'>
-          <button className='welcome__btn' onClick={userDelete}>
-            <a href="/">Delete</a>
-          </button>
-        </div>
-        :
-        ""
-        }
       </div>
     </div>
   )

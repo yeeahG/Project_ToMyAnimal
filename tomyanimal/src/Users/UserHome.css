@@ -215,7 +215,7 @@ tr {
 }
 
 .animalinfo__subtitle {
-
+    
 }
 
 .animalinfo__content {
@@ -240,6 +240,16 @@ tr {
 }
 
 
+/*=========================SIGN OUT=========================*/
+.signout__form {
+}
+
+.signout__table {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-bottom: 2rem;
+}
 
 @media (min-width: 900px) {
     .userinfo__container {
