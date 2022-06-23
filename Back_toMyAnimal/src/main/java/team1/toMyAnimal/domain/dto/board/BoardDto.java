@@ -7,6 +7,8 @@ import team1.toMyAnimal.domain.board.Board;
 import team1.toMyAnimal.domain.dto.member.MemberDto;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -30,6 +32,10 @@ public class BoardDto {
                 board.getCreatedAt(),
                 board.getModifiedAt()
         );
+    }
+
+    public static List<BoardDto> toDtoList(List<Board> boards){
+        return boards.stream().map(b -> BoardDto.toDto(b)).collect(Collectors.toList());
     }
 
 }
