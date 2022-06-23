@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import team1.toMyAnimal.aop.AssignMemberId;
 import team1.toMyAnimal.controller.response.Response;
 import team1.toMyAnimal.domain.dto.board.BoardCreateRequest;
+import team1.toMyAnimal.domain.dto.board.BoardReadCondition;
 import team1.toMyAnimal.domain.dto.board.BoardUpdateRequest;
 import team1.toMyAnimal.service.board.BoardService;
 
@@ -29,6 +30,12 @@ public class BoardController {
     @ResponseStatus(HttpStatus.OK)
     public Response read(@PathVariable Long id) {
         return Response.success(boardService.read(id));}
+
+    @GetMapping("/api/my-board")
+    @ResponseStatus(HttpStatus.OK)
+    public Response readAll(@Valid BoardReadCondition cond) {
+        return Response.success(boardService.readAll(cond));
+    }
 
     @DeleteMapping("/api/board/{id}")
     @ResponseStatus(HttpStatus.OK)
