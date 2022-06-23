@@ -4,6 +4,7 @@ import AnimalLog from './AnimalLog';
 import CheckUp from './CheckUp';
 import './AnimalInfo.css'
 import {logData} from './components/data'
+import Log from './Practice/Log';
 
 const reducer = (state, action) => {
   //state 상태관리 로직들
@@ -134,9 +135,9 @@ const AnimalHome = () => {
         <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}>Check up</li>
       ),
       tabCont:(
-        <div> <CheckUp /> </div>
+        <div> <Log /> </div>
       )
-    }
+    },
   ];
 
 
