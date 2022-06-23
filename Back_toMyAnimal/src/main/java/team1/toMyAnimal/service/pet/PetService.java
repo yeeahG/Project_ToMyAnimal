@@ -15,7 +15,6 @@ import team1.toMyAnimal.service.image.FileService;
 import java.util.List;
 import java.util.stream.IntStream;
 
-
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -41,8 +40,7 @@ public class PetService {
     }
 
     public List<PetDto> readAll(PetReadCondition cond) {
-        System.out.println("memberId: " + cond.getMemberId());
-        return PetSimpleDto.toDto(petRepository.findWithMemberById(cond.getMemberId()));
+        return PetDto.toDtoList(petRepository.findWithMemberById(cond.getMemberId()));
     }
 
     @Transactional

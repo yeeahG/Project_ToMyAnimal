@@ -7,6 +7,7 @@ import team1.toMyAnimal.domain.image.PetImageDto;
 import team1.toMyAnimal.domain.pet.Pet;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -32,5 +33,8 @@ public class PetDto {
                 MemberDto.toDto(pet.getMember()),
                 pet.getPetImages().stream().map(p -> PetImageDto.toDto(p)).collect(toList())
         );
+    }
+    public static List<PetDto> toDtoList(List<Pet> pets) {
+        return pets.stream().map(p -> PetDto.toDto(p)).collect(Collectors.toList());
     }
 }
