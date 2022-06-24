@@ -27,6 +27,8 @@ const Log = () => {
 
     {/* http://localhost:8084/api/my-board?memberId=${userId}
   https://jsonplaceholder.typicode.com/posts */}
+  
+  const putLog = [];
 
     axios.get(`http://localhost:8084/api/my-board?memberId=${userId}`, {
       headers: {
@@ -36,11 +38,17 @@ const Log = () => {
       setLogId(response.data.result.data[0].id);
       setLogTitle(response.data.result.data[0].title)
       setLogContent(response.data.result.data[0].content)
+
+      for (let i=0; i < response.data.result.data.length; i++) {
+        putLog.push(response.data.result.data[i])
+      } return putLog;
+    
     }).catch((error) => {
       console.error(error);
     });
-
-//console.log(response);
+    
+    //console.log(response);
+    console.log(putLog);
 
   const logList = [
     {id: logId, title: logTitle, content: logContent}
@@ -62,7 +70,7 @@ const Log = () => {
     }
   
     //const copyList = JSON.parse(JSON.stringify(logList));
-    const sortedList = logList.sort(compare);
+    const sortedList = putLog.sort(compare);
       
     let currentPosts = 0;
     currentPosts = sortedList.slice(indexOfFirst, indexOfLast);
@@ -93,9 +101,13 @@ const Log = () => {
         {getProcessedList().map((it) => (
           <LogGet key={it.id} {...it}/>
         ))}
-        {/* {logList.map((it) => (
-          <LogGet key={it.id} {...it}/>
-        ))}*/}
+         {/* {putLog.map((it, index) => (
+          <LogGet 
+            key={index.id} 
+            content={it.content}
+            title={it.title}
+            />
+        ))} */}
 
         <Pagination 
           postsPerPage={postsPerPage}
