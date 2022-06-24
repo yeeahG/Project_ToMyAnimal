@@ -22,6 +22,7 @@ const Log = () => {
     const [logId, setLogId] = useState("");
     const [logTitle, setLogTitle] = useState("");
     const [logContent, setLogContent] = useState("");
+    const [logarray, setLogArray] = useState();
 
     const userId = localStorage.getItem('userid');
 
@@ -41,6 +42,7 @@ const Log = () => {
 
       for (let i=0; i < response.data.result.data.length; i++) {
         putLog.push(response.data.result.data[i])
+        setLogArray(putLog)
       } return putLog;
     
     }).catch((error) => {
@@ -48,7 +50,7 @@ const Log = () => {
     });
     
     //console.log(response);
-    console.log(putLog);
+    //console.log(logarray);
 
   const logList = [
     {id: logId, title: logTitle, content: logContent}
@@ -70,7 +72,7 @@ const Log = () => {
     }
   
     //const copyList = JSON.parse(JSON.stringify(logList));
-    const sortedList = putLog.sort(compare);
+    const sortedList = logarray.sort(compare);
       
     let currentPosts = 0;
     currentPosts = sortedList.slice(indexOfFirst, indexOfLast);
