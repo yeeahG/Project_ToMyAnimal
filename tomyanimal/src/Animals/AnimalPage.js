@@ -7,17 +7,35 @@ const AnimalPage = () => {
   const [petBTD, setPetBTD] = useState();
   const [petKg, setPetKg] = useState();
 
-  useEffect(() => {
-    axios({
-      method: 'get', 
-      url: 'http://localhost:8084/api/pets/1',
-      headers: { Authorization: localStorage.getItem('logintoken')}
+  const userId = localStorage.getItem('userid');
+
+
+  // useEffect(() => {
+  //   axios({
+  //     method: 'get', 
+  //     url: 'http://localhost:8084/api/pets/1',
+  //     headers: { Authorization: localStorage.getItem('logintoken')}
+  //   }).then((response) => {
+  //     setPetname(response.data.result.data['petName'])
+  //     setPetBTD(response.data.result.data['birthday'])
+  //     setPetKg(response.data.result.data['weight'])
+  //   })
+  // }, []);
+
+  axios.get(`http://localhost:8084/api/my-pet?memberId=${userId}`, {
+      headers: {
+        Authorization: localStorage.getItem('logintoken') 
+      }
     }).then((response) => {
-      setPetname(response.data.result.data['petName'])
-      setPetBTD(response.data.result.data['birthday'])
-      setPetKg(response.data.result.data['weight'])
-    })
-  }, []);
+      console.log(response);
+      // 내가 데리고 있는 동물이 여러마리 일때는 data[0] 이곳을
+      // i를 length만큼 돌려서 가져와야될것으로 보임
+      setPetname(response.data.result.data[0].petName);
+      setPetBTD(response.data.result.data[0].birthday);
+      setPetKg(response.data.result.data[0].weight);
+    }).catch((error) => {
+      console.error(error);
+    });
 
   return (
     <div className='content__wrapper'>
