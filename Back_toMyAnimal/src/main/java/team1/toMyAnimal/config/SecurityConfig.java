@@ -40,8 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers(HttpMethod.GET, "/api/posts/**", "/api/members/**", "/api/categories/**", "/api/comments/**", "/logout").permitAll()
                 .antMatchers(HttpMethod.GET, "/image/**").permitAll()
-                .antMatchers(HttpMethod.GET,"/api/my-pet").access("@petGuard.check(#id)")
-                .antMatchers(HttpMethod.GET, "/api/my-board").access("@postGuard.check(#id)")
+                .antMatchers(HttpMethod.GET,"/api/my-pet").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/my-board").authenticated()
                 .antMatchers(HttpMethod.GET, "/api/pets/{id}").authenticated()
                 .antMatchers(HttpMethod.GET, "/api/board/{id}").access("@boardGuard.check(#id)")
 
