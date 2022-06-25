@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import team1.toMyAnimal.domain.common.EntityDate;
 import team1.toMyAnimal.domain.member.Member;
 import team1.toMyAnimal.domain.pet.Pet;
 
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Reservation {
+public class Reservation extends EntityDate {
 
     // 날짜, 장소, 시간, 동물의 종류, 회원 ID
     @Id
