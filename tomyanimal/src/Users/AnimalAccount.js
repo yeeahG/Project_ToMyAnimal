@@ -80,9 +80,9 @@ const AnimalAccount = ( ) => {
   }
 
   const animalDelete = async () => {
-    localStorage.removeItem('animalinfo');
+    //localStorage.removeItem('animalinfo');
 
-    axios.delete('http://localhost:8084/api/pets' + loginId, {
+    await axios.delete('http://localhost:8084/api/pets' + loginId, {
       headers: {
         'Content-Type': 'multipart/form-data',
         'Authorization': localStorage.getItem('logintoken'),
@@ -95,7 +95,7 @@ const AnimalAccount = ( ) => {
       console.error('실패:', error);
     });
 
-    navigate('/user')
+    //navigate('/user')
   }
 
   const date = new Date();
@@ -149,6 +149,7 @@ const AnimalAccount = ( ) => {
             <tr>
               <th>Name</th>
               <th>No</th>
+              <th>Birthday</th>
               <th>Age</th>
               <th>Weight</th>
             </tr>
@@ -179,11 +180,13 @@ const AnimalAccount = ( ) => {
               <td>{it.petName}</td>
               <td>{it.registrationNumber}</td>
               <td>{it.birthday}</td>
-              <td>{parseInt(dateYear) - parseInt(it.birthday) +1}</td>
-              <td>{it.weight}</td>
+              <td>{parseInt(dateYear) - parseInt(it.birthday) +1}살</td>
+              <td>{it.weight}kg</td>
             </tr>
           </tbody>
           )}
+
+          <button onClick={animalDelete}>delete</button>
 
 
         </table>
