@@ -34,7 +34,7 @@ const Log = () => {
   useEffect( () => { 
     axios.get(`http://localhost:8084/api/my-board?memberId=${userId}`, {
       headers: {
-        Authorization: localStorage.getItem('logintoken') 
+        Authorization: localStorage.getItem('logintoken'),
       }
     }).then((response) => {
       for (let i=0; i < response.data.result.data.length; i++) {
@@ -42,12 +42,14 @@ const Log = () => {
       // setLogTitle(response.data.result.data[i].title)
       // setLogContent(response.data.result.data[i].content)
       putLog.push(response.data.result.data[i])
+      console.log(putLog);
       } setLogArray(putLog)
       
       // for (let i=0; i < response.data.result.data.length; i++) {
-      //   putLog.push(response.data.result.data[i])
-      // } 
-    
+        //   putLog.push(response.data.result.data[i])
+        // } 
+        
+        console.log(logarray);
     }).catch((error) => {
       console.error(error);
     });
@@ -59,7 +61,6 @@ const Log = () => {
     {id: logId, title: logTitle, content: logContent}
   ]
 
-  console.log(logarray);
 
 
   const indexOfLast = currentPage * postsPerPage;
@@ -83,7 +84,6 @@ const Log = () => {
     currentPosts = sortedList.slice(indexOfFirst, indexOfLast);
       return currentPosts;
     }
-
 
   return (
     <div className='log__wrapper'>

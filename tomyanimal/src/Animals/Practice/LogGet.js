@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react'
+import axios from 'axios';
 import LogEdit from './LogEdit';
 import LogRead from './LogRead';
 
@@ -15,6 +16,8 @@ const LogGet = ( {id,  title, content} ) => {
     title: "", 
     content: "",
   });
+
+  const loginId = localStorage.getItem('userid');
 
 
   const handleEditClick = (e, logs) => {
@@ -56,6 +59,27 @@ const LogGet = ( {id,  title, content} ) => {
 
     setLogs(editedContact);
     setEditContactId(null);
+
+
+    // axios.put('http://localhost:8084/api/posts/4', editedContact,{
+    //   headers: {
+    //     'Authorization': localStorage.getItem('logintoken'),
+    //     'Content-Type': 'application/json',
+    //     "Access-Control-Allow-Origin": "*",
+    //     'Access-Control-Allow-Methods': '*',
+    //     'withCredentials': true,
+    //   }
+    // })
+    // .then( function (response){
+    //   console.log(response);
+    //   setLogs(editedContact);
+    //   setEditContactId(null); 
+    //   alert('수정이 완료되었습니다')
+    // })
+    //  .catch(function (error) {
+    //   console.log(error.message);
+    // });
+
   }
 
 
