@@ -99,6 +99,7 @@ const AnimalAccount = ( ) => {
   }
 
   const date = new Date();
+  const dateYear = date.getFullYear()
 
   //putPetsList[0].birthday
   //const birthDate = new Date(petBTD.getFullYear(), petBTD.getFullMonth(), petBTD.getDate())
@@ -178,7 +179,7 @@ const AnimalAccount = ( ) => {
               <td>{it.petName}</td>
               <td>{it.registrationNumber}</td>
               <td>{it.birthday}</td>
-              
+              <td>{parseInt(dateYear) - parseInt(it.birthday) +1}</td>
               <td>{it.weight}</td>
             </tr>
           </tbody>
