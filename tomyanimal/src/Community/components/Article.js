@@ -28,33 +28,48 @@ const Article = ( {title, body} ) => {
 
   
   useEffect(() => {
+    /*
+    axios.get('http://localhost:8084/api/comments' + id, {
+      headers: {
+        Authorization: localStorage.getItem('logintoken'),
+      }
+    })*/
     axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments/`)
     .then((response)=> {
       setCom(response.data);
-      //console.log(com);
+      console.log(com);
     })
   }, []);
 
 
   const addComment = async () => {
     const newComment = {
-      body: comtext,
-      userId: localStorage.getItem('usename'),
-      date: new Date()
+      //body: comtext,
+      //userId: localStorage.getItem('usename'),
+      //date: new Date(),
+      //postId: id
+
+      content: comtext,
+      postId: id
     }
-    //console.log(newComment);
+    console.log(newComment);
 
     if(comtext != "" ) {
-      await axios.post('https://jsonplaceholder.typicode.com/posts/${id}/comments/', newComment)
+      //await axios.post('https://jsonplaceholder.typicode.com/posts/${id}/comments/', newComment)
+      await axios.post('http://localhost:8084/api/comments', newComment, {
+        headers: {
+          Authorization: localStorage.getItem('logintoken'),
+        }
+      })
       .then((data) => {
         console.log('성공:', data);
         setCom([newComment, ...com]);
+        alert('작성이 완료되었습니다')
       })
         
       .catch((error) => {
         console.error('실패:', error);
       });
-      alert('작성이 완료되었습니다')
     } else {
         setError("한 글자 이상 입력하세요")
     }
