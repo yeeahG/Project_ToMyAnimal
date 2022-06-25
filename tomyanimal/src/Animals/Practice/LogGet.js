@@ -25,6 +25,7 @@ const LogGet = ( {id,  title, content} ) => {
     setEditContactId(id);
 
     const formValues = {
+      //id: editContactId,
       title: title,
       content: content,
     }
@@ -65,13 +66,12 @@ const LogGet = ( {id,  title, content} ) => {
       headers: {
         "Access-Control-Allow-Origin": "*",
         'Authorization': localStorage.getItem('logintoken'),
-        'Content-Type': 'application/json'
       }
     })
     .then((response) => {
       console.log(response.data);
-      setLogs(editedContact);
-      //setLogs(response.data);
+      //setLogs(editedContact);
+      setLogs(response.data);
       setEditContactId(null); 
       alert('수정이 완료되었습니다')
     })
