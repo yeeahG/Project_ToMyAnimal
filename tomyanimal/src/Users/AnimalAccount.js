@@ -7,6 +7,8 @@ import './UserHome.css'
 const AnimalAccount = ( ) => {
   const [animal, setAnimal] = useState([]);
 
+  const [res, setRes] = useState();
+
   const [petPhoto, setPetPhoto] = useState();
   const [petId, setPetId] = useState();
   const [petName, setPetName] = useState();
@@ -44,6 +46,9 @@ const AnimalAccount = ( ) => {
   }, []);
   */
 
+  const putPetsList = [];
+  const [petArray, setPetArray] = useState([]);
+
 
   /*axios.get('http://localhost:8084/api/pets' + loginId,*/
   useEffect(() => {
@@ -53,12 +58,17 @@ const AnimalAccount = ( ) => {
       } 
     })
     .then(response => {
-      //setAnimal(response.data);
-      setPetId(response.data.result.data['id'])
-      setPetName(response.data.result.data['petName'])
-      setPetnum(response.data.result.data['registrationNumber'])
-      setPetBTD(response.data.result.data['birthday'])
-      setPetKg(response.data.result.data['weight'])
+      console.log(response.data);
+      setRes(response.data.success)
+      //setPetId(response.data.result.data['id'])
+      //setPetName(response.data.result.data['petName'])
+      //setPetnum(response.data.result.data['registrationNumber'])
+      //setPetBTD(response.data.result.data['birthday'])
+      //setPetKg(response.data.result.data['weight'])
+      for (let i=0; i < response.data.result.data.length; i++) {
+        putPetsList.push(response.data.result.data[i])
+        console.log(putPetsList);
+      }setPetArray(putPetsList)
 
     })
     .catch((error) => {
@@ -120,12 +130,12 @@ const AnimalAccount = ( ) => {
 
     <div className='animalinfo__subtitle'>
       <h1>About My Animal</h1>
-      animal.userid === 로그인시의 userid면 Animal info 불러오기
+      {/*animal.userid === 로그인시의 userid면 Animal info 불러오기*/}
     </div>
 
   <div className='animalinfo__content'>
     {/*{localStorage.getItem("animalinfo")?  */}
-    {petId ? 
+    { (res) ? 
     <>
       <form>
         <table className='animal__detail__form'>
@@ -151,15 +161,24 @@ const AnimalAccount = ( ) => {
           </tbody>
            )}
           */}
-
+          {petArray.map((it) =>
           <tbody>
             <tr>
+              {/*
               <td>{petName}</td>
               <td>{petNumber}</td>
               <td>{petBTD}</td>
               <td>{petKg}</td>
+          */} 
+              <td>{it.petName}</td>
+              <td>{it.registrationNumber}</td>
+              <td>{it.birthday}</td>
+              <td>{it.weight}</td>
             </tr>
           </tbody>
+          )}
+
+
         </table>
       </form>
 
