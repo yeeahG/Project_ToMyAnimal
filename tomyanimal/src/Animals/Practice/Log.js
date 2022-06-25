@@ -48,14 +48,10 @@ const Log = () => {
       // for (let i=0; i < response.data.result.data.length; i++) {
         //   putLog.push(response.data.result.data[i])
         // } 
-        
-        console.log(logarray);
     }).catch((error) => {
       console.error(error);
     });
   }, [])
-    //console.log(response);
-    //console.log(putLog);
 
   const logList = [
     {id: logId, title: logTitle, content: logContent}
@@ -77,8 +73,8 @@ const Log = () => {
       }
     }
   
-    //const copyList = JSON.parse(JSON.stringify(logList));
-    const sortedList = logarray.sort(compare);
+    const copyList = JSON.parse(JSON.stringify(logarray));
+    const sortedList = copyList.sort(compare);
       
     let currentPosts = 0;
     currentPosts = sortedList.slice(indexOfFirst, indexOfLast);

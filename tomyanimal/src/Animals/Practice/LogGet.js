@@ -9,7 +9,7 @@ const LogGet = ( {id,  title, content} ) => {
     title: title,
     content: content, 
   });
-  console.log(content);
+  //console.log(content);
 
   const [editContactId, setEditContactId] = useState(null);
   const [editFormData, setEditFormData] = useState({
@@ -48,37 +48,36 @@ const LogGet = ( {id,  title, content} ) => {
     setEditContactId(null);
   }
 
-  const handleEditFormSubmit = (e) => {
+  const handleEditFormSubmit = async (e) => {
     e.preventDefault();
 
     const editedContact = {
-      id: editContactId,
+      //id: editContactId,
       title: editFormData.title,
       content: editFormData.content
     }
 
-    setLogs(editedContact);
-    setEditContactId(null);
+    // setLogs(editedContact);
+    // setEditContactId(null);
 
 
-    // axios.put('http://localhost:8084/api/posts/4', editedContact,{
-    //   headers: {
-    //     'Authorization': localStorage.getItem('logintoken'),
-    //     'Content-Type': 'application/json',
-    //     "Access-Control-Allow-Origin": "*",
-    //     'Access-Control-Allow-Methods': '*',
-    //     'withCredentials': true,
-    //   }
-    // })
-    // .then( function (response){
-    //   console.log(response);
-    //   setLogs(editedContact);
-    //   setEditContactId(null); 
-    //   alert('수정이 완료되었습니다')
-    // })
-    //  .catch(function (error) {
-    //   console.log(error.message);
-    // });
+    axios.put('http://localhost:8084/api/board/' + loginId, editedContact,{
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        'Authorization': localStorage.getItem('logintoken'),
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => {
+      console.log(response.data);
+      //setLogs(editedContact);
+      setLogs(response.data);
+      setEditContactId(null); 
+      alert('수정이 완료되었습니다')
+    })
+     .catch((error) => {
+      console.log(error.message);
+    });
 
   }
 
@@ -86,7 +85,7 @@ const LogGet = ( {id,  title, content} ) => {
 
   return (
     <div>
-      <form onSubmit={handleEditFormSubmit}>
+      <form onSubmit={handleEditFormSubmit} method="put">
 
       <Fragment>
 
