@@ -8,7 +8,7 @@ const LogGet = ( {id,  title, content} ) => {
     title: title,
     content: content, 
   });
-  //console.log(logs);
+  console.log(content);
 
   const [editContactId, setEditContactId] = useState(null);
   const [editFormData, setEditFormData] = useState({

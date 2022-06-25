@@ -22,29 +22,44 @@ const Log = () => {
     const [logId, setLogId] = useState("");
     const [logTitle, setLogTitle] = useState("");
     const [logContent, setLogContent] = useState("");
+    const [logarray, setLogArray] = useState([]);
 
     const userId = localStorage.getItem('userid');
 
     {/* http://localhost:8084/api/my-board?memberId=${userId}
   https://jsonplaceholder.typicode.com/posts */}
+  
+  const putLog = [];
 
+  useEffect( () => { 
     axios.get(`http://localhost:8084/api/my-board?memberId=${userId}`, {
       headers: {
         Authorization: localStorage.getItem('logintoken') 
       }
     }).then((response) => {
-      setLogId(response.data.result.data[0].id);
-      setLogTitle(response.data.result.data[0].title)
-      setLogContent(response.data.result.data[0].content)
+      for (let i=0; i < response.data.result.data.length; i++) {
+      // setLogId(response.data.result.data[i].id);
+      // setLogTitle(response.data.result.data[i].title)
+      // setLogContent(response.data.result.data[i].content)
+      putLog.push(response.data.result.data[i])
+      } setLogArray(putLog)
+      
+      // for (let i=0; i < response.data.result.data.length; i++) {
+      //   putLog.push(response.data.result.data[i])
+      // } 
+    
     }).catch((error) => {
       console.error(error);
     });
-
-//console.log(response);
+  }, [])
+    //console.log(response);
+    //console.log(putLog);
 
   const logList = [
     {id: logId, title: logTitle, content: logContent}
   ]
+
+  console.log(logarray);
 
 
   const indexOfLast = currentPage * postsPerPage;
@@ -62,7 +77,7 @@ const Log = () => {
     }
   
     //const copyList = JSON.parse(JSON.stringify(logList));
-    const sortedList = logList.sort(compare);
+    const sortedList = logarray.sort(compare);
       
     let currentPosts = 0;
     currentPosts = sortedList.slice(indexOfFirst, indexOfLast);
@@ -93,9 +108,13 @@ const Log = () => {
         {getProcessedList().map((it) => (
           <LogGet key={it.id} {...it}/>
         ))}
-        {/* {logList.map((it) => (
-          <LogGet key={it.id} {...it}/>
-        ))}*/}
+         {/* {putLog.map((it, index) => (
+          <LogGet 
+            key={index.id} 
+            content={it.content}
+            title={it.title}
+            />
+        ))} */}
 
         <Pagination 
           postsPerPage={postsPerPage}
