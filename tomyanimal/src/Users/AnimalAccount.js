@@ -58,7 +58,7 @@ const AnimalAccount = ( ) => {
       } 
     })
     .then(response => {
-      console.log(response.data);
+      //console.log(response.data);
       setRes(response.data.success)
       //setPetId(response.data.result.data['id'])
       //setPetName(response.data.result.data['petName'])
@@ -67,7 +67,6 @@ const AnimalAccount = ( ) => {
       //setPetKg(response.data.result.data['weight'])
       for (let i=0; i < response.data.result.data.length; i++) {
         putPetsList.push(response.data.result.data[i])
-        console.log(putPetsList);
       }setPetArray(putPetsList)
 
     })
@@ -75,8 +74,6 @@ const AnimalAccount = ( ) => {
       console.log('error ', error);
     });
   }, []);
-
-  //console.log(petId);
 
   const gotoLog = () => {
     navigate('/animal')
@@ -100,6 +97,14 @@ const AnimalAccount = ( ) => {
 
     navigate('/user')
   }
+
+  const date = new Date();
+
+  //putPetsList[0].birthday
+  //const birthDate = new Date(petBTD.getFullYear(), petBTD.getFullMonth(), petBTD.getDate())
+
+  //let age = date.getFullYear() - birthDate.getFullYear() +1;
+ // console.log(age);
 
   return (
   <div>
@@ -173,6 +178,7 @@ const AnimalAccount = ( ) => {
               <td>{it.petName}</td>
               <td>{it.registrationNumber}</td>
               <td>{it.birthday}</td>
+              
               <td>{it.weight}</td>
             </tr>
           </tbody>
