@@ -74,6 +74,7 @@ const LogGet = ( {id,  title, content} ) => {
       setLogs(response.data);
       setEditContactId(null); 
       alert('수정이 완료되었습니다')
+      window.location.reload();
     })
      .catch((error) => {
       console.log(error.message);

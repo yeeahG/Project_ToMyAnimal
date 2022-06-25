@@ -127,7 +127,7 @@ const AnimalHome = () => {
         <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}> My Log</li>
       ),
       tabCont:(
-        <div> {/*<AnimalLog /> */}</div>
+        <div> <AnimalLog /> </div>
       )
     },
     {
@@ -171,10 +171,10 @@ const AnimalHome = () => {
 
   return (
 
-    // <DiaryStateContext.Provider value={data}>
-    // <DiaryDispatchContext.Provider value={{
-    //   onCreate, onEdit, onRemove,
-    // }}>
+    <DiaryStateContext.Provider value={data}>
+     <DiaryDispatchContext.Provider value={{
+       onCreate, onEdit, onRemove,
+    }}>
     <div className='info__container'>
 
       <div className='header'>
@@ -214,8 +214,8 @@ const AnimalHome = () => {
       
     </div>
 
-    //</DiaryDispatchContext.Provider> 
-  //</DiaryStateContext.Provider> 
+    </DiaryDispatchContext.Provider> 
+  </DiaryStateContext.Provider> 
   )
 }
 

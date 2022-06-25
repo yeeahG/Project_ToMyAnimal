@@ -45,6 +45,7 @@ const LogWrite = () => {
                 console.error('실패:', error);
             });
             alert('작성이 완료되었습니다')
+            window.location.reload();
         } else {
             setError("한 글자 이상 입력하세요")
         }
