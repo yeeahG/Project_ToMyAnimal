@@ -70,8 +70,8 @@ const LogGet = ( {id,  title, content} ) => {
     })
     .then((response) => {
       console.log(response.data);
-      //setLogs(editedContact);
-      setLogs(response.data);
+      setLogs(editedContact);
+      //setLogs(response.data);
       setEditContactId(null); 
       alert('수정이 완료되었습니다')
     })
