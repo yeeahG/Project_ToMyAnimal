@@ -164,7 +164,7 @@ const CheckList = () => {
               />
               )}
             </div>
-              */}
+              
             
             <div className='checklist__content'>
               <Link to="/animal" >
@@ -172,7 +172,8 @@ const CheckList = () => {
                 <div className='checklist__img'><img src={img} /></div>
               </Link>
             </div>
-
+            */}
+            
           </div>
         </section>
       </section>

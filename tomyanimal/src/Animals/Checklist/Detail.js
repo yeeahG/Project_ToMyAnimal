@@ -3,7 +3,7 @@ import React from 'react'
 const Detail = () => {
   return (
     <div>
-        dd
+        세부내용
     </div>
   )
 }
