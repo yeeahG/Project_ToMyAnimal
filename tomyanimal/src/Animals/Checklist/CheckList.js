@@ -88,8 +88,7 @@ const CheckList = () => {
           <div className='checklist__swiper'>
 
             <div className='checklist__content'>
-              <CardItem 
-              />
+              <CardItem />
             </div>
 
             {/* <div className='checklist__content'>
