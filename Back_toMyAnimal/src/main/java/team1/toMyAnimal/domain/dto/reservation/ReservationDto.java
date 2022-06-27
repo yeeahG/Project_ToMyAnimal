@@ -11,6 +11,8 @@ import team1.toMyAnimal.domain.reservation.Reservation;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -38,6 +40,9 @@ public class ReservationDto{
                 reserv.getCreatedAt(),
                 reserv.getModifiedAt()
         );
+    }
+    public static List<ReservationDto> toDtoList(List<Reservation> reserv) {
+        return reserv.stream().map(r -> ReservationDto.toDto(r)).collect(Collectors.toList());
     }
 
 }

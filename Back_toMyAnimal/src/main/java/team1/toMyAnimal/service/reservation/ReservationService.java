@@ -10,6 +10,8 @@ import team1.toMyAnimal.repository.member.MemberRepository;
 import team1.toMyAnimal.repository.pet.PetRepository;
 import team1.toMyAnimal.repository.reservation.ReservationRepository;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -20,6 +22,7 @@ public class ReservationService {
     private final PetRepository petRepository;
 
     //C
+    @Transactional
     public ReservationCreateResponse create(ReservationCreateRequest req) {
         Reservation reservation = reservationRepository.save(
                 ReservationCreateRequest.toEntity(
@@ -36,18 +39,22 @@ public class ReservationService {
     }
 
     // member read
-    public ReservationDto readAll(){
-
+    public List<ReservationDto> readAll(ReservationReadCondition cond){
+        return ReservationDto.toDtoList(reservationRepository.findWithMemberId(cond.getMemberId()));
     }
 
     //U
     @Transactional
     public ReservationUpdateResponse update (Long id, ReservationUpdateRequest req) {
-
+        Reservation reserv = reservationRepository.findById(id).orElseThrow(ReservationNotFoundException::new);
+        reserv.update(req);
+        return new ReservationUpdateResponse(id);
     }
 
     //D
+    @Transactional
     public void delete(Long id) {
-
+        Reservation reserv = reservationRepository.findById(id).orElseThrow(ReservationNotFoundException::new);
+        reservationRepository.delete(reserv);
     }
 }

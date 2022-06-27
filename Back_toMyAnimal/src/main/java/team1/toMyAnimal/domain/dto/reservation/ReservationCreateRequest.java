@@ -33,6 +33,7 @@ public class ReservationCreateRequest {
     @Null
     private Long memberId;
 
+    @Null
     private Long petId;
 
     public static Reservation toEntity(ReservationCreateRequest req, MemberRepository memberRepository, PetRepository petRepository){
