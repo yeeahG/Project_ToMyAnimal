@@ -7,13 +7,8 @@ const CardItem = ( props, {id, text, src, label} ) => {
     const navigate = useNavigate();
 
     //const checklist = useContext(ChecklistContext);
-    
     const checklist = useContext(ChecklistContext);
-    console.log(checklist[0].text);
-
-    const goDetail = () => {
-        navigate(`/animal/log/${id}`)
-    }
+    //console.log(checklist[0].text);
 
   return (
     <>
