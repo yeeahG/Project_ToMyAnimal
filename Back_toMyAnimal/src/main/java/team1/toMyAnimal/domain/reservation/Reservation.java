@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import team1.toMyAnimal.domain.common.EntityDate;
+import team1.toMyAnimal.domain.dto.reservation.ReservationUpdateRequest;
 import team1.toMyAnimal.domain.member.Member;
 import team1.toMyAnimal.domain.pet.Pet;
 
@@ -43,6 +44,12 @@ public class Reservation extends EntityDate {
         this.type = type;
         this.member = member;
         this.pet = pet;
+    }
+
+    public void update(ReservationUpdateRequest req) {
+        this.date = req.getDate();
+        this.time = req.getTime();
+        this.type = req.getType();
     }
 
 }
