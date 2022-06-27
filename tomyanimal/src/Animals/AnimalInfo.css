@@ -320,6 +320,10 @@ li {
     margin: 0 1rem;
 }
 
+.checklist__walk__container {
+    max-width: 50rem;
+}
+
 /**/
 .etc {
     display: grid;

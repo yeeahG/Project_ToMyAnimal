@@ -1,13 +1,12 @@
 import React, { useContext, useState } from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ChecklistContext } from '../Animals/Checklist/CheckList'
 
 const CardItem = ( props, {id, text, src, label} ) => {
     const navigate = useNavigate();
 
-    //const checklist = useContext(ChecklistContext);
     const checklist = useContext(ChecklistContext);
-    //console.log(checklist[0].text);
+    //console.log(checklist);
 
   return (
     <>
