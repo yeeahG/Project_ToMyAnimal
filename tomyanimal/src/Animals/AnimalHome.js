@@ -184,6 +184,7 @@ const AnimalHome = () => {
      <DiaryDispatchContext.Provider value={{
        onCreate, onEdit, onRemove,
     }}>
+      
     <div className='info__container'>
 
       <div className='header'>

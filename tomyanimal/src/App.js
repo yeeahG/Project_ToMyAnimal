@@ -11,6 +11,8 @@ import Community from './Community/Community';
 import Article from './Community/components/Article';
 import Admin from './Admin/Admin';
 import CheckList from './Animals/Checklist/CheckList';
+import Walk from './Animals/Checklist/Walk';
+import Detail from './Animals/Checklist/Detail';
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/animal" element={<Animal />} />
+            <Route path="/animal/log/:id" element={<Detail />} />
+            <Route path="/animal/walk" element={<Walk />} />
             <Route path="/community/:id" element={<Community />} />
             <Route path="/community/board/:id" element={<Article />} />
             <Route path="/places/:id" element={<Place />} />

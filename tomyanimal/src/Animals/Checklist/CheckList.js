@@ -1,20 +1,73 @@
-import React, { useState } from 'react'
+import React, { useState, createContext} from 'react'
 import { Link } from 'react-router-dom';
 import CardItem from '../../Pages/CardItem';
 import ControlMenu from '../../Pages/ControlMenu';
 import img from './img/imageex.png'
 import Walk from './Walk';
 
+export const ChecklistContext = React.createContext();
+
+const checklistTab = [
+  {
+    id: 1,
+    text: "산책",
+    src: "/img/imageex.png",
+    label: 'Walking',
+  }, 
+  {
+    id: 2,
+    text: "사료",
+    src: "/img/imageex.png",
+    label: 'Walking',
+  }, 
+  {
+    id: 3,
+    text: "간식",
+    src: "/img/imageex.png",
+    label: 'Walking',
+  }, 
+  {
+    id: 4,
+    text: "미용",
+    src: "/img/imageex.png",
+    label: 'Walking',
+  }, 
+  {
+    id: 5,
+    text: "진료",
+    src: "/img/imageex.png",
+    label: 'Walking',
+  }, 
+  {
+    id: 6,
+    text: "목욕",
+    src: "/img/imageex.png",
+    label: 'Walking',
+  }, 
+  {
+    id: 7,
+    text: "대소변",
+    src: "/img/imageex.png",
+    label: 'Walking',
+    path: '/animal/walk'
+  }, 
+]
+
 const CheckList = () => {
   const [sortType, setSortType] = useState('latest');
   const [isOpen, setOpen] = useState(false);
+
 
   const sortOptionList = [
     {value: "latest", name: "최신순"},
     {value: "oldest", name: "오래된 순"},
   ]
 
+  //console.log(checklistTab);
+
   return (
+    <ChecklistContext.Provider value={checklistTab}>
+
     <div className='log__wrapper'>
 
       <div className='navi__container'>
@@ -34,13 +87,17 @@ const CheckList = () => {
         <section className='checklist__wrapper'>
           <div className='checklist__swiper'>
 
-
             <div className='checklist__content'>
+              <CardItem 
+              />
+            </div>
+
+            {/* <div className='checklist__content'>
               <CardItem 
                 text = "산책"
                 src = "/img/imageex.png"
                 label = 'Walking'
-                path='/animal'
+                path='/animal/walk'
               />
             </div>
 
@@ -96,7 +153,18 @@ const CheckList = () => {
                 label = 'Walking'
                 path='/animal'
               />
+            </div> */}
+
+            {/*
+            <div className='checklist__content'>
+              {checklistTab.map((it) => 
+              <CardItem
+                key={it.id}
+                {...it}
+              />
+              )}
             </div>
+              */}
             
             <div className='checklist__content'>
               <Link to="/animal" >
@@ -110,6 +178,7 @@ const CheckList = () => {
       </section>
 
     </div>
+    </ChecklistContext.Provider>
   )
 }
 

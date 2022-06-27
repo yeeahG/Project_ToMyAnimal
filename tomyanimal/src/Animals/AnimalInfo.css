@@ -278,7 +278,6 @@ li {
 /*================================CHECKLIST================================*/
 .checklist__wrapper {
     position: relative;
-    border: 1px solid;
     position: grid;
 }
 
@@ -299,8 +298,10 @@ li {
 }
 
 .checklist__content {
-    width: 265px;
+    width: 245px;
     height: 200px;
+    border: 1px solid;
+    margin: 0.5rem;
 }
 
 .checklist__img img {
