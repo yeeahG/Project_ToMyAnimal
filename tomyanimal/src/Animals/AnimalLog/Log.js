@@ -74,7 +74,7 @@ const Log = () => {
     }
   
     const copyList = JSON.parse(JSON.stringify(logarray));
-    const sortedList = copyList.sort(compare);
+    const sortedList = logarray.sort(compare);
       
     let currentPosts = 0;
     currentPosts = sortedList.slice(indexOfFirst, indexOfLast);
