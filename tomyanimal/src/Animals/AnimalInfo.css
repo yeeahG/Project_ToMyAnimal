@@ -250,7 +250,7 @@ li {
     cursor: pointer;
 }
 
-/*---------------log-----------------*/
+/*================================LOG================================*/
 .list_day {
     align-items: start;
     display: grid;
@@ -273,6 +273,45 @@ li {
 .log__list__container li {
     border-bottom: 1px solid;
 }
+
+
+/*================================CHECKLIST================================*/
+.checklist__wrapper {
+    position: relative;
+    border: 1px solid;
+    position: grid;
+}
+
+.checklist__swiper {
+    transform: translate3d(0px, 0px, 0px);
+    transition-duration: 0ms;
+
+
+    box-sizing: content-box;
+    display: flex;
+    height: 100%;
+    position: relative;
+    transition-property: -webkit-transform;
+    transition-property: transform;
+    transition-property: transform,-webkit-transform;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.checklist__content {
+    width: 265px;
+    height: 200px;
+}
+
+.checklist__img img {
+    height: 200px;
+    max-width: none;
+    position: absolute;
+    width: 200px;
+    object-fit: cover;
+}
+
+
 
 /**/
 .etc {
@@ -389,6 +428,10 @@ li {
     .input__container textarea  {
         width: 100%;
         height: 300px;
+    }
+
+    .checklist__img {
+        transition: all 0.3s cubic-bezier(0.77, 0, 0.175, 1) 0s;
     }
 
     /**/

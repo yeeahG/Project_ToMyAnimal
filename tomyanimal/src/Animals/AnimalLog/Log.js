@@ -7,8 +7,8 @@ import axios from 'axios';
 import LogWrite from './LogWrite'
 
 const sortOptionList = [
-    {value: "latest", name: "최신순"},
-    {value: "oldest", name: "오래된 순"},
+  {value: "latest", name: "최신순"},
+  {value: "oldest", name: "오래된 순"},
 ]
 
 const Log = () => {
@@ -74,7 +74,7 @@ const Log = () => {
     }
   
     const copyList = JSON.parse(JSON.stringify(logarray));
-    const sortedList = copyList.sort(compare);
+    const sortedList = logarray.sort(compare);
       
     let currentPosts = 0;
     currentPosts = sortedList.slice(indexOfFirst, indexOfLast);

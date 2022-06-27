@@ -10,6 +10,7 @@ import './App.css';
 import Community from './Community/Community';
 import Article from './Community/components/Article';
 import Admin from './Admin/Admin';
+import CheckList from './Animals/Checklist/CheckList';
 
 function App() {
   return (
