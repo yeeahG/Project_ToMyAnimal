@@ -192,7 +192,7 @@ const AnimalHome = () => {
         <div className='header__wrapper'>
           <h1 className='header__content'>Header</h1>
           <div className='header__detail'>
-            <p>details</p>
+            <p>내 (petname)의 모든 것</p>
           </div>
         </div>
       </div>

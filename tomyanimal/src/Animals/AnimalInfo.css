@@ -313,6 +313,16 @@ li {
     /* width: 200px; */
 }
 
+/*detail*/
+.checklist__read__container {
+    display: flex;
+    flex-wrap: wrap;
+}
+.checklist__read__content {
+    border: 1px solid;
+    width: 200px;
+    margin: 7px;
+}
 
 .checklist__walk__container {
     max-width: 50rem;
@@ -435,6 +445,12 @@ li {
         height: 300px;
     }
 
+    /* checklist detail*/
+    .checklist__read__content {
+        width: 240px;
+        height: 200px;
+        margin: 1rem;
+    }
 
 
     /**/
