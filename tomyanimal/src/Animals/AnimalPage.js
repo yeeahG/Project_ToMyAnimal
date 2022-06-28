@@ -44,8 +44,8 @@ const AnimalPage = () => {
 
   //console.log(petimg[0].uniqueName);
   //const imageurl = petimg[0].uniqueName
-  console.log(petimg);
   //localhost:8084/image/uniqueName
+  console.log(petimg);
 
   return (
     <div className='content__wrapper'>
