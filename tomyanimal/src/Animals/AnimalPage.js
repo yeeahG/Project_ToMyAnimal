@@ -7,6 +7,7 @@ const AnimalPage = () => {
   const [petBTD, setPetBTD] = useState();
   const [petKg, setPetKg] = useState();
   const [petimg, setPetimg] = useState();
+  const [petprofile, setPetprofile] = useState();
 
   const userId = localStorage.getItem('userid');
 
@@ -35,12 +36,14 @@ const AnimalPage = () => {
       setPetname(response.data.result.data[0].petName);
       setPetBTD(response.data.result.data[0].birthday);
       setPetKg(response.data.result.data[0].weight);
-      setPetimg(response.data.result.data[0].images);
+      setPetimg(response.data.result.data[0].images[0].uniqueName);
     }).catch((error) => {
       console.error(error);
     });
   }, []);
 
+  //console.log(petimg[0].uniqueName);
+  //const imageurl = petimg[0].uniqueName
   console.log(petimg);
   //localhost:8084/image/uniqueName
 
@@ -62,7 +65,7 @@ const AnimalPage = () => {
             <img className="animal__blob__img" x='20' y='-35' src={petimg}/>
           </g>
         </svg>
-        <img className="animal__blob__img" src={petimg}/>
+        <img className="animal__blob__img" src={'http://localhost:8084/image/' + petimg}/>
 
       </div>
 
