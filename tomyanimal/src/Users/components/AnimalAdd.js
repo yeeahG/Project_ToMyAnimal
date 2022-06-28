@@ -36,7 +36,7 @@ const AnimalAdd = () => {
         //const photoFile = document.getElementById('photo')
         //formData.append("addedImages", photoFile.files[0]);
 
-        if(animalName!="" && animalId!="" && animalAge!="" && animalWeight!="" ) {
+        if(animalName!=="" && animalId!=="" && animalAge!=="" && animalWeight!=="" ) {
 
             // await fetch('https://jsonplaceholder.typicode.com/posts', {
             /*
@@ -71,17 +71,18 @@ const AnimalAdd = () => {
                }
             })
            .then((data) => {
-             console.log('성공:', data);
+                console.log('성공:', data);
+                alert("등록이 완료되었습니다")
+                window.location.reload();
            })
 
            .catch((error) => {
                console.error('실패:', error);
            });
 
-           localStorage.setItem("animalinfo", JSON.stringify(animal))
+           //localStorage.setItem("animalinfo", JSON.stringify(animal))
            console.log(formData);
 
-           alert('등록이 완료되었습니다')
            navigate('/user')    
         } else {
             setError("모든 항목을 입력하세요")
