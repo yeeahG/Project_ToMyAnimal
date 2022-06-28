@@ -152,8 +152,8 @@ const UserAccount = () => {
     // setEditContactId(null);
 
     //put or patch methond
-    //ERROR남 작동에는 문제없음
-    /* 보류*/
+    //ERROR남 작동에는 문제없음-> 해결
+
     axios.put('http://localhost:8084/api/member/' + loginId, editedContact,{
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -166,6 +166,7 @@ const UserAccount = () => {
       setUser(response.data);
       setEditContactId(null); 
       alert('수정이 완료되었습니다')
+      window.location.reload();
 
       /*
       const userClone = [editedContact];

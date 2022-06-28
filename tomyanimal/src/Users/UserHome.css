@@ -200,6 +200,7 @@ tr {
     color: #f7f6f2;
     white-space: pre-wrap;
     width: 100%;
+    padding: 1rem;
     /* display: flex;
     justify-content: space-between; */
 }
