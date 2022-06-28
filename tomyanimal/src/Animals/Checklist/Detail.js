@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import ControlMenu from '../../Pages/ControlMenu';
 import { ChecklistContext } from '../Checklist/CheckList'
 
 const Detail = () => {
@@ -11,6 +12,8 @@ const Detail = () => {
   const navigate = useNavigate();
 
   const [isOpen, setOpen] = useState(false);
+  const [sortType, setSortType] = useState('latest');
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [data, setData] = useState([]);
@@ -18,6 +21,10 @@ const Detail = () => {
 
   const contentRef = useRef();
   const userid = localStorage.getItem('userid');
+  const sortOptionList = [
+    {value: "latest", name: "최신순"},
+    {value: "oldest", name: "오래된 순"},
+  ]
 
 
   {/*
@@ -130,9 +137,14 @@ const Detail = () => {
         <div className='log__wrapper'>
 
           <div className='navi__container'>
+            <ControlMenu 
+              value={sortType} 
+              onChange={setSortType}
+              optionList={sortOptionList}
+            />
             <button onClick={()=>setOpen(!isOpen)}>
             {isOpen ? "Close" : "Write"}
-          </button>
+            </button>
           </div>
 
           {error}

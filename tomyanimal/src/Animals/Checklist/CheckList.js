@@ -54,15 +54,6 @@ const checklistTab = [
 ]
 
 const CheckList = () => {
-  const [sortType, setSortType] = useState('latest');
-  const [isOpen, setOpen] = useState(false);
-
-
-  const sortOptionList = [
-    {value: "latest", name: "최신순"},
-    {value: "oldest", name: "오래된 순"},
-  ]
-
   //console.log(checklistTab);
 
   return (
@@ -70,16 +61,11 @@ const CheckList = () => {
 
       <div className='log__wrapper'>
 
-        <div className='navi__container'>
-          <ControlMenu 
-            value={sortType} 
-            onChange={setSortType}
-            optionList={sortOptionList}
-          />
-
-          <button onClick={()=>setOpen(!isOpen)}>
-            {isOpen ? "Close" : "Write"}
-          </button>
+        <div className='userinfo__subtitle'>
+          <a href='/animal'>
+            <h1>Check list</h1>
+          </a>
+          <p>Write things about your pet</p>
         </div>
 
         <section className='input__container'>
