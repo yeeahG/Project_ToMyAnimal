@@ -57,7 +57,7 @@ const Signup = () => {
               console.error('실패:', error);
             });
         
-            localStorage.setItem("userinfo", JSON.stringify(item))
+            //localStorage.setItem("userinfo", JSON.stringify(item))
             alert('가입이 완료되었습니다')
             navigate('/user')
     

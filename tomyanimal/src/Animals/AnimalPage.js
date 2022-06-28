@@ -41,6 +41,8 @@ const AnimalPage = () => {
     });
   }, []);
 
+  console.log(petimg);
+  //localhost:8084/image/uniqueName
 
   return (
     <div className='content__wrapper'>
@@ -60,8 +62,10 @@ const AnimalPage = () => {
             <img className="animal__blob__img" x='20' y='-35' src={petimg}/>
           </g>
         </svg>
+        <img className="animal__blob__img" src={petimg}/>
 
       </div>
+
 
       <div className='info__details'>
 
