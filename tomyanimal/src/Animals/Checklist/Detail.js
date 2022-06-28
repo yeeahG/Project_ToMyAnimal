@@ -62,12 +62,12 @@ const Detail = () => {
         putList.push(response.data.result.data.postList[i])
         //console.log(putList);
       } setData(putList);
-      console.log(data);
     }).catch((error) => {
       console.log(error);
     });
   }, []);
-
+  
+  console.log(data);
 
   const submitHandler = async () => {
     console.log("submit" + content);
@@ -182,7 +182,7 @@ const Detail = () => {
             {data}*/}
             {data.map((it) => (
               <div className='checklist__read__content'>
-                <p>{it.title}</p>
+                <h3>{it.title}</h3>
                 <p>{it.content}</p>
               </div>
             ))}
