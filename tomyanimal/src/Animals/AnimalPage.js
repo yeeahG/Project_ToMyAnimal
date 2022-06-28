@@ -6,6 +6,7 @@ const AnimalPage = () => {
   const [petName, setPetname] = useState();
   const [petBTD, setPetBTD] = useState();
   const [petKg, setPetKg] = useState();
+  const [petimg, setPetimg] = useState();
 
   const userId = localStorage.getItem('userid');
 
@@ -20,9 +21,10 @@ const AnimalPage = () => {
   //     setPetBTD(response.data.result.data['birthday'])
   //     setPetKg(response.data.result.data['weight'])
   //   })
-  // }, []);
-
-  axios.get(`http://localhost:8084/api/my-pet?memberId=${userId}`, {
+  //}, []);
+  
+  useEffect(() => {
+    axios.get(`http://localhost:8084/api/my-pet?memberId=${userId}`, {
       headers: {
         Authorization: localStorage.getItem('logintoken') 
       }
@@ -33,9 +35,12 @@ const AnimalPage = () => {
       setPetname(response.data.result.data[0].petName);
       setPetBTD(response.data.result.data[0].birthday);
       setPetKg(response.data.result.data[0].weight);
+      setPetimg(response.data.result.data[0].images);
     }).catch((error) => {
       console.error(error);
     });
+  }, []);
+
 
   return (
     <div className='content__wrapper'>
@@ -52,7 +57,7 @@ const AnimalPage = () => {
                   165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 
                   129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 
                   -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
-            <img className="animal__blob__img" x='20' y='-35'/>
+            <img className="animal__blob__img" x='20' y='-35' src={petimg}/>
           </g>
         </svg>
 
