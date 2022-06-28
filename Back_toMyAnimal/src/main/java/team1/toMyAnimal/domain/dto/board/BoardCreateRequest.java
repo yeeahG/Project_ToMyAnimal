@@ -4,11 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import team1.toMyAnimal.domain.board.Board;
+import team1.toMyAnimal.exception.CategoryNotFoundException;
 import team1.toMyAnimal.exception.MemberNotFoundException;
+import team1.toMyAnimal.repository.category.CategoryRepository;
 import team1.toMyAnimal.repository.member.MemberRepository;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
+import javax.validation.constraints.PositiveOrZero;
 
 @Data
 @NoArgsConstructor
@@ -23,10 +27,15 @@ public class BoardCreateRequest {
     @Null
     private Long memberId;
 
-    public static Board toEntity(BoardCreateRequest req, MemberRepository memberRepository) {
+    @NotNull(message = "카테고리 아이디를 입력해주세요.")
+    @PositiveOrZero
+    private Long categoryId;
+
+    public static Board toEntity(BoardCreateRequest req, MemberRepository memberRepository, CategoryRepository categoryRepository) {
         return new Board(
                 req.title,
                 req.content,
-                memberRepository.findById(req.getMemberId()).orElseThrow(MemberNotFoundException::new));
+                memberRepository.findById(req.getMemberId()).orElseThrow(MemberNotFoundException::new),
+                categoryRepository.findById(req.getCategoryId()).orElseThrow(CategoryNotFoundException::new));
     }
 }

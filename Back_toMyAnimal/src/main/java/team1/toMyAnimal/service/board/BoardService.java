@@ -7,6 +7,7 @@ import team1.toMyAnimal.domain.board.Board;
 import team1.toMyAnimal.domain.dto.board.*;
 import team1.toMyAnimal.exception.BoardNotFoundException;
 import team1.toMyAnimal.repository.board.BoardRepository;
+import team1.toMyAnimal.repository.category.CategoryRepository;
 import team1.toMyAnimal.repository.member.MemberRepository;
 
 import java.util.List;
@@ -17,10 +18,11 @@ import java.util.List;
 public class BoardService {
     private final BoardRepository boardRepository;
     private final MemberRepository memberRepository;
+    private final CategoryRepository categoryRepository;
 
     @Transactional
     public BoardCreateResponse create(BoardCreateRequest req) {
-        Board board = boardRepository.save(BoardCreateRequest.toEntity(req, memberRepository));
+        Board board = boardRepository.save(BoardCreateRequest.toEntity(req, memberRepository, categoryRepository));
         return new BoardCreateResponse(board.getId());
     }
 
@@ -29,7 +31,7 @@ public class BoardService {
     }
 
     public List<BoardDto> readAll(BoardReadCondition cond) {
-        return BoardDto.toDtoList(boardRepository.findByIdWithMember(cond.getMemberId()));
+        return BoardDto.toDtoList(boardRepository.findByIdWithMemberAndCategory(cond.getMemberId(), cond.getCategoryId()));
     }
 
     @Transactional
