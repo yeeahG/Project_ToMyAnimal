@@ -1,23 +1,31 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import ControlMenu from '../../Pages/ControlMenu';
 import { ChecklistContext } from '../Checklist/CheckList'
 
 const Detail = () => {
-  const {id} = useParams();
-  console.log(id);
-  const checklist = useContext(ChecklistContext);
-
-  const navigate = useNavigate();
-
   const [isOpen, setOpen] = useState(false);
+  const [sortType, setSortType] = useState('latest');
+  
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
 
-  const contentRef = useRef();
+  const {id} = useParams();
+  //console.log(id);
   const userid = localStorage.getItem('userid');
+
+  const checklist = useContext(ChecklistContext);
+
+  const navigate = useNavigate();
+  const contentRef = useRef();
+
+  const sortOptionList = [
+    {value: "latest", name: "최신순"},
+    {value: "oldest", name: "오래된 순"},
+  ]
 
 
   {/*
@@ -62,8 +70,7 @@ const Detail = () => {
 
 
   const submitHandler = async () => {
-    console.log("submit");
-    console.log(content);
+    console.log("submit" + content);
 
     const newPost = {
       title: title, 
@@ -98,7 +105,6 @@ const Detail = () => {
     } else {
       setError("한 글자 이상 입력하세요")
     }
-
   }
 
   return (
@@ -109,7 +115,7 @@ const Detail = () => {
         <div className='header__wrapper'>
           <h1 className='header__content'>Header</h1>
           <div className='header__detail'>
-            <p>Back</p>
+            <p>나의 동물이 좋아하고 행동했던 것들을 기록하기</p>
           </div>
         </div>
       </div>
@@ -130,9 +136,14 @@ const Detail = () => {
         <div className='log__wrapper'>
 
           <div className='navi__container'>
+            <ControlMenu 
+              value={sortType} 
+              onChange={setSortType}
+              optionList={sortOptionList}
+            />
             <button onClick={()=>setOpen(!isOpen)}>
             {isOpen ? "Close" : "Write"}
-          </button>
+            </button>
           </div>
 
           {error}
@@ -166,16 +177,16 @@ const Detail = () => {
             <button className='upload__btn'onClick={submitHandler} >write</button>
           </div>
             :
-          <>
+          <div className='checklist__read__container'>
             {/* {data.title} 
             {data}*/}
             {data.map((it) => (
-              <div>
+              <div className='checklist__read__content'>
                 <p>{it.title}</p>
                 <p>{it.content}</p>
               </div>
             ))}
-          </>
+          </div>
           }
 
 

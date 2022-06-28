@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ChecklistContext } from '../Animals/Checklist/CheckList'
+import './CardItem.css'
 
 const CardItem = ( props, {id, text, src, label} ) => {
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ const CardItem = ( props, {id, text, src, label} ) => {
         <li className='cards__item'>
             {/* <Link className='cards__item__link' to={props.path}> */}
                 <div 
-                    className='cards__item__pic-wrap' 
+                    className='cards__item__pic__wrap' 
                     data-category={it.label}
                     onClick={() => {navigate(`/animal/log/${it.id}`)}}
                 >
