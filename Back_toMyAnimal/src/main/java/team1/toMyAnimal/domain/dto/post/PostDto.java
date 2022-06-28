@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import team1.toMyAnimal.domain.dto.member.MemberDto;
-import team1.toMyAnimal.domain.image.PostImageDto;
+import team1.toMyAnimal.domain.dto.image.PostImageDto;
 import team1.toMyAnimal.domain.post.Post;
 
 import java.time.LocalDateTime;

@@ -11,7 +11,7 @@ import team1.toMyAnimal.domain.category.Category;
 import team1.toMyAnimal.domain.common.EntityDate;
 import team1.toMyAnimal.domain.dto.post.PostUpdateRequest;
 import team1.toMyAnimal.domain.member.Member;
-import team1.toMyAnimal.image.PostImage;
+import team1.toMyAnimal.domain.image.PostImage;
 
 import javax.persistence.*;
 import java.util.ArrayList;

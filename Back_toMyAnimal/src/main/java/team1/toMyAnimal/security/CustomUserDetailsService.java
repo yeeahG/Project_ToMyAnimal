@@ -24,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public CustomUserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
         Member member = memberRepository.findWithRolesById(Long.valueOf(userId))
-                .orElseGet(() -> new Member(null, null, null, null, List.of()));
+                .orElseGet(() -> new Member(null, null, null, null, null ,List.of()));
         return new CustomUserDetails(
                 String.valueOf(member.getId()),
                 member.getRoles().stream().map(memberRole -> memberRole.getRole())

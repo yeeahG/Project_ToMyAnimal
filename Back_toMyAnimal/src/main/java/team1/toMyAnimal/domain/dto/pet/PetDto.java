@@ -3,7 +3,7 @@ package team1.toMyAnimal.domain.dto.pet;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import team1.toMyAnimal.domain.dto.member.MemberDto;
-import team1.toMyAnimal.domain.image.PetImageDto;
+import team1.toMyAnimal.domain.dto.image.PetImageDto;
 import team1.toMyAnimal.domain.pet.Pet;
 
 import java.util.List;

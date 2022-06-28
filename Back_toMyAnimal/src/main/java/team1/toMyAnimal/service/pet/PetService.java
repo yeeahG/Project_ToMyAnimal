@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import team1.toMyAnimal.domain.dto.pet.*;
 import team1.toMyAnimal.domain.pet.Pet;
 import team1.toMyAnimal.exception.PetNotFoundException;
-import team1.toMyAnimal.image.PetImage;
+import team1.toMyAnimal.domain.image.PetImage;
 import team1.toMyAnimal.repository.member.MemberRepository;
 import team1.toMyAnimal.repository.pet.PetRepository;
 import team1.toMyAnimal.service.image.FileService;

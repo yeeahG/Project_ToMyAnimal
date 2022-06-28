@@ -9,7 +9,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.web.multipart.MultipartFile;
 import team1.toMyAnimal.domain.dto.pet.PetUpdateRequest;
 import team1.toMyAnimal.domain.member.Member;
-import team1.toMyAnimal.image.PetImage;
+import team1.toMyAnimal.domain.image.PetImage;
 
 import javax.persistence.*;
 import java.util.ArrayList;

@@ -22,7 +22,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/Image/**")
+        registry.addResourceHandler("/image/**")
                 .addResourceLocations("file:" + location)
                 .setCacheControl(CacheControl.maxAge(Duration.ofHours(1L)).cachePublic());
     }

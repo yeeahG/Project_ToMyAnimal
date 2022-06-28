@@ -41,16 +41,19 @@ public class Member extends EntityDate {
     @Column(name = "password")
     private String password;
 
+    private String email;
+
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<MemberRole> roles;
 
 
-//    id, 폰번호, 이름, 비밀번호 , 권한
-    public Member(String id, String phoneNumber, String username, String password, List<Role> roles){
+//    id, 폰번호, 이름, 비밀번호 , 이메일, 권한
+    public Member(String id, String phoneNumber, String username, String password, String email,List<Role> roles){
         this.userId = id;
         this.userPhoneNumber = phoneNumber;
         this.username = username;
         this.password = password;
+        this.email = email;
         this.roles = roles.stream().map(r -> new MemberRole(this, r)).collect(toSet());
 
     }

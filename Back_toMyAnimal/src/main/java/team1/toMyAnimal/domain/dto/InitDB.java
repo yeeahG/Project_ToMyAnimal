@@ -55,7 +55,7 @@ public class InitDB {
     private void initTestAdmin() {
         memberRepository.save(
 
-                new Member("admin", "01012345678", "admin", passwordEncoder.encode("admin"),
+                new Member("admin", "01012345678", "admin", passwordEncoder.encode("admin"),"juneseok0107@naver.com",
                         List.of(roleRepository.findByRoleType(RoleType.ROLE_USER).orElseThrow(RoleNotFoundException::new),
                                 roleRepository.findByRoleType(RoleType.ROLE_ADMIN).orElseThrow(RoleNotFoundException::new)))
         );
@@ -66,9 +66,9 @@ public class InitDB {
         memberRepository.saveAll(
                 List.of(
 
-                        new Member("member1", "01012345679", "member1", passwordEncoder.encode("1234"),
+                        new Member("member1", "01012345679", "member1", passwordEncoder.encode("1234"),"juneseok0107@gmail.com",
                                 List.of(roleRepository.findByRoleType(RoleType.ROLE_USER).orElseThrow(RoleNotFoundException::new))),
-                        new Member("member2", "01012345680", "member2", passwordEncoder.encode("1234"),
+                        new Member("member2", "01012345680", "member2", passwordEncoder.encode("1234"),"juneseok0107@daum.net",
                                 List.of(roleRepository.findByRoleType(RoleType.ROLE_USER).orElseThrow(RoleNotFoundException::new))))
         );
     }

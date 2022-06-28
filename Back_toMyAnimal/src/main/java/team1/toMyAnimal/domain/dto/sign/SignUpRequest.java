@@ -31,9 +31,12 @@ public class SignUpRequest {
     @NotBlank(message = "비밀번호를 입력해주세요.")
     private String password;
 
+    @NotBlank(message = "메일을 입력해주세요.")
+    private String email;
+
 
 
     public static Member toEntity(SignUpRequest req, Role role, PasswordEncoder encoder) {
-        return new Member(req.userId, req.userPhoneNumber, req.username,  encoder.encode(req.password),List.of(role));
+        return new Member(req.userId, req.userPhoneNumber, req.username,  encoder.encode(req.password),req.email,List.of(role));
     }
 }

@@ -41,6 +41,9 @@ dependencies {
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}" // Querydsl 설정
 	implementation "com.querydsl:querydsl-apt:${queryDslVersion}" // Querydsl 설정
 
+	implementation group: 'org.apache.commons', name: 'commons-email', version: '1.5' // email 전송 관련
+
+
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'

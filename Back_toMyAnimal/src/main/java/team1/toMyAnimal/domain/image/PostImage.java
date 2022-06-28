@@ -1,4 +1,4 @@
-package team1.toMyAnimal.image;
+package team1.toMyAnimal.domain.image;
 
 import lombok.AccessLevel;
 import lombok.Getter;

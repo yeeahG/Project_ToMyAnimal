@@ -9,8 +9,10 @@ import team1.toMyAnimal.controller.response.Response;
 import team1.toMyAnimal.domain.dto.board.BoardReadCondition;
 import team1.toMyAnimal.domain.dto.member.MemberReadCondition;
 import team1.toMyAnimal.domain.dto.member.MemberUpdateRequest;
+import team1.toMyAnimal.domain.member.Member;
 import team1.toMyAnimal.service.member.MemberService;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @RestController
@@ -39,6 +41,14 @@ public class MemberController {
     public Response update(@PathVariable Long id, @Valid @RequestBody MemberUpdateRequest req) {
         memberService.update(id, req);
         return Response.success();
+    }
+
+    @GetMapping("/api/member/my-password")
+    public void findPwGet() throws Exception{}
+
+    @PostMapping("/api/member/my-password")
+    public void findPwPost(@ModelAttribute Member member, HttpServletResponse response) throws Exception{
+        memberService.findPw(response, member);
     }
 
 

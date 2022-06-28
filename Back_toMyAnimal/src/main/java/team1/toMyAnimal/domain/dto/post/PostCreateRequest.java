@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
-import team1.toMyAnimal.image.PostImage;
+import team1.toMyAnimal.domain.image.PostImage;
 import team1.toMyAnimal.domain.post.Post;
 import team1.toMyAnimal.exception.CategoryNotFoundException;
 import team1.toMyAnimal.exception.MemberNotFoundException;

@@ -1,8 +1,8 @@
-package team1.toMyAnimal.domain.image;
+package team1.toMyAnimal.domain.dto.image;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import team1.toMyAnimal.image.PetImage;
+import team1.toMyAnimal.domain.image.PetImage;
 
 @Data
 @AllArgsConstructor
