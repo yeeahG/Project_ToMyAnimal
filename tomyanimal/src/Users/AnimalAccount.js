@@ -10,7 +10,7 @@ const AnimalAccount = ( ) => {
   const [res, setRes] = useState();
 
   const [petPhoto, setPetPhoto] = useState();
-  const [petId, setPetId] = useState();
+  //const [petId, setPetId] = useState();
   const [petName, setPetName] = useState();
   const [petNumber, setPetnum] = useState();
   const [petBTD, setPetBTD] = useState();
@@ -22,6 +22,8 @@ const AnimalAccount = ( ) => {
     name: "", 
     contact: "",
   });
+
+  const [isOpen, setOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -47,9 +49,11 @@ const AnimalAccount = ( ) => {
   */
 
   const putPetsList = [];
+  const putPetsIdList = [];
   const [petArray, setPetArray] = useState([]);
+  const [petId, setPetId] = useState();
 
-
+  
   /*axios.get('http://localhost:8084/api/pets' + loginId,*/
   useEffect(() => {
     axios.get('http://localhost:8084/api/my-pet?memberId=' + loginId, { 
@@ -59,7 +63,7 @@ const AnimalAccount = ( ) => {
     })
     .then(response => {
       //console.log(response.data);
-      setRes(response.data.success)
+      //setRes(response.data.success)
       //setPetId(response.data.result.data['id'])
       //setPetName(response.data.result.data['petName'])
       //setPetnum(response.data.result.data['registrationNumber'])
@@ -67,8 +71,10 @@ const AnimalAccount = ( ) => {
       //setPetKg(response.data.result.data['weight'])
       for (let i=0; i < response.data.result.data.length; i++) {
         putPetsList.push(response.data.result.data[i])
-      }setPetArray(putPetsList)
-
+        putPetsIdList.push(response.data.result.data[i].id)
+      }
+      setPetArray(putPetsList)
+      setPetId(putPetsIdList)
     })
     .catch((error) => {
       console.log('error ', error);
@@ -79,25 +85,26 @@ const AnimalAccount = ( ) => {
     navigate('/animal')
   }
 
-  const animalDelete = async () => {
-    //localStorage.removeItem('animalinfo');
+  const animalDelete = async (it) => {
+    it.preventDefault();
+    console.log(it.id);
 
-    await axios.delete('http://localhost:8084/api/pets' + loginId, {
+    await axios.delete('http://localhost:8084/api/pets/' + it.id, {
       headers: {
-        'Content-Type': 'multipart/form-data',
         'Authorization': localStorage.getItem('logintoken'),
       }
     })
     .then((data) => {
       console.log('성공:', data);
+      setPetArray(it.filter((p) => p.id !== it.id));
     })
     .catch((error) => {
       console.error('실패:', error);
     });
 
-    //navigate('/user')
   }
-
+  
+  //navigate('/user')
   const date = new Date();
   const dateYear = date.getFullYear()
 
@@ -141,8 +148,10 @@ const AnimalAccount = ( ) => {
 
   <div className='animalinfo__content'>
     {/*{localStorage.getItem("animalinfo")?  */}
-    { (res) ? 
+    {/* { (res === 'true') ?  */}
+    { (petArray.length >= 1 ) ? 
     <>
+      { !isOpen ?
       <form>
         <table className='animal__detail__form'>
           <thead>
@@ -155,60 +164,48 @@ const AnimalAccount = ( ) => {
             </tr>
           </thead>
 
-          {/*
-          {animal.map((it) =>
           <tbody>
-            <tr>
-              {animal}
-              <td>{it.petName}</td>
-              <td>{it.registrationNumber}</td>
-              <td>{it.birthday} </td>
-              <td>{it.weight}</td>
-            </tr>
-          </tbody>
-           )}
-          */}
           {petArray.map((it) =>
-          <tbody>
-            <tr>
-              {/*
-              <td>{petName}</td>
-              <td>{petNumber}</td>
-              <td>{petBTD}</td>
-              <td>{petKg}</td>
-          */} 
+            <tr key={it.id}>
               <td>{it.petName}</td>
               <td>{it.registrationNumber}</td>
               <td>{it.birthday}</td>
-              <td>{parseInt(dateYear) - parseInt(it.birthday) +1}살</td>
+              <td>{parseInt(dateYear) - parseInt(it.birthday)}살</td>
               <td>{it.weight}kg</td>
+              <td><button onClick={() => animalDelete(it)}>delete</button></td>
             </tr>
-          </tbody>
           )}
-
-          <button onClick={animalDelete}>delete</button>
-
+          </tbody>
 
         </table>
       </form>
-
+      :
+      <>
+        <AnimalAdd />
+      </>
+      
+    }
       <div className='welcome'>
+        <button className='welcome__btn' onClick={()=>setOpen(!isOpen)}>
+          {isOpen ? "Close" : "Add"}
+        </button>
+        {/* <button className='welcome__btn' onClick={animalDelete}>
+          Delete
+        </button> */}
         <button className='welcome__btn'>
           <a href="/animal">PET LOG</a>
         </button>
         <button className='welcome__btn'>
           <a href="/">Home</a>
         </button>
-        <button className='welcome__btn' onClick={animalDelete}>
-          <a href="/">Delete</a>
-        </button>
       </div>
+
     </>
     :
     <>
       <AnimalAdd />
     </>
-    }
+  }
           
 
   </div>
