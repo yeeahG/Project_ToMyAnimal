@@ -23,5 +23,5 @@ public class PostReadCondition {
     private Integer size; // ~ size
 
     private List<Long> categoryId = new ArrayList<>();
-    private List<Long> memberId = new ArrayList<>();
+//    private List<Long> memberId = new ArrayList<>();
 }

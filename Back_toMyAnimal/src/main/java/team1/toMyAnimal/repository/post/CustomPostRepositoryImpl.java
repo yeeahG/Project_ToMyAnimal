@@ -41,7 +41,7 @@ public class CustomPostRepositoryImpl extends QuerydslRepositorySupport implemen
         return getQuerydsl().applyPagination(
                 pageable,
                 jpaQueryFactory
-                        .select(constructor(PostSimpleDto.class, post.id, post.title, post.member.username, post.createdAt))
+                        .select(constructor(PostSimpleDto.class, post.id, post.title, post.content ,post.member.username, post.createdAt))
                         .from(post)
                         .join(post.member)
                         .where(predicate)
@@ -55,17 +55,17 @@ public class CustomPostRepositoryImpl extends QuerydslRepositorySupport implemen
 
     private Predicate createPredicate(PostReadCondition cond) {
         return new BooleanBuilder()
-                .and(orConditionsByEqCategoryIds(cond.getCategoryId()))
-                .and(orConditionsByEqMemberIds(cond.getMemberId()));
+                .and(orConditionsByEqCategoryIds(cond.getCategoryId()));
+//                .and(orConditionsByEqMemberIds(cond.getMemberId()));
     }
 
     private Predicate orConditionsByEqCategoryIds(List<Long> categoryIds) {
         return orConditions(categoryIds, post.category.id::eq);
     }
 
-    private Predicate orConditionsByEqMemberIds(List<Long> memberIds) {
-        return orConditions(memberIds, post.member.id::eq);
-    }
+//    private Predicate orConditionsByEqMemberIds(List<Long> memberIds) {
+//        return orConditions(memberIds, post.member.id::eq);
+//    }
 
     private <T> Predicate orConditions(List<T> values, Function<T, BooleanExpression> term) {
         return values.stream()
