@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import team1.toMyAnimal.domain.board.Board;
+import team1.toMyAnimal.domain.category.Category;
+import team1.toMyAnimal.domain.dto.category.CategoryDto;
 import team1.toMyAnimal.domain.dto.member.MemberDto;
 
 import java.time.LocalDateTime;
