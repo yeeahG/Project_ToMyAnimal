@@ -65,7 +65,7 @@
     text-transform: uppercase;
     font-size: 3.73333vw;
     line-height: 5.33333vw;
-    height: 15.7333vw;
+    height: 8vw;
     border: 0.4vw solid rgb(0, 0, 0);
     border-radius: 2.93333vw;
     box-sizing: border-box;
@@ -107,10 +107,15 @@
         font-size: 0.972222vw;
         line-height: 1.38889vw;
         height: 4.09722vw;
-        border: 0.104167vw solid #FF6458;
+        border: 0.104167vw solid #559df2; /*#FF6458;*/
         border-radius: 0.763889vw;
         margin-top: 1.45833vw;
     }
+    .login__btn:hover{
+        color: white;
+        background-color: #559df2;
+    }
+
     .login__register {
         margin-top: 0.902778vw;
     }
