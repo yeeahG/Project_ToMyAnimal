@@ -65,7 +65,7 @@
     padding: 4rem 1rem 4rem 1rem;
 }
 
-/*LEFT*/
+/*================================LEFT MENU================================*/
 ul {
     list-style: none;
 }
@@ -91,7 +91,8 @@ li {
     margin-bottom: 1.38889vw;
 }
 
-/*반려동물 정보 내용*/
+
+/*================================ANIMAL INFORMATION================================*/
 .content__wrapper {
     align-items: start;
     display: grid;
@@ -119,8 +120,8 @@ li {
 .animal__blob__profile {
     position: absolute;
     width: 350px;
-    top: 10px;
-    /* right: 70px; */
+    top: 50px;
+    right: 70px;
     z-index: 1;
 }
 
@@ -136,7 +137,20 @@ li {
     object-fit: cover;
 }
 
-/*내용*/
+.animal__info__wrapper {
+    display: grid;
+    grid-row-gap: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.animal__info__wrapper h2 {
+    justify-self: center;
+    text-align: center;
+    line-height: 0.8;
+    font-size: 2rem;
+}
+
 .info__details {
     display: grid;
     align-content: start;
@@ -148,7 +162,7 @@ li {
     grid-row-gap: 1rem;
 }
 
-/*내용부분*/
+/*================================NAVI CONTAINER================================*/
 .navi__container {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
@@ -362,6 +376,10 @@ li {
         grid-template-rows: 1fr 1fr;
     }
     
+    .animal__info__wrapper h2 {
+        letter-spacing: -0.05ch;
+    }
+
     .etc h2 {
         letter-spacing: -0.05ch;
     }
@@ -441,6 +459,18 @@ li {
 
     .animal__blob__profile {
         width: 20vw;
+        right: 100px;
+        top: 10px;
+    }
+
+    .animal__info__wrapper {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+        width: 55vw;
+    }
+
+    .animal__info__wrapper h2 {
+        font-size: 4rem;
     }
 
     /*log*/

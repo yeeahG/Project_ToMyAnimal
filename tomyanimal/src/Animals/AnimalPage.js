@@ -49,6 +49,8 @@ const AnimalPage = () => {
   console.log(petimg);
 
   return (
+  <div>
+
     <div className='content__wrapper'>
       <div className='animal__imageform'>
         <svg className="animal__blob" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg">
@@ -68,9 +70,9 @@ const AnimalPage = () => {
         </svg>
         {petimg? 
         <img 
-          className="animal__blob__profile" 
-          src={'http://localhost:8084/image/' + petimg}
-          alt="animal profile"
+        className="animal__blob__profile" 
+        src={'http://localhost:8084/image/' + petimg}
+        alt="animal profile"
         />
         :
         <img 
@@ -78,7 +80,7 @@ const AnimalPage = () => {
         src={profile}
         alt="animal profile"
         />
-        }
+      }
 
       </div>
 
@@ -105,7 +107,20 @@ const AnimalPage = () => {
           </div>
         </div>
       </div>
+
     </div>
+
+    <section className='animal__info__wrapper'>
+      <h2>{petName} Information</h2>
+      
+      <div>
+        <p>Hi</p>
+      </div>
+    </section>
+
+    
+
+  </div>
   )
 }
 
