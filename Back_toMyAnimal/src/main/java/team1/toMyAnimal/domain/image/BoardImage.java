@@ -39,7 +39,7 @@ public class BoardImage {
         this.originName = originName;
     }
 
-    public void initPost(Board board) {
+    public void initBoard(Board board) {
         if(this.board == null) {
             this.board = board;
         }
