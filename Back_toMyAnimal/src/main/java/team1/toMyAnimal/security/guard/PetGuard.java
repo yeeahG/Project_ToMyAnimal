@@ -6,7 +6,6 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;
 import team1.toMyAnimal.domain.member.RoleType;
 import team1.toMyAnimal.domain.pet.Pet;
-import team1.toMyAnimal.domain.post.Post;
 import team1.toMyAnimal.repository.pet.PetRepository;
 
 @Component

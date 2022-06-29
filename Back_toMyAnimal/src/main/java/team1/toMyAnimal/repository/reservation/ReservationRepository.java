@@ -3,8 +3,7 @@ package team1.toMyAnimal.repository.reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import team1.toMyAnimal.domain.pet.Pet;
-import team1.toMyAnimal.domain.reservation.Reservation;
+import team1.toMyAnimal.domain.comment.reservation.Reservation;
 
 import java.util.List;
 

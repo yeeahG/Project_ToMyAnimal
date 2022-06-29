@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team1.toMyAnimal.domain.common.EntityDate;
 import team1.toMyAnimal.domain.dto.member.MemberUpdateRequest;
-import team1.toMyAnimal.domain.pet.Pet;
 
 import javax.persistence.*;
 
