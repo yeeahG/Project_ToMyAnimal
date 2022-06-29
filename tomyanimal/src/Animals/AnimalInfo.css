@@ -137,6 +137,7 @@ li {
     object-fit: cover;
 }
 
+
 .animal__info__wrapper {
     display: grid;
     grid-row-gap: 2rem;
@@ -149,6 +150,17 @@ li {
     text-align: center;
     line-height: 0.8;
     font-size: 2rem;
+}
+
+.animal__info__container {
+    text-align: center;
+}
+
+.animal__info__content {
+    margin: 1rem 1rem;
+    height: 300px;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
 }
 
 .info__details {
@@ -471,6 +483,15 @@ li {
 
     .animal__info__wrapper h2 {
         font-size: 4rem;
+    }
+
+    .animal__info__container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .animal__info__content {
+
     }
 
     /*log*/

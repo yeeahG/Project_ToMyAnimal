@@ -113,9 +113,18 @@ const AnimalPage = () => {
     <section className='animal__info__wrapper'>
       <h2>{petName} Information</h2>
       
-      <div>
-        <p>Hi</p>
+      <div className='animal__info__container'>
+        <div className='animal__info__content'>
+          <p>Hi</p>
+        </div>
+        <div className='animal__info__content'>
+          <p>Hi</p>
+        </div>
+        <div className='animal__info__content'>
+          <p>Hi</p>
+        </div>
       </div>
+
     </section>
 
     
