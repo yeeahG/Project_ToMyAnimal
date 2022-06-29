@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './Menu.css'
 
 const Menu = () => {
     const [isOpen, setMenu] = useState(false);
+    const outSection = useRef();
 
     const toggleMenu = () => {
         setMenu(isOpen => !isOpen); // on,off 개념 boolean
@@ -16,9 +17,30 @@ const Menu = () => {
         document.getElementById("menu-wrapper").style.background = "#fe81b9";
     }
 
+    function useOutsideAlerter(ref) {
+        useEffect(() => {
+
+          function handleClickOutside(event) {
+            if (ref.current && !ref.current.contains(event.target)) {
+                setMenu(isOpen => !isOpen)
+            }
+          }
+
+          document.addEventListener("mousedown", handleClickOutside);
+          return () => {
+
+            document.removeEventListener("mousedown", handleClickOutside);
+          };
+        }, [ref]);
+    }
+    
+    const wrapperRef = useRef(null);
+    useOutsideAlerter(wrapperRef);
+    
+
   return (
     <div className='nav__wrapper'>
-        <header className='nav__form'>
+        <header className='nav__form' >
 
             <div className='nav__container'>
                 <button id='menu-btn' onClick={()=>toggleMenu()}>menu</button>
@@ -36,8 +58,11 @@ const Menu = () => {
             </div>
         </header>
 
-        <section className={isOpen ? "show-menu" : "hide-menu"}>
-            <div className="menu__wrapper jTgRTL" id="menu-wrapper" color="#CDBFEC">
+        {/* <section className={isOpen ? "show-menu" : "hide-menu"}> */}
+
+        {isOpen ?
+        <section className= "show-menu" ref={wrapperRef}>
+            <div className="menu__wrapper jTgRTL" id="menu-wrapper" color="#CDBFEC" >
                 
                 <button onClick={()=>toggleMenu()} className="menu__close__btn" >
                     <svg viewBox="0 0 32 30"fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -69,6 +94,9 @@ const Menu = () => {
 
             </div>
         </section>
+        :
+        null
+}
 
 
     </div>
