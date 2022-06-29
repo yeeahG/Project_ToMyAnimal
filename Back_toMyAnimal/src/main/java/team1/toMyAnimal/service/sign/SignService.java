@@ -36,14 +36,14 @@ public class SignService {
         String encodedPassword = passwordEncoder.encode(req.getPassword());
         List<Role> roles = List.of(roleRepository.findByRoleType(RoleType.ROLE_USER).orElseThrow(RoleNotFoundException::new));
         memberRepository.save(
-                new Member(req.getUserId(), req.getUserPhoneNumber(), req.getUsername(), encodedPassword, req.getEmail(),roles)
+                new Member(req.getIdentifier(), req.getPhoneNumber(), req.getName(), encodedPassword, req.getEmail(),roles)
         );
     }
 
     @Transactional(readOnly = true)
     public SignInResponse signIn(SignInRequest req) {
 
-        Member member = memberRepository.findByUserId(req.getUserId()).orElseThrow(MemberNotFoundException::new);
+        Member member = memberRepository.findByIdentifier(req.getIdentifier()).orElseThrow(MemberNotFoundException::new);
         validatePassword(req, member);
         String subject = createSubject(member);
         String accessToken = accessTokenHelper.createToken(subject);
@@ -67,10 +67,10 @@ public class SignService {
     }
 
     private void validateSignUpInfo(SignUpRequest req) {
-        if(memberRepository.existsByUserId(req.getUserId()))
-            throw new MemberIdAlreadyExistsException(req.getUserId());
-        if(memberRepository.existsByUserPhoneNumber(req.getUserPhoneNumber()))
-            throw new MemberPhoneNumberAlreadyExistsException(req.getUserPhoneNumber());
+        if(memberRepository.existsByIdentifier(req.getIdentifier()))
+            throw new MemberIdAlreadyExistsException(req.getIdentifier());
+        if(memberRepository.existsByPhoneNumber(req.getPhoneNumber()))
+            throw new MemberPhoneNumberAlreadyExistsException(req.getPhoneNumber());
     }
 
     private void validatePassword(SignInRequest req, Member member) {

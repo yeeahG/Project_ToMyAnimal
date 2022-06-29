@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import team1.toMyAnimal.domain.board.Board;
 import team1.toMyAnimal.domain.dto.image.BoardImageDto;
-import team1.toMyAnimal.domain.dto.image.PostImageDto;
 import team1.toMyAnimal.domain.dto.member.MemberDto;
 
 import java.time.LocalDateTime;
@@ -20,6 +19,7 @@ public class BoardDto {
     private Long id;
     private String title;
     private String content;
+    private Integer type;
     private MemberDto member;
     private List<BoardImageDto> images;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
@@ -32,6 +32,7 @@ public class BoardDto {
                 board.getId(),
                 board.getTitle(),
                 board.getContent(),
+                board.getType(),
                 MemberDto.toDto(board.getMember()),
                 board.getBoardImages().stream().map(i -> BoardImageDto.toDto(i)).collect(toList()),
                 board.getCreatedAt(),

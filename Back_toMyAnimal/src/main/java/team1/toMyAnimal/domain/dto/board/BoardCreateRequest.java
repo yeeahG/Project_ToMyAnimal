@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 import team1.toMyAnimal.domain.board.Board;
 import team1.toMyAnimal.domain.image.BoardImage;
-import team1.toMyAnimal.domain.image.PostImage;
 import team1.toMyAnimal.exception.CategoryNotFoundException;
 import team1.toMyAnimal.exception.MemberNotFoundException;
 import team1.toMyAnimal.repository.category.CategoryRepository;
@@ -31,6 +30,8 @@ public class BoardCreateRequest {
     @NotBlank(message = "게시글 본문을 입력해주세요.")
     private String content;
 
+    private int type;
+
     @Null
     private Long memberId;
 
@@ -40,10 +41,13 @@ public class BoardCreateRequest {
 
     private List<MultipartFile> images = new ArrayList<>();
 
+
+
     public static Board toEntity(BoardCreateRequest req, MemberRepository memberRepository, CategoryRepository categoryRepository) {
         return new Board(
                 req.title,
                 req.content,
+                req.type,
                 memberRepository.findById(req.getMemberId()).orElseThrow(MemberNotFoundException::new),
                 categoryRepository.findById(req.getCategoryId()).orElseThrow(CategoryNotFoundException::new),
                 req.images.stream().map(i -> new BoardImage(i.getOriginalFilename())).collect(toList())

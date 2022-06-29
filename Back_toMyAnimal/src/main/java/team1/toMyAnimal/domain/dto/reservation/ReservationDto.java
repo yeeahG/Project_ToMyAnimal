@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import team1.toMyAnimal.domain.dto.member.MemberDto;
 import team1.toMyAnimal.domain.dto.pet.PetDto;
-import team1.toMyAnimal.domain.comment.reservation.Reservation;
+import team1.toMyAnimal.domain.reservation.Reservation;
 
 import java.time.LocalDateTime;
 import java.util.List;

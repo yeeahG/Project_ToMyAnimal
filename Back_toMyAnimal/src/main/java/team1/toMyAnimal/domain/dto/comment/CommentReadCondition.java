@@ -13,5 +13,5 @@ import javax.validation.constraints.PositiveOrZero;
 public class CommentReadCondition {
     @NotNull(message = "게시글 번호를 입력해주세요.")
     @PositiveOrZero(message = "올바른 게시글 번호를 입력해주세요. (0 이상)")
-    private Long postId;
+    private Long boardId;
 }

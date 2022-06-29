@@ -25,4 +25,5 @@ public class BoardReadCondition {
 
     private Long memberId;
     private Long categoryId;
+    private Integer type;
 }
