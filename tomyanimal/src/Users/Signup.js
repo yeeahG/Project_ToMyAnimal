@@ -30,7 +30,7 @@ const Signup = () => {
         }
         console.log(item);
     
-        if( phoneNumber!="" || signinId!="" || username!="" || signinPassword!="") {
+        if( phoneNumber!=="" || signinId!=="" || username!=="" || signinPassword!=="") {
           // if (signinPassword === signinPasswordCheck) {
     
             await fetch('http://localhost:8084/api/signup', {
