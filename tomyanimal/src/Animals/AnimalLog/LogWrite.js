@@ -19,8 +19,9 @@ const LogWrite = () => {
         const newPost = {
             title: title,
             content: content,
-            userId: localStorage.getItem('usename'),
-            date: new Date()
+            categoryId: "1"
+            //userId: localStorage.getItem('usename'),
+            //date: new Date()
         }
 
         if(content.length < 1) {
@@ -34,7 +35,8 @@ const LogWrite = () => {
                 url: 'http://localhost:8084/api/board',
                 data: newPost,
                 headers: { 
-                    Authorization: localStorage.getItem('logintoken') 
+                    'Authorization': localStorage.getItem('logintoken'),
+                    'Content-Type': 'multipart/form-data',
                 }
             })
             .then((data) => {

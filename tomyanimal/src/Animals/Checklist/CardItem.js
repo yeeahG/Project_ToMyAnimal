@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { ChecklistContext } from '../Animals/Checklist/CheckList'
+import { ChecklistContext } from './CheckList'
 import './CardItem.css'
 
 const CardItem = ( props, {id, text, src, label} ) => {

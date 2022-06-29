@@ -1,6 +1,6 @@
 import React, { useState, createContext} from 'react'
 import { Link } from 'react-router-dom';
-import CardItem from '../../Pages/CardItem';
+import CardItem from './CardItem';
 import ControlMenu from '../../Pages/ControlMenu';
 import img from './img/imageex.png'
 import Walk from './Walk';

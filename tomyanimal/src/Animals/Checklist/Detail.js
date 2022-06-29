@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import Pagination from '../../Community/components/Pagination';
 import ControlMenu from '../../Pages/ControlMenu';
 import { ChecklistContext } from '../Checklist/CheckList'
 
@@ -12,6 +13,9 @@ const Detail = () => {
   const [content, setContent] = useState("");
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(6);
 
   const {id} = useParams();
   //console.log(id);
@@ -107,6 +111,14 @@ const Detail = () => {
     }
   }
 
+  //pagination
+  const indexOfLast = currentPage * postsPerPage;
+  const indexOfFirst = indexOfLast - postsPerPage;
+
+  let currentPosts = 0;
+  currentPosts = data.slice(indexOfFirst, indexOfLast);
+
+
   return (
     <div className='info__container'>
 
@@ -180,7 +192,8 @@ const Detail = () => {
           <div className='checklist__read__container'>
             {/* {data.title} 
             {data}*/}
-            {data.map((it) => (
+            {/* {data.map((it) => ( */}
+            {currentPosts.map((it) => (
               <div className='checklist__read__content'>
                 <h3>{it.title}</h3>
                 <p>{it.content}</p>
@@ -188,6 +201,12 @@ const Detail = () => {
             ))}
           </div>
           }
+
+          <Pagination 
+            postsPerPage={postsPerPage}
+            totalPosts={data.length}
+            paginate={setCurrentPage}
+          />
 
 
 

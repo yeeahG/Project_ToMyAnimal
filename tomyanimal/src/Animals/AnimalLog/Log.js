@@ -24,7 +24,8 @@ const Log = () => {
     const [logContent, setLogContent] = useState("");
     const [logarray, setLogArray] = useState([]);
 
-    const userId = localStorage.getItem('userid');
+    //const userId = localStorage.getItem('userid');
+    const userid = localStorage.getItem('userid');
 
     {/* http://localhost:8084/api/my-board?memberId=${userId}
   https://jsonplaceholder.typicode.com/posts */}
@@ -32,7 +33,8 @@ const Log = () => {
   const putLog = [];
 
   useEffect( () => { 
-    axios.get(`http://localhost:8084/api/my-board?memberId=${userId}`, {
+    //axios.get(`http://localhost:8084/api/my-board?memberId=${userid}`, {
+    axios.get(`http://localhost:8084/api/posts?page=0&size=4&categoryId=1&memberId=${userid}`, {
       headers: {
         Authorization: localStorage.getItem('logintoken'),
       }
@@ -41,8 +43,8 @@ const Log = () => {
       // setLogId(response.data.result.data[i].id);
       // setLogTitle(response.data.result.data[i].title)
       // setLogContent(response.data.result.data[i].content)
-      putLog.push(response.data.result.data[i])
-      console.log(putLog);
+      //putLog.push(response.data.result.data[i])
+        putLog.push(response.data.result.data.postList[i])
       } setLogArray(putLog)
       
       // for (let i=0; i < response.data.result.data.length; i++) {
@@ -52,6 +54,8 @@ const Log = () => {
       console.error(error);
     });
   }, [])
+
+  console.log(putLog);
 
   const logList = [
     {id: logId, title: logTitle, content: logContent}
