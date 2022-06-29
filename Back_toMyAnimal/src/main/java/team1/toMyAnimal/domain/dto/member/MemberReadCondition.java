@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberReadCondition {
-    private Long MemberId;
+    private Long id;
 }

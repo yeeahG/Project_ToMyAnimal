@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberUpdateRequest {
-    private String userPhoneNumber;
-    private String username;
+    private String phoneNumber;
+    private String name;
 }

@@ -29,13 +29,13 @@ public class Member extends EntityDate {
     private Long id;
 
     @Column(nullable = false, length = 15, unique = true)
-    private String userId;
+    private String identifier;
 
     @Column(nullable = false, unique = true)
-    private String userPhoneNumber;
+    private String phoneNumber;
 
     @Column(nullable = false, length = 20)
-    private String username;
+    private String name;
 
     @Column(name = "password")
     private String password;
@@ -47,10 +47,10 @@ public class Member extends EntityDate {
 
 
 //    id, 폰번호, 이름, 비밀번호 , 이메일, 권한
-    public Member(String id, String phoneNumber, String username, String password, String email,List<Role> roles){
-        this.userId = id;
-        this.userPhoneNumber = phoneNumber;
-        this.username = username;
+    public Member(String identifier, String phoneNumber, String name, String password, String email,List<Role> roles){
+        this.identifier = identifier;
+        this.phoneNumber = phoneNumber;
+        this.name = name;
         this.password = password;
         this.email = email;
         this.roles = roles.stream().map(r -> new MemberRole(this, r)).collect(toSet());
@@ -59,7 +59,7 @@ public class Member extends EntityDate {
 
     // 회원 정보 수정
     public void updateUserInfo(MemberUpdateRequest req) {
-        this.userPhoneNumber = req.getUserPhoneNumber();
-        this.username = req.getUsername();
+        this.phoneNumber = req.getPhoneNumber();
+        this.name = req.getName();
     }
 }

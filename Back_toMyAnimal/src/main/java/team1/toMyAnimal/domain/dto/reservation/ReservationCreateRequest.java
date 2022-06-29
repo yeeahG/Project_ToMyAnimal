@@ -3,7 +3,7 @@ package team1.toMyAnimal.domain.dto.reservation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import team1.toMyAnimal.domain.comment.reservation.Reservation;
+import team1.toMyAnimal.domain.reservation.Reservation;
 import team1.toMyAnimal.exception.MemberNotFoundException;
 import team1.toMyAnimal.exception.PetNotFoundException;
 import team1.toMyAnimal.repository.member.MemberRepository;

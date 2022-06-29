@@ -1,4 +1,4 @@
-package team1.toMyAnimal.domain.comment.reservation;
+package team1.toMyAnimal.domain.reservation;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -25,7 +25,7 @@ public class Reservation extends EntityDate {
     @Column(name = "reservation_id")
     private Long id;
     private LocalDate date;
-    private LocalDateTime time;
+
     private String type;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -40,7 +40,6 @@ public class Reservation extends EntityDate {
 
     public Reservation(LocalDate date, LocalDateTime time, String type, Member member, Pet pet){
         this.date = date;
-        this.time = time;
         this.type = type;
         this.member = member;
         this.pet = pet;
@@ -48,7 +47,6 @@ public class Reservation extends EntityDate {
 
     public void update(ReservationUpdateRequest req) {
         this.date = req.getDate();
-        this.time = req.getTime();
         this.type = req.getType();
     }
 

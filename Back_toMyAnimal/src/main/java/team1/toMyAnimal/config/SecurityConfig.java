@@ -46,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/board/{id}").access("@boardGuard.check(#id)")
                 .antMatchers(HttpMethod.GET, "/api/reservation/{id}").authenticated()
                 .antMatchers(HttpMethod.GET, "/api/my-reservation").authenticated()
+                .antMatchers(HttpMethod.GET, "/sendMail").permitAll()
 
                 .antMatchers(HttpMethod.POST, "/api/posts").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/signin", "/api/signup", "/api/refresh-token").permitAll()
@@ -54,6 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/comments").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/board").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/reservation").authenticated()
+                .antMatchers(HttpMethod.POST, "/sendMail").permitAll()
 
                 .antMatchers(HttpMethod.DELETE, "/api/members/{id}").access("@memberGuard.check(#id)")
                 .antMatchers(HttpMethod.DELETE, "/api/categories/**").hasRole("ADMIN")

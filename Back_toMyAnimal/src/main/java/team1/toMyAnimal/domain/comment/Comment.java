@@ -29,7 +29,7 @@ public class Comment extends EntityDate {
     private String content;
 
     @Column(nullable = false)
-    private boolean deleted;
+    private boolean isDeleted;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
@@ -54,7 +54,7 @@ public class Comment extends EntityDate {
         this.member = member;
         this.post = post;
         this.parent = parent;
-        this.deleted = false;
+        this.isDeleted = false;
     }
 
     public Optional<Comment> findDeletableComment() {
@@ -62,7 +62,7 @@ public class Comment extends EntityDate {
     }
 
     public void delete() {
-        this.deleted = true;
+        this.isDeleted = true;
     }
 
     private Comment findDeletableCommentByParent() {

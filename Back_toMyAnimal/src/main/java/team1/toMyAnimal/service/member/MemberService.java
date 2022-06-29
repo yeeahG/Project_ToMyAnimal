@@ -1,11 +1,9 @@
 package team1.toMyAnimal.service.member;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import team1.toMyAnimal.domain.dto.mail.MailDto;
 import team1.toMyAnimal.domain.dto.member.MemberDto;
 import team1.toMyAnimal.domain.dto.member.MemberReadCondition;
 import team1.toMyAnimal.domain.dto.member.MemberUpdateRequest;
@@ -25,7 +23,7 @@ public class MemberService {
     private static final String FROM_ADDRESS = "to.myanimal.official@gmail.com";
 
     public MemberDto read(MemberReadCondition cond) {
-        return MemberDto.toDto(memberRepository.findById(cond.getMemberId()).orElseThrow(MemberNotFoundException::new));
+        return MemberDto.toDto(memberRepository.findById(cond.getId()).orElseThrow(MemberNotFoundException::new));
     }
 
     @Transactional

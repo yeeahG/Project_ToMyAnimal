@@ -10,15 +10,15 @@ import team1.toMyAnimal.domain.member.Member;
 @NoArgsConstructor
 public class MemberDto {
     private Long id;
-    private String userId;
-    private String userName;
-    private String userPhoneNumber;
+    private String identifier;
+    private String name;
+    private String phoneNumber;
     private String password;
     private String email;
 
     //    id, 폰번호, 이름, 비밀번호 , 권한
     public static MemberDto toDto(Member member) {
-        return new MemberDto(member.getId(), member.getUserId(),  member.getUsername(), member.getUserPhoneNumber(), member.getPassword(), member.getEmail());
+        return new MemberDto(member.getId(), member.getIdentifier(),  member.getName(), member.getPhoneNumber(), member.getPassword(), member.getEmail());
     }
 
 }

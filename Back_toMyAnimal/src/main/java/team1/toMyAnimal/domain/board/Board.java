@@ -49,9 +49,13 @@ public class Board extends EntityDate {
     @OneToMany(mappedBy = "board", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<BoardImage> boardImages;
 
-    public Board(String title, String content, Member member, Category category , List<BoardImage> boardImages){
+    @Column(nullable = false)
+    private int type;
+
+    public Board(String title, String content, int type, Member member, Category category , List<BoardImage> boardImages){
         this.title = title;
         this.content = content;
+        this.type = type;
         this.member = member;
         this.category = category;
         this.boardImages = new ArrayList<>();

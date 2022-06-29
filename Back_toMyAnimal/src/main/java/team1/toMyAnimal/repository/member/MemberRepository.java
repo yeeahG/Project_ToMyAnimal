@@ -8,13 +8,13 @@ import team1.toMyAnimal.domain.member.Member;
 import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    Optional<Member> findByUserId(String userId);
-    Optional<Member> findByUserPhoneNumber(String userPhoneNumber);
+    Optional<Member> findByIdentifier(String identifier);
+    Optional<Member> findByPhoneNumber(String phoneNumber);
 
     Member findByEmail(String email);
     @EntityGraph("Member.roles")
     Optional<Member> findWithRolesById(Long Id);
 
-    boolean existsByUserId(String userId);
-    boolean existsByUserPhoneNumber(String userPhoneNumber);
+    boolean existsByIdentifier(String identifier);
+    boolean existsByPhoneNumber(String phoneNumber);
     }
