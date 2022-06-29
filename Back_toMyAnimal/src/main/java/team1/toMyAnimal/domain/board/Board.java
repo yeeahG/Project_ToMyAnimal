@@ -8,9 +8,12 @@ import org.hibernate.annotations.OnDeleteAction;
 import team1.toMyAnimal.domain.category.Category;
 import team1.toMyAnimal.domain.common.EntityDate;
 import team1.toMyAnimal.domain.dto.board.BoardUpdateRequest;
+import team1.toMyAnimal.domain.image.BoardImage;
 import team1.toMyAnimal.domain.member.Member;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -38,11 +41,16 @@ public class Board extends EntityDate {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Category category;
 
-    public Board(String title, String content, Member member, Category category){
+    @OneToMany(mappedBy = "board", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<BoardImage> boardImages;
+
+    public Board(String title, String content, Member member, Category category , List<BoardImage> boardImages){
         this.title = title;
         this.content = content;
         this.member = member;
         this.category = category;
+        this.boardImages = new ArrayList<>();
+        addImages(boardImages);
     }
 
     public void update(BoardUpdateRequest req) {
