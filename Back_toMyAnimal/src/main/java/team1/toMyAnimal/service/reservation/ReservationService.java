@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team1.toMyAnimal.domain.dto.reservation.*;
-import team1.toMyAnimal.domain.reservation.Reservation;
+import team1.toMyAnimal.domain.comment.reservation.Reservation;
 import team1.toMyAnimal.exception.ReservationNotFoundException;
 import team1.toMyAnimal.repository.member.MemberRepository;
 import team1.toMyAnimal.repository.pet.PetRepository;

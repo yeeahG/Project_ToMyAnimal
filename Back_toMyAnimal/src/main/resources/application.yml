@@ -3,6 +3,15 @@ spring:
     active: local
     include: secret
 
+  mail :
+    host : smtp.google.com
+    port : 587
+    username : to.myanimal.official@gmail.com
+    password : team1!123
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.ssl.enable: true
+
   mvc:
     hiddenmethod:
       filter:

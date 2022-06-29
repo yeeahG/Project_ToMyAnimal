@@ -1,4 +1,4 @@
-package team1.toMyAnimal.domain.reservation;
+package team1.toMyAnimal.domain.comment.reservation;
 
 import lombok.AccessLevel;
 import lombok.Getter;

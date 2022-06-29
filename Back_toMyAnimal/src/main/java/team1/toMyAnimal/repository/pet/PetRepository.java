@@ -3,7 +3,6 @@ package team1.toMyAnimal.repository.pet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import team1.toMyAnimal.domain.dto.pet.PetDto;
 import team1.toMyAnimal.domain.pet.Pet;
 
 import java.util.List;

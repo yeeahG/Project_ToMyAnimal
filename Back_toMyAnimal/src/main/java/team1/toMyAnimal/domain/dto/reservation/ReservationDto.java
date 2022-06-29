@@ -3,13 +3,10 @@ package team1.toMyAnimal.domain.dto.reservation;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import team1.toMyAnimal.domain.common.EntityDate;
 import team1.toMyAnimal.domain.dto.member.MemberDto;
 import team1.toMyAnimal.domain.dto.pet.PetDto;
-import team1.toMyAnimal.domain.dto.post.PostDto;
-import team1.toMyAnimal.domain.reservation.Reservation;
+import team1.toMyAnimal.domain.comment.reservation.Reservation;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;

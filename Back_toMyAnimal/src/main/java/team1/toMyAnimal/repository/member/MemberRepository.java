@@ -10,6 +10,8 @@ import java.util.Optional;
 public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findByUserId(String userId);
     Optional<Member> findByUserPhoneNumber(String userPhoneNumber);
+
+    Member findByEmail(String email);
     @EntityGraph("Member.roles")
     Optional<Member> findWithRolesById(Long Id);
 
