@@ -3,8 +3,11 @@ package team1.toMyAnimal.domain.dto.board;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -15,4 +18,8 @@ public class BoardUpdateRequest {
 
     @NotBlank(message = "게시글 본문을 입력해주세요.")
     private String content;
+
+    private List<MultipartFile> addedImages = new ArrayList<>();
+
+    private List<Long> deletedImages = new ArrayList<>();
 }
