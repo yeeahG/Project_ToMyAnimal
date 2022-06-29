@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import team1.toMyAnimal.domain.board.Board;
 import team1.toMyAnimal.domain.common.EntityDate;
 import team1.toMyAnimal.domain.member.Member;
-import team1.toMyAnimal.domain.post.Post;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -37,9 +37,9 @@ public class Comment extends EntityDate {
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id", nullable = false)
+    @JoinColumn(name = "board_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Post post;
+    private Board board;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
@@ -49,10 +49,10 @@ public class Comment extends EntityDate {
     @OneToMany(mappedBy = "parent")
     private List<Comment> children = new ArrayList<>();
 
-    public Comment(String content, Member member, Post post, Comment parent) {
+    public Comment(String content, Member member, Board board, Comment parent) {
         this.content = content;
         this.member = member;
-        this.post = post;
+        this.board = board;
         this.parent = parent;
         this.isDeleted = false;
     }

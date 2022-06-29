@@ -9,6 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BoardRepository extends JpaRepository<Board, Long> {
-    @Query("select b from Board b join fetch b.member where b.member.id = :memberId and b.category.id = :categoryId")
-    List<Board> findByIdWithMemberAndCategory(@Param("memberId") Long memberId, @Param("categoryId") Long categoryId);
+    @Query("select b from Board b join fetch b.member where b.member.id = :memberId and b.category.id = :categoryId and b.type = :boardType")
+    List<Board> findByIdWithMemberAndCategoryAndType(@Param("memberId") Long memberId, @Param("categoryId") Long categoryId, @Param("boardType") Integer boardType);
 }

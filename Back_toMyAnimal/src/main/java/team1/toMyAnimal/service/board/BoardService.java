@@ -42,11 +42,12 @@ public class BoardService {
     }
 
     public List<BoardDto> readAll(BoardReadCondition cond) {
-        return BoardDto.toDtoList(boardRepository.findByIdWithMemberAndCategory(cond.getMemberId(), cond.getCategoryId()));
+        return BoardDto.toDtoList(boardRepository.findByIdWithMemberAndCategoryAndType(cond.getMemberId(), cond.getCategoryId(), cond.getType()));
     }
 
     @Transactional
     public void delete(Long id) {
+
         Board board = boardRepository.findById(id).orElseThrow(BoardNotFoundException::new);
         deleteImages(board.getBoardImages());
         boardRepository.delete(board);

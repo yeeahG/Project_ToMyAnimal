@@ -8,15 +8,15 @@ import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import team1.toMyAnimal.domain.board.Board;
 import team1.toMyAnimal.domain.category.Category;
 import team1.toMyAnimal.domain.member.Member;
 import team1.toMyAnimal.domain.member.Role;
 import team1.toMyAnimal.domain.member.RoleType;
-import team1.toMyAnimal.domain.post.Post;
 import team1.toMyAnimal.exception.RoleNotFoundException;
+import team1.toMyAnimal.repository.board.BoardRepository;
 import team1.toMyAnimal.repository.category.CategoryRepository;
 import team1.toMyAnimal.repository.member.MemberRepository;
-import team1.toMyAnimal.repository.post.PostRepository;
 import team1.toMyAnimal.repository.role.RoleRepository;
 
 import java.util.List;
@@ -32,7 +32,8 @@ public class InitDB {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final CategoryRepository categoryRepository;
-    private final PostRepository postRepository;
+//    private final PostRepository postRepository;
+    private final BoardRepository boardRepository;
 
     @EventListener(ApplicationReadyEvent.class)
     @Transactional
@@ -88,8 +89,8 @@ public class InitDB {
         Member member = memberRepository.findAll().get(0);
         Category category = categoryRepository.findAll().get(0);
         IntStream.range(0, 20)
-                .forEach(i -> postRepository.save(
-                        new Post("title" + i, "content" + i, member, category, List.of())
+                .forEach(i -> boardRepository.save(
+                        new Board("title" + i, "content" + i, 0, member, category, List.of())
                 ));
     }
 
