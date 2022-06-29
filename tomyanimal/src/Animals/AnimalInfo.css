@@ -137,6 +137,20 @@ li {
     object-fit: cover;
 }
 
+.info__details {
+    display: grid;
+    align-content: start;
+    grid-row-gap: 3rem;
+}
+
+.details__description {
+    display: grid;
+    grid-row-gap: 1rem;
+}
+
+
+
+
 
 .animal__info__wrapper {
     display: grid;
@@ -161,17 +175,41 @@ li {
     height: 300px;
     border-top: 1px solid;
     border-bottom: 1px solid;
+
+    /* display:inline-block; */
+    position: relative;
+    transition: all 1s ease;
 }
 
-.info__details {
-    display: grid;
-    align-content: start;
-    grid-row-gap: 3rem;
+
+
+
+.animal__info__cover {
+    margin: 1rem 1rem;
+    height: 300px;
 }
 
-.details__description {
-    display: grid;
-    grid-row-gap: 1rem;
+
+.animal__info__cover h3 {
+    position: relative;
+    top: 60px;
+    text-align: center;
+}
+
+.animal__info__vaccine {
+    position: absolute;
+    top: 20px;
+    height: 300px;
+    width: 100%;
+    /* background-color: #559df2; */
+}
+
+.animal__info__vaccine h3 {
+    text-align: center;
+}
+
+.animal__info__desc p {
+    color: #559df2;
 }
 
 /*================================NAVI CONTAINER================================*/
@@ -493,6 +531,31 @@ li {
     .animal__info__content {
 
     }
+
+
+    .animal__info__content:hover:after, 
+    .animal__info__content:hover > .animal__info__vaccine {
+        display:block;
+    }
+
+    .animal__info__content:hover > .animal__info__cover {
+        display: none;
+        border: none;
+    }
+
+    .animal__info__content:after, .animal__info__vaccine {
+        display: none;
+    }
+
+    .animal__info__content:after {
+        content:'';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
 
     /*log*/
     .log__wrapper {

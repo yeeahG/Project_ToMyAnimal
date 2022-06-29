@@ -10,6 +10,8 @@ const AnimalPage = () => {
   const [petimg, setPetimg] = useState();
   const [petprofile, setPetprofile] = useState();
 
+  const [isOpen, setOpen] = useState(false);
+
   const userId = localStorage.getItem('userid');
 
 
@@ -68,6 +70,7 @@ const AnimalPage = () => {
             <img className="animal__blob__profile"  xlinkHref="{profile}"/>
           </g>
         </svg>
+
         {petimg? 
         <img 
         className="animal__blob__profile" 
@@ -114,14 +117,66 @@ const AnimalPage = () => {
       <h2>{petName} Information</h2>
       
       <div className='animal__info__container'>
+
         <div className='animal__info__content'>
-          <p>Hi</p>
+
+          <div className='animal__info__cover'>
+            <h3>예방접종 내역</h3>
+          </div>
+          <div className='animal__info__vaccine'>
+            <h3>내역</h3>
+            <div className='animal__info__desc'>
+              <p>2022 06 29
+              심장사상충</p>
+            </div>
+          </div>
+
         </div>
+
         <div className='animal__info__content'>
-          <p>Hi</p>
+
+          <div className='animal__info__cover'>
+            <h3>예방접종 내역</h3>
+            </div>
+          <div className='animal__info__vaccine'>
+            <h3>내역</h3>
+          </div>
+
         </div>
+
         <div className='animal__info__content'>
-          <p>Hi</p>
+
+          <div className='animal__info__cover'>
+              <h3>예방접종 내역</h3>
+            </div>
+          <div className='animal__info__vaccine'>
+            <h3>내역</h3>
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <div className='animal__info__container'>
+
+        <div className='animal__info__content'>
+
+          <h3>심장사상충 접종</h3>
+          <input type="text"/>
+
+        </div>
+
+        <div className='animal__info__content'>
+
+          <h3>예방접종 내역</h3>
+
+        </div>
+
+        <div className='animal__info__content'>
+
+          <h3>예방접종 내역</h3>
+
         </div>
       </div>
 
