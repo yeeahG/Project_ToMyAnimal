@@ -116,6 +116,14 @@ li {
     fill: #fe81b9;
 }
 
+.animal__blob__profile {
+    position: absolute;
+    width: 350px;
+    top: 10px;
+    /* right: 70px; */
+    z-index: 1;
+}
+
 #image__container {
     box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;
 }
@@ -428,6 +436,10 @@ li {
     }
 
     .animal__blob {
+        width: 20vw;
+    }
+
+    .animal__blob__profile {
         width: 20vw;
     }
 
