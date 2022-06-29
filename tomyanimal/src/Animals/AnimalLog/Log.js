@@ -12,22 +12,22 @@ const sortOptionList = [
 ]
 
 const Log = () => {
-    const [sortType, setSortType] = useState('latest');
-    const [isOpen, setOpen] = useState(false);
+  const [sortType, setSortType] = useState('latest');
+  const [isOpen, setOpen] = useState(false);
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage, setPostsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(5);
 
-    //const [logList, setLogList] = useState([]);
-    const [logId, setLogId] = useState("");
-    const [logTitle, setLogTitle] = useState("");
-    const [logContent, setLogContent] = useState("");
-    const [logarray, setLogArray] = useState([]);
+  //const [logList, setLogList] = useState([]);
+  const [logId, setLogId] = useState("");
+  const [logTitle, setLogTitle] = useState("");
+  const [logContent, setLogContent] = useState("");
+  const [logarray, setLogArray] = useState([]);
 
-    //const userId = localStorage.getItem('userid');
-    const userid = localStorage.getItem('userid');
+  //const userId = localStorage.getItem('userid');
+  const userid = localStorage.getItem('userid');
 
-    {/* http://localhost:8084/api/my-board?memberId=${userId}
+  {/* http://localhost:8084/api/my-board?memberId=${userId}
   https://jsonplaceholder.typicode.com/posts */}
   
   const putLog = [];
@@ -39,7 +39,7 @@ const Log = () => {
         Authorization: localStorage.getItem('logintoken'),
       }
     }).then((response) => {
-      for (let i=0; i < response.data.result.data.length; i++) {
+      for (let i=0; i < response.data.result.data.postList.length; i++) {
       // setLogId(response.data.result.data[i].id);
       // setLogTitle(response.data.result.data[i].title)
       // setLogContent(response.data.result.data[i].content)

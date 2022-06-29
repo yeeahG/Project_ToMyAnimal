@@ -19,7 +19,7 @@ const LogWrite = () => {
         const newPost = {
             title: title,
             content: content,
-            categoryId: "1"
+            categoryId: 1
             //userId: localStorage.getItem('usename'),
             //date: new Date()
         }
@@ -32,7 +32,7 @@ const LogWrite = () => {
         if(title != "" || content != "") {
             await axios({
                 method: 'post', 
-                url: 'http://localhost:8084/api/board',
+                url: 'http://localhost:8084/api/posts',
                 data: newPost,
                 headers: { 
                     'Authorization': localStorage.getItem('logintoken'),
