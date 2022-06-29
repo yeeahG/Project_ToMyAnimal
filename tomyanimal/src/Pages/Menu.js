@@ -3,7 +3,6 @@ import './Menu.css'
 
 const Menu = () => {
     const [isOpen, setMenu] = useState(false);
-    const outSection = useRef();
 
     const toggleMenu = () => {
         setMenu(isOpen => !isOpen); // on,off 개념 boolean
@@ -17,7 +16,7 @@ const Menu = () => {
         document.getElementById("menu-wrapper").style.background = "#fe81b9";
     }
 
-    function useOutsideAlerter(ref) {
+    function useOutsideClose(ref) {
         useEffect(() => {
 
           function handleClickOutside(event) {
@@ -28,15 +27,13 @@ const Menu = () => {
 
           document.addEventListener("mousedown", handleClickOutside);
           return () => {
-
             document.removeEventListener("mousedown", handleClickOutside);
           };
         }, [ref]);
     }
-    
     const wrapperRef = useRef(null);
-    useOutsideAlerter(wrapperRef);
-    
+    useOutsideClose(wrapperRef);
+
 
   return (
     <div className='nav__wrapper'>
@@ -59,7 +56,6 @@ const Menu = () => {
         </header>
 
         {/* <section className={isOpen ? "show-menu" : "hide-menu"}> */}
-
         {isOpen ?
         <section className= "show-menu" ref={wrapperRef}>
             <div className="menu__wrapper jTgRTL" id="menu-wrapper" color="#CDBFEC" >
@@ -96,8 +92,7 @@ const Menu = () => {
         </section>
         :
         null
-}
-
+    }
 
     </div>
   )
