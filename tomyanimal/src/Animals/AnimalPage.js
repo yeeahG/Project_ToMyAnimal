@@ -163,7 +163,8 @@ const AnimalPage = () => {
         <div className='animal__info__content'>
 
           <h3>심장사상충 접종</h3>
-          <input type="text"/>
+          <p>2022 06 29
+            심장사상충</p>
 
         </div>
 
