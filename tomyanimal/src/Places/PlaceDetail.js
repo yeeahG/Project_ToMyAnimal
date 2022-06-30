@@ -12,38 +12,38 @@ const PlaceDetail = ( {place} ) => {
 
   const isOpenHandler = () => {
     setOpen(!isOpen);
-
+    navigate(`/places/all/${id}`)
   }
 
+{/**/}
   return (
     <div className='place__detail__container'> 
      {isOpen ? 
         <Reservation place={place} />
-        : 
-      <>      <div className='place__title'>
-        <h2>{place.title}</h2>
-        <p>{place.type}</p>
-      </div>
-      <p className='place__keyword'>{place.keyword}</p>
-      <div className='place__addr'>
-        {place.addr}
-      </div>
-      <div className='place__detail__review'>
-        <p>Review</p>
-        <p>{place.rating}</p>
-      </div>
+     :  
+      <>
+        <div className='place__title'>
+          <h2>{place.title}</h2>
+          <p>{place.type}</p>
+        </div>
+        <p className='place__keyword'>{place.keyword}</p>
+        <div className='place__addr'>
+          {place.addr}
+        </div>
+        <div className='place__detail__review'>
+          <p>Review</p>
+          <p>{place.rating}</p>
+        </div>
 
-      <div 
-        className='place__detail__reserve' 
-        onClick={isOpenHandler}
-      >
-        <p>예약</p>
-      </div>
-</>
+        <div 
+          className='place__detail__reserve' 
+          onClick={isOpenHandler}
+        >
+          <p>예약</p>
+        </div>
+      </>
 
-
-      }
-
+       }
     </div>
   )
 }

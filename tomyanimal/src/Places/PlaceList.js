@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import ControlMenu from '../Pages/ControlMenu';
 import PlaceDetail from './PlaceDetail';
-import Reservation from './Reservation/Reservation'
+import Reservation from './Reservation/Reservation';
 import './Places.css'
 
 const sortOptionList = [
@@ -30,6 +31,10 @@ const PlaceList = ( {placeData, isLoading} ) => {
   //console.log(placeData[0]);
 
   const [isOpen, setOpen] = useState(false);
+
+  
+  const navigate = useNavigate();
+  //const id = place.id
 
   {/*
   if(isLoading) return (
@@ -74,6 +79,13 @@ const PlaceList = ( {placeData, isLoading} ) => {
     // return sortedList;
   }
 
+
+
+  /*const isOpenHandler = () => {
+    setOpen(!isOpen);
+    navigate(`/places/all/${id}`)
+  }*/
+
   return (
   <div>
     <div className='control__menu'>
@@ -95,10 +107,26 @@ const PlaceList = ( {placeData, isLoading} ) => {
     </div>
 
     <div className='place__detail__list'>
+
+      {/*
+      {isOpen ? 
+      <Reservation getProcessedList={getProcessedList} placeData={placeData} /> 
+      :
+      <>
+      */}
+   
       {/* {placeData && placeData.map((place, i) =>  */}
       {getProcessedList().map((place, i) => 
-        <PlaceDetail place={place} key={i} {...place}/>
+        <PlaceDetail place={place} key={i} {...place}
+          /*isOpenHandler={isOpenHandler} */
+        />
       )}
+      
+      {/*
+      </>
+      }
+      */}
+
     </div>
 
   </div>
