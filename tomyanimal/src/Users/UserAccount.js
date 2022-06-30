@@ -48,7 +48,7 @@ const UserAccount = () => {
   useEffect(() => {
     axios({
       method: 'get', 
-      url: 'http://localhost:8084/api/members',
+      url: `http://localhost:8084/api/members/${loginId}`,
       headers: {
         Authorization: localStorage.getItem('logintoken') 
       }
