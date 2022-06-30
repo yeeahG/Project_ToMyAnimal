@@ -48,15 +48,15 @@ const UserAccount = () => {
   useEffect(() => {
     axios({
       method: 'get', 
-      url: `http://localhost:8084/api/members?memberId=${loginId}`,
+      url: `http://localhost:8084/api/${loginId}`,
       headers: {
         Authorization: localStorage.getItem('logintoken') 
       }
     }).then((user) => {
       setUser(user);
-      setUserName(user.data.result.data['userName']) 
-      setUserPhone(user.data.result.data['userPhoneNumber'])
-      localStorage.setItem('usename', user.data.result.data['userName']);
+      setUserName(user.data.result.data['name']) 
+      setUserPhone(user.data.result.data['phoneNumber'])
+      localStorage.setItem('usename', user.data.result.data['name']);
       localStorage.setItem('userInfo', JSON.stringify(user.data.result.data));
     })
   }, []);
@@ -139,9 +139,9 @@ const UserAccount = () => {
     e.preventDefault();
 
     const editedContact = {
-      id: loginId,
-      username: editFormData.name,
-      userPhoneNumber: editFormData.contact,
+      memberId: loginId,
+      name: editFormData.name,
+      phoneNumber: editFormData.contact,
     }
     console.log(editedContact);
 
