@@ -31,15 +31,15 @@ public class Member extends EntityDate {
     @Column(nullable = false, length = 15, unique = true)
     private String identifier;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 14)
     private String phoneNumber;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 30)
     private String name;
 
-    @Column(name = "password")
     private String password;
 
+    @Column(nullable = false, length = 30, unique = true)
     private String email;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -58,7 +58,7 @@ public class Member extends EntityDate {
     }
 
     // 회원 정보 수정
-    public void updateUserInfo(MemberUpdateRequest req) {
+    public void updateMemberInfo(MemberUpdateRequest req) {
         this.phoneNumber = req.getPhoneNumber();
         this.name = req.getName();
     }

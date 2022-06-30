@@ -14,6 +14,7 @@ import team1.toMyAnimal.domain.image.BoardImage;
 import team1.toMyAnimal.domain.member.Member;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +30,7 @@ public class Board extends EntityDate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 30)
     private String title;
 
     @Column(nullable = false)

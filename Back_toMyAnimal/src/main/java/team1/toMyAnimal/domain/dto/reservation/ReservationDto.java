@@ -3,8 +3,8 @@ package team1.toMyAnimal.domain.dto.reservation;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import team1.toMyAnimal.domain.dto.animal.AnimalDto;
 import team1.toMyAnimal.domain.dto.member.MemberDto;
-import team1.toMyAnimal.domain.dto.pet.PetDto;
 import team1.toMyAnimal.domain.reservation.Reservation;
 
 import java.time.LocalDateTime;
@@ -20,7 +20,7 @@ public class ReservationDto{
 
     private MemberDto member;
 
-    private PetDto pet;
+    private AnimalDto animal;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime createAt;
@@ -33,7 +33,7 @@ public class ReservationDto{
                 reserv.getId(),
                 reserv.getType(),
                 MemberDto.toDto(reserv.getMember()),
-                PetDto.toDto(reserv.getPet()),
+                AnimalDto.toDto(reserv.getAnimal()),
                 reserv.getCreatedAt(),
                 reserv.getModifiedAt()
         );

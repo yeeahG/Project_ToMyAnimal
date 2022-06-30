@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import team1.toMyAnimal.domain.member.Member;
 import team1.toMyAnimal.domain.member.Role;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -31,6 +32,7 @@ public class SignUpRequest {
     @NotBlank(message = "비밀번호를 입력해주세요.")
     private String password;
 
+    @Email(message = "이메일 형식을 맞춰주세요.")
     @NotBlank(message = "메일을 입력해주세요.")
     private String email;
 

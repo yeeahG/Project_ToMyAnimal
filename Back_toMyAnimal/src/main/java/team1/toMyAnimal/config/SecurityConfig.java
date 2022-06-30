@@ -58,12 +58,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers(HttpMethod.DELETE, "/api/members/{id}").access("@memberGuard.check(#id)")
                 .antMatchers(HttpMethod.DELETE, "/api/categories/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/api/pets/{id}").access("@petGuard.check(#id)")
+                .antMatchers(HttpMethod.DELETE, "/api/pets/{id}").access("@animalGuard.check(#id)")
                 .antMatchers(HttpMethod.DELETE, "/api/comments/{id}").access("@commentGuard.check(#id)")
                 .antMatchers(HttpMethod.DELETE, "/api/board/{id}").access("@boardGuard.check(#id)")
                 .antMatchers(HttpMethod.DELETE, "/api/reservation/{id}").authenticated()
 
-                .antMatchers(HttpMethod.PUT, "/api/pets/{id}").access("@petGuard.check(#id)")
+                .antMatchers(HttpMethod.PUT, "/api/pets/{id}").access("@animalGuard.check(#id)")
                 .antMatchers(HttpMethod.PUT, "/api/member/{id}").access("@memberGuard.check(#id)")
                 .antMatchers(HttpMethod.PUT, "/api/board/{id}").access("@boardGuard.check(#id)")
                 .antMatchers(HttpMethod.PUT, "/api/reservation/{id}").authenticated()
