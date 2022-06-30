@@ -1,4 +1,4 @@
-package team1.toMyAnimal.service.sign.sign;
+package team1.toMyAnimal.service.sign;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

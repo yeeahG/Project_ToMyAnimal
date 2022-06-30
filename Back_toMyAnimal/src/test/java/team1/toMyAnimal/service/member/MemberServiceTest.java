@@ -1,4 +1,4 @@
-package team1.toMyAnimal.service.sign.member;
+package team1.toMyAnimal.service.member;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
