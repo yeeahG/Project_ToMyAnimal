@@ -60,15 +60,15 @@ const Signup = () => {
       .then((result) => {
         if(result.success === 'success'){
           alert("가입이 완료되었습니다") 
-          navigate('/user')
         }
       }) 
-
+      
       .catch((error) => {
         console.error('실패:', error);
         alert("다시 시도해주세요")
       });
       
+      navigate('/user')
       //localStorage.setItem("userinfo", JSON.stringify(item))
       // alert('가입이 완료되었습니다')
 
