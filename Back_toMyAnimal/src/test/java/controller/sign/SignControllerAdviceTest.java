@@ -64,7 +64,7 @@ class SignControllerAdviceTest {
     }
 
     @Test
-    void signUpMemberEmailAlreadyExistsExceptionTest() throws Exception {
+    void signUpMemberIdAlreadyExistsExceptionTest() throws Exception {
         // given
         SignUpRequest req = new SignUpRequest("id1","01011112222", "name", "123456a!", "email@email.com");
         doThrow(MemberIdAlreadyExistsException.class).when(signService).signUp(any());
@@ -78,7 +78,7 @@ class SignControllerAdviceTest {
     }
 
     @Test
-    void signUpMemberNicknameAlreadyExistsExceptionTest() throws Exception {
+    void signUpMemberPhoneNumberAlreadyExistsExceptionTest() throws Exception {
         // given
         SignUpRequest req = new SignUpRequest("id1","01011112222", "name", "123456a!", "email@email.com");
         doThrow(MemberPhoneNumberAlreadyExistsException.class).when(signService).signUp(any());
