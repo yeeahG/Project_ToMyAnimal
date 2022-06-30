@@ -15,7 +15,7 @@ const PlaceDetail = ( {place} ) => {
     navigate(`/places/all/${id}`)
   }
 
-{/**/}
+  {/**/}
   return (
     <div className='place__detail__container'> 
      {isOpen ? 
