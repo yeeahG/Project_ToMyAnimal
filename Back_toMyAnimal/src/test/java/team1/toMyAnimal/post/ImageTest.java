@@ -1,16 +1,14 @@
 package team1.toMyAnimal.post;
 
 import org.junit.jupiter.api.Test;
-import team1.toMyAnimal.domain.post.Image;
-import team1.toMyAnimal.domain.post.Post;
+
 import team1.toMyAnimal.exception.UnsupportedImageFormatException;
 
 
+import java.awt.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static team1.toMyAnimal.factory.post.ImageFactory.createImage;
-import static team1.toMyAnimal.factory.post.ImageFactory.createImageWithOriginName;
-import static team1.toMyAnimal.factory.post.PostFactory.createPost;
 
 
 class ImageTest {
