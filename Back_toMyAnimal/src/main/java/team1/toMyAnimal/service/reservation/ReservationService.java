@@ -7,7 +7,7 @@ import team1.toMyAnimal.domain.dto.reservation.*;
 import team1.toMyAnimal.domain.reservation.Reservation;
 import team1.toMyAnimal.exception.ReservationNotFoundException;
 import team1.toMyAnimal.repository.member.MemberRepository;
-import team1.toMyAnimal.repository.pet.PetRepository;
+import team1.toMyAnimal.repository.animal.AnimalRepository;
 import team1.toMyAnimal.repository.reservation.ReservationRepository;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final MemberRepository memberRepository;
 
-    private final PetRepository petRepository;
+    private final AnimalRepository animalRepository;
 
     //C
     @Transactional
@@ -28,7 +28,7 @@ public class ReservationService {
                 ReservationCreateRequest.toEntity(
                         req,
                         memberRepository,
-                        petRepository
+                        animalRepository
                 )
         );
         return new ReservationCreateResponse(reservation.getId());

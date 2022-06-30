@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import team1.toMyAnimal.domain.pet.Pet;
+import team1.toMyAnimal.domain.animal.Animal;
 import team1.toMyAnimal.exception.UnsupportedImageFormatException;
 
 import javax.persistence.*;
@@ -15,7 +15,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PetImage {
+public class AnimalImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,20 +28,20 @@ public class PetImage {
     private String originName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pet_id", nullable = false)
+    @JoinColumn(name = "animal_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Pet pet;
+    private Animal animal;
 
     private final static String supportedExtension[] = {"jpg", "jpeg", "gif", "bmp", "png"}; // 2
 
-    public PetImage(String originName) {
+    public AnimalImage(String originName) {
         this.uniqueName = generateUniqueName(extractExtension(originName));
         this.originName = originName;
     }
 
-    public void initPet(Pet pet) {
-        if(this.pet == null) {
-            this.pet = pet;
+    public void initAnimal(Animal animal) {
+        if(this.animal == null) {
+            this.animal = animal;
         }
     }
 

@@ -5,15 +5,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;
 import team1.toMyAnimal.domain.member.RoleType;
-import team1.toMyAnimal.domain.pet.Pet;
-import team1.toMyAnimal.repository.pet.PetRepository;
+import team1.toMyAnimal.domain.animal.Animal;
+import team1.toMyAnimal.repository.animal.AnimalRepository;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class PetGuard {
+public class AnimalGuard {
     private final AuthHelper authHelper;
-    private final PetRepository petRepository;
+    private final AnimalRepository animalRepository;
 
     public boolean check(Long id) {
         return authHelper.isAuthenticated() && hasAuthority(id);
@@ -22,9 +22,9 @@ public class PetGuard {
         return hasAdminRole() || isResourceOwner(id);
     }
     private boolean isResourceOwner(Long id) {
-        Pet pet = petRepository.findById(id).orElseThrow(() -> { throw new AccessDeniedException(""); });
+        Animal animal = animalRepository.findById(id).orElseThrow(() -> { throw new AccessDeniedException(""); });
         Long memberId = authHelper.extractMemberId();
-        return pet.getMember().getId().equals(memberId);
+        return animal.getMember().getId().equals(memberId);
     }
 
     private boolean hasAdminRole() {

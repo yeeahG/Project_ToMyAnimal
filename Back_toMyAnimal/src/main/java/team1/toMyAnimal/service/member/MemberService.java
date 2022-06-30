@@ -35,7 +35,7 @@ public class MemberService {
     @Transactional
     public MemberUpdateResponse update(Long id, MemberUpdateRequest req) {
         Member member = memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);
-        member.updateUserInfo(req);
+        member.updateMemberInfo(req);
         return new MemberUpdateResponse(id);
 
     }

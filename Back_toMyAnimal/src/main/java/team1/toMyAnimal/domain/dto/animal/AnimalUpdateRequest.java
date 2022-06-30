@@ -1,4 +1,4 @@
-package team1.toMyAnimal.domain.dto.pet;
+package team1.toMyAnimal.domain.dto.animal;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,9 +12,9 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PetUpdateRequest {
+public class AnimalUpdateRequest {
     private String registrationNumber;
-    private String petName;
+    private String name;
     private double weight;
     private List<MultipartFile> addedImages = new ArrayList<>();
     private List<Long> deletedImages = new ArrayList<>();

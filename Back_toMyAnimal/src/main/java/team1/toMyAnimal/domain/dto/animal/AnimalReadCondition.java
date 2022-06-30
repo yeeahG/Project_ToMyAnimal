@@ -1,14 +1,12 @@
-package team1.toMyAnimal.domain.dto.pet;
+package team1.toMyAnimal.domain.dto.animal;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Null;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PetReadCondition {
+public class AnimalReadCondition {
     private Long memberId;
 }

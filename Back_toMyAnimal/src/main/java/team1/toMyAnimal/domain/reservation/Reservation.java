@@ -8,7 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import team1.toMyAnimal.domain.common.EntityDate;
 import team1.toMyAnimal.domain.dto.reservation.ReservationUpdateRequest;
 import team1.toMyAnimal.domain.member.Member;
-import team1.toMyAnimal.domain.pet.Pet;
+import team1.toMyAnimal.domain.animal.Animal;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -26,6 +26,7 @@ public class Reservation extends EntityDate {
     private Long id;
     private LocalDate date;
 
+    @Column(length = 42) // 세상에서 제일 긴 동물이름 알파벳 42자
     private String type;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -34,15 +35,15 @@ public class Reservation extends EntityDate {
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pet_id", nullable = false)
+    @JoinColumn(name = "animal_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Pet pet;
+    private Animal animal;
 
-    public Reservation(LocalDate date, LocalDateTime time, String type, Member member, Pet pet){
+    public Reservation(LocalDate date, String type, Member member, Animal animal){
         this.date = date;
         this.type = type;
         this.member = member;
-        this.pet = pet;
+        this.animal = animal;
     }
 
     public void update(ReservationUpdateRequest req) {

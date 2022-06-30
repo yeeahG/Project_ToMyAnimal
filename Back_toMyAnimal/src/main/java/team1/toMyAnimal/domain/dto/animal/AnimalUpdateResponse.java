@@ -1,10 +1,10 @@
-package team1.toMyAnimal.domain.dto.pet;
+package team1.toMyAnimal.domain.dto.animal;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class PetUpdateResponse {
+public class AnimalUpdateResponse {
     private Long id;
 }
