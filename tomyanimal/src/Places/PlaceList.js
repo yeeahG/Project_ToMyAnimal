@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ControlMenu from '../Pages/ControlMenu';
 import PlaceDetail from './PlaceDetail';
+import Reservation from './Reservation/Reservation'
 import './Places.css'
 
 const sortOptionList = [
@@ -27,6 +28,8 @@ const PlaceList = ( {placeData, isLoading} ) => {
   const [ratings, setRatings] =useState();
   const [keyword, setKeyword] = useState();
   //console.log(placeData[0]);
+
+  const [isOpen, setOpen] = useState(false);
 
   {/*
   if(isLoading) return (
@@ -97,6 +100,7 @@ const PlaceList = ( {placeData, isLoading} ) => {
         <PlaceDetail place={place} key={i} {...place}/>
       )}
     </div>
+
   </div>
   )
 }
