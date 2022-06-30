@@ -189,5 +189,110 @@ public class BoardControllerIntegrationTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/exception/entry-point"));
     }
+
+    @Test
+    void updateByResourceOwnerTest() throws Exception {
+        // given
+        SignInResponse signInRes = signService.signIn(createSignInRequest(member1.getEmail(), initDB.getPassword()));
+        Board board = boardRepository.save(createBoard(member1, category));
+        String updatedTitle = "updatedTitle";
+        String updatedContent = "updatedContent";
+        Integer updatedType = 1;
+
+        // when, then
+        mockMvc.perform(
+                        multipart("/api/board/{id}", board.getId())
+                                .param("title", updatedTitle)
+                                .param("content", updatedContent)
+                                .param("type", String.valueOf(updatedType))
+                                .with(requestBoardProcessor -> {
+                                    requestBoardProcessor.setMethod("PUT");
+                                    return requestBoardProcessor;
+                                })
+                                .contentType(MediaType.MULTIPART_FORM_DATA)
+                                .header("Authorization", signInRes.getAccessToken()))
+                .andExpect(status().isOk());
+
+        Board updatedBoard = boardRepository.findById(board.getId()).orElseThrow(BoardNotFoundException::new);
+        assertThat(updatedBoard.getTitle()).isEqualTo(updatedTitle);
+        assertThat(updatedBoard.getContent()).isEqualTo(updatedContent);
+        assertThat(updatedBoard.getType()).isEqualTo(updatedType);
+    }
+
+    @Test
+    void updateByAdminTest() throws Exception {
+        // given
+        SignInResponse adminSignInRes = signService.signIn(createSignInRequest(admin.getEmail(), initDB.getPassword()));
+        Board board = boardRepository.save(createBoard(member1, category));
+        String updatedTitle = "updatedTitle";
+        String updatedContent = "updatedContent";
+        Integer updatedType = 1;
+
+        // when, then
+        mockMvc.perform(
+                        multipart("/api/Board/{id}", board.getId())
+                                .param("title", updatedTitle)
+                                .param("content", updatedContent)
+                                .param("type", String.valueOf(updatedType))
+                                .with(requestBoardProcessor -> {
+                                    requestBoardProcessor.setMethod("PUT");
+                                    return requestBoardProcessor;
+                                })
+                                .contentType(MediaType.MULTIPART_FORM_DATA)
+                                .header("Authorization", adminSignInRes.getAccessToken()))
+                .andExpect(status().isOk());
+
+        Board updatedBoard = boardRepository.findById(board.getId()).orElseThrow(BoardNotFoundException::new);
+        assertThat(updatedBoard.getTitle()).isEqualTo(updatedTitle);
+        assertThat(updatedBoard.getContent()).isEqualTo(updatedContent);
+        assertThat(updatedBoard.getType()).isEqualTo(updatedType);
+    }
+
+    @Test
+    void updateUnauthorizedByNoneTokenTest() throws Exception {
+        // given
+        Board board = boardRepository.save(createBoard(member1, category));
+        String updatedTitle = "updatedTitle";
+        String updatedContent = "updatedContent";
+        Integer updatedType = 1;
+
+        // when, then
+        mockMvc.perform(
+                        multipart("/api/board/{id}", board.getId())
+                                .param("title", updatedTitle)
+                                .param("content", updatedContent)
+                                .param("type", String.valueOf(updatedType))
+                                .with(requestBoardProcessor -> {
+                                    requestBoardProcessor.setMethod("PUT");
+                                    return requestBoardProcessor;
+                                })
+                                .contentType(MediaType.MULTIPART_FORM_DATA))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/exception/entry-point"));
+    }
+    @Test
+    void updateAccessDeniedByNotResourceOwnerTest() throws Exception {
+        // given
+        SignInResponse notOwnerSignInRes = signService.signIn(createSignInRequest(member2.getEmail(), initDB.getPassword()));
+        Board board = boardRepository.save(createBoard(member1, category));
+        String updatedTitle = "updatedTitle";
+        String updatedContent = "updatedContent";
+        Integer updatedType = 1;
+
+        // when, then
+        mockMvc.perform(
+                        multipart("/api/board/{id}", board.getId())
+                                .param("title", updatedTitle)
+                                .param("content", updatedContent)
+                                .param("type", String.valueOf(updatedType))
+                                .with(requestBoardProcessor -> {
+                                    requestBoardProcessor.setMethod("PUT");
+                                    return requestBoardProcessor;
+                                })
+                                .contentType(MediaType.MULTIPART_FORM_DATA)
+                                .header("Authorization", notOwnerSignInRes.getAccessToken()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/exception/access-denied"));
+    }
 }
 
