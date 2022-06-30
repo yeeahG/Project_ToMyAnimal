@@ -12,14 +12,15 @@ const PlaceDetail = ( {place} ) => {
 
   const isOpenHandler = () => {
     setOpen(!isOpen);
-    navigate(`/places/all/${id}`)
-    console.log(id);
+
   }
 
   return (
     <div className='place__detail__container'> 
-
-      <div className='place__title'>
+     {isOpen ? 
+        <Reservation place={place} />
+        : 
+      <>      <div className='place__title'>
         <h2>{place.title}</h2>
         <p>{place.type}</p>
       </div>
@@ -38,11 +39,9 @@ const PlaceDetail = ( {place} ) => {
       >
         <p>예약</p>
       </div>
+</>
 
-      {isOpen ? 
-        <Reservation place={place} />
-        : 
-        "" 
+
       }
 
     </div>
