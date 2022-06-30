@@ -62,7 +62,7 @@
 .info__content {
     display: grid;
     grid-gap: 1rem;
-    padding: 4rem 1rem 4rem 1rem;
+    padding: 4rem;
 }
 
 /*================================LEFT MENU================================*/
@@ -82,6 +82,7 @@ li {
     overflow-y: auto;
     display: grid;
     grid-row-gap: 1rem;
+    margin: 0 0 4rem 0;
 }
 
 
@@ -120,8 +121,8 @@ li {
 .animal__blob__profile {
     position: absolute;
     width: 350px;
-    top: 50px;
-    right: 70px;
+    /* top: 50px; */
+    right: 5px;
     z-index: 1;
 }
 
@@ -253,14 +254,11 @@ li {
 }
 
 .input__container {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-    display: grid;
-    grid-row-gap: 1.5rem;
-    padding: 1rem 1rem 4rem;
     width: 100%;
     max-width: 50rem;
     align-self: center;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .title__container {
@@ -430,6 +428,12 @@ li {
         letter-spacing: -0.05ch;
     }
 
+    .animal__blob__profile {
+        width: 40vw;
+        right: -10px;
+        top: 10px;
+    }
+
     .etc h2 {
         letter-spacing: -0.05ch;
     }
@@ -509,7 +513,7 @@ li {
 
     .animal__blob__profile {
         width: 20vw;
-        right: 100px;
+        right: 50px;
         top: 10px;
     }
 
@@ -566,6 +570,14 @@ li {
         grid-column-gap: 3rem;
     }
 
+    .input__container {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        margin-left: 1.5rem;
+        display: grid;
+        grid-row-gap: 1.5rem;
+    }
+
     .input__container textarea  {
         width: 100%;
         height: 300px;
@@ -587,5 +599,14 @@ li {
     }
     .etc h2 {
         font-size: 5rem;
+    }
+}
+
+
+@media (min-width: 1200px) {
+    .animal__blob__profile {
+        width: 20vw;
+        right: 70px;
+        top: 10px;
     }
 }
