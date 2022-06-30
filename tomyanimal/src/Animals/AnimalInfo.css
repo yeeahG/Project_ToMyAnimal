@@ -254,14 +254,11 @@ li {
 }
 
 .input__container {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-    display: grid;
-    grid-row-gap: 1.5rem;
-    padding: 1rem 1rem 4rem;
     width: 100%;
     max-width: 50rem;
     align-self: center;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .title__container {
@@ -571,6 +568,14 @@ li {
     
     .list_day {
         grid-column-gap: 3rem;
+    }
+
+    .input__container {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        margin-left: 1.5rem;
+        display: grid;
+        grid-row-gap: 1.5rem;
     }
 
     .input__container textarea  {
