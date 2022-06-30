@@ -77,6 +77,7 @@ const Detail = () => {
     console.log("submit" + content);
 
     const newPost = {
+      type: 1,
       title: title, 
       content: content,
       categoryId: id
