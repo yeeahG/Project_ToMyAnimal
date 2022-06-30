@@ -76,9 +76,9 @@ const Place = () => {
       <div className='header'>
         <div className='space'></div>
         <div className='header__wrapper'>
-          <h1 className='header__content'>Header</h1>
+          <h1 className='header__content'>Where is</h1>
           <div className='header__detail'>
-            <p>details</p>
+            <p>전국에 있는 병원과 훈련소를 찾아보세요</p>
           </div>
         </div>
       </div>
