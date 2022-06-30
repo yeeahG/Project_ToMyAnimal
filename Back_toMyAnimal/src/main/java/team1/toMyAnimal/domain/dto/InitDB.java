@@ -44,7 +44,7 @@ public class InitDB {
         initTestAdmin();
         initTestMember();
         initCategory();
-        initPost();
+        initBoard();
     }
 
     private void initRole() {
@@ -85,7 +85,7 @@ public class InitDB {
         Category c8 = categoryRepository.save(new Category("category8", null));
     }
 
-    private void initPost() {
+    private void initBoard() {
         Member member = memberRepository.findAll().get(0);
         Category category = categoryRepository.findAll().get(0);
         IntStream.range(0, 20)

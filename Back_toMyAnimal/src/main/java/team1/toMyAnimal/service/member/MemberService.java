@@ -22,8 +22,8 @@ public class MemberService {
     private JavaMailSender mailSender;
     private static final String FROM_ADDRESS = "to.myanimal.official@gmail.com";
 
-    public MemberDto read(MemberReadCondition cond) {
-        return MemberDto.toDto(memberRepository.findById(cond.getId()).orElseThrow(MemberNotFoundException::new));
+    public MemberDto read(Long id) {
+        return MemberDto.toDto(memberRepository.findById(id).orElseThrow(MemberNotFoundException::new));
     }
 
     @Transactional

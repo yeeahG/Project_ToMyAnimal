@@ -25,10 +25,10 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @GetMapping("/api/members")
+    @GetMapping("/api/members/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Response read(@Valid MemberReadCondition cond) {
-        return Response.success(memberService.read(cond));
+    public Response read(@Valid @PathVariable Long id) {
+        return Response.success(memberService.read(id));
     }
 
 

@@ -8,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import team1.toMyAnimal.domain.dto.category.CategoryCreateRequest;
 import team1.toMyAnimal.domain.dto.category.CategoryDto;
 import team1.toMyAnimal.exception.CategoryNotFoundException;
+import team1.toMyAnimal.factory.CategoryFactory;
 import team1.toMyAnimal.repository.category.CategoryRepository;
 import team1.toMyAnimal.service.category.CategoryService;
 
@@ -20,6 +21,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
+import static team1.toMyAnimal.factory.CategoryCreateRequestFactory.createCategoryCreateRequest;
+import static team1.toMyAnimal.factory.CategoryFactory.createCategory;
 
 @ExtendWith(MockitoExtension.class)
 class CategoryServiceTest {
