@@ -18,7 +18,7 @@ const AnimalAdd = () => {
 
     const registerAnimal = async () => {
         const animal = {
-            id: loginId,
+            //id: loginId,
             petName: animalName,
             registrationNumber: animalId,
             birthday: animalAge,
@@ -27,7 +27,7 @@ const AnimalAdd = () => {
         //console.log(animal);
 
         const formData = new FormData()
-        formData.set('id', animal.id)
+        //formData.set('id', animal.id)
         formData.set('petName', animal.petName)
         formData.set('registrationNumber', animal.registrationNumber)
         formData.set('birthday', animal.birthday)
