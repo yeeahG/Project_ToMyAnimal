@@ -1,10 +1,20 @@
 import React, { useState } from 'react'
-import './Places.css'
+import { useNavigate } from 'react-router-dom'
 import Reservation from './Reservation/Reservation';
+import './Places.css'
 
 const PlaceDetail = ( {place} ) => {
   //console.log(place);
   const [isOpen, setOpen] = useState(false);
+
+  const navigate = useNavigate();
+  const id = place.id
+
+  const isOpenHandler = () => {
+    setOpen(!isOpen);
+    navigate(`/places/all/${id}`)
+    console.log(id);
+  }
 
   return (
     <div className='place__detail__container'> 
@@ -24,7 +34,7 @@ const PlaceDetail = ( {place} ) => {
 
       <div 
         className='place__detail__reserve' 
-        onClick={()=>setOpen(!isOpen)}
+        onClick={isOpenHandler}
       >
         <p>예약</p>
       </div>
