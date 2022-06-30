@@ -44,17 +44,23 @@ const Reservation = ( {place, placeData} ) => {
             </div>
 
             {isLogin ?
-            <div className='reserve_wrapper'>
+            <div className='reserve__wrapper'>
 
-                <div className='userinfo__subtitle'>
-                    <a href='/animal'>
+                <div className='reserve__subtitle'>
+                    <a href='/'>
                         <h1>Reservation</h1>
                     </a>
                     <p>예약을 진행하세요</p>
                 </div>
-                <section className='reserve_container'>
+
+                <section className='reserve__container'>
+                    <div className='reserve__info'>
+                        <div className='reserve__place'>
+                            <h3>시설정보</h3>
+                        </div>
+                    </div>
                     <div className='place__reserve__form'>
-                        <p>{id}</p>
+                        <p>id = {id}</p>
                         <div>
                             예약 종류
                             <div className='reserve__keyword'>
@@ -69,9 +75,11 @@ const Reservation = ( {place, placeData} ) => {
                             <input type="date" />
                         </div>
                         <div>
+                            <p>예약을 진행하세요</p>
                             <input />
                         </div>
                         <div>
+                            <p>예약을 진행하세요</p>
                             <input />
                         </div>
 

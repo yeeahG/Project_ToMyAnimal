@@ -1,12 +1,36 @@
-.reserve_wrapper {
+.reserve__wrapper {
     width: 100%;
     max-width: 50rem;
     align-self: center;
     margin-bottom: 1.5rem;
 } 
 
-.reserve_container {
+.reserve__subtitle {
 
+}
+
+.reserve__container {
+    align-items: start;
+    display: grid;
+    grid-row-gap: 2rem;
+    grid-column-gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.reserve__info {
+    background-color: #559df2;
+    color: white;
+    height: 100%;
+    border: 1px solid;
+}
+
+.reserve__place {
+    text-align: center;
+}
+
+.place__reserve__form {
+    border-top: 2px solid;
+    border-bottom: 2px solid;
 }
 
 .reserve__keyword {
@@ -30,18 +54,19 @@
 
 
 @media (min-width: 600px) {
-    .reserve_wrapper {
+    .reserve__wrapper {
 
     }
 }
 
 @media (min-width: 900px) {
-    .reserve_wrapper {
+    .reserve__wrapper {
         width: 55vw;
     }
-    .reserve_container {
-        margin: 1.5rem;
+
+    .reserve__container {
         display: grid;
         grid-row-gap: 1.5rem;
+        grid-template-columns: 1fr 1fr;
     }
 }
