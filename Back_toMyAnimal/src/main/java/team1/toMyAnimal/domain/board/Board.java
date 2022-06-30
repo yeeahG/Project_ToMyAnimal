@@ -112,6 +112,8 @@ public class Board extends EntityDate {
         private List<MultipartFile> addedImageFiles;
         private List<BoardImage> addedBoardImages;
         private List<BoardImage> deletedBoardImages;
+
+
     }
 
 

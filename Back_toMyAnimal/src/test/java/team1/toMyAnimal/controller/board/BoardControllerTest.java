@@ -18,7 +18,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static team1.toMyAnimal.factory.BoardCreateRequestFactory.createBoardCreateRequestWithImages;
 
@@ -48,7 +48,7 @@ class BoardControllerTest {
 
         // when, then
         mockMvc.perform(
-                        multipart("/api/Boards")
+                        multipart("/api/board")
                                 .file("images", imageFiles.get(0).getBytes())
                                 .file("images", imageFiles.get(1).getBytes())
                                 .param("title", req.getTitle())
@@ -66,5 +66,29 @@ class BoardControllerTest {
 
         BoardCreateRequest capturedRequest = BoardCreateRequestArgumentCaptor.getValue();
         assertThat(capturedRequest.getImages().size()).isEqualTo(2);
+    }
+
+    @Test
+    void readTest() throws Exception {
+        // given
+        Long id = 1L;
+
+        // when, then
+        mockMvc.perform(
+                        get("/api/board/{id}", id))
+                .andExpect(status().isOk());
+        verify(boardService).read(id);
+    }
+
+    @Test
+    void deleteTest() throws Exception {
+        // given
+        Long id = 1L;
+
+        // when, then
+        mockMvc.perform(
+                        delete("/api/board/{id}", id))
+                .andExpect(status().isOk());
+        verify(boardService).delete(id);
     }
 }

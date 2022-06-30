@@ -16,16 +16,16 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LocalFileServiceTest {
     LocalFileService localFileService = new LocalFileService();
-    String testLocation = new File("src/test/resources/static").getAbsolutePath() + "/"; // 1
+    String testLocation = new File("src/test/resources/static").getAbsolutePath() + "/";
 
     @BeforeEach
-    void beforeEach() throws IOException { // 2
+    void beforeEach() throws IOException {
         ReflectionTestUtils.setField(localFileService, "location", testLocation);
         FileUtils.cleanDirectory(new File(testLocation));
     }
 
     @Test
-    void uploadTest() { // 3
+    void uploadTest() {
         // given
         MultipartFile file = new MockMultipartFile("myFile", "myFile.txt", MediaType.TEXT_PLAIN_VALUE, "test".getBytes());
         String filename = "testFile.txt";
@@ -37,7 +37,26 @@ class LocalFileServiceTest {
         assertThat(isExists(testLocation + filename)).isTrue();
     }
 
+    @Test
+    void deleteTest() {
+        // given
+        MultipartFile file = new MockMultipartFile("myFile", "myFile.txt", MediaType.TEXT_PLAIN_VALUE, "test".getBytes());
+        String filename = "testFile.txt";
+        localFileService.upload(file, filename);
+        boolean before = isExists(testLocation + filename);
+
+        // when
+        localFileService.delete(filename);
+
+        // then
+        boolean after = isExists(testLocation + filename);
+        assertThat(before).isTrue();
+        assertThat(after).isFalse();
+    }
+
     boolean isExists(String filePath) {
         return new File(filePath).exists();
     }
+
+
 }

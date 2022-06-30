@@ -19,6 +19,8 @@ public class BoardUpdateRequest {
     @NotBlank(message = "게시글 본문을 입력해주세요.")
     private String content;
 
+    private Integer type;
+
     private List<MultipartFile> addedImages = new ArrayList<>();
 
     private List<Long> deletedImages = new ArrayList<>();
