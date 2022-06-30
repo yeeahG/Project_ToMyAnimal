@@ -1,0 +1,28 @@
+.reserve_wrapper {
+    width: 100%;
+    max-width: 50rem;
+    align-self: center;
+    margin-bottom: 1.5rem;
+} 
+
+.reserve_container {
+
+}
+
+
+@media (min-width: 600px) {
+    .reserve_wrapper {
+
+    }
+}
+
+@media (min-width: 900px) {
+    .reserve_wrapper {
+        width: 55vw;
+    }
+    .reserve_container {
+        margin: 1.5rem;
+        display: grid;
+        grid-row-gap: 1.5rem;
+    }
+}

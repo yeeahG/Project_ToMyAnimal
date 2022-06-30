@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import User from '../../Users/User';
+import './Reservation.css'
 
 const Reservation = ( {place, placeData} ) => {
     console.log(place);
@@ -43,15 +44,20 @@ const Reservation = ( {place, placeData} ) => {
             </div>
 
             {isLogin ?
-            <div className='place__wrapper'>
-                <div className='place__form'>
+            <div className='reserve_wrapper'>
 
-                    <div className='place__detail__list'>
+                <div className='userinfo__subtitle'>
+                    <a href='/animal'>
+                        <h1>Reservation</h1>
+                    </a>
+                    <p>예약을 진행하세요</p>
+                </div>
+                <section className='reserve_container'>
+                    <div className='place__reserve__form'>
                         <p>{id}</p>
                         <p>예약</p>
                     </div>
-
-                </div>
+                </section>
 
             </div>
             : 
