@@ -23,6 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static team1.toMyAnimal.factory.SignInRequestFactory.createSignInRequest;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -83,13 +84,14 @@ class MemberControllerIntegrationTest {
     }
 
     @Test
-    void deleteUnauthorizedByNoneTokenTest() throws Exception {
+    void deleteUnauthorizedByRefreshTokenTest() throws Exception {
         // given
         Member member = memberRepository.findByIdentifier(initDB.getMember1Identifer()).orElseThrow(MemberNotFoundException::new);
+        SignInResponse signInRes = signService.signIn(createSignInRequest(initDB.getMember1Identifer(), initDB.getPassword()));
 
         // when, then
         mockMvc.perform(
-                        delete("/api/members/{id}", member.getId()))
+                        delete("/api/members/{id}", member.getId()).header("Authorization", signInRes.getRefreshToken()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/exception/entry-point"));
     }

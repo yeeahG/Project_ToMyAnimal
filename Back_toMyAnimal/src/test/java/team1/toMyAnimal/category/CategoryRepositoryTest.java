@@ -2,7 +2,6 @@ package team1.toMyAnimal.category;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.EmptyResultDataAccessException;
 import team1.toMyAnimal.domain.category.Category;
@@ -17,10 +16,10 @@ import java.util.List;
 import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
+import static team1.toMyAnimal.factory.CategoryFactory.createCategory;
+import static team1.toMyAnimal.factory.CategoryFactory.createCategoryWithName;
 
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class CategoryRepositoryTest {
     @Autowired
     CategoryRepository categoryRepository;

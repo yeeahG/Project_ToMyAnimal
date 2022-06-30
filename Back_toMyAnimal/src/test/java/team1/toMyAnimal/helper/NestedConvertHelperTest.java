@@ -1,9 +1,8 @@
-package team1.toMyAnimal.category;
+package team1.toMyAnimal.helper;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import team1.toMyAnimal.exception.CannotConvertNestedStructureException;
-import team1.toMyAnimal.helper.NestedConvertHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class NestedConvertHelperTest {
 
-    private static class MyEntity {
+    private static class MyEntity { // 1
         private Long id;
         private String name;
         private MyEntity parent;
@@ -37,7 +36,7 @@ class NestedConvertHelperTest {
         }
     }
 
-    private static class MyDto {
+    private static class MyDto { // 2
         private Long id;
         private String name;
         private List<MyDto> children;
