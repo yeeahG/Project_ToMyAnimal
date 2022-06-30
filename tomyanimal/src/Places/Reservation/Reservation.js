@@ -55,7 +55,26 @@ const Reservation = ( {place, placeData} ) => {
                 <section className='reserve_container'>
                     <div className='place__reserve__form'>
                         <p>{id}</p>
-                        <p>예약</p>
+                        <div>
+                            예약 종류
+                            <div className='reserve__keyword'>
+                                <p>수술</p>
+                                <p>접종</p>
+                                <p>진료</p>
+                                <p>문의</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p>예약날짜</p>
+                            <input type="date" />
+                        </div>
+                        <div>
+                            <input />
+                        </div>
+                        <div>
+                            <input />
+                        </div>
+
                     </div>
                 </section>
 

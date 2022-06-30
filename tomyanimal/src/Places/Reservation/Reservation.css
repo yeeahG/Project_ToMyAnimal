@@ -9,6 +9,25 @@
 
 }
 
+.reserve__keyword {
+    display: flex;
+}
+
+.reserve__keyword p {
+    border: 1px solid #559df2;
+    border-radius: 20px;
+    width: 70px;
+    text-align: center;
+    background-color: transparent;
+    color: #559df2;
+    cursor: pointer;
+}
+
+.reserve__keyword p:hover {
+    background-color: #559df2;
+    color: white;
+}
+
 
 @media (min-width: 600px) {
     .reserve_wrapper {
