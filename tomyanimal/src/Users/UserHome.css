@@ -59,7 +59,7 @@
 .wrapper {
     display: grid;
     grid-gap: 1rem;
-    padding: 4rem 1rem 4rem 1rem;
+    padding: 4rem;
 }
 
 .account__content {

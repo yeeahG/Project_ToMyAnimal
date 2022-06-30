@@ -1,5 +1,11 @@
 /*==================List==================*/
+.log__wrapper {
 
+}
+
+.list__board {
+
+}
 
 
 /*==================BOARD==================*/
@@ -140,7 +146,7 @@
 
 @media (min-width: 900px) {
     .list__board table {
-        display: block;
+
     }
 
     .write__head input {
