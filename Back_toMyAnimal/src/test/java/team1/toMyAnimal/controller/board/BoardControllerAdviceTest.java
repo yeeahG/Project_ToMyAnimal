@@ -107,4 +107,24 @@ public class BoardControllerAdviceTest {
                 .andExpect(jsonPath("$.code").value(-1012));
     }
 
+    @Test
+    void updateExceptionByBoardNotFoundTest() throws Exception{
+        // given
+        given(boardService.update(anyLong(), any())).willThrow(BoardNotFoundException.class);
+
+        // when, then
+        mockMvc.perform(
+                        multipart("/api/board/{id}", 1L)
+                                .param("title", "title")
+                                .param("content", "content")
+                                .param("type", "1")
+                                .with(requestBoardProcessor -> {
+                                    requestBoardProcessor.setMethod("PUT");
+                                    return requestBoardProcessor;
+                                })
+                                .contentType(MediaType.MULTIPART_FORM_DATA))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.code").value(-1012));
+    }
+
 }
