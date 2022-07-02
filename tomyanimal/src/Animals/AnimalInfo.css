@@ -345,58 +345,6 @@ li {
 }
 
 
-/*================================CHECKLIST================================*/
-.checklist__wrapper {
-    position: relative;
-    position: grid;
-}
-
-.checklist__swiper {
-    transform: translate3d(0px, 0px, 0px);
-    transition-duration: 0ms;
-
-
-    box-sizing: content-box;
-    display: flex;
-    height: 100%;
-    position: relative;
-    transition-property: -webkit-transform;
-    transition-property: transform;
-    transition-property: transform,-webkit-transform;
-    width: 100%;
-    flex-wrap: wrap;
-}
-
-.checklist__content {
-    /* width: 245px;
-    height: 200px; 
-    border: 1px solid;*/
-    margin: 0.5rem;
-    width: 100%;
-}
-
-.checklist__img {
-    height: 200px;
-    max-width: none;
-    object-fit: cover;
-    /* position: absolute; */
-    /* width: 200px; */
-}
-
-/*detail*/
-.checklist__read__container {
-    display: flex;
-    flex-wrap: wrap;
-}
-.checklist__read__content {
-    border: 1px solid;
-    width: 200px;
-    margin: 7px;
-}
-
-.checklist__walk__container {
-    max-width: 50rem;
-}
 
 /**/
 .etc {
