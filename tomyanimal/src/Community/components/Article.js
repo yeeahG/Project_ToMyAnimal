@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import {HeartOutlined, HeartFilled} from '@ant-design/icons';
 
 const Article = ( {title, body} ) => {
   const {id} = useParams();
@@ -19,8 +20,14 @@ const Article = ( {title, body} ) => {
   const [isOpen, setOpen] = useState(false);
 
   const [error, setError] = useState("");
+
+  const [isCheck, setCheck] = useState([false, false, false, false, false]);
+  const [like, setLike] = useState([0, 0, 0, 0, 0]);
+
   //useContext로 저장해야 id로 내용 불러오기가능
   const userName = localStorage.getItem('usename')
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get('https://jsonplaceholder.typicode.com/posts/'+id)
@@ -28,6 +35,10 @@ const Article = ( {title, body} ) => {
       setData(response.data);
     })
   }, []);
+
+  const boardBack = () => {
+    navigate(-1);
+  }
 
   
   useEffect(() => {
@@ -81,6 +92,14 @@ const Article = ( {title, body} ) => {
   const openButton = () => {
     setOpen(!isOpen)
   }
+
+  const clickHeart = () => {
+    //let checkToggle = [...isCheck]
+    //checkToggle[i]++;
+    //setLike(likeCnt);
+
+    setCheck(!isCheck)
+  }
   
   return (
     <div>
@@ -105,8 +124,7 @@ const Article = ( {title, body} ) => {
             <div className='left__menu'>
               <ul className='menu__wrap'>
                 <li className='menu__list'>Community</li>
-                <li>a</li>
-                <li>a</li>
+                <li onClick={boardBack}>Back</li>
               </ul>
             </div>
 
@@ -131,7 +149,7 @@ const Article = ( {title, body} ) => {
               </div>
 
               <section className='article__container'>
-                
+
                 <div className='read__title'>
                   <a>자유게시판</a>
                   {/* <strong>title</strong> */}
@@ -186,7 +204,7 @@ const Article = ( {title, body} ) => {
                         <ul>
                           <li>
                             <div className='comment__section'>
-                              {com.map((it) => 
+                              {com.map((it, i) => 
                               <div className='comment__info'>
                                 <div className='comment__user'>
                                   {/*사용자*/}
@@ -200,10 +218,34 @@ const Article = ( {title, body} ) => {
                                     {/*댓글내용*/}
                                     <span>{it.body}</span>
                                   </div>
+
+                                  <button 
+                                    onClick={() => {
+                                    let likeCnt = [...like]
+                                    likeCnt[i]++;
+                                    setLike(likeCnt);
+                                    }}
+                                  >
+                                    <HeartFilled style={{ color: 'red', fontSize: '20px'}} />
+                                  </button>
+                                    {like[i]}
+
+                                  {isCheck?
+                                    <HeartFilled 
+                                      style={{ color: 'red', fontSize: '20px'}}
+                                      onClick={clickHeart}
+                                    />
+                                    :
+                                    <HeartOutlined 
+                                      style={{ fontSize: '20px'}}
+                                      onClick={clickHeart}
+                                    />
+                                  }
+
                                   <div className='reply__reply'>
-                                    <button>좋아요</button>
                                     <button>답글</button>
                                   </div>
+                                  
                                 </div>
                               </div>
                               )}

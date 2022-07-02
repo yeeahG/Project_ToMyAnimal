@@ -80,7 +80,7 @@
 
 /*==================ARTICLE==================*/
 .article__container {
-
+    margin: 1rem;
 }
 
 .userinfo__subtitle  {
@@ -105,7 +105,7 @@
 }
 
 .comment__view ul {
-    padding-right: 40px;
+    padding: 1rem;
 }
 
 .comment__info {
@@ -118,6 +118,15 @@
 
 .comment__reply {
     display: flex;
+    width: 100%;
+}
+
+.post__box {
+    width: 90%;
+}
+
+.reply__reply {
+    width: 10%;
 }
 
 
