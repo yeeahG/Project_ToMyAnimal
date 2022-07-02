@@ -79,6 +79,10 @@
 }
 
 /*==================ARTICLE==================*/
+.article__container {
+
+}
+
 .userinfo__subtitle  {
     background-color: #fe81b9;
     color: #f7f6f2;
@@ -87,6 +91,17 @@
 
 .userinfo__subtitle p {
     margin: auto 0;
+}
+
+.area__container {
+    display: flex;
+    justify-content: space-between;
+    margin: .5rem 0;
+}
+
+.profile__thumb {
+    display: flex;
+    justify-content: space-between;
 }
 
 .comment__view ul {

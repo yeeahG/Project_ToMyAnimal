@@ -15,6 +15,9 @@ const Article = ( {title, body} ) => {
   const [data, setData] = useState({})
   const [com, setCom] = useState([])
   const [comtext, setComText] = useState("")
+
+  const [isOpen, setOpen] = useState(false);
+
   const [error, setError] = useState("");
   //useContext로 저장해야 id로 내용 불러오기가능
   const userName = localStorage.getItem('usename')
@@ -74,6 +77,10 @@ const Article = ( {title, body} ) => {
         setError("한 글자 이상 입력하세요")
     }
   }
+
+  const openButton = () => {
+    setOpen(!isOpen)
+  }
   
   return (
     <div>
@@ -112,7 +119,7 @@ const Article = ( {title, body} ) => {
                 <p>Write everything</p>
               </div>
 
-              <div>
+              <div className='area__container'>
                 <div className='area__l'>
                   <button>목록</button>
                   <button>이전글</button>
@@ -123,121 +130,134 @@ const Article = ( {title, body} ) => {
                 </div>
               </div>
 
-              <div className='read__title'>
-                <a>자유게시판</a>
-                {/* <strong>title</strong> */}
-                <strong>{data.title}</strong>
-                <div className='info__desc'>
-                  <div className='profile__thumb'>
-                    <img />
-                  </div>
-                  <div className='content__info'>
-                    {/* <a>글쓴이이름</a> */}
-                    <a>{data.userId}</a>
-                    <span>조회수</span>
-                    <span>{view}</span>
-                    <span>작성시간</span>
-                    <span>
-                      댓글
-                      {com.length}
-                      {/*<a>{comment.length}</a>*/}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <div className='read__content'>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <div className='user__content'>
-                          <p>
-                            {/* 게시글 내용 */}
-                            {data.body}
-                          </p>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div>
-                {/* isOpen으로 구현하기 */}
-                <button>댓글</button>
-              </div>
-
-              <div className='comment__list'>
-                <div className='comment__view'>
-                  <ul>
-                    <li>
-
-                      <div className='comment__section'>
-                        {com.map((it) => 
-                        <div className='comment__info'>
-                          <div className='comment__user'>
-                            {/*사용자*/}
-                            <span>{it.id}</span>
-                            <a>{postId}</a>
-                            <span>날짜</span>
-                          </div>
-                          <div className='comment__reply'>
-                            <div className='post__box'>
-                              {/*<span>댓글내용</span>*/}
-                              <span>{it.body}</span>
-                              <img/>
-                            </div>
-                            <div className='reply__reply'>
-                              <button>답글</button>
-                            </div>
-                          </div>
-                        </div>
-                        )}
+              <section className='article__container'>
+                
+                <div className='read__title'>
+                  <a>자유게시판</a>
+                  {/* <strong>title</strong> */}
+                  <strong>{data.title}</strong>
+                  <div className='info__desc'>
+                    <div className='profile__thumb'>
+                      {/* <a>글쓴이이름</a> */}
+                      <a>{data.userId}</a>
+                      <div className='content__info'>
+                        <span>조회수</span>
+                        <span>{view}</span>
+                        <span>작성시간</span>
+                        <span>
+                          댓글
+                          {com.length}
+                          {/*<a>{comment.length}</a>*/}
+                        </span>
                       </div>
-
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-
-              <div className='comment__paging'>
-                <ul>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                </ul>
-              </div>
-
-              <div className='comment__write'>
-                <div className='comment__write__area'>
-
-                  <div className='box__textarea'>
-                    {error}
-                    <textarea 
-                      type='text'
-                      name='comment' 
-                      onChange={(e) => setComText(e.target.value)} />
-                  </div>
-
-                  <div className='comment__write__menu'>
-                    <div className='area__r'>
-                      <span>
-                        <span>0</span>
-                        <span>/</span>
-                        <span>총글자수</span>
-                      </span>
-                      <button onClick={addComment}>등록</button>
                     </div>
                   </div>
                 </div>
 
-              </div>
-                
-            </div>
+                <div className='read__content'>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div className='user__content'>
+                            <p>
+                              {/* 게시글 내용 */}
+                              {data.body}
+                            </p>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
 
+                <div>
+                  {/* isOpen으로 구현하기 */}
+                  <button onClick={openButton}>
+                    { isOpen ? "댓글" : "댓글목록" }
+                  </button>
+                </div>
+
+                {isOpen ?
+                  <>
+                    <div className='comment__list'>
+                      <div className='comment__view'>
+
+                        <ul>
+                          <li>
+                            <div className='comment__section'>
+                              {com.map((it) => 
+                              <div className='comment__info'>
+                                <div className='comment__user'>
+                                  {/*사용자*/}
+                                  <span>{it.id}</span>
+                                  <a>{postId}</a>
+                                  {/*댓글작성날짜*/}
+                                  <span>{it.email}</span>
+                                </div>
+                                <div className='comment__reply'>
+                                  <div className='post__box'>
+                                    {/*댓글내용*/}
+                                    <span>{it.body}</span>
+                                  </div>
+                                  <div className='reply__reply'>
+                                    <button>좋아요</button>
+                                    <button>답글</button>
+                                  </div>
+                                </div>
+                              </div>
+                              )}
+                            </div>
+                          </li>
+                        </ul>
+                        
+                      </div>
+                    </div>
+
+
+                    <div className='comment__paging'>
+                      <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                      </ul>
+                    </div>
+
+                  </>
+                  :
+                  ""
+                }
+                  
+                <div className='comment__write'>
+                  <div className='comment__write__area'>
+
+                    <div className='box__textarea'>
+                      {error}
+                      <textarea 
+                        type='text'
+                        name='comment' 
+                        onChange={(e) => setComText(e.target.value)} 
+                      />
+                    </div>
+
+                    <div className='comment__write__menu'>
+                      <div className='area__r'>
+                        <span>
+                          <span>0</span>
+                          <span>/</span>
+                          <span>총글자수</span>
+                        </span>
+                        <button onClick={addComment}>등록</button>
+                      </div>
+                    </div>
+                  
+                  </div>
+                </div>
+
+              </section>
+
+            </div>
 
           </section>
 
