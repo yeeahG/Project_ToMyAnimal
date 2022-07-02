@@ -20,7 +20,7 @@ const Detail = () => {
   const [postsPerPage, setPostsPerPage] = useState(6);
 
   const {id} = useParams();
-  //console.log(id);
+
   const userid = localStorage.getItem('userid');
 
   const checklist = useContext(ChecklistContext);
@@ -76,24 +76,26 @@ const Detail = () => {
   
   console.log(data);
 
-  const submitHandler = async () => {
+  const submitHandler = async (content) => {
     console.log("submit" + content);
 
     const newPost = {
       type: 1,
-      title: title, 
+      title: "title", 
       content: content,
       categoryId: id
     }
 
-    if(content.length < 1) {
-      contentRef.current.focus();
-      return;
-    }
+    // if(content.length < 1) {
+    //   contentRef.current.focus();
+    //   return;
+    // }
+
+    const newPosts = [...data, newPost];
+    console.log(newPosts);
 
     if(title != "" || content != "") {
       await axios({
-        method: 'post', 
         method: 'post', 
         url: 'http://localhost:8084/api/board',
         data: newPost,
@@ -190,7 +192,7 @@ const Detail = () => {
               </p>
             </form>
 
-            <button className='upload__btn'onClick={submitHandler} >write</button>
+            <button className='upload__btn' onClick={submitHandler} >write</button>
           </div>
             :
           <div className='checklist__read__container'>
@@ -249,7 +251,9 @@ const Detail = () => {
             </div>
 
 
-            <AddChecklist />
+            <AddChecklist 
+              submitHandler={submitHandler}
+            />
 
           </div>
 

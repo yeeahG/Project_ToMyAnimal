@@ -88,10 +88,32 @@
     background-color: #559df2;
 }
 
+.checklist__note.add textarea, .checklist__note.add input {
+    border: none;
+    resize: none;
+    background-color: transparent;
+}
+
+.checklist__note.add textarea:focus {
+    outline: none;
+}
+
 .checklist__note__footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.checklist__save {
+    background-color: #fef68a;
+    border: none;
+    border-radius: 15px;
+    padding: 5px 10px 5px 10px;
+} 
+
+.checklist__save:hover {
+    background-color: #f7f6f2;
+    cursor: pointer;
 }
 
 
