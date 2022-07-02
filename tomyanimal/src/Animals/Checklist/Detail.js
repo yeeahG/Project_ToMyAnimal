@@ -4,6 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Pagination from '../../Community/components/Pagination';
 import ControlMenu from '../../Pages/ControlMenu';
 import { ChecklistContext } from '../Checklist/CheckList'
+import AddChecklist from './AddChecklist';
+import './CardItem.css'
 
 const Detail = () => {
   const [isOpen, setOpen] = useState(false);
@@ -18,7 +20,7 @@ const Detail = () => {
   const [postsPerPage, setPostsPerPage] = useState(6);
 
   const {id} = useParams();
-  //console.log(id);
+
   const userid = localStorage.getItem('userid');
 
   const checklist = useContext(ChecklistContext);
@@ -33,7 +35,7 @@ const Detail = () => {
 
 
   {/*
-  seEffect(() => {
+  useEffect(() => {
 
       const targetCheckList = checklist.find(
         (it) => parseInt(it.id) === parseInt(id)
@@ -56,7 +58,8 @@ const Detail = () => {
   const putList = [];
   
   useEffect ( () => {
-    axios.get(`http://localhost:8084/api/posts?page=0&size=4&categoryId=${id}&memberId=${userid}`, {
+    //axios.get(`http://localhost:8084/api/posts?page=0&size=4&categoryId=${id}&memberId=${userid}`, {
+    axios.get(`http://localhost:8084/api/my-board?memberId=${userid}&categoryId=${id}&page=0&size=4&type=1`, {
       headers: {
         Authorization: localStorage.getItem('logintoken'),
       }
@@ -73,25 +76,28 @@ const Detail = () => {
   
   console.log(data);
 
-  const submitHandler = async () => {
+  const submitHandler = async (content) => {
     console.log("submit" + content);
 
     const newPost = {
       type: 1,
-      title: title, 
+      title: "title", 
       content: content,
       categoryId: id
     }
 
-    if(content.length < 1) {
-      contentRef.current.focus();
-      return;
-    }
+    // if(content.length < 1) {
+    //   contentRef.current.focus();
+    //   return;
+    // }
+
+    const newPosts = [...data, newPost];
+    console.log(newPosts);
 
     if(title != "" || content != "") {
       await axios({
         method: 'post', 
-        url: 'http://localhost:8084/api/posts',
+        url: 'http://localhost:8084/api/board',
         data: newPost,
         headers: { 
           'Authorization': localStorage.getItem('logintoken'),
@@ -162,7 +168,6 @@ const Detail = () => {
           {error}
           <div className='checklist__walk__container'>
             {id} detail
-            
           </div>
 
           {isOpen ?
@@ -187,13 +192,12 @@ const Detail = () => {
               </p>
             </form>
 
-            <button className='upload__btn'onClick={submitHandler} >write</button>
+            <button className='upload__btn' onClick={submitHandler} >write</button>
           </div>
             :
           <div className='checklist__read__container'>
             {/* {data.title} 
-            {data}*/}
-            {/* {data.map((it) => ( */}
+            {data.map((it) => ( */}
             {currentPosts.map((it) => (
               <div className='checklist__read__content'>
                 <h3>{it.title}</h3>
@@ -202,6 +206,57 @@ const Detail = () => {
             ))}
           </div>
           }
+
+
+          <div className='checkllist__wrapper'>
+
+            <div className='checklist__note'>
+              {currentPosts.map((it) => (
+                <div className='checklist__read__content'>
+                  <h3>{it.title}</h3>
+                  <p>{it.content}</p> 
+                  <h3>title</h3>
+                  <p>content</p>
+                </div>
+              ))}
+              <div className='checklist__note__footer'>
+                <small>2022/07.01</small>
+                <button>delete</button>
+              </div>
+            </div>
+
+            <div className='checklist__note'>
+              <h3>title</h3>
+              <p>content</p>
+              <div className='checklist__note__footer'>
+                <small>2022/07.01</small>
+                <button>delete</button>
+              </div>
+            </div>
+            <div className='checklist__note'>
+              <h3>title</h3>
+              <p>content</p>
+              <div className='checklist__note__footer'>
+                <small>2022/07.01</small>
+                <button>delete</button>
+              </div>
+            </div>
+            <div className='checklist__note'>
+              <h3>title</h3>
+              <p>content</p>
+              <div className='checklist__note__footer'>
+                <small>2022/07.01</small>
+                <button>delete</button>
+              </div>
+            </div>
+
+
+            <AddChecklist 
+              submitHandler={submitHandler}
+            />
+
+          </div>
+
 
           <Pagination 
             postsPerPage={postsPerPage}

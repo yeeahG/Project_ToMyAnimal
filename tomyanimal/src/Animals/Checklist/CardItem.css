@@ -12,6 +12,110 @@
     text-align: center;
 }
 
+/*================================CHECKLIST================================*/
+.checklist__wrapper {
+    position: relative;
+    position: grid;
+}
+
+.checklist__swiper {
+    transform: translate3d(0px, 0px, 0px);
+    transition-duration: 0ms;
+
+
+    box-sizing: content-box;
+    display: flex;
+    height: 100%;
+    position: relative;
+    transition-property: -webkit-transform;
+    transition-property: transform;
+    transition-property: transform,-webkit-transform;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.checklist__content {
+    /* width: 245px;
+    height: 200px; 
+    border: 1px solid;*/
+    margin: 0.5rem;
+    width: 100%;
+}
+
+.checklist__img {
+    height: 200px;
+    max-width: none;
+    object-fit: cover;
+    /* position: absolute; */
+    /* width: 200px; */
+}
+
+/*detail*/
+.checklist__read__container {
+    display: flex;
+    flex-wrap: wrap;
+}
+.checklist__read__content {
+    border: 1px solid;
+    width: 200px;
+    margin: 7px;
+}
+
+.checklist__walk__container {
+    max-width: 50rem;
+}
+
+
+/*practice*/
+.checkllist__wrapper {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.checklist__note {
+    background-color: #fef68a;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding: 1rem;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.checklist__note.add {
+    background-color: #559df2;
+}
+
+.checklist__note.add textarea, .checklist__note.add input {
+    border: none;
+    resize: none;
+    background-color: transparent;
+}
+
+.checklist__note.add textarea:focus {
+    outline: none;
+}
+
+.checklist__note__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.checklist__save {
+    background-color: #fef68a;
+    border: none;
+    border-radius: 15px;
+    padding: 5px 10px 5px 10px;
+} 
+
+.checklist__save:hover {
+    background-color: #f7f6f2;
+    cursor: pointer;
+}
+
 
 @media (min-width: 900px) {
     /*CARD LIST*/
