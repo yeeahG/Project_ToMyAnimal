@@ -94,7 +94,7 @@ li {
 
 /*=====================PLACE CONTENT=====================*/
 .place__content {
-    padding: 4rem;
+    padding: 2rem;
     display: grid;
     grid-gap: 1rem;
 }
@@ -253,6 +253,7 @@ li {
     /*=====================CONTENT=====================*/
     .place__content {
         grid-template-columns: 1fr 3fr;
+        padding: 4rem;
     }
         
 

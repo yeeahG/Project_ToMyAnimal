@@ -62,7 +62,7 @@
 .info__content {
     display: grid;
     grid-gap: 1rem;
-    padding: 4rem;
+    padding: 2rem;
 }
 
 /*================================LEFT MENU================================*/
@@ -390,6 +390,7 @@ li {
 @media (min-width: 900px) {
     .info__container {
         margin: 0px 2.77778vw;
+        padding: 4rem;
     }
     .space {
         padding-top: 1.38889vw;

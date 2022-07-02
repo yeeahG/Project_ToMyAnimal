@@ -79,6 +79,10 @@
 }
 
 /*==================ARTICLE==================*/
+.article__container {
+    margin: 1rem;
+}
+
 .userinfo__subtitle  {
     background-color: #fe81b9;
     color: #f7f6f2;
@@ -89,8 +93,19 @@
     margin: auto 0;
 }
 
+.area__container {
+    display: flex;
+    justify-content: space-between;
+    margin: .5rem 0;
+}
+
+.profile__thumb {
+    display: flex;
+    justify-content: space-between;
+}
+
 .comment__view ul {
-    padding-right: 40px;
+    padding: 1rem;
 }
 
 .comment__info {
@@ -103,6 +118,15 @@
 
 .comment__reply {
     display: flex;
+    width: 100%;
+}
+
+.post__box {
+    width: 90%;
+}
+
+.reply__reply {
+    width: 10%;
 }
 
 

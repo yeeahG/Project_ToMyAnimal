@@ -23,6 +23,9 @@ const Board = () => {
     const [postsPerPage, setPostsPerPage] = useState(10);
     const [isOpen, setOpen] = useState(false);
 
+    const userid = localStorage.getItem('userid');
+
+    //http://localhost:8084/api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=0
     useEffect(() => {
         axios({
           method: 'get', 
@@ -69,7 +72,12 @@ const Board = () => {
     };
 
     const addArticle = async () => {
-        const post = {title: "New", body: "Hello world", userId: "yeji"}
+        const post = {
+            title: "New", 
+            body: "Hello world", 
+            userId: "yeji"
+        }
+
         await axios.post('https://jsonplaceholder.typicode.com/posts', post)
         setArticle([post, ...article]);
     }

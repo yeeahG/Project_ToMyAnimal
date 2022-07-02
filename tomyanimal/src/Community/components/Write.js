@@ -16,10 +16,20 @@ const Write = ( {openButton} ) => {
             userId: localStorage.getItem('usename'),
             date: new Date()
         }
+
+        /*
+        const newPost = {
+            type: 1,
+            categoryId= 1,
+            title: title,
+            content: content
+        }
+        */
         console.log(newPost);
 
         if(newTitle != "" || newContent != "") {
-            await axios.post('https://jsonplaceholder.typicode.com/posts', newPost)
+            //await axios.post('https://jsonplaceholder.typicode.com/posts', newPost)
+            await axios.post('http://localhost:8084/api/board', newPost)
             .then((data) => {
                 console.log('성공:', data);
                 setPost(data);
