@@ -31,8 +31,9 @@ const TopCommentsBox = (props) => {
     const sendComment = (e) => {
         e.preventDefault();
         console.log("Comment send");
-        
+
         //axios post사용
+        //message를 post하면 됨
         //.then(() => {
         setMessageReset(prevState => !prevState);
         //delete text input, updata comments and disable comment btn
