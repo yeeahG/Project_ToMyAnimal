@@ -115,7 +115,7 @@ const MessageScroll = () => {
     />
     ))}
 
-    {messagelist.length > 9 && showBottomBar ?
+    {messagelist.length > 2 && showBottomBar ?
       <div className='bottomBar'>
         <div className='loader'></div>
       </div>
