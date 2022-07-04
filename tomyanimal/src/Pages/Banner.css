@@ -102,13 +102,13 @@
 }
 
 .down__btn {
-    margin-bottom: -5.33333vw;
+    margin-bottom: 5vw;
     z-index: 0;
-    padding-top: 16vw;
+    padding-top: 3vw;
 }
 
 .down__btn svg {
-    width: 26.1333vw;
+    width: 20vw;
 }
 
 .down__btn svg circle {
