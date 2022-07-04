@@ -1,10 +1,13 @@
 import React, { useRef, useState } from 'react'
+import { useMainContext } from './Context/Context';
 
 const TopCommentsBox = (props) => {
     const message = useRef(null);
     const [showCommentLine, setCommentLine] = useState(false);
     const [showButtons, setShowButtons] = useState(false);
     const [enableBtn, setEnableBtn] = useState(false);
+
+    const {setMessageReset} = useMainContext
 
     const commentFocus = () => {
         setCommentLine(true);
@@ -27,6 +30,15 @@ const TopCommentsBox = (props) => {
 
     const sendComment = (e) => {
         e.preventDefault();
+        console.log("Comment send");
+        
+        //axios post사용
+        //.then(() => {
+        setMessageReset(prevState => !prevState);
+        //delete text input, updata comments and disable comment btn
+        message.current.value = '';
+        setEnableBtn(true);
+        //})
     }
 
     

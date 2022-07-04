@@ -52,7 +52,8 @@ const SubMessages = (props) => {
 
                 <i className='fas fa-thumbs-down'></i>
                 {
-                    !props.editable ? (
+                    //!props.editable ? (
+                    props.user !== "Yeji kim" ? (
                         <div onClick={changeOpenReply}>reply</div>
                     ) : ( 
                         <div onClick={deleteMessage}>delete</div>

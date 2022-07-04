@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Message from './Message'
 import axios from 'axios'
+import { useMainContext, } from './Context/Context'
+import CommentsBox from '../components/CommentsBox'
 import './Review.css'
 
 export const MessagelistContext = React.createContext();
@@ -54,10 +56,14 @@ const messagelist = [
   },
 ]
 
-const MessageScroll = () => {
+const MessageScroll = (props) => {
   //db연결시
   const [message, setMessages] = useState([])
   const [showBottomBar, setShowBottomBar] = useState(true);
+
+  const {messageReset, commentIncrement, setMethodIncrement } = useMainContext();
+  //console.log(messageReset);
+  const commentIncrementRef = useRef(commentIncrement);
 
   
   // useEffect(async () => {
@@ -78,8 +84,31 @@ const MessageScroll = () => {
   //   .catch((error) => {
   //     console.error('실패:', error);
   //   });
-  // },[])
+  // },[messageReset])
 
+  const observer = React.useRef(new IntersectionObserver(entries => {
+    const first = entries[0];
+
+    if(first.isIntersecting) {
+      //post commentIncrement=commentIncrementRef.current
+      //.then(comments) 부분
+      if(CommentsBox.length >0) {
+        setTimeout(() => {
+        //setMessages(prevState => [...prevState, ...comments])
+      }, 3000)
+      } else {
+        setTimeout(() => {
+          setShowBottomBar(false);
+        }, 3000)
+      }//setMethodIncrement(prevState => prevState += comments.length)
+    }
+  }), {threshold: 1})
+
+  useEffect(() => {
+    commentIncrementRef.current = commentIncrement;
+  }, [commentIncrement])
+
+  const [bottomBar, setBottomBar] = useState(null);
 
   console.log(messagelist);
 
@@ -116,7 +145,7 @@ const MessageScroll = () => {
     ))}
 
     {messagelist.length > 2 && showBottomBar ?
-      <div className='bottomBar'>
+      <div className='bottomBar' ref={setBottomBar}>
         <div className='loader'></div>
       </div>
     : null}

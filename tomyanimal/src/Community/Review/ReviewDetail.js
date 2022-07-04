@@ -5,6 +5,7 @@ import { HeartOutlined, HeartFilled, LikeOutlined, LikeFilled, DownOutlined, UpO
 import CommentsBox from '../components/CommentsBox';
 import TopCommentsBox from './TopCommentsBox';
 import MessageScroll from './MessageScroll';
+import { ContextProvider } from './Context/Context';
 
 
 const showReply = React.createContext();
@@ -282,9 +283,10 @@ const ReviewDetail = ( {title, body} ) => {
                       </div>
 
 
-                    <MessageScroll />
-
-                      <TopCommentsBox />
+                      <ContextProvider>            
+                        <TopCommentsBox />
+                        <MessageScroll />
+                      </ContextProvider>
                     
                     </div>
                   </div>
