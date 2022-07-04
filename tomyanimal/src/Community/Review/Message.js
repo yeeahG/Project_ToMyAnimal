@@ -84,10 +84,12 @@ const Message = (props) => {
                 {openReply && <CommentsBox autoFocus={true} />}
             </showReply.Provider>
 
-            <section className='arrowReplies' onClick={changeArrow}>
-                {arrow}
-                <div>View 4 replies</div>
-            </section>
+            {props.replies.length > 0 && (
+                <section className='arrowReplies' onClick={changeArrow}>
+                    {arrow}
+                    <div>View {props.replies.length} replies</div>
+                </section>
+            )}
             </>
           {/*  )} */}
             {arrowUp && (
