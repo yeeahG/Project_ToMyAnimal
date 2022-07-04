@@ -1,7 +1,10 @@
 import React, { useContext, useRef, useState } from 'react'
 import {useOpenReply} from '../Message'
+import { useMainContext } from '../Context/Context';
 
 const SubCommentBox = (props) => {
+  const {setMessageUpdate} = useMainContext();
+
   const changeOpenReply = useOpenReply();
 
     const message = useRef(null);
@@ -29,7 +32,10 @@ const SubCommentBox = (props) => {
     }
 
     const sendComment = (e) => {
-        e.preventDefault();
+      e.preventDefault();
+      //axios.post
+      setMessageUpdate([1, props.useKey])
+      
     }
 
     
