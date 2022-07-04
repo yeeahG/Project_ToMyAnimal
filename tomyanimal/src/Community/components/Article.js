@@ -1,7 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext, useRef } from 'react'
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import {HeartOutlined, HeartFilled} from '@ant-design/icons';
+import { HeartOutlined, HeartFilled, LikeOutlined, LikeFilled, DownOutlined, UpOutlined } from '@ant-design/icons';
+import CommentsBox from './CommentsBox';
+
+const showReply = React.createContext();
+
+export function useOpenReply() {
+  return useContext(showReply);
+}
 
 const Article = ( {title, body} ) => {
   const {id} = useParams();
@@ -108,6 +115,54 @@ const Article = ( {title, body} ) => {
     const checks = false;
     setCheck([...isCheck, checks]);
   }
+
+  const likeIcon = useRef();
+  const numLikes = useRef();
+  
+  //Like comment
+  let toggleLike = false;
+  let likes = 0;
+
+  const likeComment = () => {
+    toggleLike = !toggleLike;
+
+    if (toggleLike) {
+      likes++;
+      //likeIcon.current.style.color = '#559df2'
+      document.getElementById("thunmbLike").style.color = "#559df2";
+    } else {
+      likes--;
+      //likeIcon.current.style.color = "gray";
+      document.getElementById("thunmbLike").style.color = "black";
+    }
+    numLikes.current.innerHTML = likes;
+  }
+
+  const [arrowUp, setArrowUp] = useState(false);
+  const [openReply, setOpenReply] = useState(false);
+
+  let arrow = <DownOutlined />
+
+  const changeArrow = () => {
+    setArrowUp(prevState => prevState = !prevState);
+  }
+
+  if(arrowUp) {
+    arrow = <UpOutlined />
+  } else {
+    arrow = <DownOutlined />
+  }
+
+  const [isEdit, setEdit] = useState(false);
+
+  const changeOpenReply = () => {
+    setOpenReply(prevState => prevState = !prevState)
+  }
+
+  const deleteMessage = () => {
+
+  }
+
   
   return (
     <div>
@@ -151,6 +206,7 @@ const Article = ( {title, body} ) => {
                   <button>이전글</button>
                   <button>다음글</button>
                 </div>
+                
                 <div className='area__r'>
                   <button>수정</button>
                 </div>
@@ -164,7 +220,7 @@ const Article = ( {title, body} ) => {
                   <strong>{data.title}</strong>
                   <div className='info__desc'>
                     <div className='profile__thumb'>
-                      {/* <a>글쓴이이름</a> */}
+                      {/* 글쓴이이름 */}
                       <a>{data.userId}</a>
                       <div className='content__info'>
                         <span>조회수</span>
@@ -173,7 +229,6 @@ const Article = ( {title, body} ) => {
                         <span>
                           댓글
                           {com.length}
-                          {/*<a>{comment.length}</a>*/}
                         </span>
                       </div>
                     </div>
@@ -198,7 +253,6 @@ const Article = ( {title, body} ) => {
                 </div>
 
                 <div>
-                  {/* isOpen으로 구현하기 */}
                   <button onClick={openButton}>
                     { isOpen ? "댓글" : "댓글목록" }
                   </button>
@@ -214,6 +268,7 @@ const Article = ( {title, body} ) => {
                             <div className='comment__section'>
                               {com.map((it, i) => 
                               <div className='comment__info'>
+
                                 <div className='comment__user'>
                                   {/*사용자*/}
                                   <span>{it.id}</span>
@@ -226,42 +281,56 @@ const Article = ( {title, body} ) => {
                                     {/*댓글내용*/}
                                     <span>{it.body}</span>
                                   </div>
+                                </div>
 
-                                  <button 
-                                    onClick={() => {
-                                      let likeCnt = [...like]
-                                      likeCnt[i]++;
-                                      setLike(likeCnt);
-                                    //console.log(like);
-                                    }}
-                                  >
-                                    <HeartFilled style={{ color: 'red', fontSize: '20px'}} />
-                                  </button>
-                                    {like[i]}
+                                <button 
+                                  onClick={() => {
+                                    let likeCnt = [...like]
+                                    likeCnt[i]++;
+                                    setLike(likeCnt);
+                                  //console.log(like);
+                                  }}
+                                >
+                                  <HeartFilled style={{ color: 'red', fontSize: '20px'}} />
+                                </button>
+                                {like[i]}
+
+                                
+                                <LikeOutlined ref={likeIcon} onClick={likeComment} id='thunmbLike'/>
+                                <div ref={numLikes}>{likes}</div>
+
+                                { !isEdit ? (
+                                  <div onClick={changeOpenReply}>REPLY</div>
+                                ) : (
+                                  <div onClick={deleteMessage}>DLETE</div>
+                                ) }
 
 
-                                  {/* <HeartFilled 
+                                <showReply.Provider value={changeOpenReply}>
+                                  {openReply && <CommentsBox 
+                                  autoFocus={true} />}
+                                </showReply.Provider>
+
+                                {/* <button onClick={clickHeart}>
+                                {isCheck[i] === true ?
+                                  <HeartFilled 
                                     style={{ color: 'red', fontSize: '20px'}}
                                     onClick={clickHeart}
-                                  /> */}
-
-                                  {/* <button onClick={clickHeart}>
-                                  {isCheck[i] === true ?
-                                    <HeartFilled 
-                                      style={{ color: 'red', fontSize: '20px'}}
-                                      onClick={clickHeart}
-                                    />
-                                    :
-                                    <HeartOutlined 
-                                      style={{ fontSize: '20px'}}
-                                    />
-                                  }</button> */}
-
-                                  <div className='reply__reply'>
-                                    <button>답글</button>
-                                  </div>
-                                  
+                                  />
+                                  :
+                                  <HeartOutlined 
+                                    style={{ fontSize: '20px'}}
+                                  />
+                                }</button> */}
+                                
+                                <div 
+                                  className='reply__reply'
+                                  onClick={changeArrow}
+                                >
+                                  {arrow}
+                                  <button>View 4 replies</button>
                                 </div>
+
                               </div>
                               )}
                             </div>
@@ -274,8 +343,6 @@ const Article = ( {title, body} ) => {
 
                     <div className='comment__paging'>
                       <ul>
-                        <li></li>
-                        <li></li>
                         <li></li>
                         <li></li>
                       </ul>
@@ -299,6 +366,7 @@ const Article = ( {title, body} ) => {
                     </div>
 
                     <div className='comment__write__menu'>
+
                       <div className='area__r'>
                         <span>
                           <span>0</span>
@@ -307,6 +375,7 @@ const Article = ( {title, body} ) => {
                         </span>
                         <button onClick={addComment}>등록</button>
                       </div>
+                      
                     </div>
                   
                   </div>

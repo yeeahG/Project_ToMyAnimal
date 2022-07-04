@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Review from '../Community/Review/Review'
 import Board from './Board';
 
 const Community = () => { 
@@ -22,7 +23,9 @@ const Community = () => {
           <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}>Review</li>
         ),
         tabCont:(
-          <div> aaaaa </div>
+          <div>
+            <Review /> 
+          </div>
         )
       },
       {
