@@ -23,6 +23,7 @@ const Article = ( {title, body} ) => {
 
   const [isCheck, setCheck] = useState([false, false, false, false, false]);
   const [like, setLike] = useState([0, 0, 0, 0, 0]);
+  const likeList = [];
 
   //useContext로 저장해야 id로 내용 불러오기가능
   const userName = localStorage.getItem('usename')
@@ -51,7 +52,11 @@ const Article = ( {title, body} ) => {
     axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments/`)
     .then((response)=> {
       setCom(response.data);
-      console.log(com);
+      // console.log(response.data.length);
+
+      // for (let i=0; i <response.data.length; i++) {
+      //   setLike([...like, 0])
+      // }console.log(like);
     })
   }, []);
 
@@ -98,7 +103,10 @@ const Article = ( {title, body} ) => {
     //checkToggle[i]++;
     //setLike(likeCnt);
 
-    setCheck(!isCheck)
+    //setCheck(!isCheck)
+
+    const checks = false;
+    setCheck([...isCheck, checks]);
   }
   
   return (
@@ -221,16 +229,24 @@ const Article = ( {title, body} ) => {
 
                                   <button 
                                     onClick={() => {
-                                    let likeCnt = [...like]
-                                    likeCnt[i]++;
-                                    setLike(likeCnt);
+                                      let likeCnt = [...like]
+                                      likeCnt[i]++;
+                                      setLike(likeCnt);
+                                    //console.log(like);
                                     }}
                                   >
                                     <HeartFilled style={{ color: 'red', fontSize: '20px'}} />
                                   </button>
                                     {like[i]}
 
-                                  {isCheck?
+
+                                  {/* <HeartFilled 
+                                    style={{ color: 'red', fontSize: '20px'}}
+                                    onClick={clickHeart}
+                                  /> */}
+
+                                  {/* <button onClick={clickHeart}>
+                                  {isCheck[i] === true ?
                                     <HeartFilled 
                                       style={{ color: 'red', fontSize: '20px'}}
                                       onClick={clickHeart}
@@ -238,9 +254,8 @@ const Article = ( {title, body} ) => {
                                     :
                                     <HeartOutlined 
                                       style={{ fontSize: '20px'}}
-                                      onClick={clickHeart}
                                     />
-                                  }
+                                  }</button> */}
 
                                   <div className='reply__reply'>
                                     <button>답글</button>
