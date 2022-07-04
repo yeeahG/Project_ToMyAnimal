@@ -13,6 +13,7 @@ import CheckList from './Animals/Checklist/CheckList';
 import Detail from './Animals/Checklist/Detail';
 import './App.css';
 import Reservation from './Places/Reservation/Reservation';
+import ReviewDetail from './Community/Review/ReviewDetail';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/animal/log/:id" element={<Detail />} />
             <Route path="/community/:id" element={<Community />} />
             <Route path="/community/board/:id" element={<Article />} />
+            <Route path="/community/review/:id" element={<ReviewDetail />} />
             <Route path="/places/:id" element={<Place />} />
             <Route path="/places/:id/:id" element={<Reservation />} />
             <Route path="/user" element={<User />} />
