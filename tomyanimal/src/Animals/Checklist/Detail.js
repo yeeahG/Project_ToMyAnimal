@@ -21,6 +21,7 @@ const Detail = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [data, setData] = useState([]);
+  const [noteId, setNoteId] = useState([]);
   const [error, setError] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -120,6 +121,13 @@ const Detail = () => {
     } else {
       setError("한 글자 이상 입력하세요")
     }
+  }
+
+
+  const deleteNote = (noteId) => {
+    //글 각각의 id 필요
+    //noteId
+    data.filter((note) => note.noteId != noteId)
   }
 
   //pagination
