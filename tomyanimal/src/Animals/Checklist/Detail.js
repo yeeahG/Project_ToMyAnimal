@@ -37,7 +37,6 @@ const Detail = () => {
   const contentRef = useRef();
 
 
-
   {/*
   useEffect(() => {
 
@@ -80,7 +79,8 @@ const Detail = () => {
   
   console.log(data);
 
-  const submitHandler = async (content) => {
+  const submitHandler = async (title, content) => {
+    console.log("submit" + title);
     console.log("submit" + content);
 
     const newPost = {
@@ -274,7 +274,6 @@ const Detail = () => {
             totalPosts={data.length}
             paginate={setCurrentPage}
           />
-
 
 
         </div>

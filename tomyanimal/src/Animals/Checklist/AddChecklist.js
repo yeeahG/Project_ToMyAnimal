@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 
 const AddChecklist = ( {submitHandler} ) => {
     const [title, setTitle] = useState("");
-    const [content, setContent] = useState('')
+    const [content, setContent] = useState("")
 
     const contentRef = useRef();
     const characterLimit = 200;
@@ -15,8 +15,8 @@ const AddChecklist = ( {submitHandler} ) => {
     }
 
     const handleSave = () => {
-        //submitHandler(title);
-        submitHandler(content);
+        submitHandler(title, content);
+        //submitHandler(content);
         setTitle('')
         setContent('')
     }
