@@ -82,6 +82,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    white-space: pre-wrap;
+}
+
+.checklist__text p {
+    width: 100%;
 }
 
 .checklist__note.add {
