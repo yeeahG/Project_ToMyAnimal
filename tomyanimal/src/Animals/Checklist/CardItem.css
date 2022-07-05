@@ -84,6 +84,10 @@
     justify-content: space-between;
 }
 
+.checklist__text p {
+    width: 100%;
+}
+
 .checklist__note.add {
     background-color: #559df2;
 }

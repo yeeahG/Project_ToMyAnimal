@@ -8,14 +8,16 @@ const AddChecklist = ( {submitHandler} ) => {
     const characterLimit = 200;
 
     const handleChange = (e)=> {
-        //setTitle(e.target.value);
-        setContent(e.target.value);
+        if(characterLimit - e.target.value.length >= 0) {
+            //setTitle(e.target.value);
+            setContent(e.target.value);
+        }
     }
 
     const handleSave = () => {
         //submitHandler(title);
         submitHandler(content);
-        //setTitle('')
+        setTitle('')
         setContent('')
     }
 
@@ -26,7 +28,6 @@ const AddChecklist = ( {submitHandler} ) => {
             name="title" 
             placeholder='title'
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
             ref={contentRef}
             //onChange={handleChange}
             onChange={(e) => setTitle(e.target.value)}
@@ -38,8 +39,8 @@ const AddChecklist = ( {submitHandler} ) => {
             name="content"
             value={content}
             ref={contentRef}
-            //onChange={handleChange}
-            onChange={(e) => setContent(e.target.value)}
+            onChange={handleChange}
+            //onChange={(e) => setContent(e.target.value)}
         />
         <div className='checklist__note__footer'>
             <small>{characterLimit - content.length} 글자</small>

@@ -213,20 +213,18 @@ const Detail = () => {
 
           <div className='checkllist__wrapper'>
 
-            <div className='checklist__note'>
-              {currentPosts.map((it) => (
-                <div>
+            {currentPosts.map((it) => (
+              <div className='checklist__note'>
+                <div className='checklist__text'>
                   <h3>{it.title}</h3>
                   <p>{it.content}</p> 
-                  {/* <h3>title</h3>
-                  <p>content</p> */}
                 </div>
-              ))}
-              <div className='checklist__note__footer'>
-                <small>2022/07.01</small>
-                <button>delete</button>
+                <div className='checklist__note__footer'>
+                  <small>2022/07.01</small>
+                  <button>delete</button>
+                </div>
               </div>
-            </div>
+            ))}
 
             <div className='checklist__note'>
               <h3>title</h3>
