@@ -106,7 +106,7 @@ const Detail = () => {
         data: newPost,
         headers: { 
           'Authorization': localStorage.getItem('logintoken'),
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
         }
       })
       .then((data) => {
