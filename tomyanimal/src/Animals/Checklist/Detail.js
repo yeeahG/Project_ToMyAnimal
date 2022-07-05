@@ -5,6 +5,8 @@ import Pagination from '../../Community/components/Pagination';
 import ControlMenu from '../../Pages/ControlMenu';
 import { ChecklistContext } from '../Checklist/CheckList'
 import AddChecklist from './AddChecklist';
+import { DeleteFilled } from '@ant-design/icons';
+
 import './CardItem.css'
 
 const sortOptionList = [
@@ -221,7 +223,7 @@ const Detail = () => {
                 </div>
                 <div className='checklist__note__footer'>
                   <small>2022/07.01</small>
-                  <button>delete</button>
+                  <button><DeleteFilled style={{fontSize: '18px'}} /></button>
                 </div>
               </div>
             ))}
@@ -231,7 +233,7 @@ const Detail = () => {
               <p>content</p>
               <div className='checklist__note__footer'>
                 <small>2022/07.01</small>
-                <button>delete</button>
+                <button><DeleteFilled style={{fontSize: '18px'}} /></button>
               </div>
             </div>
             <div className='checklist__note'>
@@ -239,7 +241,7 @@ const Detail = () => {
               <p>content</p>
               <div className='checklist__note__footer'>
                 <small>2022/07.01</small>
-                <button>delete</button>
+                <button><DeleteFilled style={{fontSize: '18px'}} /></button>
               </div>
             </div>
             <div className='checklist__note'>
@@ -247,7 +249,7 @@ const Detail = () => {
               <p>content</p>
               <div className='checklist__note__footer'>
                 <small>2022/07.01</small>
-                <button>delete</button>
+                <button><DeleteFilled style={{fontSize: '18px'}} /></button>
               </div>
             </div>
 
