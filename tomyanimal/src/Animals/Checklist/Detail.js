@@ -37,7 +37,6 @@ const Detail = () => {
   const contentRef = useRef();
 
 
-
   {/*
   useEffect(() => {
 
@@ -80,7 +79,8 @@ const Detail = () => {
   
   console.log(data);
 
-  const submitHandler = async (content) => {
+  const submitHandler = async (title, content) => {
+    console.log("submit" + title);
     console.log("submit" + content);
 
     const newPost = {
@@ -124,11 +124,27 @@ const Detail = () => {
   }
 
 
-  const deleteNote = (noteId) => {
+  const deleteNote = async (noteId) => {
     //글 각각의 id 필요
     //noteId
-    data.filter((note) => note.noteId != noteId)
+    const newNotes = data.filter((note) => note.noteId != noteId)
+    setData(newNotes);
+
+    axios.delete(`http://localhost:8084/api/members/${userid}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('logintoken'),
+      }
+    })
+    .then((data) => {
+      console.log('성공:', data);
+      alert("삭제가 완료되었습니다")
+    })
+    .catch((error) => {
+      console.error('실패:', error);
+    });
   }
+
 
   //pagination
   const indexOfLast = currentPage * postsPerPage;
@@ -231,7 +247,12 @@ const Detail = () => {
                 </div>
                 <div className='checklist__note__footer'>
                   <small>2022/07.01</small>
-                  <button><DeleteFilled style={{fontSize: '18px'}} /></button>
+                  <button>
+                    <DeleteFilled 
+                      style={{fontSize: '18px'}} 
+                      //onClick={deleteNote}
+                    />
+                  </button>
                 </div>
               </div>
             ))}
@@ -274,7 +295,6 @@ const Detail = () => {
             totalPosts={data.length}
             paginate={setCurrentPage}
           />
-
 
 
         </div>
