@@ -39,7 +39,7 @@ public class Member extends EntityDate {
 
     private String password;
 
-    @Column(nullable = false, length = 30, unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
