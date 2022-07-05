@@ -7,6 +7,11 @@ import { ChecklistContext } from '../Checklist/CheckList'
 import AddChecklist from './AddChecklist';
 import './CardItem.css'
 
+const sortOptionList = [
+  {value: "latest", name: "최신순"},
+  {value: "oldest", name: "오래된 순"},
+]
+
 const Detail = () => {
   const [isOpen, setOpen] = useState(false);
   const [sortType, setSortType] = useState('latest');
@@ -28,10 +33,6 @@ const Detail = () => {
   const navigate = useNavigate();
   const contentRef = useRef();
 
-  const sortOptionList = [
-    {value: "latest", name: "최신순"},
-    {value: "oldest", name: "오래된 순"},
-  ]
 
 
   {/*
@@ -81,7 +82,7 @@ const Detail = () => {
 
     const newPost = {
       type: 1,
-      title: "title", 
+      title: title, 
       content: content,
       categoryId: id
     }
@@ -93,6 +94,7 @@ const Detail = () => {
 
     const newPosts = [...data, newPost];
     console.log(newPosts);
+    setData(newPosts);
 
     if(title != "" || content != "") {
       await axios({
@@ -112,7 +114,7 @@ const Detail = () => {
         console.error('실패:', error);
       });
       alert('작성이 완료되었습니다')
-      window.location.reload();
+      //window.location.reload();
     } else {
       setError("한 글자 이상 입력하세요")
     }
@@ -132,7 +134,7 @@ const Detail = () => {
       <div className='header'>
         <div className='space'></div>
         <div className='header__wrapper'>
-          <h1 className='header__content'>Header</h1>
+          <h1 className='header__content'>Checklist</h1>
           <div className='header__detail'>
             <p>나의 동물이 좋아하고 행동했던 것들을 기록하기</p>
           </div>
@@ -165,8 +167,8 @@ const Detail = () => {
             </button>
           </div>
 
-          {error}
           <div className='checklist__walk__container'>
+            {error}
             {id} detail
           </div>
 
@@ -195,16 +197,17 @@ const Detail = () => {
             <button className='upload__btn' onClick={submitHandler} >write</button>
           </div>
             :
-          <div className='checklist__read__container'>
-            {/* {data.title} 
-            {data.map((it) => ( */}
-            {currentPosts.map((it) => (
-              <div className='checklist__read__content'>
-                <h3>{it.title}</h3>
-                <p>{it.content}</p>
-              </div>
-            ))}
-          </div>
+          // <div className='checklist__read__container'>
+          //   {/* {data.title} 
+          //   {data.map((it) => ( */}
+          //   {currentPosts.map((it) => (
+          //     <div className='checklist__read__content'>
+          //       <h3>{it.title}</h3>
+          //       <p>{it.content}</p>
+          //     </div>
+          //   ))}
+          // </div>
+          null
           }
 
 
@@ -212,11 +215,11 @@ const Detail = () => {
 
             <div className='checklist__note'>
               {currentPosts.map((it) => (
-                <div className='checklist__read__content'>
+                <div>
                   <h3>{it.title}</h3>
                   <p>{it.content}</p> 
-                  <h3>title</h3>
-                  <p>content</p>
+                  {/* <h3>title</h3>
+                  <p>content</p> */}
                 </div>
               ))}
               <div className='checklist__note__footer'>

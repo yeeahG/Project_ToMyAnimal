@@ -5,6 +5,7 @@ const AddChecklist = ( {submitHandler} ) => {
     const [content, setContent] = useState('')
 
     const contentRef = useRef();
+    const characterLimit = 200;
 
     const handleChange = (e)=> {
         //setTitle(e.target.value);
@@ -21,14 +22,15 @@ const AddChecklist = ( {submitHandler} ) => {
 
   return (
     <div className='checklist__note add'>
-        {/* <input
+        <input
             name="title" 
             placeholder='title'
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             ref={contentRef}
-            onChange={handleChange}
-        /> */}
+            //onChange={handleChange}
+            onChange={(e) => setTitle(e.target.value)}
+        />
         <textarea 
             rows='8'
             cols='10'
@@ -36,10 +38,11 @@ const AddChecklist = ( {submitHandler} ) => {
             name="content"
             value={content}
             ref={contentRef}
-            onChange={handleChange}
+            //onChange={handleChange}
+            onChange={(e) => setContent(e.target.value)}
         />
         <div className='checklist__note__footer'>
-            <small>200 글자</small>
+            <small>{characterLimit - content.length} 글자</small>
             <button 
                 className='checklist__save'
                 onClick={handleSave}
