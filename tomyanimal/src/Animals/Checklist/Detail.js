@@ -68,8 +68,8 @@ const Detail = () => {
       }
     }).then((response) => {
       //console.log(response.data.result.data.postList[0]);
-      for (let i=0; i < response.data.result.data.postList.length; i++) {
-        putList.push(response.data.result.data.postList[i])
+      for (let i=0; i < response.data.result.data.length; i++) {
+        putList.push(response.data.result.data[i])
         //console.log(putList);
       } setData(putList);
     }).catch((error) => {
@@ -117,7 +117,7 @@ const Detail = () => {
         console.error('실패:', error);
       });
       alert('작성이 완료되었습니다')
-      //window.location.reload();
+      window.location.reload();
     } else {
       setError("한 글자 이상 입력하세요")
     }
