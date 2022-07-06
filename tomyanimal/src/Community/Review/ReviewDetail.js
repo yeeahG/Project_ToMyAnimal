@@ -86,7 +86,6 @@ const ReviewDetail = ( {title, content} ) => {
         //userId: localStorage.getItem('usename'),
         //date: new Date(),
         //postId: id
-  
         content: comtext,
         postId: id
       }
@@ -276,7 +275,6 @@ const ReviewDetail = ( {title, content} ) => {
                       </div>
   
 
-                    
                   <div className='comment__write'>
                     <div className='comment__write__area'>
   
@@ -301,7 +299,6 @@ const ReviewDetail = ( {title, content} ) => {
                         </div>
                         
                       </div>
-
 
                       <ContextProvider>            
                         <TopCommentsBox />
