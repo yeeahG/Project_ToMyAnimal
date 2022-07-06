@@ -29,7 +29,6 @@ const Detail = () => {
   const [postsPerPage, setPostsPerPage] = useState(6);
 
   const {id} = useParams();
-  //console.log(id);
 
   const userid = localStorage.getItem('userid');
 
@@ -64,7 +63,6 @@ const Detail = () => {
   const postIdList = [];
   
   useEffect ( () => {
-    //axios.get(`http://localhost:8084/api/posts?page=0&size=4&categoryId=${id}&memberId=${userid}`, {
     axios.get(`http://localhost:8084/api/my-board?memberId=${userid}&categoryId=${id}&page=0&size=4&type=PRIVATE`, {
       headers: {
         Authorization: localStorage.getItem('logintoken'),
@@ -138,7 +136,6 @@ const Detail = () => {
     setData(newNotes);
     console.log(id);
 
-    //axios.delete(`http://localhost:8084/api/members/${noteId}`, {
     await axios.delete(`http://localhost:8084/api/board/${id}`, {
       headers: {
         'Content-Type': 'application/json',
@@ -259,14 +256,6 @@ const Detail = () => {
                 </div>
                 <div className='checklist__note__footer'>
                   <small>2022/07.01</small>
-                  {/*
-                  <button key={it.id}>
-                    <DeleteFilled 
-                      style={{fontSize: '18px'}} 
-                      onClick={deleteNote}
-                    />
-                  </button>
-                  */}
                   <ChecklistFooter 
                     id={it.id}
                     deleteNote={deleteNote}
