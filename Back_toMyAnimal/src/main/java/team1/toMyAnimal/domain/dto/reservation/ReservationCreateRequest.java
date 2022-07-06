@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import team1.toMyAnimal.domain.reservation.Reservation;
+import team1.toMyAnimal.domain.reservation.ReservationType;
 import team1.toMyAnimal.exception.AnimalNotFoundException;
 import team1.toMyAnimal.exception.MemberNotFoundException;
 import team1.toMyAnimal.repository.member.MemberRepository;
@@ -21,8 +22,8 @@ public class ReservationCreateRequest {
     @NotBlank(message = "예약날짜를 입력해주세요.")
     private LocalDate date;
 
-    @NotBlank(message = "예약하실 동물의 종류를 입력해주세요.")
-    private String type;
+    @NotBlank(message = "예약 종류를 입력해주세요.")
+    private ReservationType type;
 
     @Null
     private Long memberId;
