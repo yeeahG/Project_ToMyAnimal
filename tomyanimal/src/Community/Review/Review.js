@@ -21,10 +21,10 @@ const Review = () => {
 
     const postList = [];
 
-    //http://localhost:8084/api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=0
     useEffect(() => {
         //axios.get('https://jsonplaceholder.typicode.com/posts', {
-        axios.get(`http://localhost:8084/api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PUBLIC`, {
+        //axios.get(`http://localhost:8084/api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PUBLIC`, {
+        axios.get(`http://localhost:8084/api/public-board?categoryId=1&type=PUBLIC&page=0&size=4`, {
             headers: {
                 Authorization: localStorage.getItem('logintoken'),
             }
@@ -42,9 +42,7 @@ const Review = () => {
         });
     }, []);
 
-    console.log(article);
 
-    
     /*
     const getProcessedList = () => {
         const compare = (a,b) => {
@@ -122,7 +120,7 @@ const Review = () => {
             console.error('실패:', error);
           });
           alert('작성이 완료되었습니다')
-          //window.location.reload();
+          window.location.reload();
         } else {
           setError("한 글자 이상 입력하세요")
         }
