@@ -46,7 +46,7 @@ const ReviewDetail = ( {title, content} ) => {
   
     useEffect(() => {
       //axios.get('https://jsonplaceholder.typicode.com/posts/'+id)
-      axios.get(`http://localhost:8084/api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=0`, {
+      axios.get(`http://localhost:8084/api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PUBLIC`, {
         headers: {
           Authorization: localStorage.getItem('logintoken'),
         }

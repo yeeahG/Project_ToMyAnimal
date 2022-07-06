@@ -65,7 +65,7 @@ const Detail = () => {
   
   useEffect ( () => {
     //axios.get(`http://localhost:8084/api/posts?page=0&size=4&categoryId=${id}&memberId=${userid}`, {
-    axios.get(`http://localhost:8084/api/my-board?memberId=${userid}&categoryId=${id}&page=0&size=4&type=1`, {
+    axios.get(`http://localhost:8084/api/my-board?memberId=${userid}&categoryId=${id}&page=0&size=4&type=PRIVATE`, {
       headers: {
         Authorization: localStorage.getItem('logintoken'),
       }
@@ -92,7 +92,7 @@ const Detail = () => {
     console.log("submit" + content);
 
     const newPost = {
-      type: 1,
+      type: "PRIVATE",
       title: title, 
       content: content,
       categoryId: id

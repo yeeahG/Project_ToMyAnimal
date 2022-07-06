@@ -24,7 +24,7 @@ const Review = () => {
     //http://localhost:8084/api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=0
     useEffect(() => {
         //axios.get('https://jsonplaceholder.typicode.com/posts', {
-        axios.get(`http://localhost:8084/api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=0`, {
+        axios.get(`http://localhost:8084/api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PUBLIC`, {
             headers: {
                 Authorization: localStorage.getItem('logintoken'),
             }
@@ -94,7 +94,7 @@ const Review = () => {
     const addPost = async (newTitle, newContent) => {
 
         const newPost = {
-          type: 0,
+          type: "PUBLIC",
           title: newTitle, 
           content: newContent,
           categoryId: 1
