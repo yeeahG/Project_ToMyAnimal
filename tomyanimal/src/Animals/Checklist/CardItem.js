@@ -24,6 +24,7 @@ const CardItem = ( props, {id, text, src, label} ) => {
                         alt='Checklist Image'
                         // src={props.src}
                         src={it.src}
+                        //src=`../Checklist/img/imageex.png`
                     />
                 </div>
                 <div className='cards__item__info'>
