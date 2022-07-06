@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const ReviewRead = ( {props, id, title, body, userId} ) => {
+const ReviewRead = ( {props, id, title, content, createdAt} ) => {
     const navigate = useNavigate();
     // const [article, setArticle] = useState([]);
     const [comment, setComment] = useState([])
@@ -46,7 +46,7 @@ const ReviewRead = ( {props, id, title, body, userId} ) => {
                     {/* <a href='/community/board/{id}'>{it.title}</a> */}
                     <span
                         onClick={goDetail} 
-                        title={title} body={body} 
+                        title={title} content={content} 
                         co={comment}
                         className='board__title'
                     >{title}</span>
@@ -57,10 +57,9 @@ const ReviewRead = ( {props, id, title, body, userId} ) => {
             </td>
             <td style={{width:'7.5%'}}>
                 {/* <a>작성자이름</a> */}
-                <a>{userId}</a>
             </td>
             <td style={{width:'7.5%'}}>
-                <span>작성시간</span>
+                <span>{createdAt}</span>
             </td>
             <td style={{width:'5%'}}>
                 <span>{view}</span>
