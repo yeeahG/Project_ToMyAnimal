@@ -3,7 +3,12 @@ import axios from 'axios';
 import ReviewRead from './ReviewRead';
 import ReviewWrite from './ReviewWrite';
 import Pagination from '../components/Pagination';
+import ControlMenu from '../../Pages/ControlMenu';
 
+const sortOptionList = [
+    {value: "latest", name: "최신순"},
+    {value: "oldest", name: "오래된 순"},
+]
 
 export const ArticleStateContext = React.createContext();
 
@@ -21,10 +26,10 @@ const Review = () => {
 
     const postList = [];
 
-    //http://localhost:8084/api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=0
     useEffect(() => {
         //axios.get('https://jsonplaceholder.typicode.com/posts', {
-        axios.get(`http://localhost:8084/api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PUBLIC`, {
+        //axios.get(`http://localhost:8084/api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PUBLIC`, {
+        axios.get(`http://localhost:8084/api/public-board?categoryId=1&type=PUBLIC&page=0&size=4`, {
             headers: {
                 Authorization: localStorage.getItem('logintoken'),
             }
@@ -42,9 +47,7 @@ const Review = () => {
         });
     }, []);
 
-    console.log(article);
 
-    
     /*
     const getProcessedList = () => {
         const compare = (a,b) => {
@@ -122,7 +125,7 @@ const Review = () => {
             console.error('실패:', error);
           });
           alert('작성이 완료되었습니다')
-          //window.location.reload();
+          window.location.reload();
         } else {
           setError("한 글자 이상 입력하세요")
         }
@@ -135,9 +138,26 @@ const Review = () => {
     //pagination
     const indexOfLast = currentPage * postsPerPage;
     const indexOfFirst = indexOfLast - postsPerPage;
+    
+    // let currentPosts = 0;
+    // currentPosts = article.slice(indexOfFirst, indexOfLast);
 
-    let currentPosts = 0;
-    currentPosts = article.slice(indexOfFirst, indexOfLast);
+    const getProcessedList = () => {
+        const compare = (a,b) => {
+            if(sortType === 'latest') {
+                return parseInt(b.id) - parseInt(a.id);
+            } else {
+                return parseInt(a.id) - parseInt(b.id);
+            }
+        }
+
+        const copyList = JSON.parse(JSON.stringify(article));
+        const sortedList = copyList.sort(compare);
+
+        let currentPosts = 0;
+        currentPosts = sortedList.slice(indexOfFirst, indexOfLast);
+        return currentPosts;
+    }
 
     
 
@@ -146,7 +166,7 @@ const Review = () => {
 
         <div className='userinfo__subtitle'>
             <a href='/community/board'>
-                <h1>Board</h1>
+                <h1>Talking</h1>
             </a>
             <p>Write everything</p>
         </div>
@@ -172,6 +192,15 @@ const Review = () => {
 
         </div>
 
+        <div className='control__menu'>
+            <ControlMenu 
+                value={sortType}
+                onChange={setSortType}
+                optionList={sortOptionList}
+                article={article}
+                />
+        </div>
+
         <div className='list__board'>
             <table>
 
@@ -185,8 +214,8 @@ const Review = () => {
                     </tr>
                 </thead>
 
-                {/*{getProcessedList().map((it) => */}
-                {currentPosts.map((it) => 
+                {/* {currentPosts.map((it) =>  */}
+                {getProcessedList().map((it) =>
                 <ReviewRead key={it.id} {...it} />
                 )}
             </table>
