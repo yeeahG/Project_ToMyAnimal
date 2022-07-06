@@ -12,19 +12,19 @@ const Community = () => {
     const tabContArr=[
       {
         tabTitle:(
-          <li className={activeIndex===0 ? "is-active" : ""} onClick={()=>tabClickHandler(0)}>Board</li>
+          <li className={activeIndex===0 ? "is-active" : ""} onClick={()=>tabClickHandler(0)}>Talking</li>
       ),
         tabCont:(
-          <div><Board /></div>
+          <div><Review /></div>
         )
       },
       {
         tabTitle:(
-          <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}>Review</li>
+          <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}>Dummy</li>
         ),
         tabCont:(
           <div>
-            <Review /> 
+            <Board /> 
           </div>
         )
       },

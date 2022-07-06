@@ -3,7 +3,12 @@ import axios from 'axios';
 import ReviewRead from './ReviewRead';
 import ReviewWrite from './ReviewWrite';
 import Pagination from '../components/Pagination';
+import ControlMenu from '../../Pages/ControlMenu';
 
+const sortOptionList = [
+    {value: "latest", name: "최신순"},
+    {value: "oldest", name: "오래된 순"},
+]
 
 export const ArticleStateContext = React.createContext();
 
@@ -133,9 +138,26 @@ const Review = () => {
     //pagination
     const indexOfLast = currentPage * postsPerPage;
     const indexOfFirst = indexOfLast - postsPerPage;
+    
+    // let currentPosts = 0;
+    // currentPosts = article.slice(indexOfFirst, indexOfLast);
 
-    let currentPosts = 0;
-    currentPosts = article.slice(indexOfFirst, indexOfLast);
+    const getProcessedList = () => {
+        const compare = (a,b) => {
+            if(sortType === 'latest') {
+                return parseInt(b.id) - parseInt(a.id);
+            } else {
+                return parseInt(a.id) - parseInt(b.id);
+            }
+        }
+
+        const copyList = JSON.parse(JSON.stringify(article));
+        const sortedList = copyList.sort(compare);
+
+        let currentPosts = 0;
+        currentPosts = sortedList.slice(indexOfFirst, indexOfLast);
+        return currentPosts;
+    }
 
     
 
@@ -144,7 +166,7 @@ const Review = () => {
 
         <div className='userinfo__subtitle'>
             <a href='/community/board'>
-                <h1>Board</h1>
+                <h1>Talking</h1>
             </a>
             <p>Write everything</p>
         </div>
@@ -170,6 +192,15 @@ const Review = () => {
 
         </div>
 
+        <div className='control__menu'>
+            <ControlMenu 
+                value={sortType}
+                onChange={setSortType}
+                optionList={sortOptionList}
+                article={article}
+                />
+        </div>
+
         <div className='list__board'>
             <table>
 
@@ -183,8 +214,8 @@ const Review = () => {
                     </tr>
                 </thead>
 
-                {/*{getProcessedList().map((it) => */}
-                {currentPosts.map((it) => 
+                {/* {currentPosts.map((it) =>  */}
+                {getProcessedList().map((it) =>
                 <ReviewRead key={it.id} {...it} />
                 )}
             </table>
