@@ -8,6 +8,7 @@ import AddChecklist from './AddChecklist';
 import { DeleteFilled } from '@ant-design/icons';
 
 import './CardItem.css'
+import ChecklistFooter from './ChecklistFooter';
 
 const sortOptionList = [
   {value: "latest", name: "최신순"},
@@ -28,6 +29,7 @@ const Detail = () => {
   const [postsPerPage, setPostsPerPage] = useState(6);
 
   const {id} = useParams();
+  //console.log(id);
 
   const userid = localStorage.getItem('userid');
 
@@ -59,6 +61,7 @@ const Detail = () => {
   }
 
   const putList = [];
+  const postIdList = [];
   
   useEffect ( () => {
     //axios.get(`http://localhost:8084/api/posts?page=0&size=4&categoryId=${id}&memberId=${userid}`, {
@@ -70,14 +73,19 @@ const Detail = () => {
       //console.log(response.data.result.data.postList[0]);
       for (let i=0; i < response.data.result.data.length; i++) {
         putList.push(response.data.result.data[i])
+        postIdList.push(response.data.result.data[i].id)
         //console.log(putList);
-      } setData(putList);
+      } 
+      setData(putList);
+      setNoteId(postIdList)
+
     }).catch((error) => {
       console.log(error);
     });
   }, []);
   
-  console.log(data);
+  //console.log(data);
+  console.log(noteId);
 
   const submitHandler = async (title, content) => {
     console.log("submit" + title);
@@ -124,13 +132,14 @@ const Detail = () => {
   }
 
 
-  const deleteNote = async (noteId) => {
-    //글 각각의 id 필요
-    //noteId
+  const deleteNote = async (id) => {
+    //글 각각의 id 필요 = noteId
     const newNotes = data.filter((note) => note.noteId != noteId)
     setData(newNotes);
+    console.log(id);
 
-    axios.delete(`http://localhost:8084/api/members/${userid}`, {
+    //axios.delete(`http://localhost:8084/api/members/${noteId}`, {
+    await axios.delete(`http://localhost:8084/api/board/${id}`, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('logintoken'),
@@ -139,6 +148,7 @@ const Detail = () => {
     .then((data) => {
       console.log('성공:', data);
       alert("삭제가 완료되었습니다")
+      window.location.reload();
     })
     .catch((error) => {
       console.error('실패:', error);
@@ -241,47 +251,39 @@ const Detail = () => {
 
             {currentPosts.map((it) => (
               <div className='checklist__note'>
+                
                 <div className='checklist__text'>
+                  {it.id}
                   <h3>{it.title}</h3>
                   <p>{it.content}</p> 
                 </div>
                 <div className='checklist__note__footer'>
                   <small>2022/07.01</small>
-                  <button>
+                  {/*
+                  <button key={it.id}>
                     <DeleteFilled 
                       style={{fontSize: '18px'}} 
-                      //onClick={deleteNote}
+                      onClick={deleteNote}
                     />
                   </button>
+                  */}
+                  <ChecklistFooter 
+                    id={it.id}
+                    deleteNote={deleteNote}
+                  />
                 </div>
+                
               </div>
             ))}
 
             <div className='checklist__note'>
-              <h3>title</h3>
-              <p>content</p>
+              <h3>dummy title</h3>
+              <p>dummy content</p>
               <div className='checklist__note__footer'>
                 <small>2022/07.01</small>
                 <button><DeleteFilled style={{fontSize: '18px'}} /></button>
               </div>
             </div>
-            <div className='checklist__note'>
-              <h3>title</h3>
-              <p>content</p>
-              <div className='checklist__note__footer'>
-                <small>2022/07.01</small>
-                <button><DeleteFilled style={{fontSize: '18px'}} /></button>
-              </div>
-            </div>
-            <div className='checklist__note'>
-              <h3>title</h3>
-              <p>content</p>
-              <div className='checklist__note__footer'>
-                <small>2022/07.01</small>
-                <button><DeleteFilled style={{fontSize: '18px'}} /></button>
-              </div>
-            </div>
-
 
             <AddChecklist 
               submitHandler={submitHandler}

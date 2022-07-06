@@ -2,7 +2,7 @@ import React, { useState, createContext } from 'react'
 import { Link } from 'react-router-dom';
 import CardItem from './CardItem';
 import ControlMenu from '../../Pages/ControlMenu';
-import img from './img/imageex.png'
+//import img from './img/imageex.png'
 import Walk from './Walk';
 
 export const ChecklistContext = React.createContext();
@@ -11,43 +11,43 @@ const checklistTab = [
   {
     id: 1,
     text: "산책",
-    src: "./img/imageex.png",
+    src: "../Checklist/img/1.png",
     label: 'Walking',
   }, 
   {
     id: 2,
     text: "사료",
-    src: "./img/imageex.png",
+    src: "../Checklist/img/1.png",
     label: 'Walking',
   }, 
   {
     id: 3,
     text: "간식",
-    src: "./img/imageex.png",
+    src: "../Checklist/img/1.png",
     label: 'Walking',
   }, 
   {
     id: 4,
     text: "미용",
-    src: "./img/imageex.png",
+    src: "../Checklist/img/1.png",
     label: 'Walking',
   }, 
   {
     id: 5,
     text: "진료",
-    src: "./img/imageex.png",
+    src: "../Checklist/img/1.png",
     label: 'Walking',
   }, 
   {
     id: 6,
     text: "목욕",
-    src: "./img/imageex.png",
+    src: "../Checklist/img/1.png",
     label: 'Walking',
   }, 
   {
     id: 7,
     text: "대소변",
-    src: "./img/imageex.png",
+    src: "../Checklist/img/1.png",
     label: 'Walking',
     path: '/animal/walk'
   }, 
