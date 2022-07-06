@@ -44,14 +44,18 @@ public class Animal {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Member member;
 
+    @Column(length = 42)
+    private String type;
+
     @OneToMany(mappedBy = "animal", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<AnimalImage> animalImages;
 
-    public Animal(String registrationNumber, String name, String birthday, double weight, Member member, List<AnimalImage> animalImages){
+    public Animal(String registrationNumber, String name, String birthday, double weight, String type ,Member member, List<AnimalImage> animalImages){
         this.registrationNumber = registrationNumber;
         this.name = name;
         this.birthday = birthday;
         this.weight = weight;
+        this.type = type;
         this.member = member;
         this.animalImages = new ArrayList<>();
         addImages(animalImages);
@@ -61,6 +65,7 @@ public class Animal {
         this.registrationNumber = req.getRegistrationNumber();
         this.name = req.getName();
         this.weight = req.getWeight();
+        this.type = req.getType();
         ImageUpdatedResult result = findImageUpdatedResult(req.getAddedImages(), req.getDeletedImages());
         addImages(result.getAddedAnimalImages());
         deleteImages(result.getDeletedAnimalImages());

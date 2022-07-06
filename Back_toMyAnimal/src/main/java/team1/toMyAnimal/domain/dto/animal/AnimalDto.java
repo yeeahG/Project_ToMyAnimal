@@ -19,6 +19,7 @@ public class AnimalDto {
     private String name;
     private String birthday;
     private double weight;
+    private String type;
     private MemberDto member;
     private List<AnimalImageDto> images;
 
@@ -30,6 +31,7 @@ public class AnimalDto {
                 animal.getName(),
                 animal.getBirthday(),
                 animal.getWeight(),
+                animal.getType(),
                 MemberDto.toDto(animal.getMember()),
                 animal.getAnimalImages().stream().map(p -> AnimalImageDto.toDto(p)).collect(toList())
         );

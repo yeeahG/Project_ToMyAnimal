@@ -16,6 +16,7 @@ public class AnimalUpdateRequest {
     private String registrationNumber;
     private String name;
     private double weight;
+    private String type;
     private List<MultipartFile> addedImages = new ArrayList<>();
     private List<Long> deletedImages = new ArrayList<>();
 }
