@@ -41,9 +41,16 @@ public class BoardService {
         return BoardDto.toDto(boardRepository.findById(id).orElseThrow(BoardNotFoundException::new));
     }
 
-    public List<BoardDto> readAll(BoardReadCondition cond) {
+    // checkList
+    public List<BoardDto> myReadAll(BoardReadCondition cond) {
         return BoardDto.toDtoList(boardRepository.findByIdWithMemberAndCategoryAndType(cond.getMemberId(), cond.getCategoryId(), cond.getType()));
     }
+    
+    public List<BoardDto> readAllBoardList(BoardReadCondition cond) {
+        return BoardDto.toDtoList(boardRepository.findByIdWithCategoryIdAndType(cond.getCategoryId(), cond.getType()));
+    }
+
+
 
     @Transactional
     public void delete(Long id) {

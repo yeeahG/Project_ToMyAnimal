@@ -21,7 +21,6 @@ import java.util.stream.IntStream;
 public class AnimalService {
     private final AnimalRepository animalRepository;
     private final MemberRepository memberRepository;
-
     private final FileService fileService;
 
     @Transactional
