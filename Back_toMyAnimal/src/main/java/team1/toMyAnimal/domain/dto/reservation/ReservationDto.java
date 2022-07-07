@@ -9,6 +9,7 @@ import team1.toMyAnimal.domain.reservation.Reservation;
 import team1.toMyAnimal.domain.reservation.ReservationType;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +17,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ReservationDto{
     private Long id;
+
+    private Date date;
 
     private ReservationType type;
 
@@ -32,6 +35,7 @@ public class ReservationDto{
     public static ReservationDto toDto(Reservation reserv) {
         return new ReservationDto(
                 reserv.getId(),
+                reserv.getDate(),
                 reserv.getType(),
                 MemberDto.toDto(reserv.getMember()),
                 AnimalDto.toDto(reserv.getAnimal()),

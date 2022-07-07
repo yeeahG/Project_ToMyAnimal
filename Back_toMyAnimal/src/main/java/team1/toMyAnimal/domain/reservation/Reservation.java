@@ -1,5 +1,6 @@
 package team1.toMyAnimal.domain.reservation;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,8 +12,7 @@ import team1.toMyAnimal.domain.member.Member;
 import team1.toMyAnimal.domain.animal.Animal;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -24,8 +24,10 @@ public class Reservation extends EntityDate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reservation_id")
     private Long id;
-    private LocalDate date;
+    private Date date;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private ReservationType type;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -38,7 +40,7 @@ public class Reservation extends EntityDate {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Animal animal;
 
-    public Reservation(LocalDate date, ReservationType type, Member member, Animal animal){
+    public Reservation(Date date, ReservationType type, Member member, Animal animal){
         this.date = date;
         this.type = type;
         this.member = member;
