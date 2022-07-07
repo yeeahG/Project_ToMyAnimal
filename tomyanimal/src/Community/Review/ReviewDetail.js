@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from 'react'
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { HeartOutlined, HeartFilled, LikeOutlined, LikeFilled, DownOutlined, UpOutlined } from '@ant-design/icons';
+import { LikeOutlined, LikeFilled, DownOutlined, UpOutlined } from '@ant-design/icons';
 import CommentsBox from '../components/CommentsBox';
 import TopCommentsBox from './TopCommentsBox';
 import MessageScroll from './MessageScroll';
@@ -14,9 +14,9 @@ export function useOpenReply() {
   return useContext(showReply);
 }
 
-const ReviewDetail = ( {title, body} ) => {
+const ReviewDetail = ( {title, content} ) => {
     const {id} = useParams();
-    //console.log(id);
+    console.log(id);
     const location = useLocation();
     const name = location.state.name;
     const bid = location.state.id;
@@ -40,12 +40,30 @@ const ReviewDetail = ( {title, body} ) => {
     const userName = localStorage.getItem('usename')
   
     const navigate = useNavigate();
+
+    const userid = localStorage.getItem('userid');
+    const postList = [];
   
     useEffect(() => {
-      axios.get('https://jsonplaceholder.typicode.com/posts/'+id)
-      .then((response)=> {
-        setData(response.data);
+      //axios.get('https://jsonplaceholder.typicode.com/posts/'+id)
+      axios.get(`http://localhost:8084/api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PUBLIC`, {
+        headers: {
+          Authorization: localStorage.getItem('logintoken'),
+        }
       })
+      .then((response)=> {
+        setData(response.data.result.data[0]);
+        // for (let i=0; i<response.data.result.data.length; i++) {
+        //   if (response.data.result.data[i].id === id) {
+        //     postList.push(response.data.result.data[i])
+        //   }
+        // } 
+        //setData(postList)
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     }, []);
   
     const boardBack = () => {
@@ -68,7 +86,6 @@ const ReviewDetail = ( {title, body} ) => {
         //userId: localStorage.getItem('usename'),
         //date: new Date(),
         //postId: id
-  
         content: comtext,
         postId: id
       }
@@ -236,8 +253,10 @@ const ReviewDetail = ( {title, body} ) => {
                           <td>
                             <div className='user__content'>
                               <p>
+                                {id}
+                                {content}
                                 {/* 게시글 내용 */}
-                                {data.body}
+                                {data.content}
                               </p>
                             </div>
                           </td>
@@ -256,7 +275,6 @@ const ReviewDetail = ( {title, body} ) => {
                       </div>
   
 
-                    
                   <div className='comment__write'>
                     <div className='comment__write__area'>
   
@@ -281,7 +299,6 @@ const ReviewDetail = ( {title, body} ) => {
                         </div>
                         
                       </div>
-
 
                       <ContextProvider>            
                         <TopCommentsBox />

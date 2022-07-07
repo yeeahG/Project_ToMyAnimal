@@ -125,7 +125,15 @@ const AnimalHome = () => {
     },
     {
       tabTitle:(
-        <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}> My Log</li>
+        <li className={activeIndex===3 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}>Check</li>
+      ),
+      tabCont:(
+        <div> <CheckList /> </div>
+      )
+    },
+    {
+      tabTitle:(
+        <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}> My Log</li>
       ),
       tabCont:(
         <div> <AnimalLog /> </div>
@@ -133,18 +141,10 @@ const AnimalHome = () => {
     },
     {
       tabTitle:(
-        <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}>Memo</li>
+        <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(3)}>Memo</li>
       ),
       tabCont:(
         <div> <Log /> </div>
-      )
-    },
-    {
-      tabTitle:(
-        <li className={activeIndex===3 ? "is-active" : ""} onClick={()=>tabClickHandler(3)}>Check</li>
-      ),
-      tabCont:(
-        <div> <CheckList /> </div>
       )
     },
   ];

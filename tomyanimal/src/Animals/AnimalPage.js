@@ -1,7 +1,119 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import profile from './Checklist/img/imageex.png'
+import { CloseOutlined } from '@ant-design/icons';
 import './AnimalInfo.css'
+import AnimalMedicalInfoOne from './AnimalMedical/AnimalMedicalInfoOne';
+import AnimalMedicalInfoTwo from './AnimalMedical/AnimalMedicalInfoTwo';
+
+
+export const MedicalInfoContext = React.createContext();
+
+const medicalinfoDummy = [
+  {
+    id:1,
+    type: "접종",
+    data: [
+      {
+      id: 1, 
+      type: "접종",
+      text: "광견병 접종",
+      date: '2022-07-01',
+      },
+      {
+      id: 2, 
+      type: "접종",
+      text: "심장 사상충 접종",
+      date: '2022-07-03',
+      },
+      {
+      id: 3, 
+      type: "접종",
+      text: "~~~접종",
+      date: '2022-07-04',
+      },
+    ]
+  },
+  {  
+    id:2,
+    type: "수술",
+    data: [
+      {
+        id: 1, 
+        type: "수술",
+        text: "중성화 수술",
+        date: '2022-07-06',
+      },
+      {
+        id: 2, 
+        type: "수술",
+        text: "슬개골 수술",
+        date: '2022-07-07',
+      },
+    ]
+  },
+
+]
+
+const messagelist = [
+  {
+    id: 1,
+    type: "접종",
+    editable: false,
+    replies: [
+      {
+        id: 1, 
+        date: "2022-07-01",
+        type: "광견병",
+        likes: 231
+      },
+      {
+        id: 2, 
+        date: "2022-07-03",
+        type: "심장 사상충",
+        likes: 2
+      },
+    ]
+  },
+  {
+    id: 4, 
+    type: "수술",
+    editable: false,
+    replies: [
+      {
+        id: 5,
+        date: "2022-07-06",
+        type: "중성화",
+        likes: 2
+      },
+      {
+        id: 5,
+        date: "2022-07-07",
+        type: "슬개골",
+        likes: 2
+      },
+    ]
+  },
+  {
+    id: 6,
+    type: "복용",
+    editable: false,
+    replies: [
+      {
+        id: 1,
+        date: "2022-07-06",
+        type: "유산균",
+        likes: 2
+      },
+      {
+        id: 2,
+        date: "2022-07-07",
+        type: "칼슘",
+        likes: 2
+      },
+    ]
+  },
+]
 
 const AnimalPage = () => {
   const [petName, setPetname] = useState();
@@ -13,7 +125,6 @@ const AnimalPage = () => {
   const [isOpen, setOpen] = useState(false);
 
   const userId = localStorage.getItem('userid');
-
 
   // useEffect(() => {
   //   axios({
@@ -115,14 +226,24 @@ const AnimalPage = () => {
 
     <section className='animal__info__wrapper'>
       <h2>{petName} Information</h2>
-      
+
       <div className='animal__info__container'>
 
-        <div className='animal__info__content'>
+        {messagelist.map(message => (
+          <div className='animal__info__content'>
+            <AnimalMedicalInfoOne 
+              editable={message.editable} 
+              type={message.type}
+              likes={message.likes} 
+              replies={message.replies}
+            />
+          </div>
+        ))}
 
+        {/* <div className='animal__info__content'>
           <div className='animal__info__cover'>
             <h3>예방접종 내역</h3>
-          </div>
+            </div>
           <div className='animal__info__vaccine'>
             <h3>내역</h3>
             <div className='animal__info__desc'>
@@ -131,29 +252,8 @@ const AnimalPage = () => {
             </div>
           </div>
 
-        </div>
+        </div> */}
 
-        <div className='animal__info__content'>
-
-          <div className='animal__info__cover'>
-            <h3>예방접종 내역</h3>
-            </div>
-          <div className='animal__info__vaccine'>
-            <h3>내역</h3>
-          </div>
-
-        </div>
-
-        <div className='animal__info__content'>
-
-          <div className='animal__info__cover'>
-              <h3>예방접종 내역</h3>
-            </div>
-          <div className='animal__info__vaccine'>
-            <h3>내역</h3>
-          </div>
-
-        </div>
       </div>
 
 

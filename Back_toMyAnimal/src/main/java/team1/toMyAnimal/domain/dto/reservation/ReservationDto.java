@@ -6,6 +6,7 @@ import lombok.Data;
 import team1.toMyAnimal.domain.dto.animal.AnimalDto;
 import team1.toMyAnimal.domain.dto.member.MemberDto;
 import team1.toMyAnimal.domain.reservation.Reservation;
+import team1.toMyAnimal.domain.reservation.ReservationType;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 public class ReservationDto{
     private Long id;
 
-    private String type;
+    private ReservationType type;
 
     private MemberDto member;
 
