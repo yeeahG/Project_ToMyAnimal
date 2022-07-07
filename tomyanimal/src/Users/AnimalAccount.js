@@ -56,7 +56,7 @@ const AnimalAccount = ( ) => {
   
   /*axios.get('http://localhost:8084/api/pets' + loginId,*/
   useEffect(() => {
-    axios.get('http://localhost:8084/api/my-pet?memberId=' + loginId, { 
+    axios.get('http://localhost:8084/api/animals/1', { 
       headers: { 
         Authorization: localStorage.getItem('logintoken') 
       } 
@@ -69,12 +69,13 @@ const AnimalAccount = ( ) => {
       //setPetnum(response.data.result.data['registrationNumber'])
       //setPetBTD(response.data.result.data['birthday'])
       //setPetKg(response.data.result.data['weight'])
-      for (let i=0; i < response.data.result.data.length; i++) {
-        putPetsList.push(response.data.result.data[i])
-        putPetsIdList.push(response.data.result.data[i].id)
-      }
-      setPetArray(putPetsList)
-      setPetId(putPetsIdList)
+      // for (let i=0; i < response.data.result.data.length; i++) {
+      //   putPetsList.push(response.data.result.data[i])
+      //   putPetsIdList.push(response.data.result.data[i].id)
+      // }
+      // setPetArray(putPetsList)
+      // setPetId(putPetsIdList)
+      setPetArray(response.data)
     })
     .catch((error) => {
       console.log('error ', error);
@@ -89,7 +90,7 @@ const AnimalAccount = ( ) => {
     it.preventDefault();
     console.log(it.id);
 
-    await axios.delete('http://localhost:8084/api/pets/' + it.id, {
+    await axios.delete('http://localhost:8084/api/animals/' + it.id, {
       headers: {
         'Authorization': localStorage.getItem('logintoken'),
       }
@@ -167,7 +168,7 @@ const AnimalAccount = ( ) => {
           <tbody>
           {petArray.map((it) =>
             <tr key={it.id}>
-              <td>{it.petName}</td>
+              <td>{it.name}</td>
               <td>{it.registrationNumber}</td>
               <td>{it.birthday}</td>
               <td>{parseInt(dateYear) - parseInt(it.birthday)}살</td>

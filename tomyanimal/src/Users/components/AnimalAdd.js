@@ -19,19 +19,21 @@ const AnimalAdd = () => {
     const registerAnimal = async () => {
         const animal = {
             //id: loginId,
-            petName: animalName,
+            name: animalName,
             registrationNumber: animalId,
             birthday: animalAge,
             weight: animalWeight,
+            type: "dog"
         }
         //console.log(animal);
 
         const formData = new FormData()
         //formData.set('id', animal.id)
-        formData.set('petName', animal.petName)
+        formData.set('name', animal.name)
         formData.set('registrationNumber', animal.registrationNumber)
         formData.set('birthday', animal.birthday)
         formData.set('weight', animal.weight)
+        formData.set('type', animal.type)
 
         //const file = document.getElementById('photo')
         //formData.append("addedImages", file.files[0]);
@@ -39,7 +41,7 @@ const AnimalAdd = () => {
         Object.values(imgFile).forEach((file) => formData.append("images", file));
 
         if(animalName!=="" && animalId!=="" && animalAge!=="" && animalWeight!=="" ) {
-            axios.post('http://localhost:8084/api/pets', formData, {
+            axios.post('http://localhost:8084/api/animals', formData, {
                headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': localStorage.getItem('logintoken'),
