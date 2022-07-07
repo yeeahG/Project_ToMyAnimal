@@ -486,10 +486,12 @@ li {
     }
 
 
+    /*
     .animal__info__content:hover:after, 
     .animal__info__content:hover > .animal__info__vaccine {
         display:block;
     }
+    */
 
     .animal__info__content:hover > .animal__info__cover {
         display: none;
