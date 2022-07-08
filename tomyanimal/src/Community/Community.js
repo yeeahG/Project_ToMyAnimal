@@ -33,7 +33,7 @@ const Community = () => {
           <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}>What</li>
         ),
         tabCont:(
-          <div> bbbb </div>
+          <div> Prepare </div>
         )
       }
     ];
@@ -62,7 +62,7 @@ const Community = () => {
             <div className='left__menu'>
               <ul className='menu__wrap'>
                 <li className='menu__list'>Community</li>
-                {tabContArr.map((section, index)=>{
+                {tabContArr.map((section)=>{
                   return section.tabTitle
                 })}
               </ul>
