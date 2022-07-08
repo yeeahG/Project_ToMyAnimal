@@ -109,7 +109,7 @@ const Reservation = (props) => {
             <div className='reserve__wrapper'>
 
                 <div className='reserve__subtitle'>
-                    <a href='/'>
+                    <a href='/places/all'>
                         <h1>Reservation</h1>
                     </a>
                     <p>예약을 진행하세요</p>
@@ -119,15 +119,15 @@ const Reservation = (props) => {
                         <div className='reserve__place'>
                             <h3>시설정보</h3>
                             <p>{id}</p>
-                            <p>{location.state.place.keyword}</p>
+                            <p className='reserve__info__keyword'>{location.state.place.keyword}</p>
                             <p>{location.state.place.title}</p>
                             <p>{location.state.place.addr}</p>
                         </div>
                     </div>
                     <section className='place__reserve__form'>
-                        <div className='reserve__container'>
-                            <p className='reserve__error'>{error}</p>
+                        <div className='place__reserve__container'>
                             <div>
+                                <p className='reserve__error'>{error}</p>
                                 <h3>예약 종류 *</h3>
                                 <div className='reserve__keyword'>
                                     <p value="수술" onClick={() => setType("수술")}>수술</p>
@@ -155,15 +155,16 @@ const Reservation = (props) => {
                         </div>
                     </section>
 
-                    <div className='welcome'>
-                        <button className='welcome__btn' onClick={submitHandler}>
-                            ADD
-                        </button>
-                        <button className='welcome__btn' onClick={checklistBack}>
-                            Cancel
-                        </button>
-                    </div>
                 </section>
+
+                <div className='welcome reserve__btn'>
+                    <button className='welcome__btn' onClick={submitHandler}>
+                        ADD
+                    </button>
+                    <button className='welcome__btn' onClick={checklistBack}>
+                        Cancel
+                    </button>
+                </div>
 
             </div>
             : 
