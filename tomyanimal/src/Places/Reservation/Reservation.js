@@ -16,7 +16,7 @@ const timeOptionList = [
     {value: " 16:00", name: "16:00"},
 ]
 
-const Reservation = () => {
+const Reservation = (props) => {
     const [type, setType] = useState('')
     const [date, setDate] = useState('')
     const [reservTime, setReservTime] = useState('')
@@ -36,11 +36,10 @@ const Reservation = () => {
     const isLogin = localStorage.getItem('logintoken')
 
 
-    /*
+    
     const location = useLocation();
-    const job = location.state.place;
-    console.log(job);
-    */
+    console.log(location.state.place);
+    
 
     const navigateState = useNavigate().state;
     const [placeDummy, setPlaceDummy] = useState(navigateState && navigateState.place)
@@ -127,12 +126,13 @@ const Reservation = () => {
                     <div className='reserve__info'>
                         <div className='reserve__place'>
                             <h3>시설정보</h3>
-                            {id}
-                            {place}
+                            <p>{id}</p>
+                            <p>{location.state.place.keyword}</p>
+                            <p>{location.state.place.title}</p>
+                            <p>{location.state.place.addr}</p>
                         </div>
                     </div>
                     <div className='place__reserve__form'>
-                        <p>id = {id}</p>
                         <div>
                             예약 종류
                             <div className='reserve__keyword'>
