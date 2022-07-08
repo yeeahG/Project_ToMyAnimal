@@ -4,18 +4,16 @@ import Reservation from './Reservation/Reservation';
 import './Places.css'
 
 const PlaceDetail = ( {place} ) => {
-  //console.log(place);
   const [isOpen, setOpen] = useState(false);
 
   const navigate = useNavigate();
   const id = place.id
 
-  const isOpenHandler = () => {
+  const isOpenHandler = (place) => {
     setOpen(!isOpen);
-    navigate(`/places/all/${id}`)
+    navigate(`/places/all/${id}`, { state: {place: place} })
   }
 
-  {/**/}
   return (
     <div className='place__detail__container'> 
      {isOpen ? 
