@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import User from '../../Users/User';
 import axios from 'axios';
-import { placeData } from '../placeData'
-import './Reservation.css'
 import ControlMenu from '../../Pages/ControlMenu';
+import './Reservation.css'
 
 const timeOptionList = [
     {value: " 9:00", name: "9:00"},

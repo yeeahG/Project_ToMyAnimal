@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Review from '../Community/Review/Review'
-import Board from './Board';
+import DummyBoard from './DummyBoard';
+import Board from './Review/Board';
 
 const Community = () => { 
     const [activeIndex, setActiveIndex]=useState(0);
@@ -12,10 +12,10 @@ const Community = () => {
     const tabContArr=[
       {
         tabTitle:(
-          <li className={activeIndex===0 ? "is-active" : ""} onClick={()=>tabClickHandler(0)}>Talking</li>
+          <li className={activeIndex===0 ? "is-active" : ""} onClick={()=>tabClickHandler(0)}>Board</li>
       ),
         tabCont:(
-          <div><Review /></div>
+          <div><Board /></div>
         )
       },
       {
@@ -24,7 +24,7 @@ const Community = () => {
         ),
         tabCont:(
           <div>
-            <Board /> 
+            <DummyBoard /> 
           </div>
         )
       },

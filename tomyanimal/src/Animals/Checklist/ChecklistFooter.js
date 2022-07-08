@@ -5,12 +5,11 @@ const ChecklistFooter = ( {id, deleteNote} ) => {
   return (
     <div>
         <button>
-            <DeleteFilled 
-                style={{fontSize: '18px'}} 
-                onClick={() => deleteNote(id)}
-            />
+          <DeleteFilled 
+              style={{fontSize: '18px'}} 
+              onClick={() => deleteNote(id)}
+          />
         </button>
-
     </div>
   )
 }

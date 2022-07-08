@@ -88,9 +88,6 @@ const Home = () => {
             <div className='slide__content'>
               <p>02</p>
               <h3 >Check</h3>
-              {/* <div>
-                <h3  className='slide__subtitle'>Check up</h3>
-              </div> */}
               <div className='img__box even'>
                 {/* <img src={medicine} /> */}
               </div>
@@ -107,9 +104,6 @@ const Home = () => {
             <div className='slide__content'>
               <p>04</p>
               <h3>Together</h3>
-              {/* <div>
-                <h3 className='slide__subtitle'>Check up</h3>
-              </div> */}
               <div className='img__box sec__even'>
                 <img />
               </div>

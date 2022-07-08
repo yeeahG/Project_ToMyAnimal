@@ -72,7 +72,6 @@ const Detail = () => {
       for (let i=0; i < response.data.result.data.length; i++) {
         putList.push(response.data.result.data[i])
         postIdList.push(response.data.result.data[i].id)
-        //console.log(putList);
       } 
       setData(putList);
       setNoteId(postIdList)
@@ -82,7 +81,6 @@ const Detail = () => {
     });
   }, []);
   
-  //console.log(data);
   console.log(noteId);
 
   const submitHandler = async (title, content) => {
@@ -230,16 +228,6 @@ const Detail = () => {
             <button className='upload__btn' onClick={submitHandler} >write</button>
           </div>
             :
-          // <div className='checklist__read__container'>
-          //   {/* {data.title} 
-          //   {data.map((it) => ( */}
-          //   {currentPosts.map((it) => (
-          //     <div className='checklist__read__content'>
-          //       <h3>{it.title}</h3>
-          //       <p>{it.content}</p>
-          //     </div>
-          //   ))}
-          // </div>
           null
           }
 

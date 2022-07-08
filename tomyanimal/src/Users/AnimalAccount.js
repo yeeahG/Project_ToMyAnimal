@@ -7,10 +7,7 @@ import './UserHome.css'
 const AnimalAccount = ( ) => {
   const [animal, setAnimal] = useState([]);
 
-  const [res, setRes] = useState();
-
   const [petPhoto, setPetPhoto] = useState();
-  //const [petId, setPetId] = useState();
   const [petName, setPetName] = useState();
   const [petNumber, setPetnum] = useState();
   const [petBTD, setPetBTD] = useState();
@@ -53,8 +50,7 @@ const AnimalAccount = ( ) => {
   const [petArray, setPetArray] = useState([]);
   const [petId, setPetId] = useState();
 
-  
-  /*axios.get('http://localhost:8084/api/pets' + loginId,*/
+
   useEffect(() => {
     axios.get('http://localhost:8084/api/animals/1', { 
       headers: { 
@@ -62,19 +58,6 @@ const AnimalAccount = ( ) => {
       } 
     })
     .then(response => {
-      //console.log(response.data);
-      //setRes(response.data.success)
-      //setPetId(response.data.result.data['id'])
-      //setPetName(response.data.result.data['petName'])
-      //setPetnum(response.data.result.data['registrationNumber'])
-      //setPetBTD(response.data.result.data['birthday'])
-      //setPetKg(response.data.result.data['weight'])
-      // for (let i=0; i < response.data.result.data.length; i++) {
-      //   putPetsList.push(response.data.result.data[i])
-      //   putPetsIdList.push(response.data.result.data[i].id)
-      // }
-      // setPetArray(putPetsList)
-      // setPetId(putPetsIdList)
       setPetArray(response.data)
     })
     .catch((error) => {
@@ -104,8 +87,7 @@ const AnimalAccount = ( ) => {
     });
 
   }
-  
-  //navigate('/user')
+
   const date = new Date();
   const dateYear = date.getFullYear()
 
@@ -148,8 +130,6 @@ const AnimalAccount = ( ) => {
     </div>
 
   <div className='animalinfo__content'>
-    {/*{localStorage.getItem("animalinfo")?  */}
-    {/* { (res === 'true') ?  */}
     { (petArray.length >= 1 ) ? 
     <>
       { !isOpen ?

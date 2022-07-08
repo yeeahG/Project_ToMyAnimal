@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import profile from './Checklist/img/imageex.png'
-import { CloseOutlined } from '@ant-design/icons';
 import './AnimalInfo.css'
 import AnimalMedicalInfoOne from './AnimalMedical/AnimalMedicalInfoOne';
-import AnimalMedicalInfoTwo from './AnimalMedical/AnimalMedicalInfoTwo';
-
 
 export const MedicalInfoContext = React.createContext();
 
@@ -122,22 +119,8 @@ const AnimalPage = () => {
   const [petimg, setPetimg] = useState();
   const [petprofile, setPetprofile] = useState();
 
-  const [isOpen, setOpen] = useState(false);
-
   const userId = localStorage.getItem('userid');
 
-  // useEffect(() => {
-  //   axios({
-  //     method: 'get', 
-  //     url: 'http://localhost:8084/api/pets/1',
-  //     headers: { Authorization: localStorage.getItem('logintoken')}
-  //   }).then((response) => {
-  //     setPetname(response.data.result.data['petName'])
-  //     setPetBTD(response.data.result.data['birthday'])
-  //     setPetKg(response.data.result.data['weight'])
-  //   })
-  //}, []);
-  
   useEffect(() => {
     axios.get(`http://localhost:8084/api/my-pet?memberId=${userId}`, {
       headers: {
@@ -207,19 +190,6 @@ const AnimalPage = () => {
           <p>{petKg}kg</p>
         </div>
 
-        <div className='stack'>
-          <button className='details__btn' aria-expanded="false">
-            <span>접종내역</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="14.255" height="14.255">
-              <path fill='none' stroke="currentcolor" strokeWidth="1.5" d="M7.129 0v14.255M0 7.129h14.255"></path>
-            </svg>
-          </button>
-          <div className='details__panel'>
-            <p>세부내용 aria-expanded="true"로 변경되면서 이 부분이 열림
-                d="M0 7.128h14.255"로 바꿔주기
-            </p>
-          </div>
-        </div>
       </div>
 
     </div>
@@ -239,20 +209,6 @@ const AnimalPage = () => {
             />
           </div>
         ))}
-
-        {/* <div className='animal__info__content'>
-          <div className='animal__info__cover'>
-            <h3>예방접종 내역</h3>
-            </div>
-          <div className='animal__info__vaccine'>
-            <h3>내역</h3>
-            <div className='animal__info__desc'>
-              <p>2022 06 29
-              광견병 접종</p>
-            </div>
-          </div>
-
-        </div> */}
 
       </div>
 

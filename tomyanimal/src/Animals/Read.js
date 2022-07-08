@@ -13,8 +13,6 @@ const Read = ( {diaryList, id,  title, content, date} ) => {
       content: content, 
       date: date
     });
-    // const [logs, setLogs] = useState(diaryList);
-    //console.log(logs.id);
 
     const [edited, setEdited] = useState(false);
     const [editContactId, setEditContactId] = useState(null);

@@ -49,7 +49,6 @@ const AnimalLog = () => {
     currentPosts = sortedList.slice(indexOfFirst, indexOfLast);
     return currentPosts;
 
-
     //const sortedList = diaryList.sort(compare);
     /*
     const copyList = JSON.parse(JSON.stringify(diaryList));
@@ -89,8 +88,6 @@ const AnimalLog = () => {
 
       </>
       }
-
-      
 
 
       <section className='etc'>

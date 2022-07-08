@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from 'react'
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { LikeOutlined, LikeFilled, DownOutlined, UpOutlined } from '@ant-design/icons';
-import CommentsBox from '../components/CommentsBox';
+import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import TopCommentsBox from './TopCommentsBox';
 import MessageScroll from './MessageScroll';
 import { ContextProvider } from './Context/Context';
@@ -14,9 +13,9 @@ export function useOpenReply() {
   return useContext(showReply);
 }
 
-const ReviewDetail = ( {title, content} ) => {
+const BoardDetail = ( {title, content} ) => {
     const {id} = useParams();
-    console.log(id);
+
     const location = useLocation();
     const name = location.state.name;
     const bid = location.state.id;
@@ -59,7 +58,6 @@ const ReviewDetail = ( {title, content} ) => {
         //   }
         // } 
         //setData(postList)
-        console.log(data);
       })
       .catch((error) => {
         console.log(error);
@@ -321,4 +319,4 @@ const ReviewDetail = ( {title, content} ) => {
   }
   
 
-export default ReviewDetail
+export default BoardDetail

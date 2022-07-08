@@ -25,7 +25,6 @@ const AnimalAdd = () => {
             weight: animalWeight,
             type: "dog"
         }
-        //console.log(animal);
 
         const formData = new FormData()
         //formData.set('id', animal.id)
@@ -89,7 +88,6 @@ const AnimalAdd = () => {
 
                 if(base64) {
                     var base64Sub = base64.toString()
-
                     setImgBase64(imgBase64 => [...imgBase64, base64Sub]);
                 }
             }

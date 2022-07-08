@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Message from './Message'
-import axios from 'axios'
 import { useMainContext, } from './Context/Context'
 import CommentsBox from '../components/CommentsBox'
 import './Review.css'
@@ -110,7 +109,7 @@ const MessageScroll = (props) => {
 
   const [bottomBar, setBottomBar] = useState(null);
 
-  console.log(messagelist);
+  //console.log(messagelist);
 
   return (
     <>
@@ -126,13 +125,6 @@ const MessageScroll = (props) => {
 
         </div>
     </MessagelistContext.Provider> */}
-
-    {/* <Message 
-      user="Dummy user" 
-      editable={false} 
-      message="Dummy Message"
-      likes={25} 
-    /> */}
 
     {messagelist.map(message => (
     <Message 

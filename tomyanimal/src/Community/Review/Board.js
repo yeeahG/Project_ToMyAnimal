@@ -1,17 +1,15 @@
 import React, { useEffect, useReducer, useState } from 'react'
-import Read from './components/Read'
 import axios from 'axios';
-import './Board.css'
-import ControlMenu from '../Pages/ControlMenu';
-import Pagination from './components/Pagination';
-import Write from './components/Write'
- 
+import BoardRead from './BoardRead';
+import BoardWrite from './BoardWrite';
+import Pagination from '../components/Pagination';
+import ControlMenu from '../../Pages/ControlMenu';
+
 const sortOptionList = [
     {value: "latest", name: "최신순"},
     {value: "oldest", name: "오래된 순"},
 ]
 
-//상태관리를 담을 context
 export const ArticleStateContext = React.createContext();
 
 const Board = () => {
@@ -22,22 +20,34 @@ const Board = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(10);
     const [isOpen, setOpen] = useState(false);
+    const [error, setError] = useState("");
 
     const userid = localStorage.getItem('userid');
 
-    //http://localhost:8084/api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=0
+    const postList = [];
+
     useEffect(() => {
-        axios({
-          method: 'get', 
-          url: 'https://jsonplaceholder.typicode.com/posts',
-        }).then((article) => {
-            setArticle(article.data);
+        //axios.get('https://jsonplaceholder.typicode.com/posts', {
+        axios.get(`http://localhost:8084/api/public-board?categoryId=1&type=PUBLIC&page=0&size=4`, {
+            headers: {
+                Authorization: localStorage.getItem('logintoken'),
+            }
         })
+        .then((response) => {
+            //setArticle(article.data);
+            
+            for (let i=0; i<response.data.result.data.length; i++) {
+                postList.push(response.data.result.data[i])
+            }
+            setArticle(postList);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     }, []);
 
-    const indexOfLast = currentPage * postsPerPage;
-    const indexOfFirst = indexOfLast - postsPerPage;
-    
+
+    /*
     const getProcessedList = () => {
         const compare = (a,b) => {
             if(sortType === 'latest') {
@@ -53,9 +63,9 @@ const Board = () => {
         let currentPosts = 0;
         currentPosts = sortedList.slice(indexOfFirst, indexOfLast);
         return currentPosts;
-    }
-    
-    const currentPosts = (article) => {
+    }*/
+
+    /*const currentPosts = (article) => {
         let currentPosts = 0;
         currentPosts = article.slice(indexOfFirst, indexOfLast);
 
@@ -69,21 +79,72 @@ const Board = () => {
 
         const sortedList = currentPosts.sort(compare)
         return sortedList;
-    };
+    }; */
 
-    const addArticle = async () => {
-        const post = {
-            title: "New", 
-            body: "Hello world", 
-            userId: "yeji"
+
+    const addPost = async (newTitle, newContent) => {
+
+        const newPost = {
+          type: "PUBLIC",
+          title: newTitle, 
+          content: newContent,
+          categoryId: 1
         }
-
-        await axios.post('https://jsonplaceholder.typicode.com/posts', post)
-        setArticle([post, ...article]);
-    }
+    
+        const newPosts = [...article, newPost];
+        console.log(newPosts);
+        setArticle(newPosts);
+    
+        if(newTitle != "" || newContent != "") {
+          //await axios.post('https://jsonplaceholder.typicode.com/posts', newPost)
+          await axios({
+            method: 'post', 
+            url: 'http://localhost:8084/api/board',
+            data: newPost,
+            headers: { 
+              'Authorization': localStorage.getItem('logintoken'),
+              'Content-Type': 'application/json',
+            }
+          })
+          .then((data) => {
+            console.log('성공:', data);
+          })
+          .catch((error) => {
+            console.error('실패:', error);
+          });
+          alert('작성이 완료되었습니다')
+          window.location.reload();
+        } else {
+          setError("한 글자 이상 입력하세요")
+        }
+    }    
 
     const openButton = ()=> {
     setOpen(!isOpen)
+    }
+
+    //pagination
+    const indexOfLast = currentPage * postsPerPage;
+    const indexOfFirst = indexOfLast - postsPerPage;
+    
+    // let currentPosts = 0;
+    // currentPosts = article.slice(indexOfFirst, indexOfLast);
+
+    const getProcessedList = () => {
+        const compare = (a,b) => {
+            if(sortType === 'latest') {
+                return parseInt(b.id) - parseInt(a.id);
+            } else {
+                return parseInt(a.id) - parseInt(b.id);
+            }
+        }
+
+        const copyList = JSON.parse(JSON.stringify(article));
+        const sortedList = copyList.sort(compare);
+
+        let currentPosts = 0;
+        currentPosts = sortedList.slice(indexOfFirst, indexOfLast);
+        return currentPosts;
     }
 
     
@@ -93,14 +154,17 @@ const Board = () => {
 
         <div className='userinfo__subtitle'>
             <a href='/community/board'>
-                <h1>Board</h1>
+                <h1>Talking</h1>
             </a>
             <p>Write everything</p>
         </div>
 
         {isOpen ?
         <div className='input__container'>
-            <Write openButton={openButton} />
+            <BoardWrite 
+                openButton={openButton}  
+                addPost={addPost}
+            />
         </div>
         :
         <>
@@ -113,14 +177,16 @@ const Board = () => {
                 {/* 총 글 갯수 */}
                 {article.length}
             </div>
-            <div className='control__menu'>
-                <ControlMenu 
+
+        </div>
+
+        <div className='control__menu'>
+            <ControlMenu 
                 value={sortType}
                 onChange={setSortType}
                 optionList={sortOptionList}
                 article={article}
                 />
-            </div>
         </div>
 
         <div className='list__board'>
@@ -136,25 +202,17 @@ const Board = () => {
                     </tr>
                 </thead>
 
-                {/* {article.map((it) =>  */}
-                {/*{currentPosts(article).map((it) => */}
-                {getProcessedList().map((it) => 
-                <Read key={it.id} {...it} />
+                {/* {currentPosts.map((it) =>  */}
+                {getProcessedList().map((it) =>
+                <BoardRead key={it.id} {...it} />
                 )}
             </table>
         </div>
         
 
-        {/* <Read article={article} /> */}
-        <Pagination 
-            postsPerPage={postsPerPage}
-            totalPosts={article.length}
-            paginate={setCurrentPage}
-        /> 
-        
         {localStorage.getItem('logintoken') ?
         <div className='write__article'>
-            <button onClick={addArticle}>글쓰기</button>
+            {error}
             <button onClick={openButton}>
                 {isOpen ? "" : "Write"}
             </button>
@@ -165,6 +223,12 @@ const Board = () => {
         
         </>
         }
+
+        <Pagination 
+            postsPerPage={postsPerPage}
+            totalPosts={article.length}
+            paginate={setCurrentPage}
+          />
     </div>
   )
 }
