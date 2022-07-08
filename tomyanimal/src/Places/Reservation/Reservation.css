@@ -24,6 +24,20 @@
     border: 1px solid;
 }
 
+.place__reserve__form {
+    text-align: center;
+    align-items: center;
+}
+
+.reserve__container {
+    margin: 1rem 0;
+}
+
+.reserve__error {
+    text-align: center;
+}
+
+
 .reserve__place {
     text-align: center;
 }
@@ -35,6 +49,7 @@
 
 .reserve__keyword {
     display: flex;
+    justify-content: center;
 }
 
 .reserve__keyword p {
@@ -52,6 +67,15 @@
     color: white;
 }
 
+.reserve__datetime {
+    display: flex;
+    justify-content: center;
+}
+
+.reserve__msg input {
+    width: 70%;
+    border: 1px solid #559df2;
+}
 
 @media (min-width: 600px) {
     .reserve__wrapper {
@@ -68,5 +92,20 @@
         display: grid;
         grid-row-gap: 1.5rem;
         grid-template-columns: 1fr 1fr;
+    }
+
+    .place__reserve__form {
+        text-align: unset;
+        align-items: unset;
+    }    
+
+    .reserve__keyword {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .reserve__datetime {
+        display: flex;
+        justify-content: flex-start;
     }
 }

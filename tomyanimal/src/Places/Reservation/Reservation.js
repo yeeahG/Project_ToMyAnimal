@@ -20,10 +20,10 @@ const Reservation = (props) => {
     const [type, setType] = useState('')
     const [date, setDate] = useState('')
     const [reservTime, setReservTime] = useState('')
+    const [optionMsg, setOptionMsg] = useState('')
 
     const [error, setError] = useState("");
     const [place, setPlace] = useState("");
-    console.log(placeData[0].id);
 
     const {id} = useParams();
 
@@ -43,12 +43,6 @@ const Reservation = (props) => {
 
     const navigateState = useNavigate().state;
     const [placeDummy, setPlaceDummy] = useState(navigateState && navigateState.place)
-    console.log(placeDummy);
-
-    //for(let i=0; placeData.length; i++) {
-    //    setPlace(placeData[i]=id);
-    //}
-
 
     const submitHandler = async () => {
         const newReserv = {
@@ -80,7 +74,7 @@ const Reservation = (props) => {
           alert('작성이 완료되었습니다')
           //window.location.reload();
         } else {
-          setError("한 글자 이상 입력하세요")
+          setError("필수 항목을 모두 입력해주세요")
         }
     }
 
@@ -101,7 +95,6 @@ const Reservation = (props) => {
         <div className='line'></div>
         <div className='space'></div>
 
-        {/*{placeData.id}*/}
 
         <div className='place__content'>
 
@@ -121,7 +114,6 @@ const Reservation = (props) => {
                     </a>
                     <p>예약을 진행하세요</p>
                 </div>
-
                 <section className='reserve__container'>
                     <div className='reserve__info'>
                         <div className='reserve__place'>
@@ -132,32 +124,36 @@ const Reservation = (props) => {
                             <p>{location.state.place.addr}</p>
                         </div>
                     </div>
-                    <div className='place__reserve__form'>
-                        <div>
-                            예약 종류
-                            <div className='reserve__keyword'>
-                                {error}
-                                <p value="수술" onClick={() => setType("수술")}>수술</p>
-                                <p value="접종" onClick={() => setType("접종")}>접종</p>
-                                <p value="진료" onClick={() => setType("진료")}>진료</p>
-                                <p value="문의" onClick={() => setType("문의")}>문의</p>
+                    <section className='place__reserve__form'>
+                        <div className='reserve__container'>
+                            <p className='reserve__error'>{error}</p>
+                            <div>
+                                <h3>예약 종류 *</h3>
+                                <div className='reserve__keyword'>
+                                    <p value="수술" onClick={() => setType("수술")}>수술</p>
+                                    <p value="접종" onClick={() => setType("접종")}>접종</p>
+                                    <p value="진료" onClick={() => setType("진료")}>진료</p>
+                                    <p value="문의" onClick={() => setType("문의")}>문의</p>
+                                </div>
                             </div>
+                            <div>
+                                <h3>예약날짜 *</h3>
+                                <div className='reserve__datetime'>
+                                    <input type="date" onChange={(e) => setDate(e.target.value)}/>
+                                    <ControlMenu 
+                                        value={reservTime} 
+                                        onChange={setReservTime}
+                                        optionList={timeOptionList}
+                                    />
+                                </div>
+                            </div>
+                            <div className='reserve__msg'>
+                                <h3>추가사항(선택)</h3>
+                                <input type="text" onChange={(e) => setOptionMsg(e.target.value)} />
+                            </div>
+                        
                         </div>
-                        <div>
-                            <p>예약날짜</p>
-                            <input type="date" onChange={(e) => setDate(e.target.value)}/>
-                            <ControlMenu 
-                                value={reservTime} 
-                                onChange={setReservTime}
-                                optionList={timeOptionList}
-                            />
-                        </div>
-                        <div>
-                            <p>추가사항(선택)</p>
-                            <input />
-                        </div>
-
-                    </div>
+                    </section>
 
                     <div className='welcome'>
                         <button className='welcome__btn' onClick={submitHandler}>
