@@ -24,6 +24,9 @@ const Reservation = (props) => {
     const [error, setError] = useState("");
     const [place, setPlace] = useState("");
 
+    const [fontColor, setFontColor] = useState({color: "#559df2"})
+    const [backColor, setBackColor] = useState({backgroundColor: "white"})
+
     const {id} = useParams();
 
     const navigate = useNavigate();
@@ -34,15 +37,14 @@ const Reservation = (props) => {
 
     const isLogin = localStorage.getItem('logintoken')
 
-
-    
     const location = useLocation();
-    console.log(location.state.place);
+    //console.log(location.state.place);
+
+    const typeClickHandler = () => {
+        setFontColor(fontColor === '#559df2' ? 'white' : '#559df2')
+        setBackColor(backColor === 'white' ? '#559df2' : 'white');
+    }
     
-
-    const navigateState = useNavigate().state;
-    const [placeDummy, setPlaceDummy] = useState(navigateState && navigateState.place)
-
     const submitHandler = async () => {
         const newReserv = {
           type: type,
@@ -128,8 +130,8 @@ const Reservation = (props) => {
                             <div>
                                 <p className='reserve__error'>{error}</p>
                                 <h3>예약 종류 *</h3>
-                                <div className='reserve__keyword'>
-                                    <p value="수술" onClick={() => setType("수술")}>수술</p>
+                                <div className='reserve__keyword' id='reserve__keyword'>
+                                    <button value="수술" onClick={typeClickHandler} style={{color: fontColor, backgroundColor: backColor}}>수술</button>
                                     <p value="접종" onClick={() => setType("접종")}>접종</p>
                                     <p value="진료" onClick={() => setType("진료")}>진료</p>
                                     <p value="문의" onClick={() => setType("문의")}>문의</p>
