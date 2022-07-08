@@ -1,25 +1,27 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Reservation from './Reservation/Reservation';
 import './Places.css'
 
 const PlaceDetail = ( {place} ) => {
-  //console.log(place);
   const [isOpen, setOpen] = useState(false);
 
   const navigate = useNavigate();
   const id = place.id
 
-  const isOpenHandler = () => {
+  const isOpenHandler = (e) => {
     setOpen(!isOpen);
-    navigate(`/places/all/${id}`)
+    navigate(`/places/all/${id}`, { 
+      state: {
+        place: "hello"
+      } 
+    })
   }
 
-  {/**/}
   return (
     <div className='place__detail__container'> 
      {isOpen ? 
-        <Reservation place={place} />
+        <Reservation />
      :  
       <>
         <div className='place__title'>
@@ -35,11 +37,13 @@ const PlaceDetail = ( {place} ) => {
           <p>{place.rating}</p>
         </div>
 
-        <div 
-          className='place__detail__reserve' 
-          onClick={isOpenHandler}
-        >
-          <p>예약</p>
+        <div className='place__detail__reserve'>
+          <Link 
+            to={`/places/all/${id}`} 
+            state={{place: place}}
+          >
+            예약
+          </Link>
         </div>
       </>
 
