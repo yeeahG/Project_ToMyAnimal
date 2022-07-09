@@ -34,7 +34,8 @@ const ReadChecklist = ( {id, title, content, deleteNote} ) => {
         setEditContactId(null);
     }
 
-    
+    const characterLimit = 200;
+
     const handleEditFormChange = (e) => {
         e.preventDefault();
         
@@ -43,8 +44,10 @@ const ReadChecklist = ( {id, title, content, deleteNote} ) => {
         
         const newFormData = { ...editFormData };
         newFormData[fieldName]=fieldValue;
-        
-        setEditFormData(newFormData);
+
+        if(characterLimit - e.target.value.length >= 0) {
+            setEditFormData(newFormData);
+        }
     };
 
     const handleEditFormSubmit = async (e) => {
@@ -79,11 +82,6 @@ const ReadChecklist = ( {id, title, content, deleteNote} ) => {
 
   return (
     <div className='checklist__note'>
-        {/* <div className='checklist__text'>
-            {id}
-            <h3>{title}</h3>
-            <p>{content}</p> 
-        </div> */}
 
         <form onSubmit={handleEditFormSubmit} method="put">
 
@@ -98,9 +96,7 @@ const ReadChecklist = ( {id, title, content, deleteNote} ) => {
             :
             (
                 <>
-                <ShowChecklist 
-                    notes={notes}
-                />
+                <ShowChecklist notes={notes} />
 
                 <div className='checklist__note__footer'>
                     <small>2022/07.01</small>

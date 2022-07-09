@@ -35,7 +35,7 @@ const EditCheklist = ( {notes, editFormData, handleCancelClick, handleEditFormCh
             onChange={handleEditFormChange}
         />
         <div className='checklist__note__footer'>
-            <small>{characterLimit - content.length} 글자</small>
+            <small>{characterLimit - editFormData.content.length} 글자</small>
             <button 
                 className='checklist__save'
             >

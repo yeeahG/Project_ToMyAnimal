@@ -6,8 +6,8 @@ const ChecklistFooter = ( {id, deleteNote} ) => {
     <div>
         <button>
           <DeleteFilled 
-              style={{fontSize: '18px'}} 
-              onClick={() => deleteNote(id)}
+            style={{fontSize: '18px'}} 
+            onClick={() => deleteNote(id)}
           />
         </button>
     </div>

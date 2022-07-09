@@ -203,27 +203,6 @@ const Detail = () => {
 
           <div className='checkllist__wrapper'>
             {currentPosts.map((it) => (
-              // <div className='checklist__note'>
-                
-              //   <div className='checklist__text'>
-              //     {it.id}
-              //     <h3>{it.title}</h3>
-              //     <p>{it.content}</p> 
-              //   </div>
-              //   <div className='checklist__note__footer'>
-              //     <small>2022/07.01</small>
-              //     <ChecklistFooter 
-              //       id={it.id}
-              //       deleteNote={deleteNote}
-              //     />
-              //     <button id={it.id} onClick={editNote}>edit</button>
-              //     <ChecklistFooter 
-              //       id={it.id}
-              //       editNote={editNote}
-              //     />
-              //   </div>
-
-              // </div>
               <ReadChecklist 
                 key={it.id}
                 {...it}
