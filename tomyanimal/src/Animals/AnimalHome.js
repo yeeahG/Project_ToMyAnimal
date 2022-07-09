@@ -106,7 +106,7 @@ const AnimalHome = () => {
   const [petName, setPetname] = useState();
 
   //date state를 변화시킬 수 있는 dispatch 함수들
-  const dataId = useRef(0);
+  const dataId = useRef(data.length+1);
 
   const tabClickHandler=(index)=>{
     setActiveIndex(index);

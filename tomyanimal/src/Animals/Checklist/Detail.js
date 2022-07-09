@@ -9,6 +9,7 @@ import { DeleteFilled } from '@ant-design/icons';
 
 import './CardItem.css'
 import ChecklistFooter from './ChecklistFooter';
+import ReadChecklist from './ReadChecklist';
 
 const sortOptionList = [
   {value: "latest", name: "최신순"},
@@ -103,7 +104,7 @@ const Detail = () => {
     console.log(newPosts);
     setData(newPosts);
 
-    if(title != "" || content != "") {
+    if(title != "" && content != "") {
       await axios({
         method: 'post', 
         url: 'http://localhost:8084/api/board',
@@ -115,13 +116,13 @@ const Detail = () => {
       })
       .then((data) => {
         console.log('성공:', data);
+        alert('작성이 완료되었습니다')
+        window.location.reload();
       })
       
       .catch((error) => {
         console.error('실패:', error);
       });
-      alert('작성이 완료되었습니다')
-      window.location.reload();
     } else {
       setError("한 글자 이상 입력하세요")
     }
@@ -193,9 +194,6 @@ const Detail = () => {
               onChange={setSortType}
               optionList={sortOptionList}
             />
-            <button onClick={()=>setOpen(!isOpen)}>
-            {isOpen ? "Close" : "Write"}
-            </button>
           </div>
 
           <div className='checklist__walk__container'>
@@ -203,54 +201,34 @@ const Detail = () => {
             {id} detail
           </div>
 
-          {isOpen ?
-          <div className='checklist__walk__container'>
-            Write
-            <form>
-              <input
-                name="title" 
-                placeholder='title'
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-
-              <p>
-                <textarea 
-                  name="content" 
-                  placeholder='What about your animal?'
-                  ref={contentRef}
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                />
-              </p>
-            </form>
-
-            <button className='upload__btn' onClick={submitHandler} >write</button>
-          </div>
-            :
-          null
-          }
-
-
           <div className='checkllist__wrapper'>
-
             {currentPosts.map((it) => (
-              <div className='checklist__note'>
+              // <div className='checklist__note'>
                 
-                <div className='checklist__text'>
-                  {it.id}
-                  <h3>{it.title}</h3>
-                  <p>{it.content}</p> 
-                </div>
-                <div className='checklist__note__footer'>
-                  <small>2022/07.01</small>
-                  <ChecklistFooter 
-                    id={it.id}
-                    deleteNote={deleteNote}
-                  />
-                </div>
-                
-              </div>
+              //   <div className='checklist__text'>
+              //     {it.id}
+              //     <h3>{it.title}</h3>
+              //     <p>{it.content}</p> 
+              //   </div>
+              //   <div className='checklist__note__footer'>
+              //     <small>2022/07.01</small>
+              //     <ChecklistFooter 
+              //       id={it.id}
+              //       deleteNote={deleteNote}
+              //     />
+              //     <button id={it.id} onClick={editNote}>edit</button>
+              //     <ChecklistFooter 
+              //       id={it.id}
+              //       editNote={editNote}
+              //     />
+              //   </div>
+
+              // </div>
+              <ReadChecklist 
+                key={it.id}
+                {...it}
+                deleteNote={deleteNote}
+              />
             ))}
 
             <div className='checklist__note'>

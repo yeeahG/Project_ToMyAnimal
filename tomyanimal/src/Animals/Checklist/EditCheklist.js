@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 
-const AddChecklist = ( {submitHandler} ) => {
+const EditCheklist = ( {notes, editFormData, handleCancelClick, handleEditFormChange} ) => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("")
 
@@ -14,50 +14,43 @@ const AddChecklist = ( {submitHandler} ) => {
         }
     }
 
-    const handleSave = () => {
-        submitHandler(title, content);
-
-        if(title != "" && content != "") {
-            setTitle('')
-            setContent('')
-        } else {
-            alert("한 글자 이상 입력하세요")
-        }
-    }
-
-
   return (
-    <div className='checklist__note add'>
+    <div className='checklist__text'>
+        {notes.id}
         <input
             name="title" 
             placeholder='title'
-            value={title}
-            ref={contentRef}
-            //onChange={handleChange}
-            onChange={(e) => setTitle(e.target.value)}
+            value={editFormData.title}
+            required='required' 
+            onChange={handleEditFormChange}
         />
         <textarea 
+            required='required' 
             rows='8'
             cols='10'
             placeholder='내용을 입력하세요'
             name="content"
-            value={content}
+            value={editFormData.content}
             ref={contentRef}
-            onChange={handleChange}
-            //onChange={(e) => setContent(e.target.value)}
+            onChange={handleEditFormChange}
         />
         <div className='checklist__note__footer'>
             <small>{characterLimit - content.length} 글자</small>
             <button 
                 className='checklist__save'
-                onClick={handleSave}
-                //onClick={submitHandler}
             >
                 Save
             </button>
+            <button 
+                className='checklist__save'
+                onClick={handleCancelClick}
+            >
+                Cancel
+            </button>
         </div>
     </div>
+
   )
 }
 
-export default AddChecklist
+export default EditCheklist

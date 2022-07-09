@@ -19,14 +19,20 @@ const Write = () => {
   
 
   //App.js에서 작성한 onCreate는 DiaryDispatchContext에 저장되어 있어서 호출
-  const {onCreate, onEdit} = useContext(DiaryDispatchContext);
+  const {onCreate} = useContext(DiaryDispatchContext);
 
+  
+  
   const submitHandler = (e) => {
-    // e.preventDefault();
-    // const title = e.target.title.value;
-    // const date = e.target.date.value;
-    // const content = e.target.content.value;
-
+    
+    const newPost = {
+      title: title,
+      content: content,
+      categoryId: 1,
+      type: "PRIVATE"
+    }
+    console.log(newPost);
+    
     if(content.length < 1) {
       contentRef.current.focus();
       return;
@@ -36,6 +42,7 @@ const Write = () => {
     navigate('/animal')
     alert("작성이 완료되었습니다. ")
   }
+
   
   return (
     <div>
@@ -66,7 +73,6 @@ const Write = () => {
       <p><input type="file" accept="image/*"/></p>
     </form>
 
-    {/* <input type="submit" value="upload" className='upload__btn' /> */}
     <button className='upload__btn'onClick={submitHandler} >write</button>
   </div>
   )
