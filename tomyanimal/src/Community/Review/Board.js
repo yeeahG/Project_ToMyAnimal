@@ -204,7 +204,7 @@ const Board = () => {
 
                 {/* {currentPosts.map((it) =>  */}
                 {getProcessedList().map((it) =>
-                <BoardRead key={it.id} {...it} />
+                    <BoardRead key={it.id} {...it} />
                 )}
             </table>
         </div>
@@ -217,6 +217,7 @@ const Board = () => {
                 {isOpen ? "" : "Write"}
             </button>
             <button>내글</button>
+            {/* `http://localhost:8084/api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PUBLIC` 사용하기*/}
         </div>
         :
         ""}

@@ -70,15 +70,14 @@ const MessageScroll = (props) => {
     
   //   await axios({
   //     method: 'get', 
-  //     url: 'https://jsonplaceholder.typicode.com/posts',
+  //     url: 'http://localhost:8084/api/comments',
   //     headers: {
   //       'Authorization': localStorage.getItem('logintoken'),
-  //       'Content-Type': 'multipart/form-data',
   //     }
   //   })
   //   .then((data) => {
   //     console.log('성공:', data);
-  //     setMessages(data)
+  //     setMessages(data.result)
   //   }) 
   //   .catch((error) => {
   //     console.error('실패:', error);
@@ -113,27 +112,14 @@ const MessageScroll = (props) => {
 
   return (
     <>
-    {/*<MessagelistContext.Provider value={messagelist}>
-        <div>
-            <Message />
-
-            {messagelist.length > 9 && showBottomBar ?
-            <div className='bottomBar'>
-                <div className='loader'></div>
-            </div>
-            : null}
-
-        </div>
-    </MessagelistContext.Provider> */}
-
     {messagelist.map(message => (
-    <Message 
-      user={message.user}
-      editable={message.editable} 
-      message={message.message}
-      likes={message.likes} 
-      replies={message.replies}
-    />
+      <Message 
+        user={message.user}
+        editable={message.editable} 
+        message={message.message}
+        likes={message.likes} 
+        replies={message.replies}
+      />
     ))}
 
     {messagelist.length > 2 && showBottomBar ?
