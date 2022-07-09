@@ -61,7 +61,7 @@ const CheckList = () => {
           <a href='/animal'>
             <h1>Check list</h1>
           </a>
-          <p>Write things about your pet</p>
+          <p>반려동물이 오늘 하루 했던 것, 좋아한 것, 잘 먹던 것을 기록해주세요</p>
         </div>
 
         <section className='input__container'>

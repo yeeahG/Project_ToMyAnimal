@@ -1,11 +1,11 @@
-import React, { useState, useReducer, useRef } from 'react'
+import React, { useState, useReducer, useRef, useEffect } from 'react'
+import axios from 'axios';
 import AnimalPage from './AnimalPage';
 import AnimalLog from './AnimalLog';
-import CheckUp from './Checklist/CheckList';
 import {logData} from './components/data'
 import Log from './AnimalLog/Log';
-import './AnimalInfo.css'
 import CheckList from './Checklist/CheckList';
+import './AnimalInfo.css'
 
 const reducer = (state, action) => {
   //state 상태관리 로직들
@@ -104,11 +104,10 @@ const dummyData = [
 const AnimalHome = () => {
   const [activeIndex, setActiveIndex]=useState(0);
   const [data, dispatch] = useReducer(reducer, dummyData);
+  const [petName, setPetname] = useState();
 
   //date state를 변화시킬 수 있는 dispatch 함수들
   const dataId = useRef(0);
-
-  
 
   const tabClickHandler=(index)=>{
     setActiveIndex(index);
@@ -174,6 +173,18 @@ const AnimalHome = () => {
     }});
   }
 
+  useEffect(() => {
+    //axios.get(`http://localhost:8084/api/my-pet?memberId=${userId}`, {
+    axios.get('http://localhost:8084/api/animals/1', {
+      headers: {
+        Authorization: localStorage.getItem('logintoken') 
+      }
+    }).then((response) => {
+      setPetname(response.data.result.data.name);
+    }).catch((error) => {
+      console.error(error);
+    });
+  }, []);
 
   return (
 
@@ -189,7 +200,7 @@ const AnimalHome = () => {
         <div className='header__wrapper'>
           <h1 className='header__content'>About you</h1>
           <div className='header__detail'>
-            <p>내 (petname)의 모든 것</p>
+            <p>내 {petName}의 모든 것</p>
           </div>
         </div>
       </div>
