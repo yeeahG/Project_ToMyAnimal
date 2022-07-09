@@ -42,14 +42,6 @@ const BoardRead = ( {props, id, title, content, createdAt, member} ) => {
             </td>
             <td style={{width:'75%', textAlign: 'left'}}>
                 <span className='title__span'>
-                    {/* <span
-                        onClick={goDetail} 
-                        title={title} content={content} 
-                        co={comment}
-                        className='board__title'
-                    >
-                        {title}
-                    </span> */}
                     <Link
                         className='board__title'
                         to={`/community/review/${id}`}

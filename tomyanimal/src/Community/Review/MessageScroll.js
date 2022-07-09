@@ -70,15 +70,14 @@ const MessageScroll = (props) => {
     
   //   await axios({
   //     method: 'get', 
-  //     url: 'https://jsonplaceholder.typicode.com/posts',
+  //     url: 'http://localhost:8084/api/comments',
   //     headers: {
   //       'Authorization': localStorage.getItem('logintoken'),
-  //       'Content-Type': 'multipart/form-data',
   //     }
   //   })
   //   .then((data) => {
   //     console.log('성공:', data);
-  //     setMessages(data)
+  //     setMessages(data.result)
   //   }) 
   //   .catch((error) => {
   //     console.error('실패:', error);
