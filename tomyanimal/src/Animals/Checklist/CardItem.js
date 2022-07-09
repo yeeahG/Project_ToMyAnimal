@@ -20,9 +20,7 @@ const CardItem = ( props, {id, text, src, label} ) => {
                     <img
                         className='checklist__img'
                         alt='Checklist Image'
-                        // src={props.src}
-                        src={it.src}
-                        //src=`../Checklist/img/imageex.png`
+                        src={`${process.env.PUBLIC_URL}/public_assets/${it.src}.png`}
                     />
                 </div>
                 <div className='cards__item__info'>
