@@ -69,7 +69,6 @@ const Detail = () => {
         Authorization: localStorage.getItem('logintoken'),
       }
     }).then((response) => {
-      //console.log(response.data.result.data.postList[0]);
       for (let i=0; i < response.data.result.data.length; i++) {
         putList.push(response.data.result.data[i])
         postIdList.push(response.data.result.data[i].id)
@@ -84,6 +83,8 @@ const Detail = () => {
   
   console.log(noteId);
 
+  
+
   const submitHandler = async (title, content) => {
     console.log("submit" + title);
     console.log("submit" + content);
@@ -95,10 +96,10 @@ const Detail = () => {
       categoryId: id
     }
 
-    // if(content.length < 1) {
-    //   contentRef.current.focus();
-    //   return;
-    // }
+    if(content.length < 1) {
+      contentRef.current.focus();
+      return;
+    }
 
     const newPosts = [...data, newPost];
     console.log(newPosts);

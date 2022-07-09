@@ -1,15 +1,21 @@
 import React from 'react'
-import { DeleteFilled } from '@ant-design/icons';
+import { DeleteFilled, EditOutlined } from '@ant-design/icons';
 
-const ChecklistFooter = ( {id, deleteNote} ) => {
+const ChecklistFooter = ( {id, deleteNote, editNoteClick} ) => {
   return (
     <div>
-        <button>
-          <DeleteFilled 
-            style={{fontSize: '18px'}} 
-            onClick={() => deleteNote(id)}
-          />
-        </button>
+      <button>
+        <DeleteFilled 
+          style={{fontSize: '18px'}} 
+          onClick={() => deleteNote(id)}
+        />
+      </button>
+      <button>
+        <EditOutlined 
+          style={{fontSize: '18px'}} 
+          onClick={editNoteClick}
+        />
+      </button>
     </div>
   )
 }

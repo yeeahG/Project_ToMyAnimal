@@ -81,36 +81,34 @@ const ReadChecklist = ( {id, title, content, deleteNote} ) => {
   
 
   return (
-    <div className='checklist__note'>
+    <form className='checklist__note' onSubmit={handleEditFormSubmit} method="put">
 
-        <form onSubmit={handleEditFormSubmit} method="put">
-
-            {editContactId === notes.id ? (
-                <EditCheklist 
-                    notes={notes}
-                    editFormData={editFormData}
-                    handleCancelClick={handleCancelClick}
-                    handleEditFormChange={handleEditFormChange}
-                />
-            )
+        {editContactId === notes.id ? (
+            <EditCheklist 
+                notes={notes}
+                editFormData={editFormData}
+                handleCancelClick={handleCancelClick}
+                handleEditFormChange={handleEditFormChange}
+            />
+        )
             :
-            (
-                <>
+        (
+            <>
                 <ShowChecklist notes={notes} />
-
                 <div className='checklist__note__footer'>
                     <small>2022/07.01</small>
-                    <ChecklistFooter 
-                        id={id}
-                        deleteNote={deleteNote}
-                    />
-                    <button id={id} onClick={editNoteClick}>edit</button>
+                    <div className='note__delete__edit'>
+                        <ChecklistFooter 
+                            id={id}
+                            deleteNote={deleteNote}
+                            editNoteClick={editNoteClick}
+                        />
+                    </div>
                 </div>
-                </>
-            )}
+            </>
+        )}
 
-        </form>
-    </div>
+    </form>
   )
 }
 

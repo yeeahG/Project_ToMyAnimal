@@ -93,6 +93,13 @@
     width: 100%;
 }
 
+.checklist__text input, .checklist__text textarea {
+    border: none;
+    resize: none;
+    background-color: transparent;
+    width: 100%;
+}
+
 .checklist__note.add {
     background-color: #559df2;
 }
@@ -111,6 +118,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.note__delete__edit {
+    display: flex;
+}
+
+.checklist__note__btn {
+    display: flex;
 }
 
 .checklist__save {

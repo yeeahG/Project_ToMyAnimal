@@ -16,7 +16,6 @@ const EditCheklist = ( {notes, editFormData, handleCancelClick, handleEditFormCh
 
   return (
     <div className='checklist__text'>
-        {notes.id}
         <input
             name="title" 
             placeholder='title'
@@ -36,17 +35,17 @@ const EditCheklist = ( {notes, editFormData, handleCancelClick, handleEditFormCh
         />
         <div className='checklist__note__footer'>
             <small>{characterLimit - editFormData.content.length} 글자</small>
-            <button 
-                className='checklist__save'
-            >
-                Save
-            </button>
-            <button 
-                className='checklist__save'
-                onClick={handleCancelClick}
-            >
-                Cancel
-            </button>
+            <div className='checklist__note__btn'>
+                <button className='checklist__save'>
+                    Save
+                </button>
+                <button 
+                    className='checklist__save'
+                    onClick={handleCancelClick}
+                >
+                    Cancel
+                </button>
+            </div>
         </div>
     </div>
 
