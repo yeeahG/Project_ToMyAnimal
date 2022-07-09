@@ -122,7 +122,8 @@ const AnimalPage = () => {
   const userId = localStorage.getItem('userid');
 
   useEffect(() => {
-    axios.get(`http://localhost:8084/api/my-pet?memberId=${userId}`, {
+    //axios.get(`http://localhost:8084/api/my-pet?memberId=${userId}`, {
+    axios.get('http://localhost:8084/api/animals/1', {
       headers: {
         Authorization: localStorage.getItem('logintoken') 
       }
@@ -130,10 +131,10 @@ const AnimalPage = () => {
       console.log(response);
       // 내가 데리고 있는 동물이 여러마리 일때는 data[0] 이곳을
       // i를 length만큼 돌려서 가져와야될것으로 보임
-      setPetname(response.data.result.data[0].petName);
-      setPetBTD(response.data.result.data[0].birthday);
-      setPetKg(response.data.result.data[0].weight);
-      setPetimg(response.data.result.data[0].images[0].uniqueName);
+      setPetname(response.data.result.data.name);
+      setPetBTD(response.data.result.data.birthday);
+      setPetKg(response.data.result.data.weight);
+      setPetimg(response.data.result.data.images[0].uniqueName);
     }).catch((error) => {
       console.error(error);
     });
@@ -143,6 +144,9 @@ const AnimalPage = () => {
   //const imageurl = petimg[0].uniqueName
   //localhost:8084/image/uniqueName
   console.log(petimg);
+
+  const date = new Date();
+  const dateYear = date.getFullYear()
 
   return (
   <div>
@@ -186,7 +190,7 @@ const AnimalPage = () => {
 
         <div className='details__description'>
           <h1>I'm {petName}</h1>
-          <p>{petBTD} years old</p>
+          <p>{parseInt(dateYear) - parseInt(petBTD)} years old</p>
           <p>{petKg}kg</p>
         </div>
 
