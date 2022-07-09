@@ -5,20 +5,13 @@ import AnimalAdd from './components/AnimalAdd';
 import './UserHome.css'
 
 const AnimalAccount = ( ) => {
-  const [animal, setAnimal] = useState([]);
-
-  const [petPhoto, setPetPhoto] = useState();
-  const [petName, setPetName] = useState();
-  const [petNumber, setPetnum] = useState();
-  const [petBTD, setPetBTD] = useState();
-  const [petKg, setPetKg] = useState();
-
-  
   const [editContactId, setEditContactId] = useState(null);
   const [editFormData, setEditFormData] = useState({
     name: "", 
     contact: "",
   });
+  const [petArray, setPetArray] = useState([]);
+  const [petId, setPetId] = useState();
 
   const [isOpen, setOpen] = useState(false);
 
@@ -26,29 +19,8 @@ const AnimalAccount = ( ) => {
 
   const loginId = localStorage.getItem('userid');
 
-
-  /*
-  useEffect(() => {
-    axios({
-      method: 'get', 
-      url: 'http://localhost:8084/api/pets/' + loginId,
-      // url: 'https://jsonplaceholder.typicode.com/posts',
-      headers: {Authorization: localStorage.getItem('logintoken')}
-    }).then((animal) => {
-      setAnimal(animal.data);
-
-      console.log(animal.data);
-
-    }).then((error) => {
-      console.log(error.message)
-    })
-  }, []);
-  */
-
   const putPetsList = [];
   const putPetsIdList = [];
-  const [petArray, setPetArray] = useState([]);
-  const [petId, setPetId] = useState();
 
   useEffect(() => {
     axios.get(`http://localhost:8084/api/my-animal?memberId=${loginId}`, { 
@@ -58,7 +30,7 @@ const AnimalAccount = ( ) => {
     })
     .then(response => {
       //setPetArray(response.data)
-      
+
       for (let i=0; i < response.data.result.data.length; i++) {
         putPetsList.push(response.data.result.data[i])
         putPetsIdList.push(response.data.result.data[i].id)
@@ -94,14 +66,13 @@ const AnimalAccount = ( ) => {
 
   }
 
+  //반려동물 나이 계산
   const date = new Date();
   const dateYear = date.getFullYear()
 
   //putPetsList[0].birthday
   //const birthDate = new Date(petBTD.getFullYear(), petBTD.getFullMonth(), petBTD.getDate())
-
   //let age = date.getFullYear() - birthDate.getFullYear() +1;
- // console.log(age);
 
   return (
   <div>
@@ -132,7 +103,6 @@ const AnimalAccount = ( ) => {
 
     <div className='animalinfo__subtitle'>
       <h1>About My Animal</h1>
-      {/*animal.userid === 로그인시의 userid면 Animal info 불러오기*/}
     </div>
 
   <div className='animalinfo__content'>
@@ -176,9 +146,6 @@ const AnimalAccount = ( ) => {
         <button className='welcome__btn' onClick={()=>setOpen(!isOpen)}>
           {isOpen ? "Close" : "Add"}
         </button>
-        {/* <button className='welcome__btn' onClick={animalDelete}>
-          Delete
-        </button> */}
         <button className='welcome__btn'>
           <a href="/animal">PET LOG</a>
         </button>
