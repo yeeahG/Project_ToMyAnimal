@@ -50,15 +50,21 @@ const AnimalAccount = ( ) => {
   const [petArray, setPetArray] = useState([]);
   const [petId, setPetId] = useState();
 
-
   useEffect(() => {
-    axios.get('http://localhost:8084/api/animals/1', { 
+    axios.get(`http://localhost:8084/api/my-animal?memberId=${loginId}`, { 
       headers: { 
         Authorization: localStorage.getItem('logintoken') 
       } 
     })
     .then(response => {
-      setPetArray(response.data)
+      //setPetArray(response.data)
+      
+      for (let i=0; i < response.data.result.data.length; i++) {
+        putPetsList.push(response.data.result.data[i])
+        putPetsIdList.push(response.data.result.data[i].id)
+      }
+      setPetArray(putPetsList)
+      setPetId(putPetsIdList)
     })
     .catch((error) => {
       console.log('error ', error);
