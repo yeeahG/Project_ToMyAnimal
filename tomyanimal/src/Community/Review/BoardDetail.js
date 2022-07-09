@@ -17,11 +17,7 @@ const BoardDetail = ( {title, content} ) => {
     const {id} = useParams();
 
     const location = useLocation();
-    const name = location.state.name;
-    const bid = location.state.id;
-    const postId = location.state.postId;
     const view = location.state.view;
-  
   
     const [data, setData] = useState({})
     const [com, setCom] = useState([])
@@ -42,40 +38,11 @@ const BoardDetail = ( {title, content} ) => {
 
     const userid = localStorage.getItem('userid');
     const postList = [];
-  
-    useEffect(() => {
-      //axios.get('https://jsonplaceholder.typicode.com/posts/'+id)
-      axios.get(`http://localhost:8084/api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PUBLIC`, {
-        headers: {
-          Authorization: localStorage.getItem('logintoken'),
-        }
-      })
-      .then((response)=> {
-        setData(response.data.result.data[0]);
-        // for (let i=0; i<response.data.result.data.length; i++) {
-        //   if (response.data.result.data[i].id === id) {
-        //     postList.push(response.data.result.data[i])
-        //   }
-        // } 
-        //setData(postList)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    }, []);
+
   
     const boardBack = () => {
       navigate(-1);
     }
-  
-    
-    /*
-    useEffect(() => {
-      axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments/`)
-      .then((response)=> {
-        setCom(response.data);
-      })
-    }, []); */
   
   
     const addComment = async () => {
@@ -225,19 +192,18 @@ const BoardDetail = ( {title, content} ) => {
   
                   <div className='read__title'>
                     <a>자유게시판</a>
-                    {/* <strong>title</strong> */}
-                    <strong>{data.title}</strong>
+                    <strong>{location.state.title}</strong>
                     <div className='info__desc'>
                       <div className='profile__thumb'>
-                        {/* 글쓴이이름 */}
-                        <a>{data.userId}</a>
+                        <a>{location.state.member.name}</a>
                         <div className='content__info'>
                           <span>조회수</span>
                           <span>{view}</span>
                           <span>작성시간</span>
+                          <span>{location.state.createdAt}</span>
                           <span>
                             댓글
-                            {com.length}
+                            {location.state.comment.length}
                           </span>
                         </div>
                       </div>
@@ -252,9 +218,8 @@ const BoardDetail = ( {title, content} ) => {
                             <div className='user__content'>
                               <p>
                                 {id}
-                                {content}
                                 {/* 게시글 내용 */}
-                                {data.content}
+                                <p>{location.state.content}</p>
                               </p>
                             </div>
                           </td>

@@ -113,27 +113,14 @@ const MessageScroll = (props) => {
 
   return (
     <>
-    {/*<MessagelistContext.Provider value={messagelist}>
-        <div>
-            <Message />
-
-            {messagelist.length > 9 && showBottomBar ?
-            <div className='bottomBar'>
-                <div className='loader'></div>
-            </div>
-            : null}
-
-        </div>
-    </MessagelistContext.Provider> */}
-
     {messagelist.map(message => (
-    <Message 
-      user={message.user}
-      editable={message.editable} 
-      message={message.message}
-      likes={message.likes} 
-      replies={message.replies}
-    />
+      <Message 
+        user={message.user}
+        editable={message.editable} 
+        message={message.message}
+        likes={message.likes} 
+        replies={message.replies}
+      />
     ))}
 
     {messagelist.length > 2 && showBottomBar ?

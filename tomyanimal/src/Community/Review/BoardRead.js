@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const BoardRead = ( {props, id, title, content, createdAt, member} ) => {
     const navigate = useNavigate();
     // const [article, setArticle] = useState([]);
     const [comment, setComment] = useState([])
     const [view, setView] = useState(0);
-    const userName = localStorage.getItem('usename')
+    const userName = localStorage.getItem('usename');
+    
 
     useEffect(() => {
         axios({
@@ -41,15 +42,29 @@ const BoardRead = ( {props, id, title, content, createdAt, member} ) => {
             </td>
             <td style={{width:'75%', textAlign: 'left'}}>
                 <span className='title__span'>
-                    <span
+                    {/* <span
                         onClick={goDetail} 
                         title={title} content={content} 
                         co={comment}
                         className='board__title'
-                    >{title}</span>
-                    {/*<a>댓글수</a>*/}
+                    >
+                        {title}
+                    </span> */}
+                    <Link
+                        className='board__title'
+                        to={`/community/review/${id}`}
+                        state={{
+                            title: title, 
+                            content: content,
+                            createdAt: createdAt,
+                            member: member,
+                            comment: comment
+                        }}
+                    >
+                        {title}
+                    </Link>
+
                     <a>{comment.length}</a>
-                    {/* <span>New</span> */}
                 </span>
             </td>
             <td style={{width:'7.5%'}}>
