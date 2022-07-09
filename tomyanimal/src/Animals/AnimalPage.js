@@ -143,7 +143,7 @@ const AnimalPage = () => {
   //console.log(petimg[0].uniqueName);
   //const imageurl = petimg[0].uniqueName
   //localhost:8084/image/uniqueName
-  console.log(petimg);
+  console.log(petName);
 
   const date = new Date();
   const dateYear = date.getFullYear()
@@ -199,7 +199,7 @@ const AnimalPage = () => {
     </div>
 
     <section className='animal__info__wrapper'>
-      <h2>{petName} Information</h2>
+      <h2>{petName}'s Information</h2>
 
       <div className='animal__info__container'>
 
