@@ -2,7 +2,6 @@ import React, { useState, useReducer, useRef, useEffect } from 'react'
 import axios from 'axios';
 import AnimalPage from './AnimalPage';
 import AnimalLog from './AnimalLog';
-import {logData} from './components/data'
 import Log from './AnimalLog/Log';
 import CheckList from './Checklist/CheckList';
 import './AnimalInfo.css'
@@ -214,7 +213,7 @@ const AnimalHome = () => {
         <div className='left__menu'>
           <ul className='menu__wrap'>
             <li className='menu__list'>My animal</li>
-            {tabContArr.map((section, index)=>{
+            {tabContArr.map((section)=>{
             return section.tabTitle
           })}
           </ul>
