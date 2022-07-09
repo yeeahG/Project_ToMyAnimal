@@ -15,8 +15,8 @@ const Signout = () => {
       method: 'get', 
       url: 'http://localhost:8084/api/members/' + userid,
     }).then((user) => {
-      setUSername(user.data.result.data['userName']) 
-      setPassword(user.data.result.data['userPhoneNumber']) 
+      setUSername(user.data.result.data['name']) 
+      setPassword(user.data.result.data['phoneNumber']) 
     })
   }, []);
 
@@ -36,8 +36,6 @@ const Signout = () => {
       console.error('실패:', error);
     });
   }
-  
-  //console.log(checkPassword);
 
   const checkHandler = (e) => {
     e.preventDefault();
@@ -57,8 +55,6 @@ const Signout = () => {
       </div>
       
       <p>탈퇴하기</p>
-      <p>비밀번호 재 확인(전화번호로 임시대체) 후 확인창 띄우고 삭제</p>
-      <p>input.password === DB의 userid password ? 탈퇴창 : error</p>
       <div className='userinfo__content'>
         {error}
         <form onSubmit={checkHandler} className='signout__form'>

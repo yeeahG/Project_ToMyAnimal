@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 
-const ReviewWrite = ( {openButton, addPost} ) => {
+const BoardWrite = ( {openButton, addPost} ) => {
   const [isOpen, setOpen] = useState(true);
   const [newTitle, setNewTitle] = useState("");
   const [newContent, setNewContent] = useState("");
@@ -45,4 +45,4 @@ const ReviewWrite = ( {openButton, addPost} ) => {
   )
 }
 
-export default ReviewWrite
+export default BoardWrite

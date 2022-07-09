@@ -9,11 +9,10 @@ import Footer from './Pages/Footer';
 import Community from './Community/Community';
 import Article from './Community/components/Article';
 import Admin from './Admin/Admin';
-import CheckList from './Animals/Checklist/CheckList';
 import Detail from './Animals/Checklist/Detail';
-import './App.css';
 import Reservation from './Places/Reservation/Reservation';
-import ReviewDetail from './Community/Review/ReviewDetail';
+import BoardDetail from './Community/Review/BoardDetail';
+import './App.css';
 
 function App() {
   return (
@@ -29,7 +28,7 @@ function App() {
             <Route path="/animal/log/:id" element={<Detail />} />
             <Route path="/community/:id" element={<Community />} />
             <Route path="/community/board/:id" element={<Article />} />
-            <Route path="/community/review/:id" element={<ReviewDetail />} />
+            <Route path="/community/review/:id" element={<BoardDetail />} />
             <Route path="/places/:id" element={<Place />} />
             <Route path="/places/:id/:id" element={<Reservation />} />
             <Route path="/user" element={<User />} />

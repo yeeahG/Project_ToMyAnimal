@@ -1,8 +1,7 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import Axios from 'axios'
-import './UserLogin.css'
 import axios from 'axios';
+import './UserLogin.css'
 
 const LOGIN_URL = 'https://jsonplaceholder.typicode.com/posts';
 // axios.defaults.withCredentials = true;
@@ -13,80 +12,6 @@ const UserLogin = ({Login}) => {
     const [error, setError] = useState("");
     // const { setAuth } = useContext(AuthContext);
     const navigate = useNavigate();
-
-
-    /*
-    const submitHandler = async (e) => {
-        e.preventDefault();
-        
-        //Login(details); //details에 id, password 임시 저장되어있음
-        const userdata = {
-            userPhoneNumberOrUserId: details.id,
-            userPassword: details.password
-        }
-        
-        /*1후보*/
-        /*Axios.post('https://jsonplaceholder.typicode.com/posts', userdata
-        ,{
-            headers: {
-                //"Authorization": `Bearer ${accessToken}`,
-                //"Authorization": 'Bearer' + accessToken,
-                //"Authorization": `Bearer ${accessToken}`,
-                "Authorization": `Bearer ${accessToken.token}`,
-                "Content-Type": 'application/json',
-            }
-        }
-        )
-        .then((details) => {
-            Login(details);
-            //db에 login 정보가 입력이 되면 detail에 저장되게 하는 방식이 될까..?
-            //console.log(details);
-            console.log(details.data.id);
-            console.log(userdata);
-            //Axios.defaults.headers.common['Authorization'] = 'Bearer ' + details.userdata;
-            //Axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-            console.log("details.userdata.accessToken : " + details.userdata);
-            //console.log(Authorization);
-            //const { accesToken } = details.userdata;
-            //Axios.defaults.headers.common['Authorization']  = `Bearer ${accessToken}`;
-        })
-
-        // .then(result => {
-        // //     result.token ? goToMain() : alert(result.message)
-        //         if(result.TOKEN) {
-        //             localStorage.setItem("TOKEN", result.TOKEN)
-        //             goToMain();
-        //         } else {
-        //             alert("로그인에 실패하였습니다")
-        //         }
-        // });
-        */
-
-        // await fetch('https://jsonplaceholder.typicode.com/posts', {
-        //     method: "Post",
-        //     headers: {
-        //         "Content-Type":'application/json',
-        //     },
-        //     body: JSON.stringify(userdata),
-        // })
-        // .then((response) => {
-        //     if(response.status === 200) {
-            //     Login(details); //details에 id, password 저장, toekn으로 해야할까?
-            //     return Promise.all([response.json(), response.headers]);
-        //      }
-        //          else
-        //         return Promise.reject("Invalid login attempt")
-        // })
-        // .then(([body, headers]) => {
-        //     setJwt(headers.get("Authorization"));
-        //     window.location.href ='dashboard';
-        // })
-        // .then(res => {
-        //     const token = res.data.token;
-        //     localStorage.setItem('jwtToken', token);
-        // })
-    //}
-
     
     const userdata = {
         identifier: details.id,
@@ -98,19 +23,14 @@ const UserLogin = ({Login}) => {
         e.preventDefault();
         
         try {
-            // const {data} = await axios.post('http://localhost:8084/api/auth/signin', userdata, {withCredentials: true});
             const data = await axios.post('http://localhost:8084/api/signin', userdata);
-            //console.log(data);
             //console.log(data.data.result.data['accessToken']);
             // const jwt = axios.defaults.headers.common['Authorization'] = `${data['accessToken']}`;
             const jwt = axios.defaults.headers.common['Authorization'] = data.data.result.data['accessToken'];
             localStorage.setItem('logintoken', jwt);
-    
             localStorage.setItem('userInfo', JSON.stringify(data.data.result.data));
             localStorage.setItem('userid', data.data.result.data['member']);
-            // console.log(data.data.result.data['member']);
-            // localStorage.setItem('id', jwt);
-    
+            
             if (jwt) {
                 navigate('/')
             } else {

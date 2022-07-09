@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Review from '../Community/Review/Review'
-import Board from './Board';
+import DummyBoard from './DummyBoard';
+import Board from './Review/Board';
 
 const Community = () => { 
     const [activeIndex, setActiveIndex]=useState(0);
@@ -12,10 +12,10 @@ const Community = () => {
     const tabContArr=[
       {
         tabTitle:(
-          <li className={activeIndex===0 ? "is-active" : ""} onClick={()=>tabClickHandler(0)}>Talking</li>
+          <li className={activeIndex===0 ? "is-active" : ""} onClick={()=>tabClickHandler(0)}>Board</li>
       ),
         tabCont:(
-          <div><Review /></div>
+          <div><Board /></div>
         )
       },
       {
@@ -24,7 +24,7 @@ const Community = () => {
         ),
         tabCont:(
           <div>
-            <Board /> 
+            <DummyBoard /> 
           </div>
         )
       },
@@ -33,7 +33,7 @@ const Community = () => {
           <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}>What</li>
         ),
         tabCont:(
-          <div> bbbb </div>
+          <div> Prepare </div>
         )
       }
     ];
@@ -62,7 +62,7 @@ const Community = () => {
             <div className='left__menu'>
               <ul className='menu__wrap'>
                 <li className='menu__list'>Community</li>
-                {tabContArr.map((section, index)=>{
+                {tabContArr.map((section)=>{
                   return section.tabTitle
                 })}
               </ul>

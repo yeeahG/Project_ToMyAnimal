@@ -1,19 +1,14 @@
-import React, { useEffect, useState }  from 'react'
-import axios from 'axios'
+import React from 'react'
 import UserHome from '../Users/UserHome'
 import UserLogin from './UserLogin'
 
 
 const User = () => {
-    const style = {
-      margin: "5vw auto"
-    }
-
 
   return (
     <div>
       {localStorage.getItem('logintoken') ? 
-      <UserHome />
+        <UserHome />
         :
       <div className='user__container'>
         <UserLogin />

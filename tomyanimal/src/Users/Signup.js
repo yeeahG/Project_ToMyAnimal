@@ -8,7 +8,6 @@ const Signup = () => {
   let [signinId, setSigninId] = useState("");
   let [signinEmail, setSigninEmail] = useState("");
   let [signinPassword, setSigninPassword] = useState("");
-  //let [signinPasswordCheck, setSigninPasswordCheck] = useState("");
     
   let [savedPhoneNumber, setSavedPhoneNumber] = useState("");
   let [savedUsername, setSavedUsername] = useState("");
@@ -47,9 +46,6 @@ const Signup = () => {
         // mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json;',
-          // 'Content-Type': 'application/json; charset=UTF-8',
-          // 'Access-Control-Allow-Origin': 'http://localhost:8082/',
-          // 'Accept': '*/*'
         },
         body: JSON.stringify(item),
       })
@@ -70,8 +66,6 @@ const Signup = () => {
       
       navigate('/user')
       //localStorage.setItem("userinfo", JSON.stringify(item))
-      // alert('가입이 완료되었습니다')
-
       // } else {
       //     setError("비밀번호가 일치하지 않습니다")
       // }
@@ -100,7 +94,6 @@ const Signup = () => {
         <input 
           label="이메일" name="userEmail" placeholder="이메일" 
           required 
-          //onChange={ (e) => {setSigninEmail(e.target.value)}} 
           onChange={isEmail}
         />
         <input 
@@ -113,13 +106,6 @@ const Signup = () => {
           회원가입
         </button>
       </div>
-
-      {/*<div>
-        <h3>USER INFO</h3>
-        {localStorage.userinfo}
-      </div>*/}
-
-
     </div>
   )
 }

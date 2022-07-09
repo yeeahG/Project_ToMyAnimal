@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const ReviewRead = ( {props, id, title, content, createdAt, member} ) => {
+const BoardRead = ( {props, id, title, content, createdAt, member} ) => {
     const navigate = useNavigate();
     // const [article, setArticle] = useState([]);
     const [comment, setComment] = useState([])
@@ -69,4 +69,4 @@ const ReviewRead = ( {props, id, title, content, createdAt, member} ) => {
 }
 
 
-export default ReviewRead
+export default BoardRead

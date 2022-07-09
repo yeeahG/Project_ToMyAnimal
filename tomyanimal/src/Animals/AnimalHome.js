@@ -150,7 +150,6 @@ const AnimalHome = () => {
   ];
 
 
-
   //CREATE
   const onCreate = (date, content, title) => {
     dispatch({type : "CREATE", data:{
@@ -174,8 +173,6 @@ const AnimalHome = () => {
       title
     }});
   }
-
-
 
 
   return (
@@ -202,24 +199,17 @@ const AnimalHome = () => {
       <div className='space'></div>
 
       <div className='info__content'>
-        {/* <div className='grid'> */}
-
-          <div className='left__menu'>
-            <ul className='menu__wrap'>
-              <li className='menu__list'>My animal</li>
-              {tabContArr.map((section, index)=>{
-              return section.tabTitle
-            })}
-            </ul>
-          </div>
-
-
-
-          {tabContArr[activeIndex].tabCont}
-
-
-        {/* </div> */}
-
+        
+        <div className='left__menu'>
+          <ul className='menu__wrap'>
+            <li className='menu__list'>My animal</li>
+            {tabContArr.map((section, index)=>{
+            return section.tabTitle
+          })}
+          </ul>
+        </div>
+          
+        {tabContArr[activeIndex].tabCont}
       </div>
       
     </div>
