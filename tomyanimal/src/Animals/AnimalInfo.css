@@ -144,9 +144,10 @@ li {
     grid-row-gap: 3rem;
 }
 
-.details__description {
+.animal__description {
     display: grid;
     grid-row-gap: 1rem;
+    margin: 2rem 0;
 }
 
 
@@ -465,6 +466,8 @@ li {
         right: 50px;
         top: 10px;
     }
+
+    
 
     .animal__info__wrapper {
         padding-top: 5rem;

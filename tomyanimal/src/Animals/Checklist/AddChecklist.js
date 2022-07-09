@@ -16,9 +16,13 @@ const AddChecklist = ( {submitHandler} ) => {
 
     const handleSave = () => {
         submitHandler(title, content);
-        //submitHandler(content);
-        setTitle('')
-        setContent('')
+
+        if(title != "" && content != "") {
+            setTitle('')
+            setContent('')
+        } else {
+            alert("한 글자 이상 입력하세요")
+        }
     }
 
 

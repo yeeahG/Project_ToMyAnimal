@@ -188,7 +188,7 @@ const AnimalPage = () => {
 
       <div className='info__details'>
 
-        <div className='details__description'>
+        <div className='animal__description'>
           <h1>I'm {petName}</h1>
           <p>{parseInt(dateYear) - parseInt(petBTD)} years old</p>
           <p>{petKg}kg</p>
