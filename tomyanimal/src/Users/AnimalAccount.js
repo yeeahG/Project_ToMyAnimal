@@ -77,6 +77,7 @@ const AnimalAccount = ( ) => {
   return (
   <div>
     <div className='animal__banner'>
+      
       <h2>
         WANT TO WRITE{"\n"}
         MORE ABOUT MY ANIMAL?
@@ -107,59 +108,60 @@ const AnimalAccount = ( ) => {
 
   <div className='animalinfo__content'>
     { (petArray.length >= 1 ) ? 
-    <>
-      { !isOpen ?
-      <form>
-        <table className='animal__detail__form'>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>No</th>
-              <th>Birthday</th>
-              <th>Age</th>
-              <th>Weight</th>
-            </tr>
-          </thead>
+      <>
+        { !isOpen ?
+          <form>
+            <table className='animal__detail__form'>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>No</th>
+                  <th>Birthday</th>
+                  <th>Age</th>
+                  <th>Weight</th>
+                </tr>
+              </thead>
 
-          <tbody>
-          {petArray.map((it) =>
-            <tr key={it.id}>
-              <td>{it.name}</td>
-              <td>{it.registrationNumber}</td>
-              <td>{it.birthday}</td>
-              <td>{parseInt(dateYear) - parseInt(it.birthday)}살</td>
-              <td>{it.weight}kg</td>
-              <td><button onClick={() => animalDelete(it)}>delete</button></td>
-            </tr>
-          )}
-          </tbody>
+              <tbody>
+              {petArray.map((it) =>
+                <tr key={it.id}>
+                  <td>{it.name}</td>
+                  <td>{it.registrationNumber}</td>
+                  <td>{it.birthday}</td>
+                  <td>{parseInt(dateYear) - parseInt(it.birthday)}살</td>
+                  <td>{it.weight}kg</td>
+                  <td><button onClick={() => animalDelete(it)}>delete</button></td>
+                </tr>
+              )}
+              </tbody>
 
-        </table>
-      </form>
-      :
+            </table>
+          </form>
+          :
+          <>
+            <AnimalAdd />
+          </>
+          
+        }
+        
+        <div className='welcome'>
+          <button className='welcome__btn' onClick={()=>setOpen(!isOpen)}>
+            {isOpen ? "Close" : "Add"}
+          </button>
+          <button className='welcome__btn'>
+            <a href="/animal">PET LOG</a>
+          </button>
+          <button className='welcome__btn'>
+            <a href="/">Home</a>
+          </button>
+        </div>
+
+      </>
+    :
       <>
         <AnimalAdd />
       </>
-      
     }
-      <div className='welcome'>
-        <button className='welcome__btn' onClick={()=>setOpen(!isOpen)}>
-          {isOpen ? "Close" : "Add"}
-        </button>
-        <button className='welcome__btn'>
-          <a href="/animal">PET LOG</a>
-        </button>
-        <button className='welcome__btn'>
-          <a href="/">Home</a>
-        </button>
-      </div>
-
-    </>
-    :
-    <>
-      <AnimalAdd />
-    </>
-  }
           
 
   </div>
