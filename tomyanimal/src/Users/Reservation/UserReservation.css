@@ -1,0 +1,15 @@
+.myreserv__content {
+    align-items: start;
+    display: grid;
+    grid-row-gap: 2rem;
+    grid-column-gap: 2rem;
+    margin: 2rem 1rem;
+    grid-template-columns: 1fr 1fr;
+}
+
+@media (min-width: 900px) {
+    .myreserv__content {
+        grid-column-gap: 3rem;
+        width: 55vw;
+    }
+}
