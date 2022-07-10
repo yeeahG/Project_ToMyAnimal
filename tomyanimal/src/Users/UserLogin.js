@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './UserLogin.css'
 
-const LOGIN_URL = 'https://jsonplaceholder.typicode.com/posts';
 // axios.defaults.withCredentials = true;
 
 const UserLogin = ({Login}) => {
@@ -23,7 +22,7 @@ const UserLogin = ({Login}) => {
         e.preventDefault();
         
         try {
-            const data = await axios.post('http://localhost:8084/api/signin', userdata);
+            const data = await axios.post(process.env.REACT_APP_BACK_BASE_URL + 'api/signin', userdata);
             //console.log(data.data.result.data['accessToken']);
             // const jwt = axios.defaults.headers.common['Authorization'] = `${data['accessToken']}`;
             const jwt = axios.defaults.headers.common['Authorization'] = data.data.result.data['accessToken'];

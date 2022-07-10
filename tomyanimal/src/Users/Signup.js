@@ -40,7 +40,7 @@ const Signup = () => {
     
     if( phoneNumber !=="" || signinId !=="" || username !=="" || signinPassword !=="" || signinEmail !== "") {
     //if (signinPassword === signinPasswordCheck) {
-      await fetch('http://localhost:8084/api/signup', {
+      await fetch(process.env.REACT_APP_BACK_BASE_URL + 'api/signup', {
         method: 'POST',
         // credentials: 'include',
         // mode: 'no-cors',

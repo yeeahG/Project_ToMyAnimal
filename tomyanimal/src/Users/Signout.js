@@ -13,7 +13,7 @@ const Signout = () => {
   useEffect(() => {
     axios({
       method: 'get', 
-      url: 'http://localhost:8084/api/members/' + userid,
+      url: process.env.REACT_APP_BACK_BASE_URL + 'api/members/' + userid,
     }).then((user) => {
       setUSername(user.data.result.data['name']) 
       setPassword(user.data.result.data['phoneNumber']) 
@@ -21,7 +21,7 @@ const Signout = () => {
   }, []);
 
   const userDelete = async () => {
-    axios.delete(`http://localhost:8084/api/members/${userid}`, {
+    axios.delete(process.env.REACT_APP_BACK_BASE_URL + `api/members/${userid}`, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('logintoken'),

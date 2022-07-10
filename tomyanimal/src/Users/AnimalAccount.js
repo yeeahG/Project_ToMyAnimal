@@ -23,7 +23,7 @@ const AnimalAccount = ( ) => {
   const putPetsIdList = [];
 
   useEffect(() => {
-    axios.get(`http://localhost:8084/api/my-animal?memberId=${loginId}`, { 
+    axios.get(process.env.REACT_APP_BACK_BASE_URL + `api/my-animal?memberId=${loginId}`, { 
       headers: { 
         Authorization: localStorage.getItem('logintoken') 
       } 
@@ -51,7 +51,7 @@ const AnimalAccount = ( ) => {
     it.preventDefault();
     console.log(it.id);
 
-    await axios.delete('http://localhost:8084/api/animals/' + it.id, {
+    await axios.delete(process.env.REACT_APP_BACK_BASE_URL + 'api/animals/' + it.id, {
       headers: {
         'Authorization': localStorage.getItem('logintoken'),
       }

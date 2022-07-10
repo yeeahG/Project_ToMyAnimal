@@ -26,7 +26,7 @@ const UserAccount = () => {
   useEffect(() => {
     axios({
       method: 'get', 
-      url: `http://localhost:8084/api/members/${loginId}`,
+      url: process.env.REACT_APP_BACK_BASE_URL + `api/members/${loginId}`,
       headers: {
         Authorization: localStorage.getItem('logintoken') 
       }
@@ -78,7 +78,7 @@ const UserAccount = () => {
     //put or patch methond
     //ERROR남 작동에는 문제없음-> 해결
 
-    axios.put('http://localhost:8084/api/member/' + loginId, editedContact,{
+    axios.put(process.env.REACT_APP_BACK_BASE_URL + 'api/member/' + loginId, editedContact,{
       headers: {
         "Access-Control-Allow-Origin": "*",
         'Authorization': localStorage.getItem('logintoken'),
