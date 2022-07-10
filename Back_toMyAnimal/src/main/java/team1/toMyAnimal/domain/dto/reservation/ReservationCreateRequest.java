@@ -25,7 +25,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class ReservationCreateRequest {
     //    @NotBlank(message = "예약날짜를 입력해주세요.")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
     private Date date;
 
     //    @NotBlank(message = "예약 종류를 입력해주세요.")
