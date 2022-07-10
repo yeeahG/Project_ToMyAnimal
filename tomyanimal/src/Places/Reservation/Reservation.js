@@ -48,10 +48,7 @@ const Reservation = (props) => {
     
     const submitHandler = async () => {
         const newReserv = {
-          //type: type,
           date: reservData, 
-          //animalId: 1,
-          //hospitalId: id,
         }
 
         console.log(newReserv);
@@ -59,7 +56,7 @@ const Reservation = (props) => {
         if(type != "" && date != "") {
           await axios({
             method: 'post', 
-            url: process.env.REACT_APP_BACK_BASE_URL + `api/reservationdate=${reservData}&type=${type}&animalId=1`,
+            url: process.env.REACT_APP_BACK_BASE_URL + `api/reservation?date=${reservData}&type=${type}&animalId=1`,
             data: newReserv,
             headers: { 
               'Authorization': localStorage.getItem('logintoken'),
@@ -133,9 +130,10 @@ const Reservation = (props) => {
                                 <h3>예약 종류 *</h3>
                                 <div className='reserve__keyword' id='reserve__keyword'>
                                     <button value="수술" onClick={typeClickHandler} style={{color: fontColor, backgroundColor: backColor}}>수술</button>
-                                    <p value="접종" onClick={() => setType("접종")}>접종</p>
-                                    <p value="진료" onClick={() => setType("진료")}>진료</p>
-                                    <p value="문의" onClick={() => setType("문의")}>문의</p>
+                                    <p value="수술" onClick={() => setType("SURGERY")}>수술</p>
+                                    <p value="접종" onClick={() => setType("VACCINE")}>접종</p>
+                                    <p value="진료" onClick={() => setType("CHECK")}>진료</p>
+                                    <p value="문의" onClick={() => setType("ASK")}>문의</p>
                                 </div>
                             </div>
                             <div>
