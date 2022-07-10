@@ -22,7 +22,6 @@ const UserAccount = () => {
   const loginId = localStorage.getItem('userid');
   const navigate = useNavigate();
 
-  //1
   useEffect(() => {
     axios({
       method: 'get', 
