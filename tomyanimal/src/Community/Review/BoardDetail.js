@@ -58,7 +58,7 @@ const BoardDetail = ( {title, content} ) => {
   
       if(comtext != "" ) {
         //await axios.post('https://jsonplaceholder.typicode.com/posts/${id}/comments/', newComment)
-        await axios.post('http://localhost:8084/api/comments', newComment, {
+        await axios.post(process.env.REACT_APP_BACK_BASE_URL + 'api/comments', newComment, {
           headers: {
             Authorization: localStorage.getItem('logintoken'),
           }

@@ -60,7 +60,7 @@ const ReadChecklist = ( {id, title, content, deleteNote} ) => {
           categoryId: id
         }
     
-        axios.put(`http://localhost:8084/api/board/${editContactId}`, editedContact,{
+        axios.put(process.env.REACT_APP_BACK_BASE_URL + `api/board/${editContactId}`, editedContact,{
           headers: {
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('logintoken'),

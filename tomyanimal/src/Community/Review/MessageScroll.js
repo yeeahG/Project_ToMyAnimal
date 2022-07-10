@@ -70,7 +70,7 @@ const MessageScroll = (props) => {
     
   //   await axios({
   //     method: 'get', 
-  //     url: 'http://localhost:8084/api/comments',
+  //     url: process.env.REACT_APP_BACK_BASE_URL + 'api/comments',
   //     headers: {
   //       'Authorization': localStorage.getItem('logintoken'),
   //     }

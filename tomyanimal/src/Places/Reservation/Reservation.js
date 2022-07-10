@@ -58,7 +58,7 @@ const Reservation = (props) => {
         if(type != "" || date != "") {
           await axios({
             method: 'post', 
-            url: `http://localhost:8084/api/reservationdate=${date}&type=${type}&animalId=1`,
+            url: process.env.REACT_APP_BACK_BASE_URL + `api/reservationdate=${date}&type=${type}&animalId=1`,
             data: newReserv,
             headers: { 
               'Authorization': localStorage.getItem('logintoken'),

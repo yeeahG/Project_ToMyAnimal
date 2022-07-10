@@ -122,8 +122,8 @@ const AnimalPage = () => {
   const userId = localStorage.getItem('userid');
 
   useEffect(() => {
-    //axios.get(`http://localhost:8084/api/my-pet?memberId=${userId}`, {
-    axios.get('http://localhost:8084/api/animals/1', {
+    //axios.get(process.env.REACT_APP_BACK_BASE_URL + `api/my-pet?memberId=${userId}`, {
+    axios.get(process.env.REACT_APP_BACK_BASE_URL + 'api/animals/1', {
       headers: {
         Authorization: localStorage.getItem('logintoken') 
       }

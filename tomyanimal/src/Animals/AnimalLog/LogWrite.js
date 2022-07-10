@@ -31,7 +31,7 @@ const LogWrite = () => {
         if(title != "" || content != "") {
             await axios({
                 method: 'post', 
-                url: 'http://localhost:8084/api/posts',
+                url: process.env.REACT_APP_BACK_BASE_URL + 'api/posts',
                 data: newPost,
                 headers: { 
                     'Authorization': localStorage.getItem('logintoken'),

@@ -64,7 +64,7 @@ const Detail = () => {
   const postIdList = [];
   
   useEffect ( () => {
-    axios.get(`http://localhost:8084/api/my-board?memberId=${userid}&categoryId=${id}&page=0&size=4&type=PRIVATE`, {
+    axios.get(process.env.REACT_APP_BACK_BASE_URL + `api/my-board?memberId=${userid}&categoryId=${id}&page=0&size=4&type=PRIVATE`, {
       headers: {
         Authorization: localStorage.getItem('logintoken'),
       }
@@ -108,7 +108,7 @@ const Detail = () => {
     if(title != "" && content != "") {
       await axios({
         method: 'post', 
-        url: 'http://localhost:8084/api/board',
+        url: process.env.REACT_APP_BACK_BASE_URL + 'api/board',
         data: newPost,
         headers: { 
           'Authorization': localStorage.getItem('logintoken'),
@@ -136,7 +136,7 @@ const Detail = () => {
     setData(newNotes);
     console.log(id);
 
-    await axios.delete(`http://localhost:8084/api/board/${id}`, {
+    await axios.delete(process.env.REACT_APP_BACK_BASE_URL + `api/board/${id}`, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('logintoken'),

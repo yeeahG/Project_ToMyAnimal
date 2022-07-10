@@ -28,7 +28,7 @@ const Board = () => {
 
     useEffect(() => {
         //axios.get('https://jsonplaceholder.typicode.com/posts', {
-        axios.get(`http://localhost:8084/api/public-board?categoryId=1&type=PUBLIC&page=0&size=4`, {
+        axios.get(process.env.REACT_APP_BACK_BASE_URL + `api/public-board?categoryId=1&type=PUBLIC&page=0&size=4`, {
             headers: {
                 Authorization: localStorage.getItem('logintoken'),
             }
@@ -99,7 +99,7 @@ const Board = () => {
           //await axios.post('https://jsonplaceholder.typicode.com/posts', newPost)
           await axios({
             method: 'post', 
-            url: 'http://localhost:8084/api/board',
+            url: process.env.REACT_APP_BACK_BASE_URL + 'api/board',
             data: newPost,
             headers: { 
               'Authorization': localStorage.getItem('logintoken'),
@@ -217,7 +217,7 @@ const Board = () => {
                 {isOpen ? "" : "Write"}
             </button>
             <button>내글</button>
-            {/* `http://localhost:8084/api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PUBLIC` 사용하기*/}
+            {/* process.env.REACT_APP_BACK_BASE_URL + `api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PUBLIC` 사용하기*/}
         </div>
         :
         ""}

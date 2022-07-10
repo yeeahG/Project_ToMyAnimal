@@ -40,7 +40,7 @@ const TopCommentsBox = (props) => {
 
         //axios post사용
         //message를 post하면 됨 message.current.value
-        //http://localhost:8084/api/comments
+        //process.env.REACT_APP_BACK_BASE_URL + api/comments
         //.then(() => {
         setMessageReset(prevState => !prevState);
         //delete text input, updata comments and disable comment btn
@@ -58,7 +58,7 @@ const TopCommentsBox = (props) => {
         console.log(newComment);
     
         if(message.current.value != "" ) {
-          await axios.post('http://localhost:8084/api/comments', newComment, {
+          await axios.post(process.env.REACT_APP_BACK_BASE_URL + 'api/comments', newComment, {
             headers: {
               Authorization: localStorage.getItem('logintoken'),
             }

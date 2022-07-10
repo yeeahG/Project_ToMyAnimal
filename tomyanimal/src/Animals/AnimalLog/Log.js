@@ -33,7 +33,7 @@ const Log = () => {
   const putLog = [];
 
   useEffect( () => {
-    axios.get(`http://localhost:8084/api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PRIVATE`, {
+    axios.get(process.env.REACT_APP_BACK_BASE_URL + `api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PRIVATE`, {
       headers: {
         Authorization: localStorage.getItem('logintoken'),
       }
