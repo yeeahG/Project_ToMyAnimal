@@ -6,13 +6,13 @@ import ControlMenu from '../../Pages/ControlMenu';
 import './Reservation.css'
 
 const timeOptionList = [
-    {value: " 9:00", name: "9:00"},
-    {value: " 10:00", name: "10:00"},
-    {value: " 11:00", name: "11:00"},
-    {value: " 13:00", name: "13:00"},
-    {value: " 14:00", name: "14:00"},
-    {value: " 15:00", name: "15:00"},
-    {value: " 16:00", name: "16:00"},
+    {value: "T9:00", name: "9:00"},
+    {value: "10:00", name: "10:00"},
+    {value: "11:00", name: "11:00"},
+    {value: "13:00", name: "13:00"},
+    {value: "14:00", name: "14:00"},
+    {value: "15:00", name: "15:00"},
+    {value: "16:00", name: "16:00"},
 ]
 
 const Reservation = (props) => {
@@ -22,7 +22,6 @@ const Reservation = (props) => {
     const [optionMsg, setOptionMsg] = useState('')
 
     const [error, setError] = useState("");
-    const [place, setPlace] = useState("");
 
     const [fontColor, setFontColor] = useState({color: "#559df2"})
     const [backColor, setBackColor] = useState({backgroundColor: "white"})
@@ -44,21 +43,23 @@ const Reservation = (props) => {
         setFontColor(fontColor === '#559df2' ? 'white' : '#559df2')
         setBackColor(backColor === 'white' ? '#559df2' : 'white');
     }
+
+    const reservData = date + reservTime;
     
     const submitHandler = async () => {
         const newReserv = {
-          type: type,
-          date: date + reservTime, 
-          animalId: 1,
+          //type: type,
+          date: reservData, 
+          //animalId: 1,
           //hospitalId: id,
         }
 
         console.log(newReserv);
     
-        if(type != "" || date != "") {
+        if(type != "" && date != "") {
           await axios({
             method: 'post', 
-            url: process.env.REACT_APP_BACK_BASE_URL + `api/reservationdate=${date}&type=${type}&animalId=1`,
+            url: process.env.REACT_APP_BACK_BASE_URL + `api/reservationdate=${reservData}&type=${type}&animalId=1`,
             data: newReserv,
             headers: { 
               'Authorization': localStorage.getItem('logintoken'),
