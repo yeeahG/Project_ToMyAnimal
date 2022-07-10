@@ -22,7 +22,6 @@ const Reservation = (props) => {
     const [optionMsg, setOptionMsg] = useState('')
 
     const [error, setError] = useState("");
-    const [place, setPlace] = useState("");
 
     const [fontColor, setFontColor] = useState({color: "#559df2"})
     const [backColor, setBackColor] = useState({backgroundColor: "white"})
