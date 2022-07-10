@@ -7,12 +7,12 @@ import './Reservation.css'
 
 const timeOptionList = [
     {value: "T9:00", name: "9:00"},
-    {value: "10:00", name: "10:00"},
-    {value: "11:00", name: "11:00"},
-    {value: "13:00", name: "13:00"},
-    {value: "14:00", name: "14:00"},
-    {value: "15:00", name: "15:00"},
-    {value: "16:00", name: "16:00"},
+    {value: "T10:00", name: "10:00"},
+    {value: "T11:00", name: "11:00"},
+    {value: "T13:00", name: "13:00"},
+    {value: "T14:00", name: "14:00"},
+    {value: "T15:00", name: "15:00"},
+    {value: "T16:00", name: "16:00"},
 ]
 
 const Reservation = (props) => {
@@ -48,10 +48,7 @@ const Reservation = (props) => {
     
     const submitHandler = async () => {
         const newReserv = {
-          //type: type,
           date: reservData, 
-          //animalId: 1,
-          //hospitalId: id,
         }
 
         console.log(newReserv);
@@ -59,7 +56,7 @@ const Reservation = (props) => {
         if(type != "" && date != "") {
           await axios({
             method: 'post', 
-            url: process.env.REACT_APP_BACK_BASE_URL + `api/reservationdate=${reservData}&type=${type}&animalId=1`,
+            url: process.env.REACT_APP_BACK_BASE_URL + `api/reservation?date=${reservData}&type=${type}&animalId=1`,
             data: newReserv,
             headers: { 
               'Authorization': localStorage.getItem('logintoken'),
@@ -133,9 +130,9 @@ const Reservation = (props) => {
                                 <h3>예약 종류 *</h3>
                                 <div className='reserve__keyword' id='reserve__keyword'>
                                     <button value="수술" onClick={typeClickHandler} style={{color: fontColor, backgroundColor: backColor}}>수술</button>
-                                    <p value="접종" onClick={() => setType("접종")}>접종</p>
-                                    <p value="진료" onClick={() => setType("진료")}>진료</p>
-                                    <p value="문의" onClick={() => setType("문의")}>문의</p>
+                                    <p value="접종" onClick={() => setType("SURGERY")}>접종</p>
+                                    <p value="진료" onClick={() => setType("SURGERY")}>진료</p>
+                                    <p value="문의" onClick={() => setType("SURGERY")}>문의</p>
                                 </div>
                             </div>
                             <div>
