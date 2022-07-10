@@ -20,10 +20,8 @@ const PlaceDetail = ( {place} ) => {
 
   return (
     <div className='place__detail__container'> 
-     {isOpen ? 
-        <Reservation />
-     :  
       <>
+
         <div className='place__title'>
           <h2>{place.title}</h2>
           <p>{place.type}</p>
@@ -45,9 +43,8 @@ const PlaceDetail = ( {place} ) => {
             예약
           </Link>
         </div>
+        
       </>
-
-       }
     </div>
   )
 }
