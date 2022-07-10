@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './UserReservation.css'
 
 const UserReservation = () => {
     const [reservDate, setReservDate] = useState("");
@@ -30,14 +31,22 @@ const UserReservation = () => {
             <h1>Reservation</h1>
         </div>
 
-        <div>
-            <h3>예약날짜</h3>
-            <p>{reservDate}</p>
-            <h3>예약내역</h3>
-            <p>{reservType}</p>
-            <h3>해당동물</h3>
-            <p>{reservAnimal}</p>
-        </div>
+        <section className='myreserv__content'>
+
+            <div>
+                <img  src={`${process.env.PUBLIC_URL}/public_assets/보건증1.png`}/>
+            </div>
+
+            <div>
+                <h3>예약날짜</h3>
+                <p>{reservDate}</p>
+                <h3>예약내역</h3>
+                <p>{reservType}</p>
+                <h3>해당동물</h3>
+                <p>{reservAnimal}</p>
+            </div>
+
+        </section>
         
     </div>
   )
