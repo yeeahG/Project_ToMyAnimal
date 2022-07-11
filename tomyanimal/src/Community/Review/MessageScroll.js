@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
+import axios from 'axios';
 import Message from './Message'
 import { useMainContext, } from './Context/Context'
 import CommentsBox from '../components/CommentsBox'
 import './Review.css'
+import { useParams } from 'react-router-dom';
 
 export const MessagelistContext = React.createContext();
 
@@ -60,29 +62,42 @@ const MessageScroll = (props) => {
   const [message, setMessages] = useState([])
   const [showBottomBar, setShowBottomBar] = useState(true);
 
-  const {messageReset, commentIncrement, setMethodIncrement } = useMainContext();
+  const {id} = useParams();
+
+  const {messageReset, commentIncrement, setMethodIncrement, messageUpdate } = useMainContext();
   //console.log(messageReset);
   const commentIncrementRef = useRef(commentIncrement);
 
-  
-  // useEffect(async () => {
-  //   setShowBottomBar(true);
+  const formData = new FormData()
+  formData.set('boardId', id)
+
+  useEffect(() => {
+    setShowBottomBar(true);
     
-  //   await axios({
-  //     method: 'get', 
-  //     url: process.env.REACT_APP_BACK_BASE_URL + 'api/comments',
-  //     headers: {
-  //       'Authorization': localStorage.getItem('logintoken'),
-  //     }
-  //   })
-  //   .then((data) => {
-  //     console.log('성공:', data);
-  //     setMessages(data.result)
-  //   }) 
-  //   .catch((error) => {
-  //     console.error('실패:', error);
-  //   });
-  // },[messageReset])
+    // await axios({
+    //   method: 'get', 
+    //   url: process.env.REACT_APP_BACK_BASE_URL + 'api/comments',
+    //   data: formData,
+    //   headers: {
+    //     'Authorization': localStorage.getItem('logintoken'),
+    //     'Content-Type': 'multipart/form-data',
+    //   }
+    // })
+    axios.get(process.env.REACT_APP_BACK_BASE_URL + 'api/comments', formData, {
+      headers: { 
+        Authorization: localStorage.getItem('logintoken') 
+      } 
+    })
+    .then((data) => {
+      console.log('성공:', data);
+      //setMessages(data.data.result.data[0])
+    }) 
+    .catch((error) => {
+      console.error('실패:', error);
+    });
+  },[])
+
+
 
   const observer = React.useRef(new IntersectionObserver(entries => {
     const first = entries[0];

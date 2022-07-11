@@ -15,6 +15,9 @@ export function useOpenReply() {
 
 const BoardDetail = ( {title, content} ) => {
     const {id} = useParams();
+    const message = useRef(null);
+    const contentRef = useRef();
+    const characterLimit = 200;
 
     const location = useLocation();
     const view = location.state.view;
@@ -24,40 +27,30 @@ const BoardDetail = ( {title, content} ) => {
     const [comtext, setComText] = useState("")
   
     const [isOpen, setOpen] = useState(false);
-  
+    
+    const [showCommentLine, setCommentLine] = useState(false);
+    const [showButtons, setShowButtons] = useState(false);
+    const [enableBtn, setEnableBtn] = useState(false);
     const [error, setError] = useState("");
-  
-    const [isCheck, setCheck] = useState([false, false, false, false, false]);
-    const [like, setLike] = useState([0, 0, 0, 0, 0]);
-    const likeList = [];
-  
-    //useContext로 저장해야 id로 내용 불러오기가능
-    const userName = localStorage.getItem('usename')
+
   
     const navigate = useNavigate();
 
     const userid = localStorage.getItem('userid');
-    const postList = [];
-
   
     const boardBack = () => {
       navigate(-1);
     }
   
   
-    const addComment = async () => {
+    const addComment = async (e) => {
       const newComment = {
-        //body: comtext,
-        //userId: localStorage.getItem('usename'),
-        //date: new Date(),
-        //postId: id
-        content: comtext,
-        postId: id
+        content: message.current.value,
+        boardId: id
       }
       console.log(newComment);
   
-      if(comtext != "" ) {
-        //await axios.post('https://jsonplaceholder.typicode.com/posts/${id}/comments/', newComment)
+      if(message.current.value != "" ) {
         await axios.post(process.env.REACT_APP_BACK_BASE_URL + 'api/comments', newComment, {
           headers: {
             Authorization: localStorage.getItem('logintoken'),
@@ -65,32 +58,51 @@ const BoardDetail = ( {title, content} ) => {
         })
         .then((data) => {
           console.log('성공:', data);
-          setCom([newComment, ...com]);
+          //setCom([newComment, ...com]);
           alert('작성이 완료되었습니다')
         })
-          
         .catch((error) => {
           console.error('실패:', error);
         });
       } else {
-          setError("한 글자 이상 입력하세요")
+        setError("한 글자 이상 입력하세요")
       }
     }
+
+
+    const commentFocus = () => {
+      setCommentLine(true);
+      setShowButtons(true);
+    }
+ 
+    const commentFocusOut = () => {
+      setCommentLine(false);
+    }
+
+    const commentStroke = e => {
+      let currMessage = e.target.value;
+
+      if(currMessage) {
+        setEnableBtn(false);
+      } else {
+        setEnableBtn(true);
+      }
+    }
+
+
+    
+  const handleChange = (e)=> {
+    if(characterLimit - e.target.value.length >= 0) {
+      setComText(e.target.value)
+    }
+  }
+
   
     const openButton = () => {
       setOpen(!isOpen)
     }
+    
   
-    const clickHeart = () => {
-      //let checkToggle = [...isCheck]
-      //checkToggle[i]++;
-      //setLike(likeCnt);
-  
-      //setCheck(!isCheck)
-  
-      const checks = false;
-      setCheck([...isCheck, checks]);
-    }
   
     const likeIcon = useRef();
     const numLikes = useRef();
@@ -198,9 +210,10 @@ const BoardDetail = ( {title, content} ) => {
                         <a>{location.state.member.name}</a>
                         <div className='content__info'>
                           <span>조회수</span>
-                          <span>{view}</span>
+                          <span>{location.state.view + 1}</span>
                           <span>작성시간</span>
-                          <span>{location.state.createdAt}</span>
+                          <span>{location.state.createdAt.slice(0,10)} </span>
+                          <span>{location.state.createdAt.slice(11,16)}</span>
                           <span>
                             댓글
                             {location.state.comment.length}
@@ -240,31 +253,53 @@ const BoardDetail = ( {title, content} ) => {
 
                   <div className='comment__write'>
                     <div className='comment__write__area'>
-  
-                      <div className='box__textarea'>
+
+                      <div className='comment__write__menu'>
                         {error}
+                        <div className='area__r'>
+                          <span>
+                            <span>{comtext.length}</span>
+                            <span>/</span>
+                            <span>{characterLimit}</span>
+                          </span>
+                        </div>
+                      </div>
+
+                      <section className='box__textarea'>
                         <textarea 
                           type='text'
                           name='comment' 
-                          onChange={(e) => setComText(e.target.value)} 
+                          placeholder='Add a comment'
+                          onChange={handleChange} 
+                          ref={message}
+                          //ref={contentRef}
+                          onFocus={commentFocus}
+                          onBlur={commentFocusOut}
+                          onKeyUp={commentStroke}
                         />
-                      </div>
-  
-                      <div className='comment__write__menu'>
-  
-                        <div className='area__r'>
-                          <span>
-                            <span>0</span>
-                            <span>/</span>
-                            <span>총글자수</span>
-                          </span>
-                          <button onClick={addComment}>등록</button>
-                        </div>
-                        
-                      </div>
+                        {showCommentLine && <div className='commentLine'></div>}
+                      </section>
+                      
+                      {showButtons && (
+                        <>
+                          <button 
+                            disabled={enableBtn} 
+                            onClick={addComment}
+                          >
+                            comment
+                          </button>
+                          <button onClick={() => {
+                            setShowButtons(false);
+                            message.current.value = ""
+                          }}>cancle</button>
+                        </>
+                      )}
 
-                      <ContextProvider>            
-                        <TopCommentsBox />
+
+
+                      <ContextProvider>        
+                        {/*issue가 많아서 잠시 주석*/}    
+                        {/* <TopCommentsBox /> */}
                         <MessageScroll />
                       </ContextProvider>
                     
