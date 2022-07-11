@@ -7,12 +7,12 @@ import './Reservation.css'
 
 const timeOptionList = [
     {value: "T9:00", name: "9:00"},
-    {value: "10:00", name: "10:00"},
-    {value: "11:00", name: "11:00"},
-    {value: "13:00", name: "13:00"},
-    {value: "14:00", name: "14:00"},
-    {value: "15:00", name: "15:00"},
-    {value: "16:00", name: "16:00"},
+    {value: "T10:00", name: "10:00"},
+    {value: "T11:00", name: "11:00"},
+    {value: "T13:00", name: "13:00"},
+    {value: "T14:00", name: "14:00"},
+    {value: "T15:00", name: "15:00"},
+    {value: "T16:00", name: "16:00"},
 ]
 
 const Reservation = (props) => {
@@ -71,7 +71,7 @@ const Reservation = (props) => {
             console.error('실패:', error);
           });
           alert('작성이 완료되었습니다')
-          //window.location.reload();
+            window.location.reload();
         } else {
           setError("필수 항목을 모두 입력해주세요")
         }
@@ -111,7 +111,7 @@ const Reservation = (props) => {
                     <a href='/places/all'>
                         <h1>Reservation</h1>
                     </a>
-                    <p>예약을 진행하세요</p>
+                    <p>예약을 진행하세요. 예약내역은 user 메뉴에서 확인하실 수 있습니다.</p>
                 </div>
                 <section className='reserve__container'>
                     <div className='reserve__info'>
