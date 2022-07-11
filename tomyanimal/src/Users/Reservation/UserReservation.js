@@ -38,8 +38,8 @@ const UserReservation = () => {
             </div>
 
             <div>
-                <h3>예약날짜</h3>
-                <p>{reservDate}</p>
+                <h3>예약일</h3>
+                <p>날짜 {reservDate.slice(0,10)} 시간 {reservDate.slice(11, 16)}</p>
                 <h3>예약내역</h3>
                 <p>{reservType}</p>
                 <h3>해당동물</h3>
