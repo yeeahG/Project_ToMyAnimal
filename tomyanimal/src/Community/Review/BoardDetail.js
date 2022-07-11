@@ -20,7 +20,7 @@ const BoardDetail = ( {title, content} ) => {
     const characterLimit = 200;
 
     const location = useLocation();
-    //const view = location.state.view;
+    const view = location.state.view;
   
     const [data, setData] = useState({})
     const [com, setCom] = useState([])
@@ -210,9 +210,10 @@ const BoardDetail = ( {title, content} ) => {
                         <a>{location.state.member.name}</a>
                         <div className='content__info'>
                           <span>조회수</span>
-                          {/* <span>{view}</span> */}
+                          <span>{location.state.view + 1}</span>
                           <span>작성시간</span>
-                          <span>{location.state.createdAt}</span>
+                          <span>{location.state.createdAt.slice(0,10)} </span>
+                          <span>{location.state.createdAt.slice(11,16)}</span>
                           <span>
                             댓글
                             {location.state.comment.length}

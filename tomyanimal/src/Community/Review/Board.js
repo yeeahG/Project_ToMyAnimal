@@ -222,14 +222,14 @@ const Board = () => {
         :
         ""}
         
+            <Pagination 
+                postsPerPage={postsPerPage}
+                totalPosts={article.length}
+                paginate={setCurrentPage}
+            />
         </>
         }
 
-        <Pagination 
-            postsPerPage={postsPerPage}
-            totalPosts={article.length}
-            paginate={setCurrentPage}
-          />
     </div>
   )
 }

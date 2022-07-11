@@ -4,12 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const BoardRead = ( {props, id, title, content, createdAt, member} ) => {
     const navigate = useNavigate();
-    // const [article, setArticle] = useState([]);
     const [comment, setComment] = useState([])
     const [view, setView] = useState(0);
-    const userName = localStorage.getItem('usename');
     
-
     useEffect(() => {
         axios({
             method: 'get', 
@@ -50,7 +47,8 @@ const BoardRead = ( {props, id, title, content, createdAt, member} ) => {
                             content: content,
                             createdAt: createdAt,
                             member: member,
-                            comment: comment
+                            comment: comment,
+                            view: view
                         }}
                     >
                         {title}
@@ -60,11 +58,10 @@ const BoardRead = ( {props, id, title, content, createdAt, member} ) => {
                 </span>
             </td>
             <td style={{width:'7.5%'}}>
-                {/* <a>작성자이름</a> */}
                 <p>{member.name}</p>
             </td>
             <td style={{width:'7.5%'}}>
-                <span>{createdAt}</span>
+                <span>{createdAt.slice(0, 10)}</span>
             </td>
             <td style={{width:'5%'}}>
                 <span>{view}</span>
