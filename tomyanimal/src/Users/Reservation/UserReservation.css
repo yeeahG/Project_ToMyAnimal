@@ -8,6 +8,7 @@
 }
 
 .myreserv__subtitle h3 {
+    font-weight: 800;
     margin: 2rem 0 4rem 0;
     position: relative;
     z-index: 3;
