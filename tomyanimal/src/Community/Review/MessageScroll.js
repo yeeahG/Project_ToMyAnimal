@@ -68,34 +68,35 @@ const MessageScroll = (props) => {
   //console.log(messageReset);
   const commentIncrementRef = useRef(commentIncrement);
 
-  const formData = new FormData()
-  formData.set('boardId', id)
+  const commentlist = [];
 
   useEffect(() => {
     setShowBottomBar(true);
-    
-    // await axios({
-    //   method: 'get', 
-    //   url: process.env.REACT_APP_BACK_BASE_URL + 'api/comments',
-    //   data: formData,
-    //   headers: {
-    //     'Authorization': localStorage.getItem('logintoken'),
-    //     'Content-Type': 'multipart/form-data',
-    //   }
-    // })
-    axios.get(process.env.REACT_APP_BACK_BASE_URL + 'api/comments', formData, {
+
+    axios.get(process.env.REACT_APP_BACK_BASE_URL + 'api/comments',
+      {
+        params: {boardId: id}
+      },
+      {
       headers: { 
-        Authorization: localStorage.getItem('logintoken') 
-      } 
+        Authorization: localStorage.getItem('logintoken')
+      },
     })
     .then((data) => {
       console.log('성공:', data);
-      //setMessages(data.data.result.data[0])
+
+      // for(let i=0; i < data.data.result.data.length; i++) {
+      //   commentlist.push(data.data.result.data[i])
+      // }
+      // setMessages(commentlist);
+      setMessages(data.data.result.data);
     }) 
     .catch((error) => {
       console.error('실패:', error);
     });
   },[])
+
+  console.log(message);
 
 
 
@@ -134,6 +135,15 @@ const MessageScroll = (props) => {
         message={message.message}
         likes={message.likes} 
         replies={message.replies}
+      />
+    ))}
+
+    {message.map(message => (
+      <Message 
+        id={message.id}
+        user={message.member.name}
+        message={message.content}
+        replies={message.children}
       />
     ))}
 

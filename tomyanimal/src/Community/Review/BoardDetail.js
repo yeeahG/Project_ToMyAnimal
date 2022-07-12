@@ -209,8 +209,8 @@ const BoardDetail = ( ) => {
                             <span>조회수</span>
                             <span>{location.state.view + 1}</span>
                             <span>작성시간</span>
-                            <span>{location.state.createdAt.slice(0,10)} </span>
-                            <span>{location.state.createdAt.slice(11,16)}</span>
+                            <span>{location.state.modifiedAt.slice(0,10)} </span>
+                            <span>{location.state.modifiedAt.slice(11,16)}</span>
                             <span>
                               댓글
                               {location.state.comment.length}

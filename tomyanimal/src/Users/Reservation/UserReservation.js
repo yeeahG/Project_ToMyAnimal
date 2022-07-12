@@ -54,7 +54,8 @@ const UserReservation = () => {
           
           <div className='myreserv__data'>
 
-            { (reservData.length >= 1) ?
+            {/* { (reservData.length >= 1) ? */}
+            { (reservData) ?
               <>
             <h3 className='myreserv__date'>{reservDate.slice(5,10)}</h3>
             <p>{reservAnimal}</p>

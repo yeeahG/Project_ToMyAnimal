@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
-const BoardRead = (props, {id, title, content, createdAt, member} ) => {
+const BoardRead = ( {props, id, title, content, createdAt, modifiedAt, member} ) => {
     const navigate = useNavigate();
     const [comment, setComment] = useState([])
     const [view, setView] = useState(0);
@@ -45,7 +45,7 @@ const BoardRead = (props, {id, title, content, createdAt, member} ) => {
                         state={{
                             title: title, 
                             content: content,
-                            createdAt: createdAt,
+                            modifiedAt: modifiedAt,
                             member: member,
                             comment: comment,
                             view: view
@@ -61,7 +61,7 @@ const BoardRead = (props, {id, title, content, createdAt, member} ) => {
                 <p>{member.name}</p>
             </td>
             <td style={{width:'7.5%'}}>
-                <span>{createdAt.slice(0, 10)}</span>
+                <span>{modifiedAt.slice(0, 10)}</span>
             </td>
             <td style={{width:'5%'}}>
                 <span>{view}</span>
