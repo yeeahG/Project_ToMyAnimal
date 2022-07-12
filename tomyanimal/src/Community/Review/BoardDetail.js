@@ -13,7 +13,7 @@ export function useOpenReply() {
   return useContext(showReply);
 }
 
-const BoardDetail = ( {title, content} ) => {
+const BoardDetail = ( ) => {
     const {id} = useParams();
     const message = useRef(null);
     const contentRef = useRef();
@@ -25,8 +25,6 @@ const BoardDetail = ( {title, content} ) => {
     const [data, setData] = useState({})
     const [com, setCom] = useState([])
     const [comtext, setComText] = useState("")
-  
-    const [isOpen, setOpen] = useState(false);
     
     const [showCommentLine, setCommentLine] = useState(false);
     const [showButtons, setShowButtons] = useState(false);
@@ -97,12 +95,6 @@ const BoardDetail = ( {title, content} ) => {
     }
   }
 
-  
-    const openButton = () => {
-      setOpen(!isOpen)
-    }
-    
-  
   
     const likeIcon = useRef();
     const numLikes = useRef();

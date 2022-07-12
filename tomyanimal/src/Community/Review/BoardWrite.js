@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import axios from 'axios';
 
 const BoardWrite = ( {openButton, addPost} ) => {
   const [isOpen, setOpen] = useState(true);
