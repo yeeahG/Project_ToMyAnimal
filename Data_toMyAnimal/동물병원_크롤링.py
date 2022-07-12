@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[3]:
+# In[2]:
 
 
 def animalhospital(place):
@@ -83,17 +83,24 @@ def animalhospital(place):
                         
     except:
         animalhospital_df = pd.DataFrame({ '병원이름':name_list, '별점':star_list, '리뷰수':reviewtotal_list, '주소':addr_list, '전화':tel_list })
-        animalhospital_df['주소'] = animalhospital_df['주소'].apply(lambda x: tuple(x.split("\n")))
+        animalhospital_df['주소'] = animalhospital_df['주소'].apply(lambda x: x.replace("\n", ", "))
         animalhospital_df_dropdupl = animalhospital_df.copy()
         animalhospital_df_dropdupl.drop_duplicates(['병원이름', '주소'], keep = 'first')
         animalhospital_df_dropdupl.to_csv('animalhospital_'+place+'.csv')
-        print("크롤링 완료")
+        print(place + "동물병원 크롤링 완료")
 
 
-# In[8]:
+# In[3]:
 
 
-animalhospital("서울")
+placelist = ["서울", "대전", "대구", "부산", "광주", "울산", "인천"]
+
+
+# In[4]:
+
+
+for i in placelist:
+    animalhospital(i)
 
 
 # In[ ]:
