@@ -13,7 +13,7 @@ export function useOpenReply() {
   return useContext(showReply);
 }
 
-const BoardDetail = ( {title, content} ) => {
+const BoardDetail = ( ) => {
     const {id} = useParams();
     const message = useRef(null);
     const contentRef = useRef();
@@ -25,8 +25,6 @@ const BoardDetail = ( {title, content} ) => {
     const [data, setData] = useState({})
     const [com, setCom] = useState([])
     const [comtext, setComText] = useState("")
-  
-    const [isOpen, setOpen] = useState(false);
     
     const [showCommentLine, setCommentLine] = useState(false);
     const [showButtons, setShowButtons] = useState(false);
@@ -97,12 +95,6 @@ const BoardDetail = ( {title, content} ) => {
     }
   }
 
-  
-    const openButton = () => {
-      setOpen(!isOpen)
-    }
-    
-  
   
     const likeIcon = useRef();
     const numLikes = useRef();
@@ -202,35 +194,41 @@ const BoardDetail = ( {title, content} ) => {
   
                 <section className='article__container'>
   
-                  <div className='read__title'>
-                    <a>자유게시판</a>
-                    <strong>{location.state.title}</strong>
-                    <div className='info__desc'>
-                      <div className='profile__thumb'>
-                        <a>{location.state.member.name}</a>
-                        <div className='content__info'>
-                          <span>조회수</span>
-                          <span>{location.state.view + 1}</span>
-                          <span>작성시간</span>
-                          <span>{location.state.createdAt.slice(0,10)} </span>
-                          <span>{location.state.createdAt.slice(11,16)}</span>
-                          <span>
-                            댓글
-                            {location.state.comment.length}
-                          </span>
+                  <div className='read__title__container'>
+                    <div className='read__title'>
+
+                      <a>자유게시판</a>
+                      <div className='info__desc__l'>
+                        <p>{id}</p>
+                        <strong>{location.state.title}</strong>
+                      </div>
+                      <div className='info__desc'>
+                        <div className='profile__thumb'>
+                          <a>{location.state.member.name}</a>
+                          <div className='content__info'>
+                            <span>조회수</span>
+                            <span>{location.state.view + 1}</span>
+                            <span>작성시간</span>
+                            <span>{location.state.createdAt.slice(0,10)} </span>
+                            <span>{location.state.createdAt.slice(11,16)}</span>
+                            <span>
+                              댓글
+                              {location.state.comment.length}
+                            </span>
+                          </div>
                         </div>
                       </div>
+
                     </div>
                   </div>
   
                   <div className='read__content'>
                     <table>
-                      <tbody>
+                      <tbody className='read__content__text'>
                         <tr>
                           <td>
                             <div className='user__content'>
                               <p>
-                                {id}
                                 {/* 게시글 내용 */}
                                 <p>{location.state.content}</p>
                               </p>
@@ -242,13 +240,13 @@ const BoardDetail = ( {title, content} ) => {
                   </div>
   
 
-                      <div className='comment__list'>
-                        <div className='comment__view'>
+                  <div className='comment__list'>
+                    <div className='comment__view'>
   
 
                           
-                        </div>
-                      </div>
+                    </div>
+                  </div>
   
 
                   <div className='comment__write'>
@@ -256,7 +254,7 @@ const BoardDetail = ( {title, content} ) => {
 
                       <div className='comment__write__menu'>
                         {error}
-                        <div className='area__r'>
+                        <div className='area__l'>
                           <span>
                             <span>{comtext.length}</span>
                             <span>/</span>
@@ -281,7 +279,7 @@ const BoardDetail = ( {title, content} ) => {
                       </section>
                       
                       {showButtons && (
-                        <>
+                        <div className='comment__btn'>
                           <button 
                             disabled={enableBtn} 
                             onClick={addComment}
@@ -292,7 +290,7 @@ const BoardDetail = ( {title, content} ) => {
                             setShowButtons(false);
                             message.current.value = ""
                           }}>cancle</button>
-                        </>
+                        </div>
                       )}
 
 

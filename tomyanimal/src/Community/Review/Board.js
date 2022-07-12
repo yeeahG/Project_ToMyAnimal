@@ -27,7 +27,6 @@ const Board = () => {
     const postList = [];
 
     useEffect(() => {
-        //axios.get('https://jsonplaceholder.typicode.com/posts', {
         axios.get(process.env.REACT_APP_BACK_BASE_URL + `api/public-board?categoryId=1&type=PUBLIC&page=0&size=4`, {
             headers: {
                 Authorization: localStorage.getItem('logintoken'),
@@ -96,7 +95,6 @@ const Board = () => {
         setArticle(newPosts);
     
         if(newTitle != "" || newContent != "") {
-          //await axios.post('https://jsonplaceholder.typicode.com/posts', newPost)
           await axios({
             method: 'post', 
             url: process.env.REACT_APP_BACK_BASE_URL + 'api/board',
@@ -171,10 +169,8 @@ const Board = () => {
         <div className='add_info'>
             <div className='count__item'>
                 새글
-                {/*새글갯수*/}
                 1
                 /
-                {/* 총 글 갯수 */}
                 {article.length}
             </div>
 
@@ -202,7 +198,6 @@ const Board = () => {
                     </tr>
                 </thead>
 
-                {/* {currentPosts.map((it) =>  */}
                 {getProcessedList().map((it) =>
                     <BoardRead key={it.id} {...it} />
                 )}
