@@ -33,12 +33,35 @@ const CommentsBox = (props) => {
     }
 
     const sendComment = (e) => {
-      e.preventDefault();
+        e.preventDefault();
 
-      //axios post
-      setMessageUpdate([1, props.useKey])
-      message.current.value = '';
-      setEnableBtn(false);
+        const newComment = {
+            content: message.current.value,
+        }
+        console.log(newComment);
+
+        //axios post
+        // if(message.current.value != "" ) {
+        //     await axios.post(process.env.REACT_APP_BACK_BASE_URL + 'api/comments', newComment, {
+        //     headers: {
+        //         Authorization: localStorage.getItem('logintoken'),
+        //     }
+        //     })
+        //     .then((data) => {
+        //     console.log('성공:', data);
+        //     //setCom([newComment, ...com]);
+        //     alert('작성이 완료되었습니다')
+
+        //     })
+        //     .catch((error) => {
+        //         console.error('실패:', error);
+        //     });
+        // } else {
+        //     setError("한 글자 이상 입력하세요")
+        // }
+        //setMessageUpdate([1, props.useKey])
+        message.current.value = '';
+        setEnableBtn(false);
     }
 
     
@@ -59,7 +82,7 @@ const CommentsBox = (props) => {
 
         {showButtons && (
             <>
-            <button disabled={enableBtn} onClick={sendComment}>comment</button>
+            <button disabled={enableBtn} onClick={sendComment}>등록</button>
             <button onClick={() => {
                 setShowButtons(false);
                 changeOpenReply()

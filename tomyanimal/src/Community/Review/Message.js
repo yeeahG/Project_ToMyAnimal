@@ -12,16 +12,18 @@ export function useOpenReply() {
 const Message = (props) => {
     const messagelist = useContext(MessagelistContext);
 
-    //console.log(messagelist[0].replies);
-
     const likeIcons = useRef();
     const numLikes = useRef();
 
     const [arrowUp, setArrowUp] = useState(false);
     const [openReply, setOpenReply] = useState(false);
 
+    const username = localStorage.getItem('usename')
+
     const changeOpenReply = () => {
         setOpenReply(prevState => prevState = !prevState);
+
+        //axios post문
     }
 
     let arrow = <i className='fas fa-caret-down'></i>
@@ -54,7 +56,7 @@ const Message = (props) => {
 
 
     const deleteMessage = () => {
-        
+        //axios delete 문
     }
 
 
@@ -71,11 +73,11 @@ const Message = (props) => {
                 <div ref={numLikes}>{props.likes}</div>
 
                 <i className='fas fa-thumbs-down'></i>
-                {
-                    //!props.editable ? (
-                    props.user !== "Yeji kim" ? (
-                        <div onClick={changeOpenReply}>reply</div>
-                    ) : ( 
+                <div onClick={changeOpenReply}>reply</div>
+                {//!props.editable ? (
+                    props.user !== username ? (
+                        ""
+                        ) : ( 
                         <div onClick={deleteMessage}>delete</div>
                     )
                 }
@@ -97,11 +99,6 @@ const Message = (props) => {
             <section className='subMessages'>
                 {props.replies.map(reply => 
                 <>
-                    {/*<SubMessages 
-                     user='Dummy Reply User' 
-                     message="This is a dummy reply" 
-                    likes={2} />*/}
-                
                     <SubMessages 
                         user={reply.user} 
                         message={reply.message}
