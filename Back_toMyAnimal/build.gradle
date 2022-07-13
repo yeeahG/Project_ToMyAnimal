@@ -31,6 +31,11 @@ dependencies {
 	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.12.4'
 	implementation 'org.springframework.boot:spring-boot-starter-test'
 
+	//JUnit4 추가
+	testImplementation("org.junit.vintage:junit-vintage-engine") {
+		exclude group: "org.hamcrest", module: "hamcrest-core"
+	}
+
 	implementation group: 'org.apache.commons', name: 'commons-email', version: '1.5' // email 전송 관련
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 

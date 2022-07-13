@@ -1,4 +1,4 @@
-package team1.toMyAnimal.dto.board;
+package team1.toMyAnimal.domain.dto.board;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;

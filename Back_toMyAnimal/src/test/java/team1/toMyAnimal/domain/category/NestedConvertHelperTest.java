@@ -1,4 +1,4 @@
-package team1.toMyAnimal.category;
+package team1.toMyAnimal.domain.category;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

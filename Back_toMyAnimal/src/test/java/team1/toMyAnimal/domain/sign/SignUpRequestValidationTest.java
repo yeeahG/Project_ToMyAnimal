@@ -1,4 +1,4 @@
-package team1.toMyAnimal.sign;
+package team1.toMyAnimal.domain.sign;
 import org.junit.jupiter.api.Test;
 import team1.toMyAnimal.domain.dto.sign.SignUpRequest;
 
