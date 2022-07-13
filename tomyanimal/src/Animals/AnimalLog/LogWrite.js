@@ -66,10 +66,7 @@ const LogWrite = () => {
                 onChange={(e) => setTitle(e.target.value)}
             />
             <span>Day </span>
-            {/* <input 
-                type="date" name='date' value={date} 
-                onChange={(e) => setDate(e.target.value)}
-            /> */}
+
             </div>
             <p>
                 <textarea 
@@ -83,7 +80,6 @@ const LogWrite = () => {
             <p><input type="file" accept="image/*"/></p>
         </form>
 
-        {/* <input type="submit" value="upload" className='upload__btn' /> */}
         <button className='upload__btn' onClick={submitHandler}>write</button>
     </div>
   )

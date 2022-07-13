@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Pagination from '../../Community/components/Pagination'
 import ControlMenu from '../../Pages/ControlMenu'
-import Write from '../Write'
 import LogGet from './LogGet'
 import axios from 'axios';
 import LogWrite from './LogWrite'
@@ -18,18 +17,13 @@ const Log = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(5);
 
-  //const [logList, setLogList] = useState([]);
   const [logId, setLogId] = useState("");
   const [logTitle, setLogTitle] = useState("");
   const [logContent, setLogContent] = useState("");
   const [logarray, setLogArray] = useState([]);
 
-  //const userId = localStorage.getItem('userid');
   const userid = localStorage.getItem('userid');
 
-  {/* http://localhost:8084/api/my-board?memberId=${userId}
-  https://jsonplaceholder.typicode.com/posts */}
-  
   const putLog = [];
 
   useEffect( () => {
@@ -51,7 +45,6 @@ const Log = () => {
   const logList = [
     {id: logId, title: logTitle, content: logContent}
   ]
-
 
 
   const indexOfLast = currentPage * postsPerPage;
@@ -99,13 +92,6 @@ const Log = () => {
         {getProcessedList().map((it) => (
           <LogGet key={it.id} {...it}/>
         ))}
-         {/* {putLog.map((it, index) => (
-          <LogGet 
-            key={index.id} 
-            content={it.content}
-            title={it.title}
-            />
-        ))} */}
 
         <Pagination 
           postsPerPage={postsPerPage}
@@ -115,8 +101,6 @@ const Log = () => {
 
       </>
       }
-
-      
 
 
       <section className='etc'>

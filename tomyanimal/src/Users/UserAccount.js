@@ -6,9 +6,7 @@ import EditableRow from './components/EditableRow';
 import './UserHome.css'
 
 const UserAccount = () => {
-  const [isOpen, setOpen] = useState(false);
   const [user, setUser] = useState();
-  //const [userInfo, setUserInfo] = useState(userInfo);
   const [userName, setUserName] = useState();
   const [userPhone, setUserPhone] = useState();
 
@@ -66,16 +64,12 @@ const UserAccount = () => {
       name: editFormData.name,
       phoneNumber: editFormData.contact,
     }
-    console.log(editedContact);
 
     // const newContacts = [...user];
     // const index = user.findIndex((it) => it.loginId === editContactId);
     // newContacts[index] = editedContact;
     // setUser(newContacts);
     // setEditContactId(null);
-
-    //put or patch methond
-    //ERROR남 작동에는 문제없음-> 해결
 
     axios.put(process.env.REACT_APP_BACK_BASE_URL + 'api/member/' + loginId, editedContact,{
       headers: {
@@ -90,15 +84,6 @@ const UserAccount = () => {
       setEditContactId(null); 
       alert('수정이 완료되었습니다')
       window.location.reload();
-
-      /*
-      const userClone = [editedContact];
-      const index = userClone.indexOf(response);
-      userClone[index] = editedContact
-      setUser(userClone);
-      setEditContactId(null);
-      */
-    
     })
     .catch(function (error) {
       console.log(error.message);
@@ -107,9 +92,8 @@ const UserAccount = () => {
   }
 
   
-  const handleEditClick = (e, user) => {
+  const handleEditClick = (e) => {
     e.preventDefault();
-    // setEditContactId(user.id);
     // setEditContactId(user.data.result.data['userId']);
     setEditContactId(loginId);
 

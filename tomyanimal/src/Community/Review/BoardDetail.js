@@ -95,7 +95,6 @@ const BoardDetail = ( ) => {
     }
   }
 
-  
     const likeIcon = useRef();
     const numLikes = useRef();
     

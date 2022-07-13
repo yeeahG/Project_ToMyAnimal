@@ -70,10 +70,6 @@ const AnimalAccount = ( ) => {
   const date = new Date();
   const dateYear = date.getFullYear()
 
-  //putPetsList[0].birthday
-  //const birthDate = new Date(petBTD.getFullYear(), petBTD.getFullMonth(), petBTD.getDate())
-  //let age = date.getFullYear() - birthDate.getFullYear() +1;
-
   return (
   <div>
     <div className='animal__banner'>

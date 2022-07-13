@@ -40,7 +40,7 @@ const CommentsBox = (props) => {
         }
         console.log(newComment);
 
-        //axios post
+        // NOTE : axios post
         // if(message.current.value != "" ) {
         //     await axios.post(process.env.REACT_APP_BACK_BASE_URL + 'api/comments', newComment, {
         //     headers: {
