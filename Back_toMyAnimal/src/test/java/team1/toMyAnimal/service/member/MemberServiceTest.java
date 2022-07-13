@@ -39,7 +39,7 @@ class MemberServiceTest {
         given(memberRepository.findById(anyLong())).willReturn(Optional.of(member));
 
         // when
-        MemberDto result = memberService.read(cond);
+        MemberDto result = memberService.read(cond.getId());
 
         // then
         assertThat(result.getIdentifier()).isEqualTo(member.getIdentifier());
@@ -51,7 +51,7 @@ class MemberServiceTest {
         given(memberRepository.findById(any())).willReturn(Optional.ofNullable(null));
 
         // when, then
-        assertThatThrownBy(() -> memberService.read(cond)).isInstanceOf(MemberNotFoundException.class);
+        assertThatThrownBy(() -> memberService.read(cond.getId())).isInstanceOf(MemberNotFoundException.class);
     }
 
     void deleteTest() {

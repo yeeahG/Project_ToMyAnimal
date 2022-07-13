@@ -5,6 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 import team1.toMyAnimal.domain.board.Board;
+import team1.toMyAnimal.domain.board.BoardType;
 import team1.toMyAnimal.domain.dto.board.BoardUpdateRequest;
 import team1.toMyAnimal.domain.image.BoardImage;
 
@@ -28,7 +29,7 @@ public class BoardTest {
 
         // when
         MockMultipartFile cFile = new MockMultipartFile("c", "c.png", MediaType.IMAGE_PNG_VALUE, "cFile".getBytes());
-        BoardUpdateRequest boardUpdateRequest = createBoardUpdateRequest("update title", "update content", 1, List.of(cFile), List.of(a.getId()));
+        BoardUpdateRequest boardUpdateRequest = createBoardUpdateRequest("update title", "update content", BoardType.PUBLIC, List.of(cFile), List.of(a.getId()));
         Board.ImageUpdatedResult imageUpdatedResult = board.update(boardUpdateRequest);
 
         // then
