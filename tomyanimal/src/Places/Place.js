@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import ControlMenu from '../Pages/ControlMenu'
-import Header from './Header'
+import React, { useState } from 'react'
 import Map from './Map'
 import { placeData } from './placeData'
 import PlaceList from './PlaceList'
@@ -8,8 +6,6 @@ import './Places.css'
 
 
 const Place = () => {
-  const [places, setPlaces] = useState('동물병원');
-
   const [coordinates, setCoordinates] = useState({ lat:0, lng:0});
 
   const [isLoading, setisLoading] = useState(true);
@@ -48,12 +44,6 @@ const Place = () => {
     }
   ];
 
-  useEffect(() => {
-    // placeData((data) => {
-    //   setPlaces(data);
-    // })
-    setPlaces();
-  }, )
 
   return (
     <div className='place__container'>
@@ -75,10 +65,6 @@ const Place = () => {
       <div className='map__container'>
         <Map />
       </div>
-
-      {/* <Header 
-        setType={setType} setRatings={setRatings} setCoordinates={setCoordinates}
-      /> */}
 
       <div className='place__content'>
 

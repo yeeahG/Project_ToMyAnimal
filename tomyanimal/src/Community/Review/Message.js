@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from 'react'
-import CommentsBox from './CommentBox';
+import CommentsBox from './CommentsBox';
 import SubMessages from './SubMsg/SubMessages';
 import {MessagelistContext} from './MessageScroll'
 
@@ -10,6 +10,7 @@ export function useOpenReply() {
 }
 
 const Message = (props) => {
+    console.log(props);
     const messagelist = useContext(MessagelistContext);
 
     const likeIcons = useRef();
@@ -96,6 +97,7 @@ const Message = (props) => {
             </>
           {/*  )} */}
             {arrowUp && (
+                <>
             <section className='subMessages'>
                 {props.replies.map(reply => 
                 <>
@@ -107,6 +109,18 @@ const Message = (props) => {
                 </>
                 )}
             </section>
+
+            {/* <section className='subMessages'>
+                {props.replies.map(reply => 
+                <>
+                    <SubMessages 
+                        user={reply.user} 
+                        message={reply.message}
+                    />
+                </>
+                )}
+            </section> */}
+            </>
             )}
         </section>
 

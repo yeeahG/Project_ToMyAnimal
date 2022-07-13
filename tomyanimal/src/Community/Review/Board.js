@@ -46,6 +46,7 @@ const Board = () => {
     }, []);
 
 
+    // NOTE : 최신순, 오래된순 필터 적용 기능 시 쓸 예정
     /*
     const getProcessedList = () => {
         const compare = (a,b) => {

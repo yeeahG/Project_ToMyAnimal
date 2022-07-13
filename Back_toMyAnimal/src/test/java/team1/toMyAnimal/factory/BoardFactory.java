@@ -1,6 +1,7 @@
 package team1.toMyAnimal.factory;
 
 import team1.toMyAnimal.domain.board.Board;
+import team1.toMyAnimal.domain.board.BoardType;
 import team1.toMyAnimal.domain.category.Category;
 import team1.toMyAnimal.domain.image.BoardImage;
 import team1.toMyAnimal.domain.member.Member;
@@ -16,14 +17,14 @@ public class BoardFactory {
     }
 
     public static Board createBoard(Member member, Category category) {
-        return new Board("title", "content", 0, member, category, List.of());
+        return new Board("title", "content", BoardType.PUBLIC, member, category, List.of());
     }
 
     public static Board createBoardWithImages(Member member, Category category, List<BoardImage> images) {
-        return new Board("title", "content", 0, member, category, images);
+        return new Board("title", "content", BoardType.PUBLIC, member, category, images);
     }
 
     public static Board createBoardWithImages(List<BoardImage> images) {
-        return new Board("title", "content", 0, createMember(), createCategory(), images);
+        return new Board("title", "content", BoardType.PUBLIC, createMember(), createCategory(), images);
     }
 }

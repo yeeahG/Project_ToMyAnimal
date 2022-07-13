@@ -49,10 +49,8 @@ const Signup = () => {
       email: signinEmail,
       password: signinPassword,
     }
-    //console.log(item);
     
     if( phoneNumber !=="" || signinId !=="" || username !=="" || signinPassword !=="" || signinEmail !== "") {
-    //if (signinPassword === signinPasswordCheck) {
       await fetch(process.env.REACT_APP_BACK_BASE_URL + 'api/signup', {
         method: 'POST',
         // credentials: 'include',
@@ -80,9 +78,6 @@ const Signup = () => {
       });
       
       navigate('/user')
-      // } else {
-      //     setError("비밀번호가 일치하지 않습니다")
-      // }
     } else {
       setError("한 글자 이상 입력하세요")
     }
@@ -124,7 +119,6 @@ const Signup = () => {
           label="비밀번호" name="password" placeholder="비밀번호" type="password" 
           required onChange={(e) => {setSigninPassword(e.target.value)}} 
         />
-        {/* <input label="비밀번호 확인" name="passwordConfirm" placeholder="비밀번호 확인" type="password" required onChange={(e) => {setSigninPasswordCheck(e.target.value)}}></input>  */}
                 
         <button onClick={onSubmitSignUp} className='resigter__btn'>
           회원가입
