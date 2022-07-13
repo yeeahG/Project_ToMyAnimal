@@ -8,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import team1.toMyAnimal.domain.board.Board;
+import team1.toMyAnimal.domain.board.BoardType;
 import team1.toMyAnimal.domain.dto.board.BoardCreateRequest;
 import team1.toMyAnimal.domain.dto.board.BoardDto;
 import team1.toMyAnimal.domain.dto.board.BoardUpdateRequest;
@@ -158,7 +159,7 @@ class BoardServiceTest {
         Board board = createBoardWithImages(List.of(a, b));
         given(boardRepository.findById(anyLong())).willReturn(Optional.of(board));
         MockMultipartFile cFile = new MockMultipartFile("c", "c.png", MediaType.IMAGE_PNG_VALUE, "c".getBytes());
-        BoardUpdateRequest postUpdateRequest = createBoardUpdateRequest("title", "content", 0, List.of(cFile), List.of(a.getId()));
+        BoardUpdateRequest postUpdateRequest = createBoardUpdateRequest("title", "content", BoardType.PUBLIC, List.of(cFile), List.of(a.getId()));
 
         // when
         boardService.update(1L, postUpdateRequest);
@@ -179,7 +180,7 @@ class BoardServiceTest {
         given(boardRepository.findById(anyLong())).willReturn(Optional.ofNullable(null));
 
         // when, then
-        assertThatThrownBy(() -> boardService.update(1L, createBoardUpdateRequest("title", "content", 0, List.of(), List.of())))
+        assertThatThrownBy(() -> boardService.update(1L, createBoardUpdateRequest("title", "content", BoardType.PUBLIC, List.of(), List.of())))
                 .isInstanceOf(BoardNotFoundException.class);
     }
 }

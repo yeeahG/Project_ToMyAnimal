@@ -2,6 +2,7 @@ package team1.toMyAnimal.dto.board;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import team1.toMyAnimal.domain.board.BoardType;
 import team1.toMyAnimal.domain.dto.board.BoardCreateRequest;
 
 import javax.validation.ConstraintViolation;
@@ -88,21 +89,7 @@ class BoardCreateRequestValidationTest {
     @Test
     void invalidateByNullPriceTest() {
         // given
-        Integer invalidValue = null;
-        BoardCreateRequest req = createBoardCreateRequestWithType(invalidValue);
-
-        // when
-        Set<ConstraintViolation<BoardCreateRequest>> validate = validator.validate(req);
-
-        // then
-        Assertions.assertThat(validate).isNotEmpty();
-        assertThat(validate.stream().map(v -> v.getInvalidValue()).collect(toSet())).contains(invalidValue);
-    }
-
-    @Test
-    void invalidateByNegativePriceTest() {
-        // given
-        Integer invalidValue = -1;
+        BoardType invalidValue = null;
         BoardCreateRequest req = createBoardCreateRequestWithType(invalidValue);
 
         // when

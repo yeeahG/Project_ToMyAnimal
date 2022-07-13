@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import team1.toMyAnimal.domain.board.Board;
+import team1.toMyAnimal.domain.board.BoardType;
 import team1.toMyAnimal.domain.category.Category;
 import team1.toMyAnimal.domain.dto.board.BoardUpdateRequest;
 import team1.toMyAnimal.domain.image.BoardImage;
@@ -172,7 +173,7 @@ class BoardRepositoryTest {
 
         // when
         MockMultipartFile cFile = new MockMultipartFile("c", "c.png", MediaType.IMAGE_PNG_VALUE, "cFile".getBytes());
-        BoardUpdateRequest postUpdateRequest = createBoardUpdateRequest("update title", "update content", 1, List.of(cFile), List.of(a.getId()));
+        BoardUpdateRequest postUpdateRequest = createBoardUpdateRequest("update title", "update content", BoardType.PRIVATE, List.of(cFile), List.of(a.getId()));
         Board foundBoard = boardRepository.findById(board.getId()).orElseThrow(BoardNotFoundException::new);
         foundBoard.update(postUpdateRequest);
         clear();

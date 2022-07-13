@@ -1,6 +1,7 @@
 package team1.toMyAnimal.dto.board;
 
 import org.junit.jupiter.api.Test;
+import team1.toMyAnimal.domain.board.BoardType;
 import team1.toMyAnimal.domain.dto.board.BoardUpdateRequest;
 
 import javax.validation.ConstraintViolation;
@@ -19,7 +20,7 @@ class BoardUpdateRequestValidationTest {
     @Test
     void validateTest() {
         // given
-        BoardUpdateRequest req = createBoardUpdateRequest("title", "content", 0, List.of(), List.of());
+        BoardUpdateRequest req = createBoardUpdateRequest("title", "content", BoardType.PUBLIC, List.of(), List.of());
 
         // when
         Set<ConstraintViolation<BoardUpdateRequest>> validate = validator.validate(req);
@@ -32,7 +33,7 @@ class BoardUpdateRequestValidationTest {
     void invalidateByEmptyTitleTest() {
         // given
         String invalidValue = null;
-        BoardUpdateRequest req = createBoardUpdateRequest(invalidValue, "content", 0, List.of(), List.of());
+        BoardUpdateRequest req = createBoardUpdateRequest(invalidValue, "content", BoardType.PUBLIC, List.of(), List.of());
 
         // when
         Set<ConstraintViolation<BoardUpdateRequest>> validate = validator.validate(req);
@@ -46,7 +47,7 @@ class BoardUpdateRequestValidationTest {
     void invalidateByBlankTitleTest() {
         // given
         String invalidValue = " ";
-        BoardUpdateRequest req = createBoardUpdateRequest(invalidValue, "content", 0, List.of(), List.of());
+        BoardUpdateRequest req = createBoardUpdateRequest(invalidValue, "content", BoardType.PUBLIC, List.of(), List.of());
 
         // when
         Set<ConstraintViolation<BoardUpdateRequest>> validate = validator.validate(req);
@@ -60,7 +61,7 @@ class BoardUpdateRequestValidationTest {
     void invalidateByEmptyContentTest() {
         // given
         String invalidValue = null;
-        BoardUpdateRequest req = createBoardUpdateRequest("title", invalidValue, 0, List.of(), List.of());
+        BoardUpdateRequest req = createBoardUpdateRequest("title", invalidValue, BoardType.PUBLIC, List.of(), List.of());
 
         // when
         Set<ConstraintViolation<BoardUpdateRequest>> validate = validator.validate(req);
@@ -74,7 +75,7 @@ class BoardUpdateRequestValidationTest {
     void invalidateByBlankContentTest() {
         // given
         String invalidValue = " ";
-        BoardUpdateRequest req = createBoardUpdateRequest("title", invalidValue, 0, List.of(), List.of());
+        BoardUpdateRequest req = createBoardUpdateRequest("title", invalidValue, BoardType.PUBLIC, List.of(), List.of());
 
         // when
         Set<ConstraintViolation<BoardUpdateRequest>> validate = validator.validate(req);
@@ -87,7 +88,7 @@ class BoardUpdateRequestValidationTest {
     @Test
     void invalidateByNullPriceTest() {
         // given
-        Integer invalidValue = null;
+        BoardType invalidValue = null;
         BoardUpdateRequest req = createBoardUpdateRequest("title", "content", invalidValue, List.of(), List.of());
 
         // when
@@ -98,18 +99,5 @@ class BoardUpdateRequestValidationTest {
         assertThat(validate.stream().map(v -> v.getInvalidValue()).collect(toSet())).contains(invalidValue);
     }
 
-    @Test
-    void invalidateByNegativePriceTest() {
-        // given
-        Integer invalidValue = -1;
-        BoardUpdateRequest req = createBoardUpdateRequest("title", "content", invalidValue, List.of(), List.of());
-
-        // when
-        Set<ConstraintViolation<BoardUpdateRequest>> validate = validator.validate(req);
-
-        // then
-        assertThat(validate).isNotEmpty();
-        assertThat(validate.stream().map(v -> v.getInvalidValue()).collect(toSet())).contains(invalidValue);
-    }
 
 }
