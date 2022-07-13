@@ -1,24 +1,36 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import ControlMenu from '../Pages/ControlMenu';
 import './Signup.css'
 
+const golbalPhoneNumberList = [
+  {value: "+82", name: "+82"},
+  {value: "+82", name: "+82"},
+]
+
 const Signup = () => {
+  let [globalPhoneNumber, setGlobalPhoneNumber] = useState("");
   let [phoneNumber, setPhoneNumber] = useState("");
   let [username, setUsername] = useState("");
   let [signinId, setSigninId] = useState("");
   let [signinEmail, setSigninEmail] = useState("");
   let [signinPassword, setSigninPassword] = useState("");
-  //let [signinPasswordCheck, setSigninPasswordCheck] = useState("");
-    
-  let [savedPhoneNumber, setSavedPhoneNumber] = useState("");
-  let [savedUsername, setSavedUsername] = useState("");
-  let [savedSigninId, setSavedSigninId] = useState("");
-  let [savedSigninPassword, setSavedSigninPassword] = useState("");
   
-  let localStorage = window.localStorage;
   const navigate = useNavigate();
   const [error, setError] = useState("");
 
+  const location = useLocation();
+
+  // 핸드폰번호 유효성 검사
+  const isPhone = (e) => {
+    const phoneRegex = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/
+    console.log('이메일 유효성 검사 : ', phoneRegex.test(e.target.value));
+
+    if ((!e.target.value || (phoneRegex.test(e.target.value)))) setError("");
+    else setError("핸드폰 번호 형식이 맞지않습니다")
+    setPhoneNumber(e.target.value);
+  }
+  
   // 이메일 유효성 검사
   const isEmail = (e) => {
     const emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
@@ -41,15 +53,12 @@ const Signup = () => {
     
     if( phoneNumber !=="" || signinId !=="" || username !=="" || signinPassword !=="" || signinEmail !== "") {
     //if (signinPassword === signinPasswordCheck) {
-      await fetch('http://localhost:8084/api/signup', {
+      await fetch(process.env.REACT_APP_BACK_BASE_URL + 'api/signup', {
         method: 'POST',
         // credentials: 'include',
         // mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json;',
-          // 'Content-Type': 'application/json; charset=UTF-8',
-          // 'Access-Control-Allow-Origin': 'http://localhost:8082/',
-          // 'Accept': '*/*'
         },
         body: JSON.stringify(item),
       })
@@ -60,18 +69,17 @@ const Signup = () => {
       .then((result) => {
         if(result.success === 'success'){
           alert("가입이 완료되었습니다") 
+        } else if (result.success === 'false') {
+          alert("가입을 다시 진행해주세요")
+          window.location.reload();
         }
       }) 
-      
       .catch((error) => {
         console.error('실패:', error);
         alert("다시 시도해주세요")
       });
       
       navigate('/user')
-      //localStorage.setItem("userinfo", JSON.stringify(item))
-      // alert('가입이 완료되었습니다')
-
       // } else {
       //     setError("비밀번호가 일치하지 않습니다")
       // }
@@ -83,12 +91,22 @@ const Signup = () => {
   return (
     <div>
       <div className='signContainer'>
+
         <h2>Sign up</h2>
         {error}
-        <input 
-          label="연락처" name="phone" placeholder="연락처" 
-          required onChange={(e) => {setPhoneNumber(e.target.value)}} 
-        />
+
+        <div className='phoneNumber__container'>
+          <ControlMenu
+            value={globalPhoneNumber} 
+            onChange={setGlobalPhoneNumber}
+            optionList={golbalPhoneNumberList}
+          />
+          <input 
+            label="연락처" name="phone" placeholder="연락처" 
+            required onChange={isPhone}
+          />
+        </div>
+
         <input 
           label="이름" name="username" placeholder="이름" 
           required onChange={(e) => {setUsername(e.target.value)}}
@@ -100,7 +118,6 @@ const Signup = () => {
         <input 
           label="이메일" name="userEmail" placeholder="이메일" 
           required 
-          //onChange={ (e) => {setSigninEmail(e.target.value)}} 
           onChange={isEmail}
         />
         <input 
@@ -112,14 +129,8 @@ const Signup = () => {
         <button onClick={onSubmitSignUp} className='resigter__btn'>
           회원가입
         </button>
+
       </div>
-
-      {/*<div>
-        <h3>USER INFO</h3>
-        {localStorage.userinfo}
-      </div>*/}
-
-
     </div>
   )
 }

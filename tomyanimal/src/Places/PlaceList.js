@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ControlMenu from '../Pages/ControlMenu';
 import PlaceDetail from './PlaceDetail';
-import Reservation from './Reservation/Reservation';
 import './Places.css'
 
 const sortOptionList = [
@@ -32,9 +31,6 @@ const PlaceList = ( {placeData, isLoading} ) => {
 
   const [isOpen, setOpen] = useState(false);
 
-  
-  const navigate = useNavigate();
-  //const id = place.id
 
   {/*
   if(isLoading) return (
@@ -78,8 +74,6 @@ const PlaceList = ( {placeData, isLoading} ) => {
     // const sortedList = copyList.filter((it) => filterCallBack(it));
     // return sortedList;
   }
-
-
 
   /*const isOpenHandler = () => {
     setOpen(!isOpen);

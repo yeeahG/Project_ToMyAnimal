@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
+import axios from 'axios';
 import Message from './Message'
-import axios from 'axios'
 import { useMainContext, } from './Context/Context'
 import CommentsBox from '../components/CommentsBox'
 import './Review.css'
+import { useParams } from 'react-router-dom';
 
 export const MessagelistContext = React.createContext();
 
@@ -61,30 +62,43 @@ const MessageScroll = (props) => {
   const [message, setMessages] = useState([])
   const [showBottomBar, setShowBottomBar] = useState(true);
 
-  const {messageReset, commentIncrement, setMethodIncrement } = useMainContext();
+  const {id} = useParams();
+
+  const {messageReset, commentIncrement, setMethodIncrement, messageUpdate } = useMainContext();
   //console.log(messageReset);
   const commentIncrementRef = useRef(commentIncrement);
 
-  
-  // useEffect(async () => {
-  //   setShowBottomBar(true);
-    
-  //   await axios({
-  //     method: 'get', 
-  //     url: 'https://jsonplaceholder.typicode.com/posts',
-  //     headers: {
-  //       'Authorization': localStorage.getItem('logintoken'),
-  //       'Content-Type': 'multipart/form-data',
-  //     }
-  //   })
-  //   .then((data) => {
-  //     console.log('성공:', data);
-  //     setMessages(data)
-  //   }) 
-  //   .catch((error) => {
-  //     console.error('실패:', error);
-  //   });
-  // },[messageReset])
+  const commentlist = [];
+
+  useEffect(() => {
+    setShowBottomBar(true);
+
+    axios.get(process.env.REACT_APP_BACK_BASE_URL + 'api/comments',
+      {
+        params: {boardId: id}
+      },
+      {
+      headers: { 
+        Authorization: localStorage.getItem('logintoken')
+      },
+    })
+    .then((data) => {
+      console.log('성공:', data);
+
+      // for(let i=0; i < data.data.result.data.length; i++) {
+      //   commentlist.push(data.data.result.data[i])
+      // }
+      // setMessages(commentlist);
+      setMessages(data.data.result.data);
+    }) 
+    .catch((error) => {
+      console.error('실패:', error);
+    });
+  },[])
+
+  console.log(message);
+
+
 
   const observer = React.useRef(new IntersectionObserver(entries => {
     const first = entries[0];
@@ -110,38 +124,27 @@ const MessageScroll = (props) => {
 
   const [bottomBar, setBottomBar] = useState(null);
 
-  console.log(messagelist);
+  //console.log(messagelist);
 
   return (
     <>
-    {/*<MessagelistContext.Provider value={messagelist}>
-        <div>
-            <Message />
-
-            {messagelist.length > 9 && showBottomBar ?
-            <div className='bottomBar'>
-                <div className='loader'></div>
-            </div>
-            : null}
-
-        </div>
-    </MessagelistContext.Provider> */}
-
-    {/* <Message 
-      user="Dummy user" 
-      editable={false} 
-      message="Dummy Message"
-      likes={25} 
-    /> */}
-
     {messagelist.map(message => (
-    <Message 
-      user={message.user}
-      editable={message.editable} 
-      message={message.message}
-      likes={message.likes} 
-      replies={message.replies}
-    />
+      <Message 
+        user={message.user}
+        editable={message.editable} 
+        message={message.message}
+        likes={message.likes} 
+        replies={message.replies}
+      />
+    ))}
+
+    {message.map(message => (
+      <Message 
+        id={message.id}
+        user={message.member.name}
+        message={message.content}
+        replies={message.children}
+      />
     ))}
 
     {messagelist.length > 2 && showBottomBar ?

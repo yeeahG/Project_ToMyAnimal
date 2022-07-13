@@ -1,12 +1,4 @@
 /*==================List==================*/
-.log__wrapper {
-
-}
-
-.list__board {
-
-}
-
 
 /*==================BOARD==================*/
 .board__index {
@@ -41,6 +33,17 @@
     margin-right: 7px;
 }
 
+.info__desc__l {
+    display: flex;
+}
+
+.info__desc__l p {
+    margin: .5rem 1rem 1rem 0;
+}
+
+.info__desc__l strong {
+    font-size: 1.5rem;
+}
 /*==================PAGINATION==================*/
 .paging {
     display: flex;
@@ -80,7 +83,15 @@
 
 /*==================ARTICLE==================*/
 .article__container {
-    margin: 1rem;
+    margin: 1.5rem 3rem;
+}
+
+.read__title__container {
+    border-bottom: 1px solid;
+}
+
+.read__title {
+    margin: .5rem 0;
 }
 
 .userinfo__subtitle  {
@@ -93,6 +104,7 @@
     margin: auto 0;
 }
 
+
 .area__container {
     display: flex;
     justify-content: space-between;
@@ -102,6 +114,18 @@
 .profile__thumb {
     display: flex;
     justify-content: space-between;
+}
+
+.read__content__text {
+    height: 200px;
+}
+
+.user__content p {
+
+}
+
+.area__l {
+    float: right;
 }
 
 .comment__view ul {
@@ -144,6 +168,15 @@
     width: 100%;
     overflow-y: scroll;
     resize: none;
+    margin: .5rem 1rem;
+}
+
+.comment__btn {
+    float: right;
+}
+
+.comment__btn button {
+    margin: 0 .5rem;
 }
 
 /*==================WRITE==================*/
@@ -169,9 +202,6 @@
 
 
 @media (min-width: 900px) {
-    .list__board table {
-
-    }
 
     .write__head input {
         width: 100%;
@@ -181,6 +211,9 @@
         padding: 19px 27px 30px;
         box-sizing: border-box;
         border-radius: 2px;
+    }
+    .read__content__text {
+        width: 700px;
     }
 
 }

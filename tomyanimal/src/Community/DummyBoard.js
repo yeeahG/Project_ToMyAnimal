@@ -1,10 +1,10 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import Read from './components/Read'
 import axios from 'axios';
-import './Board.css'
 import ControlMenu from '../Pages/ControlMenu';
 import Pagination from './components/Pagination';
 import Write from './components/Write'
+import './Board.css'
  
 const sortOptionList = [
     {value: "latest", name: "최신순"},
@@ -14,7 +14,7 @@ const sortOptionList = [
 //상태관리를 담을 context
 export const ArticleStateContext = React.createContext();
 
-const Board = () => {
+const DummyBoard = () => {
     const [article, setArticle] = useState([]);
     const [data, dispatch] = useReducer(article);
     const [sortType, setSortType] = useState('latest');
@@ -25,7 +25,6 @@ const Board = () => {
 
     const userid = localStorage.getItem('userid');
 
-    //http://localhost:8084/api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=0
     useEffect(() => {
         axios({
           method: 'get', 
@@ -136,8 +135,6 @@ const Board = () => {
                     </tr>
                 </thead>
 
-                {/* {article.map((it) =>  */}
-                {/*{currentPosts(article).map((it) => */}
                 {getProcessedList().map((it) => 
                 <Read key={it.id} {...it} />
                 )}
@@ -145,7 +142,6 @@ const Board = () => {
         </div>
         
 
-        {/* <Read article={article} /> */}
         <Pagination 
             postsPerPage={postsPerPage}
             totalPosts={article.length}
@@ -169,4 +165,4 @@ const Board = () => {
   )
 }
 
-export default Board
+export default DummyBoard

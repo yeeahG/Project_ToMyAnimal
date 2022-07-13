@@ -19,9 +19,8 @@ const LogWrite = () => {
         const newPost = {
             title: title,
             content: content,
-            categoryId: 1
-            //userId: localStorage.getItem('usename'),
-            //date: new Date()
+            categoryId: 1,
+            type: "PRIVATE"
         }
 
         if(content.length < 1) {
@@ -32,7 +31,7 @@ const LogWrite = () => {
         if(title != "" || content != "") {
             await axios({
                 method: 'post', 
-                url: 'http://localhost:8084/api/posts',
+                url: process.env.REACT_APP_BACK_BASE_URL + 'api/posts',
                 data: newPost,
                 headers: { 
                     'Authorization': localStorage.getItem('logintoken'),
@@ -47,7 +46,7 @@ const LogWrite = () => {
                 console.error('실패:', error);
             });
             alert('작성이 완료되었습니다')
-            window.location.reload();
+            //window.location.reload();
         } else {
             setError("한 글자 이상 입력하세요")
         }

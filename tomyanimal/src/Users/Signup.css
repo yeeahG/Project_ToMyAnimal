@@ -60,6 +60,14 @@ input:focus+:after {
     transform-origin: bottom left;
 }
 
+.phoneNumber__container {
+    display: flex;
+}
+
+.phoneNumber__container select {
+    border: none;
+}
+
 .resigter__btn {
     width: 100%;
     text-transform: uppercase;

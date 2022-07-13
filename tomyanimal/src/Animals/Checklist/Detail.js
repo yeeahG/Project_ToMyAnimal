@@ -8,6 +8,8 @@ import AddChecklist from './AddChecklist';
 import { DeleteFilled } from '@ant-design/icons';
 
 import './CardItem.css'
+import ChecklistFooter from './ChecklistFooter';
+import ReadChecklist from './ReadChecklist';
 
 const sortOptionList = [
   {value: "latest", name: "최신순"},
@@ -59,50 +61,54 @@ const Detail = () => {
   }
 
   const putList = [];
+  const postIdList = [];
   
   useEffect ( () => {
-    //axios.get(`http://localhost:8084/api/posts?page=0&size=4&categoryId=${id}&memberId=${userid}`, {
-    axios.get(`http://localhost:8084/api/my-board?memberId=${userid}&categoryId=${id}&page=0&size=4&type=1`, {
+    axios.get(process.env.REACT_APP_BACK_BASE_URL + `api/my-board?memberId=${userid}&categoryId=${id}&page=0&size=4&type=PRIVATE`, {
       headers: {
         Authorization: localStorage.getItem('logintoken'),
       }
     }).then((response) => {
-      //console.log(response.data.result.data.postList[0]);
       for (let i=0; i < response.data.result.data.length; i++) {
         putList.push(response.data.result.data[i])
-        //console.log(putList);
-      } setData(putList);
+        postIdList.push(response.data.result.data[i].id)
+      } 
+      setData(putList);
+      setNoteId(postIdList)
+
     }).catch((error) => {
       console.log(error);
     });
   }, []);
   
-  console.log(data);
+  console.log(noteId);
+
+  
 
   const submitHandler = async (title, content) => {
     console.log("submit" + title);
     console.log("submit" + content);
 
     const newPost = {
-      type: 1,
+      type: "PRIVATE",
       title: title, 
       content: content,
       categoryId: id
     }
 
-    // if(content.length < 1) {
-    //   contentRef.current.focus();
-    //   return;
-    // }
+    if(content.length < 1) {
+      contentRef.current.focus();
+      return;
+    }
 
     const newPosts = [...data, newPost];
     console.log(newPosts);
     setData(newPosts);
 
-    if(title != "" || content != "") {
+    if(title != "" && content != "") {
       await axios({
         method: 'post', 
-        url: 'http://localhost:8084/api/board',
+        url: process.env.REACT_APP_BACK_BASE_URL + 'api/board',
         data: newPost,
         headers: { 
           'Authorization': localStorage.getItem('logintoken'),
@@ -111,26 +117,26 @@ const Detail = () => {
       })
       .then((data) => {
         console.log('성공:', data);
+        alert('작성이 완료되었습니다')
+        window.location.reload();
       })
       
       .catch((error) => {
         console.error('실패:', error);
       });
-      alert('작성이 완료되었습니다')
-      window.location.reload();
     } else {
       setError("한 글자 이상 입력하세요")
     }
   }
 
 
-  const deleteNote = async (noteId) => {
-    //글 각각의 id 필요
-    //noteId
+  const deleteNote = async (id) => {
+    //글 각각의 id 필요 = noteId
     const newNotes = data.filter((note) => note.noteId != noteId)
     setData(newNotes);
+    console.log(id);
 
-    axios.delete(`http://localhost:8084/api/members/${userid}`, {
+    await axios.delete(process.env.REACT_APP_BACK_BASE_URL + `api/board/${id}`, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('logintoken'),
@@ -139,6 +145,7 @@ const Detail = () => {
     .then((data) => {
       console.log('성공:', data);
       alert("삭제가 완료되었습니다")
+      window.location.reload();
     })
     .catch((error) => {
       console.error('실패:', error);
@@ -188,9 +195,6 @@ const Detail = () => {
               onChange={setSortType}
               optionList={sortOptionList}
             />
-            <button onClick={()=>setOpen(!isOpen)}>
-            {isOpen ? "Close" : "Write"}
-            </button>
           </div>
 
           <div className='checklist__walk__container'>
@@ -198,90 +202,23 @@ const Detail = () => {
             {id} detail
           </div>
 
-          {isOpen ?
-          <div className='checklist__walk__container'>
-            Write
-            <form>
-              <input
-                name="title" 
-                placeholder='title'
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-
-              <p>
-                <textarea 
-                  name="content" 
-                  placeholder='What about your animal?'
-                  ref={contentRef}
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                />
-              </p>
-            </form>
-
-            <button className='upload__btn' onClick={submitHandler} >write</button>
-          </div>
-            :
-          // <div className='checklist__read__container'>
-          //   {/* {data.title} 
-          //   {data.map((it) => ( */}
-          //   {currentPosts.map((it) => (
-          //     <div className='checklist__read__content'>
-          //       <h3>{it.title}</h3>
-          //       <p>{it.content}</p>
-          //     </div>
-          //   ))}
-          // </div>
-          null
-          }
-
-
           <div className='checkllist__wrapper'>
-
             {currentPosts.map((it) => (
-              <div className='checklist__note'>
-                <div className='checklist__text'>
-                  <h3>{it.title}</h3>
-                  <p>{it.content}</p> 
-                </div>
-                <div className='checklist__note__footer'>
-                  <small>2022/07.01</small>
-                  <button>
-                    <DeleteFilled 
-                      style={{fontSize: '18px'}} 
-                      //onClick={deleteNote}
-                    />
-                  </button>
-                </div>
-              </div>
+              <ReadChecklist 
+                key={it.id}
+                {...it}
+                deleteNote={deleteNote}
+              />
             ))}
 
             <div className='checklist__note'>
-              <h3>title</h3>
-              <p>content</p>
+              <h3>dummy title</h3>
+              <p>dummy content</p>
               <div className='checklist__note__footer'>
                 <small>2022/07.01</small>
                 <button><DeleteFilled style={{fontSize: '18px'}} /></button>
               </div>
             </div>
-            <div className='checklist__note'>
-              <h3>title</h3>
-              <p>content</p>
-              <div className='checklist__note__footer'>
-                <small>2022/07.01</small>
-                <button><DeleteFilled style={{fontSize: '18px'}} /></button>
-              </div>
-            </div>
-            <div className='checklist__note'>
-              <h3>title</h3>
-              <p>content</p>
-              <div className='checklist__note__footer'>
-                <small>2022/07.01</small>
-                <button><DeleteFilled style={{fontSize: '18px'}} /></button>
-              </div>
-            </div>
-
 
             <AddChecklist 
               submitHandler={submitHandler}

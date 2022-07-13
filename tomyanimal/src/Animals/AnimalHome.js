@@ -1,11 +1,10 @@
-import React, { useState, useReducer, useRef } from 'react'
+import React, { useState, useReducer, useRef, useEffect } from 'react'
+import axios from 'axios';
 import AnimalPage from './AnimalPage';
 import AnimalLog from './AnimalLog';
-import CheckUp from './Checklist/CheckList';
-import {logData} from './components/data'
 import Log from './AnimalLog/Log';
-import './AnimalInfo.css'
 import CheckList from './Checklist/CheckList';
+import './AnimalInfo.css'
 
 const reducer = (state, action) => {
   //state 상태관리 로직들
@@ -104,11 +103,10 @@ const dummyData = [
 const AnimalHome = () => {
   const [activeIndex, setActiveIndex]=useState(0);
   const [data, dispatch] = useReducer(reducer, dummyData);
+  const [petName, setPetname] = useState();
 
   //date state를 변화시킬 수 있는 dispatch 함수들
-  const dataId = useRef(0);
-
-  
+  const dataId = useRef(data.length+1);
 
   const tabClickHandler=(index)=>{
     setActiveIndex(index);
@@ -125,7 +123,15 @@ const AnimalHome = () => {
     },
     {
       tabTitle:(
-        <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}> My Log</li>
+        <li className={activeIndex===3 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}>Check</li>
+      ),
+      tabCont:(
+        <div> <CheckList /> </div>
+      )
+    },
+    {
+      tabTitle:(
+        <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}> My Log</li>
       ),
       tabCont:(
         <div> <AnimalLog /> </div>
@@ -133,22 +139,13 @@ const AnimalHome = () => {
     },
     {
       tabTitle:(
-        <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}>Memo</li>
+        <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(3)}>Memo</li>
       ),
       tabCont:(
         <div> <Log /> </div>
       )
     },
-    {
-      tabTitle:(
-        <li className={activeIndex===3 ? "is-active" : ""} onClick={()=>tabClickHandler(3)}>Check</li>
-      ),
-      tabCont:(
-        <div> <CheckList /> </div>
-      )
-    },
   ];
-
 
 
   //CREATE
@@ -175,8 +172,18 @@ const AnimalHome = () => {
     }});
   }
 
-
-
+  useEffect(() => {
+    //axios.get(`http://localhost:8084/api/my-pet?memberId=${userId}`, {
+    axios.get('http://localhost:8084/api/animals/1', {
+      headers: {
+        Authorization: localStorage.getItem('logintoken') 
+      }
+    }).then((response) => {
+      setPetname(response.data.result.data.name);
+    }).catch((error) => {
+      console.error(error);
+    });
+  }, []);
 
   return (
 
@@ -192,7 +199,7 @@ const AnimalHome = () => {
         <div className='header__wrapper'>
           <h1 className='header__content'>About you</h1>
           <div className='header__detail'>
-            <p>내 (petname)의 모든 것</p>
+            <p>내 {petName}의 모든 것</p>
           </div>
         </div>
       </div>
@@ -202,24 +209,17 @@ const AnimalHome = () => {
       <div className='space'></div>
 
       <div className='info__content'>
-        {/* <div className='grid'> */}
-
-          <div className='left__menu'>
-            <ul className='menu__wrap'>
-              <li className='menu__list'>My animal</li>
-              {tabContArr.map((section, index)=>{
-              return section.tabTitle
-            })}
-            </ul>
-          </div>
-
-
-
-          {tabContArr[activeIndex].tabCont}
-
-
-        {/* </div> */}
-
+        
+        <div className='left__menu'>
+          <ul className='menu__wrap'>
+            <li className='menu__list'>My animal</li>
+            {tabContArr.map((section)=>{
+            return section.tabTitle
+          })}
+          </ul>
+        </div>
+          
+        {tabContArr[activeIndex].tabCont}
       </div>
       
     </div>

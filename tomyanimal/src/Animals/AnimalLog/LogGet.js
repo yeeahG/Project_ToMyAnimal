@@ -62,7 +62,7 @@ const LogGet = ( {id,  title, content} ) => {
     // setEditContactId(null);
 
 
-    axios.put('http://localhost:8084/api/board/' + editContactId, editedContact,{
+    axios.put(process.env.REACT_APP_BACK_BASE_URL + 'api/board/' + editContactId, editedContact,{
       headers: {
         "Access-Control-Allow-Origin": "*",
         'Authorization': localStorage.getItem('logintoken'),

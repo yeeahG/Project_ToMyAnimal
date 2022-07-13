@@ -50,7 +50,6 @@ const Menu = () => {
             </div>
 
             <div className="Container__StyledContainer heASqm">
-                {/* <div className="space__styledSpace djzxvY"></div> */}
                 <div className="Border__StyeldBorder klPBwl"></div>
             </div>
         </header>

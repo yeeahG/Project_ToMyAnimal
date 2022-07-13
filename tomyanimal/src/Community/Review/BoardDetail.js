@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from 'react'
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { HeartOutlined, HeartFilled, LikeOutlined, LikeFilled, DownOutlined, UpOutlined } from '@ant-design/icons';
-import CommentsBox from '../components/CommentsBox';
+import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import TopCommentsBox from './TopCommentsBox';
 import MessageScroll from './MessageScroll';
 import { ContextProvider } from './Context/Context';
@@ -14,101 +13,88 @@ export function useOpenReply() {
   return useContext(showReply);
 }
 
-const ReviewDetail = ( {title, body} ) => {
+const BoardDetail = ( ) => {
     const {id} = useParams();
-    //console.log(id);
+    const message = useRef(null);
+    const contentRef = useRef();
+    const characterLimit = 200;
+
     const location = useLocation();
-    const name = location.state.name;
-    const bid = location.state.id;
-    const postId = location.state.postId;
     const view = location.state.view;
-  
   
     const [data, setData] = useState({})
     const [com, setCom] = useState([])
     const [comtext, setComText] = useState("")
-  
-    const [isOpen, setOpen] = useState(false);
-  
+    
+    const [showCommentLine, setCommentLine] = useState(false);
+    const [showButtons, setShowButtons] = useState(false);
+    const [enableBtn, setEnableBtn] = useState(false);
     const [error, setError] = useState("");
-  
-    const [isCheck, setCheck] = useState([false, false, false, false, false]);
-    const [like, setLike] = useState([0, 0, 0, 0, 0]);
-    const likeList = [];
-  
-    //useContext로 저장해야 id로 내용 불러오기가능
-    const userName = localStorage.getItem('usename')
+
   
     const navigate = useNavigate();
-  
-    useEffect(() => {
-      axios.get('https://jsonplaceholder.typicode.com/posts/'+id)
-      .then((response)=> {
-        setData(response.data);
-      })
-    }, []);
+
+    const userid = localStorage.getItem('userid');
   
     const boardBack = () => {
       navigate(-1);
     }
   
-    
-    /*
-    useEffect(() => {
-      axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments/`)
-      .then((response)=> {
-        setCom(response.data);
-      })
-    }, []); */
   
-  
-    const addComment = async () => {
+    const addComment = async (e) => {
       const newComment = {
-        //body: comtext,
-        //userId: localStorage.getItem('usename'),
-        //date: new Date(),
-        //postId: id
-  
-        content: comtext,
-        postId: id
+        content: message.current.value,
+        boardId: id
       }
       console.log(newComment);
   
-      if(comtext != "" ) {
-        //await axios.post('https://jsonplaceholder.typicode.com/posts/${id}/comments/', newComment)
-        await axios.post('http://localhost:8084/api/comments', newComment, {
+      if(message.current.value != "" ) {
+        await axios.post(process.env.REACT_APP_BACK_BASE_URL + 'api/comments', newComment, {
           headers: {
             Authorization: localStorage.getItem('logintoken'),
           }
         })
         .then((data) => {
           console.log('성공:', data);
-          setCom([newComment, ...com]);
+          //setCom([newComment, ...com]);
           alert('작성이 완료되었습니다')
         })
-          
         .catch((error) => {
           console.error('실패:', error);
         });
       } else {
-          setError("한 글자 이상 입력하세요")
+        setError("한 글자 이상 입력하세요")
       }
     }
-  
-    const openButton = () => {
-      setOpen(!isOpen)
+
+
+    const commentFocus = () => {
+      setCommentLine(true);
+      setShowButtons(true);
     }
-  
-    const clickHeart = () => {
-      //let checkToggle = [...isCheck]
-      //checkToggle[i]++;
-      //setLike(likeCnt);
-  
-      //setCheck(!isCheck)
-  
-      const checks = false;
-      setCheck([...isCheck, checks]);
+ 
+    const commentFocusOut = () => {
+      setCommentLine(false);
     }
+
+    const commentStroke = e => {
+      let currMessage = e.target.value;
+
+      if(currMessage) {
+        setEnableBtn(false);
+      } else {
+        setEnableBtn(true);
+      }
+    }
+
+
+    
+  const handleChange = (e)=> {
+    if(characterLimit - e.target.value.length >= 0) {
+      setComText(e.target.value)
+    }
+  }
+
   
     const likeIcon = useRef();
     const numLikes = useRef();
@@ -208,36 +194,43 @@ const ReviewDetail = ( {title, body} ) => {
   
                 <section className='article__container'>
   
-                  <div className='read__title'>
-                    <a>자유게시판</a>
-                    {/* <strong>title</strong> */}
-                    <strong>{data.title}</strong>
-                    <div className='info__desc'>
-                      <div className='profile__thumb'>
-                        {/* 글쓴이이름 */}
-                        <a>{data.userId}</a>
-                        <div className='content__info'>
-                          <span>조회수</span>
-                          <span>{view}</span>
-                          <span>작성시간</span>
-                          <span>
-                            댓글
-                            {com.length}
-                          </span>
+                  <div className='read__title__container'>
+                    <div className='read__title'>
+
+                      <a>자유게시판</a>
+                      <div className='info__desc__l'>
+                        <p>{id}</p>
+                        <strong>{location.state.title}</strong>
+                      </div>
+                      <div className='info__desc'>
+                        <div className='profile__thumb'>
+                          <a>{location.state.member.name}</a>
+                          <div className='content__info'>
+                            <span>조회수</span>
+                            <span>{location.state.view + 1}</span>
+                            <span>작성시간</span>
+                            <span>{location.state.modifiedAt.slice(0,10)} </span>
+                            <span>{location.state.modifiedAt.slice(11,16)}</span>
+                            <span>
+                              댓글
+                              {location.state.comment.length}
+                            </span>
+                          </div>
                         </div>
                       </div>
+
                     </div>
                   </div>
   
                   <div className='read__content'>
                     <table>
-                      <tbody>
+                      <tbody className='read__content__text'>
                         <tr>
                           <td>
                             <div className='user__content'>
                               <p>
                                 {/* 게시글 내용 */}
-                                {data.body}
+                                <p>{location.state.content}</p>
                               </p>
                             </div>
                           </td>
@@ -247,44 +240,64 @@ const ReviewDetail = ( {title, body} ) => {
                   </div>
   
 
-                      <div className='comment__list'>
-                        <div className='comment__view'>
+                  <div className='comment__list'>
+                    <div className='comment__view'>
   
 
                           
-                        </div>
-                      </div>
+                    </div>
+                  </div>
   
 
-                    
                   <div className='comment__write'>
                     <div className='comment__write__area'>
-  
-                      <div className='box__textarea'>
+
+                      <div className='comment__write__menu'>
                         {error}
+                        <div className='area__l'>
+                          <span>
+                            <span>{comtext.length}</span>
+                            <span>/</span>
+                            <span>{characterLimit}</span>
+                          </span>
+                        </div>
+                      </div>
+
+                      <section className='box__textarea'>
                         <textarea 
                           type='text'
                           name='comment' 
-                          onChange={(e) => setComText(e.target.value)} 
+                          placeholder='Add a comment'
+                          onChange={handleChange} 
+                          ref={message}
+                          //ref={contentRef}
+                          onFocus={commentFocus}
+                          onBlur={commentFocusOut}
+                          onKeyUp={commentStroke}
                         />
-                      </div>
-  
-                      <div className='comment__write__menu'>
-  
-                        <div className='area__r'>
-                          <span>
-                            <span>0</span>
-                            <span>/</span>
-                            <span>총글자수</span>
-                          </span>
-                          <button onClick={addComment}>등록</button>
+                        {showCommentLine && <div className='commentLine'></div>}
+                      </section>
+                      
+                      {showButtons && (
+                        <div className='comment__btn'>
+                          <button 
+                            disabled={enableBtn} 
+                            onClick={addComment}
+                          >
+                            comment
+                          </button>
+                          <button onClick={() => {
+                            setShowButtons(false);
+                            message.current.value = ""
+                          }}>cancle</button>
                         </div>
-                        
-                      </div>
+                      )}
 
 
-                      <ContextProvider>            
-                        <TopCommentsBox />
+
+                      <ContextProvider>        
+                        {/*issue가 많아서 잠시 주석*/}    
+                        {/* <TopCommentsBox /> */}
                         <MessageScroll />
                       </ContextProvider>
                     
@@ -304,4 +317,4 @@ const ReviewDetail = ( {title, body} ) => {
   }
   
 
-export default ReviewDetail
+export default BoardDetail

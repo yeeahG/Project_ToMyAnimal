@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
+import team1.toMyAnimal.domain.board.BoardType;
 
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class BoardUpdateRequest {
     @NotBlank(message = "게시글 본문을 입력해주세요.")
     private String content;
 
-    private Integer type;
+    private BoardType type;
 
     private List<MultipartFile> addedImages = new ArrayList<>();
 

@@ -52,10 +52,11 @@ public class Board extends EntityDate {
     private List<BoardImage> boardImages;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.ORDINAL)
     //0 :공용 , 1:개인
-    private Integer type;
+    private BoardType type;
 
-    public Board(String title, String content, int type, Member member, Category category , List<BoardImage> boardImages){
+    public Board(String title, String content, BoardType type, Member member, Category category , List<BoardImage> boardImages){
         this.title = title;
         this.content = content;
         this.type = type;

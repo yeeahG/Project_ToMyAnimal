@@ -32,24 +32,15 @@ const Log = () => {
   
   const putLog = [];
 
-  useEffect( () => { 
-    //axios.get(`http://localhost:8084/api/my-board?memberId=${userid}`, {
-    axios.get(`http://localhost:8084/api/posts?page=0&size=4&categoryId=1&memberId=${userid}`, {
+  useEffect( () => {
+    axios.get(process.env.REACT_APP_BACK_BASE_URL + `api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PRIVATE`, {
       headers: {
         Authorization: localStorage.getItem('logintoken'),
       }
     }).then((response) => {
-      for (let i=0; i < response.data.result.data.postList.length; i++) {
-      // setLogId(response.data.result.data[i].id);
-      // setLogTitle(response.data.result.data[i].title)
-      // setLogContent(response.data.result.data[i].content)
-      //putLog.push(response.data.result.data[i])
-        putLog.push(response.data.result.data.postList[i])
+      for (let i=0; i < response.data.result.data.length; i++) {
+        putLog.push(response.data.result.data[i])
       } setLogArray(putLog)
-      
-      // for (let i=0; i < response.data.result.data.length; i++) {
-        //   putLog.push(response.data.result.data[i])
-        // } 
     }).catch((error) => {
       console.error(error);
     });
