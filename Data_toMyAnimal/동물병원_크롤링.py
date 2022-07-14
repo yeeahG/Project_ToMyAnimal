@@ -1,19 +1,24 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
+# In[7]:
+
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+import pandas as pd
+
+
+# In[8]:
 
 
 def animalhospital(place):
     
-    from selenium.webdriver.common.keys import Keys
-    from selenium import webdriver
-    import time
-    from selenium.webdriver.common.by import By
-    import pandas as pd
-
-    driver = webdriver.Chrome("D:/20220103_lab/14.python/data/chrome/103/chromedriver")
-    driver.get("https://map.kakao.com/")
+    path="D:/20220103_lab/14.python/data/chrome/103/chromedriver"
+    driver = webdriver.Chrome(path)
+    url="https://map.kakao.com/"
+    driver.get(url)
     time.sleep(3)
 
     dimmedLayer = driver.find_element_by_css_selector("div#dimmedLayer.DimmedLayer")
@@ -86,11 +91,12 @@ def animalhospital(place):
         animalhospital_df['주소'] = animalhospital_df['주소'].apply(lambda x: x.replace("\n", ", "))
         animalhospital_df_dropdupl = animalhospital_df.copy()
         animalhospital_df_dropdupl.drop_duplicates(['병원이름', '주소'], keep = 'first')
-        animalhospital_df_dropdupl.to_csv('animalhospital_'+place+'.csv')
+        animalhospital_df_dropdupl['location_type'] = 0
+        animalhospital_df_dropdupl.to_csv('animalhospital_'+place+'.csv', index=False)
         print(place + "동물병원 크롤링 완료")
 
 
-# In[3]:
+# In[9]:
 
 
 placelist = ["서울", "대전", "대구", "부산", "광주", "울산", "인천"]
@@ -101,6 +107,14 @@ placelist = ["서울", "대전", "대구", "부산", "광주", "울산", "인천
 
 for i in placelist:
     animalhospital(i)
+
+
+# In[11]:
+
+
+from datetime import datetime
+now = datetime.now()
+print("current time is", now)
 
 
 # In[ ]:
