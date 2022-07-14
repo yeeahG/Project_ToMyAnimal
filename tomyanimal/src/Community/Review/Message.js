@@ -94,6 +94,7 @@ const Message = (props) => {
             )}
             </>
 
+            {/*Dummy data 부분 */}
             {/* {arrowUp && (
                 <>
                 <section className='subMessages'>

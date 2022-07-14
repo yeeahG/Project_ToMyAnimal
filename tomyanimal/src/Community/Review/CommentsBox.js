@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import axios from 'axios';
 import {useOpenReply} from './Message'
 import { useMainContext } from './Context/Context';
@@ -64,7 +64,7 @@ const CommentsBox = (props) => {
         } else {
             setError("한 글자 이상 입력하세요")
         }
-        //setMessageUpdate([1, props.useKey])
+
         message.current.value = '';
         setEnableBtn(false);
     }
