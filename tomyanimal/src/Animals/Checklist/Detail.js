@@ -10,6 +10,8 @@ import { DeleteFilled } from '@ant-design/icons';
 import './CardItem.css'
 import ChecklistFooter from './ChecklistFooter';
 import ReadChecklist from './ReadChecklist';
+import API from '../../utils/api';
+
 
 const sortOptionList = [
   {value: "latest", name: "최신순"},
@@ -64,27 +66,18 @@ const Detail = () => {
   const postIdList = [];
   
   useEffect ( () => {
-    axios.get(process.env.REACT_APP_BACK_BASE_URL + `api/my-board?memberId=${userid}&categoryId=${id}&page=0&size=4&type=PRIVATE`, {
-      headers: {
-        Authorization: localStorage.getItem('logintoken'),
-      }
-    }).then((response) => {
+    async function callAPI() {
+      const response = await API.get(`api/my-board?memberId=${userid}&categoryId=${id}&page=0&size=4&type=PRIVATE`);
+
       for (let i=0; i < response.data.result.data.length; i++) {
         putList.push(response.data.result.data[i])
         postIdList.push(response.data.result.data[i].id)
-      } 
+      }
       setData(putList);
-      setNoteId(postIdList)
-
-    }).catch((error) => {
-      console.log(error);
-    });
+      setNoteId(postIdList);
+    } callAPI();
   }, []);
   
-  console.log(noteId);
-
-  
-
   const submitHandler = async (title, content) => {
     console.log("submit" + title);
     console.log("submit" + content);
@@ -102,7 +95,6 @@ const Detail = () => {
     }
 
     const newPosts = [...data, newPost];
-    console.log(newPosts);
     setData(newPosts);
 
     if(title != "" && content != "") {
