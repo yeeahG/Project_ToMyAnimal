@@ -5,6 +5,7 @@ import ReadOnlyRow from './components/ReadOnlyRow';
 import EditableRow from './components/EditableRow';
 import UserLogIn from './UserLogin'
 import './UserHome.css'
+import API from '../utils/api'
 
 const UserAccount = () => {
   const [user, setUser] = useState();
@@ -23,20 +24,27 @@ const UserAccount = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios({
-      method: 'get', 
-      url: process.env.REACT_APP_BACK_BASE_URL + `api/members/${loginId}`,
-      headers: {
-        Authorization: localStorage.getItem('logintoken') 
-      }
-    })
-    .then((user) => {
-      setUser(user);
-      setUserName(user.data.result.data['name']) 
-      setUserPhone(user.data.result.data['phoneNumber'])
-      localStorage.setItem('usename', user.data.result.data['name']);
-      localStorage.setItem('userInfo', JSON.stringify(user.data.result.data));
-    })
+
+    async function callAPI() {
+      const res = await API.get(`api/members/${loginId}`);
+      console.log(res.data);
+    } callAPI();
+
+    // axios({
+    //   method: 'get', 
+    //   url: process.env.REACT_APP_BACK_BASE_URL + `api/members/${loginId}`,
+    //   headers: {
+    //     Authorization: localStorage.getItem('logintoken') 
+    //   }
+    // })
+    
+    // .then((user) => {
+    //   setUser(user);
+    //   setUserName(user.data.result.data['name']) 
+    //   setUserPhone(user.data.result.data['phoneNumber'])
+    //   localStorage.setItem('usename', user.data.result.data['name']);
+    //   localStorage.setItem('userInfo', JSON.stringify(user.data.result.data));
+    // })
   }, []);
 
     
