@@ -93,6 +93,10 @@ const Log = () => {
           <LogGet key={it.id} {...it}/>
         ))}
 
+        <div>
+          
+        </div>
+
         <Pagination 
           postsPerPage={postsPerPage}
           totalPosts={logList.length}

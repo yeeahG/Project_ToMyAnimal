@@ -82,7 +82,7 @@ const Home = () => {
               </div>
               <p>01</p>
               <div>
-                <h3 className='slide__subtitle'>About my pet</h3>
+                <h3 className='slide__subtitle'>About my animal</h3>
               </div>
             </div>
             <div className='slide__content'>

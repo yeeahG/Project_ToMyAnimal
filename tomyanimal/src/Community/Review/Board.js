@@ -4,6 +4,7 @@ import BoardRead from './BoardRead';
 import BoardWrite from './BoardWrite';
 import Pagination from '../components/Pagination';
 import ControlMenu from '../../Pages/ControlMenu';
+import { FormOutlined } from '@ant-design/icons';
 
 const sortOptionList = [
     {value: "latest", name: "최신순"},
@@ -210,7 +211,7 @@ const Board = () => {
         <div className='write__article'>
             {error}
             <button onClick={openButton}>
-                {isOpen ? "" : "Write"}
+                {isOpen ? "" : <FormOutlined style={{fontSize: '18px'}}/>}
             </button>
             <button>내글</button>
             {/* process.env.REACT_APP_BACK_BASE_URL + `api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PUBLIC` 사용하기*/}

@@ -13,6 +13,7 @@ import Detail from './Animals/Checklist/Detail';
 import Reservation from './Places/Reservation/Reservation';
 import BoardDetail from './Community/Review/BoardDetail';
 import './App.css';
+import About from './Pages/About';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/user" element={<User />} />
             <Route path="/register" element={<Signup />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/about" element={<About />} />
           </Routes>
 
           <Footer />

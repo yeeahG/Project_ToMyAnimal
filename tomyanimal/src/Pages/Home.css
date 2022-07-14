@@ -71,7 +71,6 @@
 .img__box {
     width: auto;
     height: 350px;
-    border: 1px solid;
 }
 
 .odd {
@@ -89,7 +88,12 @@
 }
 
 .sec__odd {
-    background-image: url('../img/medicine.png');
+    background-image: url('../img/cat2.jpg');
+    background-repeat: no-repeat;
+}
+
+.sec__even {
+    background-image: url('../img/dog1.jpg');
     background-repeat: no-repeat;
 }
 
@@ -264,7 +268,7 @@
     }
 
     .slide__service {
-        margin: 0px 5vw;
+        margin: 5rem 5vw;
     }
     .slide__title {
         font-size: 5rem;

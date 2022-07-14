@@ -4,13 +4,17 @@
 .board__index {
     table-layout: fixed;
     word-break: break-all;
-    width: 844.8px;
+    display: flex;
+    width: 90vw;
+    position: relative;
+    margin: 1rem 0;
+    text-align: center;
 }
 
-/*==================READ==================*/
-.board__index {
-    display: flex;
+.list__board {
+    margin: 1rem 0;
 }
+/*==================READ==================*/
 
 .list__board tbody { 
     margin: 0;
@@ -58,7 +62,7 @@
 .write__article {
     float: right;
     position: absolute;
-    right: 20%;
+    right: 15%;
 }
 
 /* .paging__number ol {
@@ -202,6 +206,10 @@
 
 
 @media (min-width: 900px) {
+
+    .board__index {
+        width: 55vw;
+    }
 
     .write__head input {
         width: 100%;
