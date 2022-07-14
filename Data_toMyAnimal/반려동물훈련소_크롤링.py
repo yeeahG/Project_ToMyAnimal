@@ -1,19 +1,25 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[5]:
+# In[ ]:
+
+
+from selenium.webdriver.common.keys import Keys
+from selenium import webdriver
+import time
+from selenium.webdriver.common.by import By
+import pandas as pd
+
+
+# In[ ]:
 
 
 def pet_training_center():
     
-    from selenium.webdriver.common.keys import Keys
-    from selenium import webdriver
-    import time
-    from selenium.webdriver.common.by import By
-    import pandas as pd
-
-    driver = webdriver.Chrome("D:/20220103_lab/14.python/data/chrome/103/chromedriver")
-    driver.get("https://map.kakao.com/")
+    path="D:/20220103_lab/14.python/data/chrome/103/chromedriver"
+    driver = webdriver.Chrome(path)
+    url="https://map.kakao.com/"
+    driver.get(url)
     time.sleep(3)
 
     dimmedLayer = driver.find_element_by_css_selector("div#dimmedLayer.DimmedLayer")
@@ -82,22 +88,17 @@ def pet_training_center():
                             time.sleep(1)
                         
     except:
-        animalhospital_df = pd.DataFrame({ '훈련소이름':name_list, '별점':star_list, '리뷰수':reviewtotal_list, '주소':addr_list, '전화':tel_list })
-        animalhospital_df['주소'] = animalhospital_df['주소'].apply(lambda x: tuple(x.split("\n")))
-        animalhospital_df_dropdupl = animalhospital_df.copy()
-        animalhospital_df_dropdupl.drop_duplicates(['훈련소이름', '주소'], keep = 'first')
-        animalhospital_df_dropdupl.to_csv('pet_training_center.csv')
+        pet_training_center = pd.DataFrame({ '훈련소이름':name_list, '별점':star_list, '리뷰수':reviewtotal_list, '주소':addr_list, '전화':tel_list })
+        pet_training_center['주소'] = pet_training_center['주소'].apply(lambda x: x.replace("\n", ", "))
+        pet_training_center_dropdupl = pet_training_center.copy()
+        pet_training_center_dropdupl.drop_duplicates(['훈련소이름', '주소'], keep = 'first')
+        pet_training_center_dropdupl['location_type'] = 1
+        pet_training_center_dropdupl.to_csv('pet_training_center.csv', index=False)
         print("크롤링 완료")
-
-
-# In[6]:
-
-
-pet_training_center()
 
 
 # In[ ]:
 
 
-
+pet_training_center()
 

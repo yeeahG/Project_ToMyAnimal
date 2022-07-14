@@ -1,24 +1,29 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[7]:
+# In[ ]:
 
 
+pip install selenium
+
+
+# In[ ]:
+
+
+from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 import time
+from selenium.webdriver.common.by import By
 import pandas as pd
 
 
-# In[8]:
+# In[2]:
 
 
 def animalhospital(place):
     
-    path="D:/20220103_lab/14.python/data/chrome/103/chromedriver"
-    driver = webdriver.Chrome(path)
-    url="https://map.kakao.com/"
-    driver.get(url)
+    driver = webdriver.Chrome("/home/ec2-user/test_pythonfiles/chromedriver")
+    driver.get("https://map.kakao.com/")
     time.sleep(3)
 
     dimmedLayer = driver.find_element_by_css_selector("div#dimmedLayer.DimmedLayer")
@@ -96,7 +101,7 @@ def animalhospital(place):
         print(place + "동물병원 크롤링 완료")
 
 
-# In[9]:
+# In[3]:
 
 
 placelist = ["서울", "대전", "대구", "부산", "광주", "울산", "인천"]
@@ -109,7 +114,7 @@ for i in placelist:
     animalhospital(i)
 
 
-# In[11]:
+# In[1]:
 
 
 from datetime import datetime
