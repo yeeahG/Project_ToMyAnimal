@@ -39,6 +39,7 @@ const UserReservation = () => {
         <h3>Reservation<br/>
         List</h3>
         <div className='myreserv__background'>
+          {/*사진 들어올 예정*/}
           {/* <img  src={`${process.env.PUBLIC_URL}/public_assets/보건증1.png`}/> */}
         </div>
         
@@ -53,6 +54,7 @@ const UserReservation = () => {
           
           <div className='myreserv__data'>
 
+            {/* 예약내역 없을 시 문구 지정 부분 */}
             {/* { (reservData.length >= 1) ? */}
             { (reservData) ?
               <>
