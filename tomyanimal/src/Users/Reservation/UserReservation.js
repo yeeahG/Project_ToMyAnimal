@@ -9,7 +9,6 @@ const UserReservation = () => {
   const [reservData, setReservData] = useState("");
 
   const loginId = localStorage.getItem('userid');
-
   //const myreservlist = [];
 
   useEffect(() => {
@@ -57,10 +56,10 @@ const UserReservation = () => {
             {/* { (reservData.length >= 1) ? */}
             { (reservData) ?
               <>
-            <h3 className='myreserv__date'>{reservDate.slice(5,10)}</h3>
-            <p>{reservAnimal}</p>
-            <p>{reservDate.slice(11, 16)}</p>
-            <p>{reservType}</p>
+                <h3 className='myreserv__date'>{reservDate.slice(5,10)}</h3>
+                <p>{reservAnimal}</p>
+                <p>{reservDate.slice(11, 16)}</p>
+                <p>{reservType}</p>
               </>
             :
             <h3>예약 내역이 없습니다</h3>

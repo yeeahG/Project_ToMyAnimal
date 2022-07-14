@@ -54,7 +54,7 @@ const Signout = () => {
         <h1>ByeBye</h1>
       </div>
       
-      <p>탈퇴하기</p>
+      <p>핸드폰번호를 입력해주세요</p>
       <div className='userinfo__content'>
         {error}
         <form onSubmit={checkHandler} className='signout__form'>
