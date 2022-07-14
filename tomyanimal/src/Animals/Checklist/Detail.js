@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Pagination from '../../Community/components/Pagination';
@@ -10,7 +9,7 @@ import { DeleteFilled } from '@ant-design/icons';
 import './CardItem.css'
 import ChecklistFooter from './ChecklistFooter';
 import ReadChecklist from './ReadChecklist';
-import API from '../../utils/api';
+import { authInstance } from '../../utils/api';
 
 
 const sortOptionList = [
@@ -19,11 +18,8 @@ const sortOptionList = [
 ]
 
 const Detail = () => {
-  const [isOpen, setOpen] = useState(false);
   const [sortType, setSortType] = useState('latest');
-  
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+
   const [data, setData] = useState([]);
   const [noteId, setNoteId] = useState([]);
   const [error, setError] = useState("");
@@ -40,24 +36,6 @@ const Detail = () => {
   const navigate = useNavigate();
   const contentRef = useRef();
 
-
-  {/*
-  useEffect(() => {
-
-      const targetCheckList = checklist.find(
-        (it) => parseInt(it.id) === parseInt(id)
-      )
-      console.log(targetCheckList);
-
-      if(targetCheckList) {
-        setData(targetCheckList)
-      } else {
-        alert("존재하지 않는 메모입니다")
-        navigate('/', {replace:true})
-      }
-    
-  }, [id, checklist]) */}
-
   const checklistBack = () => {
     navigate(-1);
   }
@@ -67,7 +45,7 @@ const Detail = () => {
   
   useEffect ( () => {
     async function callAPI() {
-      const response = await API.get(`api/my-board?memberId=${userid}&categoryId=${id}&page=0&size=4&type=PRIVATE`);
+      const response = await authInstance.get(`api/my-board?memberId=${userid}&categoryId=${id}&page=0&size=4&type=PRIVATE`);
 
       for (let i=0; i < response.data.result.data.length; i++) {
         putList.push(response.data.result.data[i])
@@ -79,9 +57,6 @@ const Detail = () => {
   }, []);
   
   const submitHandler = async (title, content) => {
-    console.log("submit" + title);
-    console.log("submit" + content);
-
     const newPost = {
       type: "PRIVATE",
       title: title, 
@@ -98,24 +73,15 @@ const Detail = () => {
     setData(newPosts);
 
     if(title != "" && content != "") {
-      await axios({
-        method: 'post', 
-        url: process.env.REACT_APP_BACK_BASE_URL + 'api/board',
-        data: newPost,
-        headers: { 
-          'Authorization': localStorage.getItem('logintoken'),
-          'Content-Type': 'application/json',
-        }
-      })
-      .then((data) => {
-        console.log('성공:', data);
-        alert('작성이 완료되었습니다')
-        window.location.reload();
-      })
-      
-      .catch((error) => {
+      try {
+        async function callAPI() {
+          await authInstance.post('api/board', newPost)
+          alert('작성이 완료되었습니다')
+          window.location.reload();
+        } callAPI();
+      } catch {
         console.error('실패:', error);
-      });
+      }
     } else {
       setError("한 글자 이상 입력하세요")
     }
@@ -126,22 +92,14 @@ const Detail = () => {
     //글 각각의 id 필요 = noteId
     const newNotes = data.filter((note) => note.noteId != noteId)
     setData(newNotes);
-    console.log(id);
 
-    await axios.delete(process.env.REACT_APP_BACK_BASE_URL + `api/board/${id}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('logintoken'),
-      }
-    })
-    .then((data) => {
-      console.log('성공:', data);
+    try {
+      await authInstance.delete(`api/board/${id}`)
       alert("삭제가 완료되었습니다")
       window.location.reload();
-    })
-    .catch((error) => {
+    } catch (error) {
       console.error('실패:', error);
-    });
+    }
   }
 
 
@@ -191,7 +149,6 @@ const Detail = () => {
 
           <div className='checklist__walk__container'>
             {error}
-            {id} detail
           </div>
 
           <div className='checkllist__wrapper'>

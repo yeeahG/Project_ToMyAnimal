@@ -23,7 +23,6 @@ const UserLogin = ({Login}) => {
         
         try {
             const data = await axios.post(process.env.REACT_APP_BACK_BASE_URL + 'api/signin', userdata);
-            // const jwt = axios.defaults.headers.common['Authorization'] = `${data['accessToken']}`;
             const jwt = axios.defaults.headers.common['Authorization'] = data.data.result.data['accessToken'];
             localStorage.setItem('logintoken', jwt);
             localStorage.setItem('userInfo', JSON.stringify(data.data.result.data));
