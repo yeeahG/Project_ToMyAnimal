@@ -57,7 +57,7 @@ const UserHome = () => {
           <h1 className='header__content'>My account</h1>
           <div className='header__detail'>
             <p>
-              details
+              회원정보 및 반려동물 정보
             </p>
           </div>
         </div>

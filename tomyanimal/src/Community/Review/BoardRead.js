@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
-const BoardRead = ( {props, id, title, content, createdAt, modifiedAt, member} ) => {
+const BoardRead = ( {props, id, title, content, modifiedAt, member} ) => {
     const navigate = useNavigate();
     const [comment, setComment] = useState([])
     const [view, setView] = useState(0);

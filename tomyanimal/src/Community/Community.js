@@ -27,14 +27,6 @@ const Community = () => {
             <DummyBoard /> 
           </div>
         )
-      },
-      {
-        tabTitle:(
-          <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}>What</li>
-        ),
-        tabCont:(
-          <div> Prepare </div>
-        )
       }
     ];
 

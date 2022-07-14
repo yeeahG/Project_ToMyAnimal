@@ -96,9 +96,6 @@ const MessageScroll = (props) => {
     });
   },[])
 
-  console.log(message);
-
-
 
   const observer = React.useRef(new IntersectionObserver(entries => {
     const first = entries[0];
@@ -123,8 +120,6 @@ const MessageScroll = (props) => {
   }, [commentIncrement])
 
   const [bottomBar, setBottomBar] = useState(null);
-
-  //console.log(messagelist);
 
   return (
     <>

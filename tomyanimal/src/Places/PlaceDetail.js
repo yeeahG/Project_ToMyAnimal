@@ -1,22 +1,9 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import Reservation from './Reservation/Reservation';
+import React from 'react'
+import { Link } from 'react-router-dom'
 import './Places.css'
 
 const PlaceDetail = ( {place} ) => {
-  const [isOpen, setOpen] = useState(false);
-
-  const navigate = useNavigate();
   const id = place.id
-
-  const isOpenHandler = (e) => {
-    setOpen(!isOpen);
-    navigate(`/places/all/${id}`, { 
-      state: {
-        place: "hello"
-      } 
-    })
-  }
 
   return (
     <div className='place__detail__container'> 

@@ -39,7 +39,7 @@ public class MemberControllerAdviceTest {
     @Test
     void readMemberNotFoundExceptionTest() throws Exception {
         // given
-        given(memberService.read(cond));
+        given(memberService.read(cond.getId()));
 
         // when, then
         mockMvc.perform(

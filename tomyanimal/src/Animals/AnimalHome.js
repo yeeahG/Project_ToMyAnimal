@@ -173,7 +173,6 @@ const AnimalHome = () => {
   }
 
   useEffect(() => {
-    //axios.get(`http://localhost:8084/api/my-pet?memberId=${userId}`, {
     axios.get('http://localhost:8084/api/animals/1', {
       headers: {
         Authorization: localStorage.getItem('logintoken') 

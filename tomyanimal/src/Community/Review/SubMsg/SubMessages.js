@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from 'react'
-import CommentsBox from '../CommentBox';
+import CommentsBox from '../CommentsBox';
 import SubCommentBox from './SubCommentBox';
 
 const showReply = React.createContext();
@@ -54,7 +54,7 @@ const SubMessages = (props) => {
                 {
                     //!props.editable ? (
                     props.user !== "Yeji kim" ? (
-                        <div onClick={changeOpenReply}>reply</div>
+                        <div onClick={changeOpenReply}>답변</div>
                     ) : ( 
                         <div onClick={deleteMessage}>delete</div>
                     )

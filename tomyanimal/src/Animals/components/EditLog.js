@@ -1,17 +1,14 @@
 import React from 'react'
 
-const EditLog = ( {
-  logs, editFormData, handleEditFormChange, handleCancelClick, 
-  id,  title, content, date
-} ) => {
+const EditLog = ( {logs, editFormData, handleEditFormChange, handleCancelClick} ) => {
 
   return (
     <div>
       <div className='log__content'>
-          <h3>Day {logs.id}</h3>
-          <p>{logs.date}</p>
-          <button type='submit'>Save</button>
-          <button type='button' onClick={handleCancelClick}>Cancel</button>
+        <h3>Day {logs.id}</h3>
+        <p>{logs.date}</p>
+        <button type='submit'>Save</button>
+        <button type='button' onClick={handleCancelClick}>Cancel</button>
       </div>
       <p>
         <input 

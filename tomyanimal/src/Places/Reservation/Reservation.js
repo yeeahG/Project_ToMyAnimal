@@ -37,7 +37,6 @@ const Reservation = (props) => {
     const isLogin = localStorage.getItem('logintoken')
 
     const location = useLocation();
-    //console.log(location.state.place);
 
     const typeClickHandler = () => {
         setFontColor(fontColor === '#559df2' ? 'white' : '#559df2')

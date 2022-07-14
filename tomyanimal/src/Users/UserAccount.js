@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ReadOnlyRow from './components/ReadOnlyRow';
 import EditableRow from './components/EditableRow';
+import UserLogIn from './UserLogin'
 import './UserHome.css'
 
 const UserAccount = () => {
-  const [isOpen, setOpen] = useState(false);
   const [user, setUser] = useState();
-  //const [userInfo, setUserInfo] = useState(userInfo);
   const [userName, setUserName] = useState();
   const [userPhone, setUserPhone] = useState();
+  const [error, setError] = useState();
 
 
   const [editContactId, setEditContactId] = useState(null);
@@ -29,7 +29,8 @@ const UserAccount = () => {
       headers: {
         Authorization: localStorage.getItem('logintoken') 
       }
-    }).then((user) => {
+    })
+    .then((user) => {
       setUser(user);
       setUserName(user.data.result.data['name']) 
       setUserPhone(user.data.result.data['phoneNumber'])
@@ -66,16 +67,6 @@ const UserAccount = () => {
       name: editFormData.name,
       phoneNumber: editFormData.contact,
     }
-    console.log(editedContact);
-
-    // const newContacts = [...user];
-    // const index = user.findIndex((it) => it.loginId === editContactId);
-    // newContacts[index] = editedContact;
-    // setUser(newContacts);
-    // setEditContactId(null);
-
-    //put or patch methond
-    //ERROR남 작동에는 문제없음-> 해결
 
     axios.put(process.env.REACT_APP_BACK_BASE_URL + 'api/member/' + loginId, editedContact,{
       headers: {
@@ -90,27 +81,16 @@ const UserAccount = () => {
       setEditContactId(null); 
       alert('수정이 완료되었습니다')
       window.location.reload();
-
-      /*
-      const userClone = [editedContact];
-      const index = userClone.indexOf(response);
-      userClone[index] = editedContact
-      setUser(userClone);
-      setEditContactId(null);
-      */
-    
     })
     .catch(function (error) {
-      console.log(error.message);
+      setError(error)
     });
 
   }
 
   
-  const handleEditClick = (e, user) => {
+  const handleEditClick = (e) => {
     e.preventDefault();
-    // setEditContactId(user.id);
-    // setEditContactId(user.data.result.data['userId']);
     setEditContactId(loginId);
 
     const formValues = {
@@ -130,50 +110,56 @@ const UserAccount = () => {
   return (
   <div>
 
-    <div className='userinfo__subtitle'>
-      <h1>Details</h1>
-    </div>
-
-    <div className='userinfo__content'>
-
-      <form onSubmit={handleEditFormSubmit} method="PUT">
-        <table className='account__detail__form'>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Contact</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* {editContactId === loginId ? ( */}
-            <Fragment>
-            {editContactId === loginId ? (
-              <EditableRow 
-              editFormData={editFormData}
-                handleEditFormChange={handleEditFormChange}
-                handleCancelClick={handleCancelClick}
-              />
-            ) : (
-              <ReadOnlyRow 
-                userPhone={userPhone} userName={userName}
-                handleEditClick={handleEditClick}
-              />
-            )}
-            </Fragment>
-          </tbody>
-        </table>
-      </form>
-
-      <div className='welcome'>
-        <button onClick={Logout} className='welcome__btn'>
-          <a href="/user">Logout</a>
-        </button>
-        <button className='welcome__btn'>
-          <a href="/">Home</a>
-        </button>
+    { (!user) ?
+      <UserLogIn />
+    :
+    <>
+      <div className='userinfo__subtitle'>
+        <h1>Details</h1>
       </div>
 
-    </div>
+      <div className='userinfo__content'>
+
+        <form onSubmit={handleEditFormSubmit} method="PUT">
+          <table className='account__detail__form'>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Contact</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* {editContactId === loginId ? ( */}
+              <Fragment>
+              {editContactId === loginId ? (
+                <EditableRow 
+                editFormData={editFormData}
+                  handleEditFormChange={handleEditFormChange}
+                  handleCancelClick={handleCancelClick}
+                />
+              ) : (
+                <ReadOnlyRow 
+                  userPhone={userPhone} userName={userName}
+                  handleEditClick={handleEditClick}
+                />
+              )}
+              </Fragment>
+            </tbody>
+          </table>
+        </form>
+
+        <div className='welcome'>
+          <button onClick={Logout} className='welcome__btn'>
+            <a href="/user">Logout</a>
+          </button>
+          <button className='welcome__btn'>
+            <a href="/">Home</a>
+          </button>
+        </div>
+
+      </div>
+    </>
+    }
   </div>
   )
 }

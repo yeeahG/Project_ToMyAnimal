@@ -38,7 +38,7 @@ class MemberControllerTest {
         mockMvc.perform(
                         get("/api/members/{id}", condition))
                 .andExpect(status().isOk());
-        verify(memberService).read(condition);
+        verify(memberService).read(condition.getId());
     }
 
     @Test

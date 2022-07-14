@@ -12,6 +12,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.multipart.MultipartFile;
+import team1.toMyAnimal.domain.board.BoardType;
 import team1.toMyAnimal.domain.dto.board.BoardCreateRequest;
 import team1.toMyAnimal.domain.dto.board.BoardUpdateRequest;
 import team1.toMyAnimal.repository.service.board.BoardService;
@@ -107,7 +108,7 @@ class BoardControllerTest {
         );
         List<Long> deletedImages = List.of(1L, 2L);
 
-        BoardUpdateRequest req = createBoardUpdateRequest("title", "content", 0, addedImages, deletedImages);
+        BoardUpdateRequest req = createBoardUpdateRequest("title", "content", BoardType.PUBLIC, addedImages, deletedImages);
 
         // when, then
         mockMvc.perform(

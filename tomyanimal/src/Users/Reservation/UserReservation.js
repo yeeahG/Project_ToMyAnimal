@@ -9,7 +9,6 @@ const UserReservation = () => {
   const [reservData, setReservData] = useState("");
 
   const loginId = localStorage.getItem('userid');
-
   //const myreservlist = [];
 
   useEffect(() => {
@@ -40,6 +39,7 @@ const UserReservation = () => {
         <h3>Reservation<br/>
         List</h3>
         <div className='myreserv__background'>
+          {/*사진 들어올 예정*/}
           {/* <img  src={`${process.env.PUBLIC_URL}/public_assets/보건증1.png`}/> */}
         </div>
         
@@ -54,13 +54,14 @@ const UserReservation = () => {
           
           <div className='myreserv__data'>
 
+            {/* 예약내역 없을 시 문구 지정 부분 */}
             {/* { (reservData.length >= 1) ? */}
             { (reservData) ?
               <>
-            <h3 className='myreserv__date'>{reservDate.slice(5,10)}</h3>
-            <p>{reservAnimal}</p>
-            <p>{reservDate.slice(11, 16)}</p>
-            <p>{reservType}</p>
+                <h3 className='myreserv__date'>{reservDate.slice(5,10)}</h3>
+                <p>{reservAnimal}</p>
+                <p>{reservDate.slice(11, 16)}</p>
+                <p>{reservType}</p>
               </>
             :
             <h3>예약 내역이 없습니다</h3>

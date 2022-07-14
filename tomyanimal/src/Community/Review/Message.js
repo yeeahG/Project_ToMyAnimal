@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from 'react'
-import CommentsBox from './CommentBox';
+import CommentsBox from './CommentsBox';
 import SubMessages from './SubMsg/SubMessages';
 import {MessagelistContext} from './MessageScroll'
 
@@ -10,6 +10,7 @@ export function useOpenReply() {
 }
 
 const Message = (props) => {
+    console.log(props);
     const messagelist = useContext(MessagelistContext);
 
     const likeIcons = useRef();
@@ -63,7 +64,6 @@ const Message = (props) => {
   return (
     <div>
         <section className='messageContainer'>
-        {/*{messagelist.map( (it) => */}
             <>
             <div className='messageUser'>{props.user}</div>
             <div className='messageText'>{props.message}</div>
@@ -74,17 +74,16 @@ const Message = (props) => {
 
                 <i className='fas fa-thumbs-down'></i>
                 <div onClick={changeOpenReply}>reply</div>
-                {//!props.editable ? (
-                    props.user !== username ? (
-                        ""
-                        ) : ( 
-                        <div onClick={deleteMessage}>delete</div>
+                {props.user !== username ? (
+                    ""
+                    ) : ( 
+                    <div onClick={deleteMessage}>delete</div>
                     )
                 }
             </section>
 
             <showReply.Provider value={changeOpenReply}>
-                {openReply && <CommentsBox autoFocus={true} />}
+                {openReply && <CommentsBox autoFocus={true} value={props.id} />}
             </showReply.Provider>
 
             {props.replies.length > 0 && (
@@ -94,20 +93,37 @@ const Message = (props) => {
                 </section>
             )}
             </>
-          {/*  )} */}
-            {arrowUp && (
-            <section className='subMessages'>
-                {props.replies.map(reply => 
+
+            {/*Dummy data 부분 */}
+            {/* {arrowUp && (
                 <>
-                    <SubMessages 
-                        user={reply.user} 
-                        message={reply.message}
-                        likes={reply.likes}
-                    />
+                <section className='subMessages'>
+                    {props.replies.map(reply => 
+                    <>
+                        <SubMessages 
+                            user={reply.user} 
+                            message={reply.message}
+                            likes={reply.likes}
+                        />
+                    </>
+                    )}
+                </section>
                 </>
-                )}
-            </section>
+            )} */}
+
+            {arrowUp && (
+                <section className='subMessages'>
+                    {props.replies.map(reply => 
+                    <>
+                        <SubMessages 
+                            user={reply.member.name} 
+                            message={reply.content}
+                        />
+                    </>
+                    )}
+                </section>
             )}
+
         </section>
 
     </div>

@@ -1,6 +1,5 @@
 package team1.toMyAnimal.repository.reservation;
 
-import com.querydsl.core.annotations.QueryTransient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
