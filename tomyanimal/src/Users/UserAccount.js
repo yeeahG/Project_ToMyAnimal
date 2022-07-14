@@ -1,11 +1,10 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import ReadOnlyRow from './components/ReadOnlyRow';
 import EditableRow from './components/EditableRow';
 import UserLogIn from './UserLogin'
+import { authInstance } from '../utils/api'
 import './UserHome.css'
-import API from '../utils/api'
 
 const UserAccount = () => {
   const [user, setUser] = useState();
@@ -24,27 +23,19 @@ const UserAccount = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-
-    async function callAPI() {
-      const res = await API.get(`api/members/${loginId}`);
-      console.log(res.data);
-    } callAPI();
-
-    // axios({
-    //   method: 'get', 
-    //   url: process.env.REACT_APP_BACK_BASE_URL + `api/members/${loginId}`,
-    //   headers: {
-    //     Authorization: localStorage.getItem('logintoken') 
-    //   }
-    // })
-    
-    // .then((user) => {
-    //   setUser(user);
-    //   setUserName(user.data.result.data['name']) 
-    //   setUserPhone(user.data.result.data['phoneNumber'])
-    //   localStorage.setItem('usename', user.data.result.data['name']);
-    //   localStorage.setItem('userInfo', JSON.stringify(user.data.result.data));
-    // })
+    try {
+      async function callAPI() {
+        const user = await authInstance.get(`api/members/${loginId}`);
+        setUser(user);
+        setUserName(user.data.result.data['name']) 
+        setUserPhone(user.data.result.data['phoneNumber'])
+        localStorage.setItem('usename', user.data.result.data['name']);
+        //NOTE : 사용할 확장성 고려
+        //localStorage.setItem('userInfo', JSON.stringify(user.data.result.data));
+      } callAPI();
+    } catch(err) {
+      console.log(err);
+    }
   }, []);
 
     
@@ -76,24 +67,16 @@ const UserAccount = () => {
       phoneNumber: editFormData.contact,
     }
 
-    axios.put(process.env.REACT_APP_BACK_BASE_URL + 'api/member/' + loginId, editedContact,{
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        'Authorization': localStorage.getItem('logintoken'),
-        'Content-Type': 'application/json'
-      }
-    })
-    .then( function (response){
+    try {
+      const response = await authInstance.put('api/member/' + loginId, editedContact)
       console.log(response);
       setUser(response.data);
       setEditContactId(null); 
       alert('수정이 완료되었습니다')
       window.location.reload();
-    })
-    .catch(function (error) {
+    } catch (error) {
       setError(error)
-    });
-
+    }
   }
 
   
@@ -118,10 +101,11 @@ const UserAccount = () => {
   return (
   <div>
 
-    { (!user) ?
+    {/*NOTE: 재로그인 시 필요한 기능*/}
+    {/* { (!user) ?
       <UserLogIn />
     :
-    <>
+    <> */}
       <div className='userinfo__subtitle'>
         <h1>Details</h1>
       </div>
@@ -166,8 +150,8 @@ const UserAccount = () => {
         </div>
 
       </div>
-    </>
-    }
+    {/* </>
+    } */}
   </div>
   )
 }
