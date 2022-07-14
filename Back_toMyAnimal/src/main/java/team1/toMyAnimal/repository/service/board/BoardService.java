@@ -1,4 +1,4 @@
-package team1.toMyAnimal.service.board;
+package team1.toMyAnimal.repository.service.board;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import team1.toMyAnimal.exception.BoardNotFoundException;
 import team1.toMyAnimal.repository.board.BoardRepository;
 import team1.toMyAnimal.repository.category.CategoryRepository;
 import team1.toMyAnimal.repository.member.MemberRepository;
-import team1.toMyAnimal.service.image.FileService;
+import team1.toMyAnimal.repository.service.image.FileService;
 
 import java.util.List;
 import java.util.stream.IntStream;

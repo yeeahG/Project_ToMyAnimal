@@ -1,4 +1,4 @@
-package team1.toMyAnimal.service.sign;
+package team1.toMyAnimal.repository.service.sign;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

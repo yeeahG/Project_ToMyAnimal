@@ -1,4 +1,4 @@
-package team1.toMyAnimal.service.image;
+package team1.toMyAnimal.repository.service.image;
 
 
 import lombok.extern.slf4j.Slf4j;

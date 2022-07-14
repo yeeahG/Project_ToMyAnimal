@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.multipart.MultipartFile;
 import team1.toMyAnimal.domain.dto.board.BoardCreateRequest;
 import team1.toMyAnimal.domain.dto.board.BoardUpdateRequest;
+import team1.toMyAnimal.repository.service.board.BoardService;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ class BoardControllerTest {
     @InjectMocks
     BoardController boardController;
     @Mock
-    team1.toMyAnimal.service.board.BoardService boardService;
+    BoardService boardService;
     MockMvc mockMvc;
 
     @BeforeEach

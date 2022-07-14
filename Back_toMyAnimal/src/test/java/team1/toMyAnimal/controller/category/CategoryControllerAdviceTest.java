@@ -11,7 +11,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import team1.toMyAnimal.exception.CannotConvertNestedStructureException;
 import team1.toMyAnimal.exception.CategoryNotFoundException;
 import team1.toMyAnimal.exception.ExceptionAdvice;
-import team1.toMyAnimal.service.category.CategoryService;
+import team1.toMyAnimal.repository.service.category.CategoryService;
 
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;

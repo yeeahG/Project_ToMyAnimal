@@ -9,7 +9,7 @@ import team1.toMyAnimal.controller.response.Response;
 import team1.toMyAnimal.domain.dto.animal.AnimalCreateRequest;
 import team1.toMyAnimal.domain.dto.animal.AnimalReadCondition;
 import team1.toMyAnimal.domain.dto.animal.AnimalUpdateRequest;
-import team1.toMyAnimal.service.animal.AnimalService;
+import team1.toMyAnimal.repository.service.animal.AnimalService;
 
 import javax.validation.Valid;
 

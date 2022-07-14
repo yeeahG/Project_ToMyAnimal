@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import team1.toMyAnimal.domain.dto.board.BoardCreateRequest;
 import team1.toMyAnimal.exception.*;
-import team1.toMyAnimal.service.board.BoardService;
+import team1.toMyAnimal.repository.service.board.BoardService;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;

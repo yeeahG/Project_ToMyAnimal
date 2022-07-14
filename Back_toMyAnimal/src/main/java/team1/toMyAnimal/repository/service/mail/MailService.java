@@ -1,4 +1,4 @@
-package team1.toMyAnimal.service.mail;
+package team1.toMyAnimal.repository.service.mail;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

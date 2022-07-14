@@ -22,8 +22,8 @@ import team1.toMyAnimal.init.TestInitDB;
 import team1.toMyAnimal.repository.board.BoardRepository;
 import team1.toMyAnimal.repository.category.CategoryRepository;
 import team1.toMyAnimal.repository.member.MemberRepository;
-import team1.toMyAnimal.service.board.BoardService;
-import team1.toMyAnimal.service.sign.SignService;
+import team1.toMyAnimal.repository.service.board.BoardService;
+import team1.toMyAnimal.repository.service.sign.SignService;
 
 import java.util.List;
 

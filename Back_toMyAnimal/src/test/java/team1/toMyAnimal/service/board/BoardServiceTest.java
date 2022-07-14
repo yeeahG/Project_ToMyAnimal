@@ -18,7 +18,8 @@ import team1.toMyAnimal.exception.MemberNotFoundException;
 import team1.toMyAnimal.exception.UnsupportedImageFormatException;
 import team1.toMyAnimal.repository.category.CategoryRepository;
 import team1.toMyAnimal.repository.member.MemberRepository;
-import team1.toMyAnimal.service.image.FileService;
+import team1.toMyAnimal.repository.service.board.BoardService;
+import team1.toMyAnimal.repository.service.image.FileService;
 
 import java.awt.*;
 import java.util.List;

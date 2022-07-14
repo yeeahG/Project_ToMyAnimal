@@ -1,4 +1,4 @@
-package team1.toMyAnimal.service.reservation;
+package team1.toMyAnimal.repository.service.reservation;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

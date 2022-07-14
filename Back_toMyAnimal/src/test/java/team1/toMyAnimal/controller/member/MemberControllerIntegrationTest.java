@@ -16,7 +16,7 @@ import team1.toMyAnimal.domain.member.Member;
 import team1.toMyAnimal.exception.MemberNotFoundException;
 import team1.toMyAnimal.init.TestInitDB;
 import team1.toMyAnimal.repository.member.MemberRepository;
-import team1.toMyAnimal.service.sign.SignService;
+import team1.toMyAnimal.repository.service.sign.SignService;
 
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;

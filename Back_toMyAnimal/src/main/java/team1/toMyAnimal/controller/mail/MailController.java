@@ -2,11 +2,9 @@ package team1.toMyAnimal.controller.mail;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team1.toMyAnimal.controller.response.Response;
-import team1.toMyAnimal.service.mail.MailService;
+import team1.toMyAnimal.repository.service.mail.MailService;
 
 @RestController
 @RequiredArgsConstructor

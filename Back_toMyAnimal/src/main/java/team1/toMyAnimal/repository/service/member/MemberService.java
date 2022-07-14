@@ -1,4 +1,4 @@
-package team1.toMyAnimal.service.member;
+package team1.toMyAnimal.repository.service.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;

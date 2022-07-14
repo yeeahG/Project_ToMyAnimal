@@ -1,4 +1,4 @@
-package team1.toMyAnimal.service.comment;
+package team1.toMyAnimal.repository.service.comment;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -10,7 +10,7 @@ import team1.toMyAnimal.domain.dto.member.MemberReadCondition;
 import team1.toMyAnimal.domain.member.Member;
 import team1.toMyAnimal.exception.MemberNotFoundException;
 import team1.toMyAnimal.repository.member.MemberRepository;
-import team1.toMyAnimal.service.member.MemberService;
+import team1.toMyAnimal.repository.service.member.MemberService;
 
 import java.util.List;
 import java.util.Optional;

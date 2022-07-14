@@ -1,4 +1,4 @@
-package team1.toMyAnimal.service.category;
+package team1.toMyAnimal.repository.service.category;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

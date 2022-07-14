@@ -1,4 +1,4 @@
-package team1.toMyAnimal.service.animal;
+package team1.toMyAnimal.repository.service.animal;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,7 @@ import team1.toMyAnimal.domain.image.AnimalImage;
 import team1.toMyAnimal.exception.AnimalNotFoundException;
 import team1.toMyAnimal.repository.member.MemberRepository;
 import team1.toMyAnimal.repository.animal.AnimalRepository;
-import team1.toMyAnimal.service.image.FileService;
+import team1.toMyAnimal.repository.service.image.FileService;
 
 import java.util.List;
 import java.util.stream.IntStream;
