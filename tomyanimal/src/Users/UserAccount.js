@@ -29,7 +29,8 @@ const UserAccount = () => {
       headers: {
         Authorization: localStorage.getItem('logintoken') 
       }
-    }).then((user) => {
+    })
+    .then((user) => {
       setUser(user);
       setUserName(user.data.result.data['name']) 
       setUserPhone(user.data.result.data['phoneNumber'])
@@ -67,12 +68,6 @@ const UserAccount = () => {
       phoneNumber: editFormData.contact,
     }
 
-    // const newContacts = [...user];
-    // const index = user.findIndex((it) => it.loginId === editContactId);
-    // newContacts[index] = editedContact;
-    // setUser(newContacts);
-    // setEditContactId(null);
-
     axios.put(process.env.REACT_APP_BACK_BASE_URL + 'api/member/' + loginId, editedContact,{
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -96,7 +91,6 @@ const UserAccount = () => {
   
   const handleEditClick = (e) => {
     e.preventDefault();
-    // setEditContactId(user.data.result.data['userId']);
     setEditContactId(loginId);
 
     const formValues = {
