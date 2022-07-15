@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useContext, useRef } from 'react'
+import React, { useState, useContext, useRef } from 'react'
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import TopCommentsBox from './TopCommentsBox';
 import MessageScroll from './MessageScroll';
 import { ContextProvider } from './Context/Context';
+import { authInstance } from '../../utils/api';
 
 
 const showReply = React.createContext();
@@ -15,10 +15,13 @@ export function useOpenReply() {
 
 const BoardDetail = ( ) => {
     const {id} = useParams();
+    const userid = localStorage.getItem('userid');
+  
     const message = useRef(null);
     const contentRef = useRef();
     const characterLimit = 200;
 
+    const navigate = useNavigate();
     const location = useLocation();
     const view = location.state.view;
   
@@ -32,9 +35,6 @@ const BoardDetail = ( ) => {
     const [error, setError] = useState("");
 
   
-    const navigate = useNavigate();
-
-    const userid = localStorage.getItem('userid');
   
     const boardBack = () => {
       navigate(-1);
@@ -49,19 +49,15 @@ const BoardDetail = ( ) => {
       console.log(newComment);
   
       if(message.current.value != "" ) {
-        await axios.post(process.env.REACT_APP_BACK_BASE_URL + 'api/comments', newComment, {
-          headers: {
-            Authorization: localStorage.getItem('logintoken'),
-          }
-        })
-        .then((data) => {
+        try {
+          const data = await authInstance.post('api/comments', newComment);
           console.log('성공:', data);
           //setCom([newComment, ...com]);
           alert('작성이 완료되었습니다')
-        })
-        .catch((error) => {
+          window.location.reload();
+        } catch(error) {
           console.error('실패:', error);
-        });
+        }
       } else {
         setError("한 글자 이상 입력하세요")
       }
@@ -295,7 +291,7 @@ const BoardDetail = ( ) => {
 
 
                       <ContextProvider>        
-                        {/*issue가 많아서 잠시 주석*/}    
+                        {/*NOTE : issue가 많아서 잠시 주석*/}    
                         {/* <TopCommentsBox /> */}
                         <MessageScroll />
                       </ContextProvider>
