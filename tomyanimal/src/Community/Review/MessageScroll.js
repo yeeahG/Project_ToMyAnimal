@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import axios from 'axios';
 import Message from './Message'
 import { useMainContext, } from './Context/Context'
 import CommentsBox from '../components/CommentsBox'
@@ -19,14 +18,18 @@ const messagelist = [
     replies: [
       {
         id: 2, 
-        user: "Junseok Lee",
-        message: "No I am",
+        member: {
+          name: "Junseok Lee",
+        },
+        content: "No I am",
         likes: 231
       },
       {
         id: 3, 
-        user: "Jeongmin kwon",
-        message: "Hmmm",
+        member: {
+          name: "Jeongmin kwon",
+        },
+        content: "Hmmm",
         likes: 2
       },
     ]
@@ -40,8 +43,10 @@ const messagelist = [
     replies: [
       {
         id: 5,
-        user: "민트초코",
-        message: "yesss",
+        member: {
+          name: "민트초코",
+        },
+        content: "yesss",
         likes: 2
       },
     ]
@@ -79,10 +84,6 @@ const MessageScroll = (props) => {
           params: {boardId: id}
         });
         console.log('성공:', data);
-        // for(let i=0; i < data.data.result.data.length; i++) {
-        //   commentlist.push(data.data.result.data[i])
-        // }
-        // setMessages(commentlist);
         setMessages(data.data.result.data);
       } callAPI();
     }catch(error) {
@@ -117,31 +118,32 @@ const MessageScroll = (props) => {
 
   return (
     <>
-    {messagelist.map(message => (
-      <Message 
-        user={message.user}
-        editable={message.editable} 
-        message={message.message}
-        likes={message.likes} 
-        replies={message.replies}
-      />
-    ))}
+      {/*NOTE : DUMMY */}
+      {messagelist.map(message => (
+        <Message 
+          user={message.user}
+          editable={message.editable} 
+          message={message.message}
+          likes={message.likes} 
+          replies={message.replies}
+        />
+      ))}
 
-    {message.map(message => (
-      <Message 
-        id={message.id}
-        user={message.member.name}
-        message={message.content}
-        replies={message.children}
-      />
-    ))}
+      {message.map(message => (
+        <Message 
+          id={message.id}
+          user={message.member.name}
+          message={message.content}
+          replies={message.children}
+        />
+      ))}
 
-    {messagelist.length > 2 && showBottomBar ?
-      <div className='bottomBar' ref={setBottomBar}>
-        <div className='loader'></div>
-      </div>
-    : null}
-  </>
+      {message.length > 2 && showBottomBar ?
+        <div className='bottomBar' ref={setBottomBar}>
+          <div className='loader'></div>
+        </div>
+      : null}
+    </>
   )
 }
 

@@ -91,23 +91,6 @@ const Message = (props) => {
             )}
             </>
 
-            {/*Dummy data 부분 */}
-            {/* {arrowUp && (
-                <>
-                <section className='subMessages'>
-                    {props.replies.map(reply => 
-                    <>
-                        <SubMessages 
-                            user={reply.user} 
-                            message={reply.message}
-                            likes={reply.likes}
-                        />
-                    </>
-                    )}
-                </section>
-                </>
-            )} */}
-
             {arrowUp && (
                 <section className='subMessages'>
                     {props.replies.map(reply => 
@@ -115,6 +98,7 @@ const Message = (props) => {
                         <SubMessages 
                             user={reply.member.name} 
                             message={reply.content}
+                            likes={reply.likes}
                         />
                     </>
                     )}
