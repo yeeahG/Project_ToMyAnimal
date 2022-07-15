@@ -17,17 +17,6 @@ const BoardRead = ( {props, id, title, content, modifiedAt, member} ) => {
         })
     }, []);
     
-    const goDetail = () => {
-        navigate(`/community/review/${id}`, { 
-            state: {
-                name: comment.name,
-                id: comment.id,
-                postId: comment.postId,
-                view: view
-            }})
-        setView(+1)
-    }
-    
     
   return (
     <tbody>
