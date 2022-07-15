@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+
+# In[7]:
 
 
 from selenium import webdriver
@@ -10,7 +11,8 @@ import time
 import pandas as pd
 
 
-# In[6]:
+
+# In[8]:
 
 
 def animalhospital(place):
@@ -22,7 +24,6 @@ def animalhospital(place):
     time.sleep(3)
 
     dimmedLayer = driver.find_element(By.CSS_SELECTOR, "div#dimmedLayer.DimmedLayer")
-    #dimmedLayer = driver.find_element_by_css_selector("div#dimmedLayer.DimmedLayer")
     dimmedLayer.click()
     time.sleep(1)
 
@@ -97,7 +98,8 @@ def animalhospital(place):
         print(place + "동물병원 크롤링 완료")
 
 
-# In[13]:
+
+# In[9]:
 
 
 placelist = ["서울", "대전", "대구", "부산", "광주", "울산", "인천"]
