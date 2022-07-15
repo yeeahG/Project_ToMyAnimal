@@ -3,7 +3,6 @@ import { MedicalInfoContext } from '../AnimalPage'
 import { CloseOutlined } from '@ant-design/icons';
 
 const AnimalMedicalInfoOne = (props) => {
-  console.log(props);
   const medicalInfoList = useContext(MedicalInfoContext);
   const [isOpen, setOpen] = useState(false);
 

@@ -40,8 +40,6 @@ const Log = () => {
     });
   }, [])
 
-  console.log(putLog);
-
   const logList = [
     {id: logId, title: logTitle, content: logContent}
   ]
