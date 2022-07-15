@@ -180,7 +180,7 @@ const AnimalHome = () => {
         setPetname(response.data.result.data.name);
       } callAPI();
     } catch(error) {
-        console.log(error);
+      console.log(error);
     }
   }, []);
 
