@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import BoardRead from './BoardRead';
 import BoardWrite from './BoardWrite';
 import Pagination from '../components/Pagination';
@@ -21,9 +21,11 @@ const Board = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(10);
     const [isOpen, setOpen] = useState(false);
+    const [isMyPost, setMyPost] = useState(false);
     const [error, setError] = useState("");
 
     const userid = localStorage.getItem('userid');
+    const location = useLocation();
 
     const postList = [];
 
@@ -41,6 +43,26 @@ const Board = () => {
             console.log(error);
         }
     }, []);
+
+    const serchMyPost = () => {
+        setMyPost(!isMyPost)
+
+        try {
+            async function callAPI() {
+                const response = await authInstance.get(`api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PUBLIC`);
+                for (let i=0; i<response.data.result.data.length; i++) {
+                    postList.push(response.data.result.data[i])
+                }
+                setArticle(postList);
+            } callAPI();
+        } catch(error) {
+            console.log(error);
+        }
+    }
+
+    const searchAllPost = () => {
+        window.location.reload();
+    }
 
 
     // NOTE : 최신순, 오래된순 필터 적용 기능 시 쓸 예정
@@ -235,12 +257,19 @@ const Board = () => {
 
         {localStorage.getItem('logintoken') ?
         <div className='write__article'>
+
             {error}
             <button onClick={openButton}>
                 {isOpen ? "" : <FormOutlined style={{fontSize: '18px'}}/>}
             </button>
-            <button>내글</button>
-            {/*NOTE : process.env.REACT_APP_BACK_BASE_URL + `api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PUBLIC` 사용하기*/}
+            
+            <button onClick={serchMyPost}>
+                {isMyPost ? 
+                    <p onClick={searchAllPost}>모든 글</p>
+                : 
+                    "내글"
+                }
+            </button>
         </div>
         :
         ""}
