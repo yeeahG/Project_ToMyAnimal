@@ -131,9 +131,9 @@ const BoardDetail = ( ) => {
             <div className='header'>
               <div className='space'></div>
               <div className='header__wrapper'>
-                <h1 className='header__content'>Header</h1>
+                <h1 className='header__content'>Community</h1>
                 <div className='header__detail'>
-                  <p>details</p>
+                  <p>자유게시판</p>
                 </div>
               </div>
             </div>
