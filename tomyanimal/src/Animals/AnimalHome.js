@@ -5,6 +5,7 @@ import AnimalLog from './AnimalLog';
 import Log from './AnimalLog/Log';
 import CheckList from './Checklist/CheckList';
 import './AnimalInfo.css'
+import { authInstance } from '../utils/api';
 
 const reducer = (state, action) => {
   //state 상태관리 로직들
@@ -173,15 +174,14 @@ const AnimalHome = () => {
   }
 
   useEffect(() => {
-    axios.get('http://localhost:8084/api/animals/1', {
-      headers: {
-        Authorization: localStorage.getItem('logintoken') 
-      }
-    }).then((response) => {
-      setPetname(response.data.result.data.name);
-    }).catch((error) => {
-      console.error(error);
-    });
+    try {
+      async function callAPI() {
+        const response = await authInstance.get('api/animals/1');
+        setPetname(response.data.result.data.name);
+      } callAPI();
+    } catch(error) {
+        console.log(error);
+    }
   }, []);
 
   return (
