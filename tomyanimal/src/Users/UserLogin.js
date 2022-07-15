@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './UserLogin.css'
+import { authInstance } from '../utils/api';
 
 // axios.defaults.withCredentials = true;
 
@@ -22,6 +23,8 @@ const UserLogin = ({Login}) => {
         e.preventDefault();
         
         try {
+
+            //const data = await authInstance.post('api/signin', userdata);
             const data = await axios.post(process.env.REACT_APP_BACK_BASE_URL + 'api/signin', userdata);
             const jwt = axios.defaults.headers.common['Authorization'] = data.data.result.data['accessToken'];
             localStorage.setItem('logintoken', jwt);

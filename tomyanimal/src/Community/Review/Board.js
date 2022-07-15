@@ -185,47 +185,48 @@ const Board = () => {
                     </tr>
                 </thead>
 
+                {/*Dummy data*/}
+                <tbody>
+                    <tr className='board__content'>
+                        <td style={{width:'5%'}}>
+                            <div>
+                                <div>0</div>
+                            </div>
+                        </td>
+                        <td style={{width:'75%', textAlign: 'left'}}>
+                            <span className='title__span'>
+                                <Link
+                                    className='board__title'
+                                    to={`/community/review/0`}
+                                    state={{
+                                        title: "📢 공지사항", 
+                                        content: "To. my animal 게시판을 이용해주셔서 감사합니다",
+                                        modifiedAt: "",
+                                        member: {name:"admin"},
+                                        comment: "",
+                                        view: 0
+                                    }}
+                                >
+                                    📢 공지사항
+                                </Link>
+                            </span>
+                        </td>
+                        <td style={{width:'7.5%'}}>
+                            admin
+                        </td>
+                        <td style={{width:'7.5%'}}>
+                            <span>2022-00-00</span>
+                        </td>
+                        <td style={{width:'5%'}}>
+                            <span>0</span>
+                        </td>
+                    </tr>
+                </tbody>
+
                 {getProcessedList().map((it) =>
                     <BoardRead key={it.id} {...it} />
                 )}
 
-            {/*Dummy data*/}
-            <tbody>
-                <tr className='board__content'>
-                    <td style={{width:'5%'}}>
-                        <div>
-                            <div>0</div>
-                        </div>
-                    </td>
-                    <td style={{width:'75%', textAlign: 'left'}}>
-                        <span className='title__span'>
-                            <Link
-                                className='board__title'
-                                to={`/community/review/0`}
-                                state={{
-                                    title: "공지사항", 
-                                    content: "공지사항",
-                                    modifiedAt: "",
-                                    member: "관리자",
-                                    comment: "",
-                                    view: 0
-                                }}
-                            >
-                                공지사항
-                            </Link>
-                        </span>
-                    </td>
-                    <td style={{width:'7.5%'}}>
-                        관리자
-                    </td>
-                    <td style={{width:'7.5%'}}>
-                        <span>2022-00-00</span>
-                    </td>
-                    <td style={{width:'5%'}}>
-                        <span>0</span>
-                    </td>
-                </tr>
-            </tbody>
 
 
         </table>

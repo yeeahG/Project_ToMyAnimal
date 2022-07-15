@@ -25,8 +25,6 @@ const BoardDetail = ( ) => {
     const location = useLocation();
     const view = location.state.view;
   
-    const [data, setData] = useState({})
-    const [com, setCom] = useState([])
     const [comtext, setComText] = useState("")
     
     const [showCommentLine, setCommentLine] = useState(false);
@@ -97,21 +95,7 @@ const BoardDetail = ( ) => {
     //Like comment
     let toggleLike = false;
     let likes = 0;
-  
-    const likeComment = () => {
-      toggleLike = !toggleLike;
-  
-      if (toggleLike) {
-        likes++;
-        //likeIcon.current.style.color = '#559df2'
-        document.getElementById("thunmbLike").style.color = "#559df2";
-      } else {
-        likes--;
-        //likeIcon.current.style.color = "gray";
-        document.getElementById("thunmbLike").style.color = "black";
-      }
-      numLikes.current.innerHTML = likes;
-    }
+
   
     const [arrowUp, setArrowUp] = useState(false);
     const [openReply, setOpenReply] = useState(false);
