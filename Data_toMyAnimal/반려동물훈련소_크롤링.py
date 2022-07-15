@@ -4,16 +4,13 @@
 # In[ ]:
 
 
-from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
-import time
 from selenium.webdriver.common.by import By
+import time
 import pandas as pd
 
 
 # In[ ]:
-
-
 def pet_training_center():
     
     path="D:/20220103_lab/14.python/data/chrome/103/chromedriver"
@@ -22,7 +19,7 @@ def pet_training_center():
     driver.get(url)
     time.sleep(3)
 
-    dimmedLayer = driver.find_element_by_css_selector("div#dimmedLayer.DimmedLayer")
+    dimmedLayer = driver.find_element(By.CSS_SELECTOR, "div#dimmedLayer.DimmedLayer")
     dimmedLayer.click()
     time.sleep(1)
 
