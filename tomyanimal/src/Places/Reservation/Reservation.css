@@ -10,6 +10,7 @@
 }
 
 .reserve__container {
+    margin: 1rem 0;
     align-items: start;
     display: grid;
     grid-row-gap: 2rem;
@@ -24,6 +25,33 @@
     border: 1px solid;
 }
 
+.reserve__info__keyword {
+    border: none;
+    border-radius: 20px;
+    width: 70px;
+    text-align: center;
+    align-items: center;
+    background-color: white;
+    color: #559df2;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.place__reserve__form {
+    text-align: center;
+    align-items: center;
+}
+
+.place__reserve__container {
+    margin: 1rem 0;
+}
+
+
+.reserve__error {
+    text-align: center;
+}
+
+
 .reserve__place {
     text-align: center;
 }
@@ -35,6 +63,7 @@
 
 .reserve__keyword {
     display: flex;
+    justify-content: center;
 }
 
 .reserve__keyword p {
@@ -52,6 +81,24 @@
     color: white;
 }
 
+.reserve__datetime {
+    display: flex;
+    justify-content: center;
+}
+
+.reserve__datetime input, .reserve__datetime select {
+    border: none;
+    width: 150px;
+}
+
+.reserve__msg input {
+    width: 70%;
+    border: 1px solid #559df2;
+}
+
+.reserve__btn {
+    justify-content: flex-end;
+}
 
 @media (min-width: 600px) {
     .reserve__wrapper {
@@ -68,5 +115,21 @@
         display: grid;
         grid-row-gap: 1.5rem;
         grid-template-columns: 1fr 1fr;
+    }
+
+    .place__reserve__form {
+        text-align: unset;
+        align-items: unset;
+        height: 350px;
+    }    
+
+    .reserve__keyword {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .reserve__datetime {
+        display: flex;
+        justify-content: flex-start;
     }
 }

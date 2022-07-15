@@ -2,7 +2,6 @@ package team1.toMyAnimal.repository.member;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import team1.toMyAnimal.domain.member.Member;
 
 import java.util.Optional;

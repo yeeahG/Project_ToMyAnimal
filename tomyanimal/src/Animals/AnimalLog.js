@@ -1,7 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { DiaryStateContext } from './AnimalHome'
-import dummy from './data.json'
-import { Navigate } from 'react-router-dom';
 import Write from './Write';
 import Read from './Read';
 import './AnimalInfo.css'
@@ -16,7 +14,6 @@ const sortOptionList = [
 ]
 
 const AnimalLog = () => {
-  //const [logs, setLogs] = useState(dummyData);
   const [sortType, setSortType] = useState('latest');
   const [isOpen, setOpen] = useState(false);
 
@@ -24,9 +21,6 @@ const AnimalLog = () => {
   const [postsPerPage, setPostsPerPage] = useState(5);
 
   const diaryList = useContext(DiaryStateContext);
-  //console.log(diaryList.id);
-  //console.log(diaryList);
-
   
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
@@ -48,13 +42,6 @@ const AnimalLog = () => {
     let currentPosts = 0;
     currentPosts = sortedList.slice(indexOfFirst, indexOfLast);
     return currentPosts;
-
-
-    //const sortedList = diaryList.sort(compare);
-    /*
-    const copyList = JSON.parse(JSON.stringify(diaryList));
-    const sortedList = copyList.sort(compare);
-    return sortedList;*/
   }
 
   return (
@@ -89,9 +76,6 @@ const AnimalLog = () => {
 
       </>
       }
-
-      
-
 
       <section className='etc'>
       <h2>New section</h2>

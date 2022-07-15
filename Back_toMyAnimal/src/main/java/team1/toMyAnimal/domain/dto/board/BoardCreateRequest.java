@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 import team1.toMyAnimal.domain.board.Board;
+import team1.toMyAnimal.domain.board.BoardType;
 import team1.toMyAnimal.domain.image.BoardImage;
 import team1.toMyAnimal.exception.CategoryNotFoundException;
 import team1.toMyAnimal.exception.MemberNotFoundException;
@@ -30,7 +31,7 @@ public class BoardCreateRequest {
     @NotBlank(message = "게시글 본문을 입력해주세요.")
     private String content;
 
-    private int type;
+    private BoardType type;
 
     @Null
     private Long memberId;

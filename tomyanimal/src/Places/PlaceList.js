@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import ControlMenu from '../Pages/ControlMenu';
 import PlaceDetail from './PlaceDetail';
-import Reservation from './Reservation/Reservation';
 import './Places.css'
 
 const sortOptionList = [
@@ -28,22 +26,6 @@ const PlaceList = ( {placeData, isLoading} ) => {
   const [type, setType] = useState('all');
   const [ratings, setRatings] =useState();
   const [keyword, setKeyword] = useState();
-  //console.log(placeData[0]);
-
-  const [isOpen, setOpen] = useState(false);
-
-  
-  const navigate = useNavigate();
-  //const id = place.id
-
-  {/*
-  if(isLoading) return (
-    <div>
-      <div>
-        
-      </div>
-    </div>
-  ) */}
 
   const getProcessedList = () => {
     //시설종류
@@ -73,18 +55,8 @@ const PlaceList = ( {placeData, isLoading} ) => {
     const typeList =  type === 'all' ? copyList : copyList.filter((it) => typeCallBack(it))
     const sortedList = typeList.filter((it) => filterCallBack(it));
     return sortedList;
-        
-    // const copyList = JSON.parse(JSON.stringify(placeData));
-    // const sortedList = copyList.filter((it) => filterCallBack(it));
-    // return sortedList;
   }
 
-
-
-  /*const isOpenHandler = () => {
-    setOpen(!isOpen);
-    navigate(`/places/all/${id}`)
-  }*/
 
   return (
   <div>
@@ -108,25 +80,13 @@ const PlaceList = ( {placeData, isLoading} ) => {
 
     <div className='place__detail__list'>
 
-      {/*
-      {isOpen ? 
-      <Reservation getProcessedList={getProcessedList} placeData={placeData} /> 
-      :
-      <>
-      */}
-   
-      {/* {placeData && placeData.map((place, i) =>  */}
+  
       {getProcessedList().map((place, i) => 
         <PlaceDetail place={place} key={i} {...place}
           /*isOpenHandler={isOpenHandler} */
         />
       )}
       
-      {/*
-      </>
-      }
-      */}
-
     </div>
 
   </div>

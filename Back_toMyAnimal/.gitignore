@@ -36,5 +36,6 @@ out/
 ### VS Code ###
 .vscode/
 
-application-secret.yml
+
+/src/main/resources/*
 /src/test/resources/static/*

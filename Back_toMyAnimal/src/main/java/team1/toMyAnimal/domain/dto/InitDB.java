@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import team1.toMyAnimal.domain.board.Board;
+import team1.toMyAnimal.domain.board.BoardType;
 import team1.toMyAnimal.domain.category.Category;
 import team1.toMyAnimal.domain.member.Member;
 import team1.toMyAnimal.domain.member.Role;
@@ -90,7 +91,7 @@ public class InitDB {
         Category category = categoryRepository.findAll().get(0);
         IntStream.range(0, 20)
                 .forEach(i -> boardRepository.save(
-                        new Board("title" + i, "content" + i, 0, member, category, List.of())
+                        new Board("title" + i, "content" + i, BoardType.PUBLIC, member, category, List.of())
                 ));
     }
 

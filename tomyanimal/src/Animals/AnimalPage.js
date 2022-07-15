@@ -2,6 +2,115 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import profile from './Checklist/img/imageex.png'
 import './AnimalInfo.css'
+import AnimalMedicalInfoOne from './AnimalMedical/AnimalMedicalInfoOne';
+
+export const MedicalInfoContext = React.createContext();
+
+const medicalinfoDummy = [
+  {
+    id:1,
+    type: "접종",
+    data: [
+      {
+      id: 1, 
+      type: "접종",
+      text: "광견병 접종",
+      date: '2022-07-01',
+      },
+      {
+      id: 2, 
+      type: "접종",
+      text: "심장 사상충 접종",
+      date: '2022-07-03',
+      },
+      {
+      id: 3, 
+      type: "접종",
+      text: "~~~접종",
+      date: '2022-07-04',
+      },
+    ]
+  },
+  {  
+    id:2,
+    type: "수술",
+    data: [
+      {
+        id: 1, 
+        type: "수술",
+        text: "중성화 수술",
+        date: '2022-07-06',
+      },
+      {
+        id: 2, 
+        type: "수술",
+        text: "슬개골 수술",
+        date: '2022-07-07',
+      },
+    ]
+  },
+
+]
+
+const messagelist = [
+  {
+    id: 1,
+    type: "접종",
+    editable: false,
+    replies: [
+      {
+        id: 1, 
+        date: "2022-07-01",
+        type: "광견병",
+        likes: 231
+      },
+      {
+        id: 2, 
+        date: "2022-07-03",
+        type: "심장 사상충",
+        likes: 2
+      },
+    ]
+  },
+  {
+    id: 4, 
+    type: "수술",
+    editable: false,
+    replies: [
+      {
+        id: 5,
+        date: "2022-07-06",
+        type: "중성화",
+        likes: 2
+      },
+      {
+        id: 5,
+        date: "2022-07-07",
+        type: "슬개골",
+        likes: 2
+      },
+    ]
+  },
+  {
+    id: 6,
+    type: "복용",
+    editable: false,
+    replies: [
+      {
+        id: 1,
+        date: "2022-07-06",
+        type: "유산균",
+        likes: 2
+      },
+      {
+        id: 2,
+        date: "2022-07-07",
+        type: "칼슘",
+        likes: 2
+      },
+    ]
+  },
+]
 
 const AnimalPage = () => {
   const [petName, setPetname] = useState();
@@ -10,25 +119,11 @@ const AnimalPage = () => {
   const [petimg, setPetimg] = useState();
   const [petprofile, setPetprofile] = useState();
 
-  const [isOpen, setOpen] = useState(false);
-
   const userId = localStorage.getItem('userid');
 
-
-  // useEffect(() => {
-  //   axios({
-  //     method: 'get', 
-  //     url: 'http://localhost:8084/api/pets/1',
-  //     headers: { Authorization: localStorage.getItem('logintoken')}
-  //   }).then((response) => {
-  //     setPetname(response.data.result.data['petName'])
-  //     setPetBTD(response.data.result.data['birthday'])
-  //     setPetKg(response.data.result.data['weight'])
-  //   })
-  //}, []);
-  
   useEffect(() => {
-    axios.get(`http://localhost:8084/api/my-pet?memberId=${userId}`, {
+    //axios.get(process.env.REACT_APP_BACK_BASE_URL + `api/my-pet?memberId=${userId}`, {
+    axios.get(process.env.REACT_APP_BACK_BASE_URL + 'api/animals/1', {
       headers: {
         Authorization: localStorage.getItem('logintoken') 
       }
@@ -36,10 +131,10 @@ const AnimalPage = () => {
       console.log(response);
       // 내가 데리고 있는 동물이 여러마리 일때는 data[0] 이곳을
       // i를 length만큼 돌려서 가져와야될것으로 보임
-      setPetname(response.data.result.data[0].petName);
-      setPetBTD(response.data.result.data[0].birthday);
-      setPetKg(response.data.result.data[0].weight);
-      setPetimg(response.data.result.data[0].images[0].uniqueName);
+      setPetname(response.data.result.data.name);
+      setPetBTD(response.data.result.data.birthday);
+      setPetKg(response.data.result.data.weight);
+      setPetimg(response.data.result.data.images[0].uniqueName);
     }).catch((error) => {
       console.error(error);
     });
@@ -48,7 +143,10 @@ const AnimalPage = () => {
   //console.log(petimg[0].uniqueName);
   //const imageurl = petimg[0].uniqueName
   //localhost:8084/image/uniqueName
-  console.log(petimg);
+  console.log(petName);
+
+  const date = new Date();
+  const dateYear = date.getFullYear()
 
   return (
   <div>
@@ -90,70 +188,32 @@ const AnimalPage = () => {
 
       <div className='info__details'>
 
-        <div className='details__description'>
+        <div className='animal__description'>
           <h1>I'm {petName}</h1>
-          <p>{petBTD} years old</p>
+          <p>{parseInt(dateYear) - parseInt(petBTD)} years old</p>
           <p>{petKg}kg</p>
         </div>
 
-        <div className='stack'>
-          <button className='details__btn' aria-expanded="false">
-            <span>접종내역</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="14.255" height="14.255">
-              <path fill='none' stroke="currentcolor" strokeWidth="1.5" d="M7.129 0v14.255M0 7.129h14.255"></path>
-            </svg>
-          </button>
-          <div className='details__panel'>
-            <p>세부내용 aria-expanded="true"로 변경되면서 이 부분이 열림
-                d="M0 7.128h14.255"로 바꿔주기
-            </p>
-          </div>
-        </div>
       </div>
 
     </div>
 
     <section className='animal__info__wrapper'>
-      <h2>{petName} Information</h2>
-      
+      <h2>{petName}'s Information</h2>
+
       <div className='animal__info__container'>
 
-        <div className='animal__info__content'>
-
-          <div className='animal__info__cover'>
-            <h3>예방접종 내역</h3>
+        {messagelist.map(message => (
+          <div className='animal__info__content'>
+            <AnimalMedicalInfoOne 
+              editable={message.editable} 
+              type={message.type}
+              likes={message.likes} 
+              replies={message.replies}
+            />
           </div>
-          <div className='animal__info__vaccine'>
-            <h3>내역</h3>
-            <div className='animal__info__desc'>
-              <p>2022 06 29
-              광견병 접종</p>
-            </div>
-          </div>
+        ))}
 
-        </div>
-
-        <div className='animal__info__content'>
-
-          <div className='animal__info__cover'>
-            <h3>예방접종 내역</h3>
-            </div>
-          <div className='animal__info__vaccine'>
-            <h3>내역</h3>
-          </div>
-
-        </div>
-
-        <div className='animal__info__content'>
-
-          <div className='animal__info__cover'>
-              <h3>예방접종 내역</h3>
-            </div>
-          <div className='animal__info__vaccine'>
-            <h3>내역</h3>
-          </div>
-
-        </div>
       </div>
 
 

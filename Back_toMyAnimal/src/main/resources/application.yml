@@ -3,15 +3,6 @@ spring:
     active: local
     include: secret
 
-  mail :
-    host : smtp.google.com
-    port : 587
-    username : to.myanimal.official@gmail.com
-    password : sozejyhzlocztwnv
-    properties:
-      mail.smtp.auth: true
-      mail.smtp.ssl.enable: true
-
   mvc:
     hiddenmethod:
       filter:
@@ -21,19 +12,10 @@ spring:
   servlet.multipart.max-file-size: 5MB
   servlet.multipart.max-request-size: 5MB
 
-  jackson:
-    time-zone: UTC
-    serialization:
-      WRITE_DATES_AS_TIMESTAMPS: 'false'
-  datasource:
-    password: '1234'
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    url: jdbc:mysql://localhost:3306/team1
   jpa:
 #    show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true

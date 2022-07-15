@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Permanent+Marker&family=Rubik+Mono+One&family=Ultra&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 /*
 font-family: 'Abril Fatface', cursive;
 font-family: 'Permanent Marker', cursive;
 font-family: 'Rubik Mono One', sans-serif;
 font-family: 'Ultra', serif;
+font-family: 'Nanum Gothic', sans-serif;
 */
 
 body {

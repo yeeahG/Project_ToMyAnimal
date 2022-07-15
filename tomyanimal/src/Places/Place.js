@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import ControlMenu from '../Pages/ControlMenu'
-import Header from './Header'
+import React, { useState } from 'react'
 import Map from './Map'
 import { placeData } from './placeData'
 import PlaceList from './PlaceList'
@@ -8,8 +6,6 @@ import './Places.css'
 
 
 const Place = () => {
-  const [places, setPlaces] = useState('동물병원');
-
   const [coordinates, setCoordinates] = useState({ lat:0, lng:0});
 
   const [isLoading, setisLoading] = useState(true);
@@ -48,27 +44,6 @@ const Place = () => {
     }
   ];
 
-  //console.log(placeData);
-
-  useEffect(() => {
-    // placeData((data) => {
-    //   setPlaces(data);
-    // })
-    setPlaces();
-  }, )
-  //console.log(places[0].title);
-
-  // const [productInfos, setProductInfos] = useState([]);
-  // const location = useLocation();
-
-  // useEffect(() => {
-  //   fetch(`${api.fetchAccommList}${location.search}`)
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       setProductInfos(res.message);
-  //     });
-  // }, [location]);
-
 
   return (
     <div className='place__container'>
@@ -91,16 +66,12 @@ const Place = () => {
         <Map />
       </div>
 
-      {/* <Header 
-        setType={setType} setRatings={setRatings} setCoordinates={setCoordinates}
-      /> */}
-
       <div className='place__content'>
 
         <div className='left__menu'>
           <ul className='menu__wrap'>
             <li className='menu__list'>지역들</li>
-            {tabContArr.map((section, index)=>{
+            {tabContArr.map((section)=>{
               return section.tabTitle
             })}
           </ul>
@@ -110,36 +81,6 @@ const Place = () => {
           <div className='place__form'>
             {tabContArr[activeIndex].tabCont}
           </div>
-
-          {/*<div className='info__details'>
-
-            <div className='details__description'>
-              <h1>이름</h1>
-               {places[0].title}
-              {/* <p>주소</p> */}
-              {/* {places[0].addr} */}
-              {/* {places?.map(elm => {
-                elm.title
-                elm.addr
-              })}
-
-            </div>
-
-            {/* <div className='stack'>
-              <button className='details__btn' aria-expanded="false">
-                <span>리뷰</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="14.255" height="14.255">
-                  <path fill='none' stroke="currentcolor" strokeWidth="1.5" d="M7.129 0v14.255M0 7.129h14.255"></path>
-                </svg>
-              </button>
-              <div className='details__panel'>
-                <p>세부내용
-                </p>
-              </div>
-            </div> 
-
-          </div>*/}
-
         </div>
         
       </div>

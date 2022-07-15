@@ -2,33 +2,40 @@ import React, { useRef, useState } from 'react'
 
 const AddChecklist = ( {submitHandler} ) => {
     const [title, setTitle] = useState("");
-    const [content, setContent] = useState('')
+    const [content, setContent] = useState("")
 
     const contentRef = useRef();
+    const characterLimit = 200;
 
     const handleChange = (e)=> {
-        //setTitle(e.target.value);
-        setContent(e.target.value);
+        if(characterLimit - e.target.value.length >= 0) {
+            //setTitle(e.target.value);
+            setContent(e.target.value);
+        }
     }
 
     const handleSave = () => {
-        //submitHandler(title);
-        submitHandler(content);
-        //setTitle('')
-        setContent('')
+        submitHandler(title, content);
+
+        if(title != "" && content != "") {
+            setTitle('')
+            setContent('')
+        } else {
+            alert("한 글자 이상 입력하세요")
+        }
     }
 
 
   return (
     <div className='checklist__note add'>
-        {/* <input
+        <input
             name="title" 
             placeholder='title'
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
             ref={contentRef}
-            onChange={handleChange}
-        /> */}
+            //onChange={handleChange}
+            onChange={(e) => setTitle(e.target.value)}
+        />
         <textarea 
             rows='8'
             cols='10'
@@ -37,9 +44,10 @@ const AddChecklist = ( {submitHandler} ) => {
             value={content}
             ref={contentRef}
             onChange={handleChange}
+            //onChange={(e) => setContent(e.target.value)}
         />
         <div className='checklist__note__footer'>
-            <small>200 글자</small>
+            <small>{characterLimit - content.length} 글자</small>
             <button 
                 className='checklist__save'
                 onClick={handleSave}

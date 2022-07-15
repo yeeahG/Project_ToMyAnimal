@@ -15,7 +15,7 @@ import team1.toMyAnimal.domain.member.RoleType;
 import team1.toMyAnimal.exception.*;
 import team1.toMyAnimal.repository.member.MemberRepository;
 import team1.toMyAnimal.repository.role.RoleRepository;
-import team1.toMyAnimal.service.sign.SignService;
+import team1.toMyAnimal.repository.service.sign.SignService;
 
 import java.util.Optional;
 

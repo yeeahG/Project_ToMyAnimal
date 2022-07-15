@@ -1,0 +1,11 @@
+.about__container {
+    background-color: #fe81b9;
+}
+
+.about__title {
+    display: grid;
+    padding: 3rem 1rem;
+    font-size: 4rem;
+    letter-spacing: -0.05ch;
+    line-height: calc(1em + 0.25rem);
+}

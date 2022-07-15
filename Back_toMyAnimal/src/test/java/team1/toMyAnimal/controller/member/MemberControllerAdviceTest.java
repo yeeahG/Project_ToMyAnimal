@@ -11,7 +11,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import team1.toMyAnimal.domain.dto.member.MemberReadCondition;
 import team1.toMyAnimal.exception.ExceptionAdvice;
 import team1.toMyAnimal.exception.MemberNotFoundException;
-import team1.toMyAnimal.service.member.MemberService;
+import team1.toMyAnimal.repository.service.member.MemberService;
 
 import static org.assertj.core.api.BDDAssumptions.given;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -39,7 +39,7 @@ public class MemberControllerAdviceTest {
     @Test
     void readMemberNotFoundExceptionTest() throws Exception {
         // given
-        given(memberService.read(cond));
+        given(memberService.read(cond.getId()));
 
         // when, then
         mockMvc.perform(

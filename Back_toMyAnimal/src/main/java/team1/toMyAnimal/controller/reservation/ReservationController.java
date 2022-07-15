@@ -10,7 +10,7 @@ import team1.toMyAnimal.domain.dto.reservation.ReservationCreateRequest;
 import team1.toMyAnimal.domain.dto.reservation.ReservationReadCondition;
 import team1.toMyAnimal.domain.dto.reservation.ReservationUpdateRequest;
 
-import team1.toMyAnimal.service.reservation.ReservationService;
+import team1.toMyAnimal.repository.service.reservation.ReservationService;
 
 import javax.validation.Valid;
 

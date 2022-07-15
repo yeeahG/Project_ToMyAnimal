@@ -10,7 +10,7 @@ import team1.toMyAnimal.domain.dto.category.CategoryDto;
 import team1.toMyAnimal.exception.CategoryNotFoundException;
 import team1.toMyAnimal.factory.CategoryFactory;
 import team1.toMyAnimal.repository.category.CategoryRepository;
-import team1.toMyAnimal.service.category.CategoryService;
+import team1.toMyAnimal.repository.service.category.CategoryService;
 
 import java.util.List;
 import java.util.Optional;

@@ -36,7 +36,7 @@ cur.execute(sql)
 # In[5]:
 
 
-cur.execute("CREATE TABLE usertable (hospital_name VARCHAR(50), star VARCHAR(10), review_count VARCHAR(10), addr VARCHAR(99), tel VARCHAR(50), location_type VARCHAR(20))")
+cur.execute("CREATE TABLE usertable (hospital_name VARCHAR(50), star VARCHAR(10), review_count VARCHAR(10), addr VARCHAR(99), tel VARCHAR(50), location_type VARCHAR(255))")
 
 
 # In[6]:

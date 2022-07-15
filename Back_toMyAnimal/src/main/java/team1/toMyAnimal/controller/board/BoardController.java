@@ -9,7 +9,7 @@ import team1.toMyAnimal.controller.response.Response;
 import team1.toMyAnimal.domain.dto.board.BoardCreateRequest;
 import team1.toMyAnimal.domain.dto.board.BoardReadCondition;
 import team1.toMyAnimal.domain.dto.board.BoardUpdateRequest;
-import team1.toMyAnimal.service.board.BoardService;
+import team1.toMyAnimal.repository.service.board.BoardService;
 
 import javax.validation.Valid;
 
@@ -31,11 +31,19 @@ public class BoardController {
     public Response read(@PathVariable Long id) {
         return Response.success(boardService.read(id));}
 
+    // 개인 게시글 가져오기
     @GetMapping("/api/my-board")
     @ResponseStatus(HttpStatus.OK)
-    public Response readAll(@Valid BoardReadCondition cond) {
-        return Response.success(boardService.readAll(cond));
+    public Response myReadAll(@Valid BoardReadCondition cond) {
+        return Response.success(boardService.myReadAll(cond));
     }
+
+    // 공용 게시글 가져오기
+    @GetMapping("/api/public-board")
+    @ResponseStatus(HttpStatus.OK)
+    public Response readAllBoardList(@Valid BoardReadCondition cond) {
+        return Response.success(boardService.readAllBoardList(cond));}
+
 
     @DeleteMapping("/api/board/{id}")
     @ResponseStatus(HttpStatus.OK)

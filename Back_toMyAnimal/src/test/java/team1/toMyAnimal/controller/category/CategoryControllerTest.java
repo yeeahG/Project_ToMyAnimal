@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import team1.toMyAnimal.domain.dto.category.CategoryCreateRequest;
-import team1.toMyAnimal.service.category.CategoryService;
+import team1.toMyAnimal.repository.service.category.CategoryService;
 
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;

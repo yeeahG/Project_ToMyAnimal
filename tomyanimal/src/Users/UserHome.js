@@ -3,6 +3,7 @@ import AnimalAccount from './AnimalAccount';
 import UserAccount from './UserAccount';
 import Signout from './Signout'
 import './UserHome.css'
+import UserReservation from './Reservation/UserReservation';
 
 const UserHome = () => {
   const [activeIndex, setActiveIndex]=useState(0);
@@ -30,7 +31,15 @@ const UserHome = () => {
     },
     {
       tabTitle:(
-        <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}> Sign out</li>
+        <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}> My reservation </li>
+      ),
+      tabCont:(
+        <div> <UserReservation/> </div>
+      )
+    },
+    {
+      tabTitle:(
+        <li className={activeIndex===3 ? "is-active" : ""} onClick={()=>tabClickHandler(3)}> Sign out</li>
       ),
       tabCont:(
         <div><Signout /></div>
@@ -48,7 +57,7 @@ const UserHome = () => {
           <h1 className='header__content'>My account</h1>
           <div className='header__detail'>
             <p>
-              details
+              회원정보 및 반려동물 정보
             </p>
           </div>
         </div>

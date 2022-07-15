@@ -1,5 +1,8 @@
 .cards__item__pic__wrap {
     height: 150px;
+    width: 200px;
+    align-items: center;
+    margin: 0 auto;
     border: 1px solid;
 }
 
@@ -46,6 +49,7 @@
     height: 200px;
     max-width: none;
     object-fit: cover;
+    align-items: center;
     /* position: absolute; */
     /* width: 200px; */
 }
@@ -82,6 +86,18 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    white-space: pre-wrap;
+}
+
+.checklist__text p {
+    width: 100%;
+}
+
+.checklist__text input, .checklist__text textarea {
+    border: none;
+    resize: none;
+    background-color: transparent;
+    width: 100%;
 }
 
 .checklist__note.add {
@@ -104,6 +120,14 @@
     justify-content: space-between;
 }
 
+.note__delete__edit {
+    display: flex;
+}
+
+.checklist__note__btn {
+    display: flex;
+}
+
 .checklist__save {
     background-color: #fef68a;
     border: none;
@@ -119,6 +143,12 @@
 
 @media (min-width: 900px) {
     /*CARD LIST*/
+    .cards__item__pic__wrap {
+        height: 150px;
+        width: unset;
+        border: 1px solid;
+    }
+
     .checklist__content {
         display: flex;
         flex-wrap: wrap;
@@ -126,6 +156,8 @@
 
     .checklist__img {
         transition: all 0.3s cubic-bezier(0.77, 0, 0.175, 1) 0s;
+        width: 100%;
+        height: 100%;
     }
 
     .cards__item {

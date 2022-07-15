@@ -5,13 +5,13 @@
 
 
 .up_btn {
-    margin-bottom: -5.33333vw;
+    margin-bottom: -8vw;
     z-index: 0;
     padding-top: 16vw;
 }
 
 .up_btn svg {
-    width: 26.1333vw;
+    width: 20vw;
 }
 
 .up_btn svg circle {
@@ -71,7 +71,6 @@
 .img__box {
     width: auto;
     height: 350px;
-    border: 1px solid;
 }
 
 .odd {
@@ -89,7 +88,12 @@
 }
 
 .sec__odd {
-    background-image: url('../img/medicine.png');
+    background-image: url('../img/cat2.jpg');
+    background-repeat: no-repeat;
+}
+
+.sec__even {
+    background-image: url('../img/dog1.jpg');
     background-repeat: no-repeat;
 }
 
@@ -170,6 +174,7 @@
     width: 100%;
     max-width: 20rem;
     overflow: hidden;
+    background-color: #fe81b9;
     /* border: 1px solid; */
 }
 
@@ -218,8 +223,8 @@
 
 @media (min-width: 900px) {
     .up_btn {
-        margin-bottom: 1.38889vw;
         padding-top: 2.77778vw;
+        margin-bottom: -3vw;
     }
     .up_btn svg {
         width: 6.80556vw;
@@ -263,7 +268,7 @@
     }
 
     .slide__service {
-        margin: 0px 5vw;
+        margin: 5rem 5vw;
     }
     .slide__title {
         font-size: 5rem;
