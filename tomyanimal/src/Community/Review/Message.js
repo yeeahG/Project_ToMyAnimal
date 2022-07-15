@@ -10,7 +10,6 @@ export function useOpenReply() {
 }
 
 const Message = (props) => {
-    console.log(props);
     const messagelist = useContext(MessagelistContext);
 
     const likeIcons = useRef();
@@ -23,8 +22,6 @@ const Message = (props) => {
 
     const changeOpenReply = () => {
         setOpenReply(prevState => prevState = !prevState);
-
-        //axios post문
     }
 
     let arrow = <i className='fas fa-caret-down'></i>

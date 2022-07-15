@@ -1,10 +1,11 @@
-import React, { useEffect, useReducer, useState } from 'react'
-import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import BoardRead from './BoardRead';
 import BoardWrite from './BoardWrite';
 import Pagination from '../components/Pagination';
 import ControlMenu from '../../Pages/ControlMenu';
 import { FormOutlined } from '@ant-design/icons';
+import { authInstance } from '../../utils/api';
 
 const sortOptionList = [
     {value: "latest", name: "최신순"},
@@ -15,7 +16,6 @@ export const ArticleStateContext = React.createContext();
 
 const Board = () => {
     const [article, setArticle] = useState([]);
-    const [data, dispatch] = useReducer(article);
     const [sortType, setSortType] = useState('latest');
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -28,22 +28,18 @@ const Board = () => {
     const postList = [];
 
     useEffect(() => {
-        axios.get(process.env.REACT_APP_BACK_BASE_URL + `api/public-board?categoryId=1&type=PUBLIC&page=0&size=4`, {
-            headers: {
-                Authorization: localStorage.getItem('logintoken'),
-            }
-        })
-        .then((response) => {
-            //setArticle(article.data);
-            
-            for (let i=0; i<response.data.result.data.length; i++) {
-                postList.push(response.data.result.data[i])
-            }
-            setArticle(postList);
-        })
-        .catch((error) => {
+        try {
+            async function callAPI() {
+                const response = await authInstance.get(`api/public-board?categoryId=1&type=PUBLIC&page=0&size=4`);
+          
+                for (let i=0; i<response.data.result.data.length; i++) {
+                    postList.push(response.data.result.data[i])
+                }
+                setArticle(postList);
+            } callAPI();
+        } catch(error) {
             console.log(error);
-        });
+        }
     }, []);
 
 
@@ -84,7 +80,6 @@ const Board = () => {
 
 
     const addPost = async (newTitle, newContent) => {
-
         const newPost = {
           type: "PUBLIC",
           title: newTitle, 
@@ -93,27 +88,17 @@ const Board = () => {
         }
     
         const newPosts = [...article, newPost];
-        console.log(newPosts);
         setArticle(newPosts);
     
         if(newTitle != "" || newContent != "") {
-          await axios({
-            method: 'post', 
-            url: process.env.REACT_APP_BACK_BASE_URL + 'api/board',
-            data: newPost,
-            headers: { 
-              'Authorization': localStorage.getItem('logintoken'),
-              'Content-Type': 'application/json',
+            try {
+                const data = await authInstance.post('api/board', newPost);
+                console.log('성공:', data);
+                alert('작성이 완료되었습니다')
+                window.location.reload();
+            } catch(error) {
+                console.error('실패:', error);
             }
-          })
-          .then((data) => {
-            console.log('성공:', data);
-          })
-          .catch((error) => {
-            console.error('실패:', error);
-          });
-          alert('작성이 완료되었습니다')
-          window.location.reload();
         } else {
           setError("한 글자 이상 입력하세요")
         }
@@ -184,7 +169,7 @@ const Board = () => {
                 onChange={setSortType}
                 optionList={sortOptionList}
                 article={article}
-                />
+            />
         </div>
 
         <div className='list__board'>
@@ -203,9 +188,49 @@ const Board = () => {
                 {getProcessedList().map((it) =>
                     <BoardRead key={it.id} {...it} />
                 )}
-            </table>
-        </div>
-        
+
+            {/*Dummy data*/}
+            <tbody>
+                <tr className='board__content'>
+                    <td style={{width:'5%'}}>
+                        <div>
+                            <div>0</div>
+                        </div>
+                    </td>
+                    <td style={{width:'75%', textAlign: 'left'}}>
+                        <span className='title__span'>
+                            <Link
+                                className='board__title'
+                                to={`/community/review/0`}
+                                state={{
+                                    title: "공지사항", 
+                                    content: "공지사항",
+                                    modifiedAt: "",
+                                    member: "관리자",
+                                    comment: "",
+                                    view: 0
+                                }}
+                            >
+                                공지사항
+                            </Link>
+                        </span>
+                    </td>
+                    <td style={{width:'7.5%'}}>
+                        관리자
+                    </td>
+                    <td style={{width:'7.5%'}}>
+                        <span>2022-00-00</span>
+                    </td>
+                    <td style={{width:'5%'}}>
+                        <span>0</span>
+                    </td>
+                </tr>
+            </tbody>
+
+
+        </table>
+    </div>
+    
 
         {localStorage.getItem('logintoken') ?
         <div className='write__article'>
@@ -214,7 +239,7 @@ const Board = () => {
                 {isOpen ? "" : <FormOutlined style={{fontSize: '18px'}}/>}
             </button>
             <button>내글</button>
-            {/* process.env.REACT_APP_BACK_BASE_URL + `api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PUBLIC` 사용하기*/}
+            {/*NOTE : process.env.REACT_APP_BACK_BASE_URL + `api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PUBLIC` 사용하기*/}
         </div>
         :
         ""}

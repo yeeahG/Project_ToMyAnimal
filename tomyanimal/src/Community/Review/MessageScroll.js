@@ -5,6 +5,7 @@ import { useMainContext, } from './Context/Context'
 import CommentsBox from '../components/CommentsBox'
 import './Review.css'
 import { useParams } from 'react-router-dom';
+import { authInstance } from '../../utils/api';
 
 export const MessagelistContext = React.createContext();
 
@@ -65,7 +66,6 @@ const MessageScroll = (props) => {
   const {id} = useParams();
 
   const {messageReset, commentIncrement, setMethodIncrement, messageUpdate } = useMainContext();
-  //console.log(messageReset);
   const commentIncrementRef = useRef(commentIncrement);
 
   const commentlist = [];
@@ -73,27 +73,21 @@ const MessageScroll = (props) => {
   useEffect(() => {
     setShowBottomBar(true);
 
-    axios.get(process.env.REACT_APP_BACK_BASE_URL + 'api/comments',
-      {
-        params: {boardId: id}
-      },
-      {
-      headers: { 
-        Authorization: localStorage.getItem('logintoken')
-      },
-    })
-    .then((data) => {
-      console.log('성공:', data);
-
-      // for(let i=0; i < data.data.result.data.length; i++) {
-      //   commentlist.push(data.data.result.data[i])
-      // }
-      // setMessages(commentlist);
-      setMessages(data.data.result.data);
-    }) 
-    .catch((error) => {
+    try {
+      async function callAPI() {
+        const data = await authInstance.get('api/comments', {
+          params: {boardId: id}
+        });
+        console.log('성공:', data);
+        // for(let i=0; i < data.data.result.data.length; i++) {
+        //   commentlist.push(data.data.result.data[i])
+        // }
+        // setMessages(commentlist);
+        setMessages(data.data.result.data);
+      } callAPI();
+    }catch(error) {
       console.error('실패:', error);
-    });
+    }
   },[])
 
 
