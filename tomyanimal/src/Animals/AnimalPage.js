@@ -78,9 +78,6 @@ const AnimalPage = () => {
         const response = await authInstance.get('api/animals/1');
         
         setPetprofile(response.data.result.data);
-        // setPetname(response.data.result.data.name);
-        // setPetBTD(response.data.result.data.birthday);
-        // setPetKg(response.data.result.data.weight);
         setPetimg(response.data.result.data.images[0].uniqueName);
       } callAPI();
     } catch(error) {
