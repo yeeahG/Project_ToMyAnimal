@@ -119,6 +119,11 @@
     justify-content: space-between;
 }
 
+.note__footer__container {
+    display: flex;
+    justify-content: space-between;
+}
+
 .note__delete__edit {
     display: flex;
 }
