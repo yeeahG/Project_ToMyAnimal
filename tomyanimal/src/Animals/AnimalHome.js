@@ -1,9 +1,8 @@
 import React, { useState, useReducer, useRef, useEffect } from 'react'
-import axios from 'axios';
 import AnimalPage from './AnimalPage';
 import AnimalLog from './AnimalLog';
-import Log from './AnimalLog/Log';
 import CheckList from './Checklist/CheckList';
+import GalleryHome from './AnimalGallery/GalleryHome'
 import './AnimalInfo.css'
 import { authInstance } from '../utils/api';
 
@@ -124,7 +123,15 @@ const AnimalHome = () => {
     },
     {
       tabTitle:(
-        <li className={activeIndex===3 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}>Check</li>
+        <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}>Photos</li>
+      ),
+      tabCont:(
+        <div> <GalleryHome /> </div>
+      )
+    },
+    {
+      tabTitle:(
+        <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}>CheckList</li>
       ),
       tabCont:(
         <div> <CheckList /> </div>
@@ -132,18 +139,10 @@ const AnimalHome = () => {
     },
     {
       tabTitle:(
-        <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}> My Log</li>
+        <li className={activeIndex===3 ? "is-active" : ""} onClick={()=>tabClickHandler(3)}> My Log</li>
       ),
       tabCont:(
         <div> <AnimalLog /> </div>
-      )
-    },
-    {
-      tabTitle:(
-        <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(3)}>Memo</li>
-      ),
-      tabCont:(
-        <div> <Log /> </div>
       )
     },
   ];
