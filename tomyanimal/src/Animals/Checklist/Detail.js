@@ -161,10 +161,10 @@ const Detail = () => {
             ))}
 
             <div className='checklist__note'>
-              <h3>dummy title</h3>
-              <p>dummy content</p>
+              <h3>ex) ㅇㅇ천 산책갔다옴</h3>
+              <p>ex) 초코가 너무 좋아했다. ㅇㅇ천 근처에 잔디밭이 넓게 있어서 여기를 산책장소로 자주 다니면 되겠다. </p>
               <div className='checklist__note__footer'>
-                <small>2022/07.01</small>
+                <small>2022.07.01</small>
                 <button><DeleteFilled style={{fontSize: '18px'}} /></button>
               </div>
             </div>

@@ -84,7 +84,6 @@ const AnimalAdd = () => {
 
             reader.onloadend = () => {
                 const base64 = reader.result;
-                console.log(base64);
 
                 if(base64) {
                     var base64Sub = base64.toString()
