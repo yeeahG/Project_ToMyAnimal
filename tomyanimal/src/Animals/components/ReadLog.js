@@ -1,8 +1,7 @@
 import React from 'react'
 
 const ReadLog = ( {logs, handleEditClick} ) => {
-  const finalDate = new Date(logs.date);
-  
+
   return (
     <div>
       <>
