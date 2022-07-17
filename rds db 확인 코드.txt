@@ -1,1 +1,0 @@
-mysql -u juneseok --host database-1.cjsvopo9rkyv.ap-n                                                                                                                                                             ortheast-2.rds.amazonaws.com -P 3306 -p
