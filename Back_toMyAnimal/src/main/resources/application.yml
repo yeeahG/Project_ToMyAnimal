@@ -3,6 +3,12 @@ spring:
     active: local
     include: secret
 
+  datasource:
+    url: jdbc:mysql://database-1.cjsvopo9rkyv.ap-northeast-2.rds.amazonaws.com/team1
+    username: juneseok
+    password: gkswk123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
   mvc:
     hiddenmethod:
       filter:
@@ -15,7 +21,7 @@ spring:
   jpa:
 #    show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true
