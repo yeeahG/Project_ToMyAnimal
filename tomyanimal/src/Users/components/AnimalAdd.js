@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { fileInstance } from '../../utils/api';
 
 const AnimalAdd = () => {
     const [animalName, setAnimalName] = useState("");
@@ -40,26 +41,23 @@ const AnimalAdd = () => {
         Object.values(imgFile).forEach((file) => formData.append("images", file));
 
         if(animalName!=="" && animalId!=="" && animalAge!=="" && animalWeight!=="" ) {
-            axios.post('http://localhost:8084/api/animals', formData, {
-               headers: {
-                'Content-Type': 'multipart/form-data',
-                'Authorization': localStorage.getItem('logintoken'),
-               }
-            })
-           .then((data) => {
-                console.log('성공:', data);
-                alert("등록이 완료되었습니다")
-                window.location.reload();
-           })
 
-           .catch((error) => {
-               console.error('실패:', error);
-           });
+            try {
+                const data = await fileInstance.post('api/signin', formData);
 
-           //localStorage.setItem("animalinfo", JSON.stringify(animal))
-           console.log(formData);
+                if(data.success === 'success') {
+                    alert("등록이 완료되었습니다");
+                    window.location.reload();
+                } else if (data.success === 'false') {
+                    alert("등록을 다시 진행해주세요")
+                    window.location.reload();
+                } 
+                console.log(formData);
+                navigate('/user')
+            } catch(error) {
+                console.error('실패:', error);
+            }
 
-           navigate('/user')    
         } else {
             setError("모든 항목을 입력하세요")
         }

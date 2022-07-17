@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import ControlMenu from '../Pages/ControlMenu';
+import { baseInstance } from '../utils/api';
 import './Signup.css'
 
 const golbalPhoneNumberList = [
@@ -50,34 +51,25 @@ const Signup = () => {
       password: signinPassword,
     }
     
-    if( phoneNumber !=="" || signinId !=="" || username !=="" || signinPassword !=="" || signinEmail !== "") {
-      await fetch(process.env.REACT_APP_BACK_BASE_URL + 'api/signup', {
-        method: 'POST',
-        // credentials: 'include',
-        // mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json;',
-        },
-        body: JSON.stringify(item),
-      })
-      .then((response) => response.json())
-      // .then((data) => {
-      //   console.log('성공:', data);
-      // })
-      .then((result) => {
-        if(result.success === 'success'){
-          alert("가입이 완료되었습니다") 
-        } else if (result.success === 'false') {
-          alert("가입을 다시 진행해주세요")
-          window.location.reload();
-        }
-      }) 
-      .catch((error) => {
+    if( phoneNumber !=="" && signinId !=="" && username !=="" && signinPassword !=="" && signinEmail !== "") {
+
+      try {
+        async function callAPI() {
+          const result = await baseInstance.post('api/signup', item);
+
+          if(result.success === 'success'){
+            alert("가입이 완료되었습니다") 
+          } else if (result.success === 'false') {
+            alert("가입을 다시 진행해주세요")
+            window.location.reload();
+          }
+          navigate('/user')
+          
+        } callAPI();
+      } catch(error) {
         console.error('실패:', error);
         alert("다시 시도해주세요")
-      });
-      
-      navigate('/user')
+      }
     } else {
       setError("한 글자 이상 입력하세요")
     }
