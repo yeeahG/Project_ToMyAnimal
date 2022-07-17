@@ -1,7 +1,30 @@
+jwt:
+  key:
+    access: base64 {bcrypt} key
+    refresh: base64 {bcrypt} key
+  max-age:
+    access: 1800  # 60 * 60 * 30
+    refresh: 604800 # 60 * 60 * 24 * 7
+
 spring:
   profiles:
     active: local
     include: secret
+
+  mail:
+    host: smtp.google.com
+    port: 587
+    username: to.myanimal.official@gmail.com
+    password: sozejyhzlocztwnv
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.ssl.enable: true
+
+  datasource:
+    url: jdbc:mysql://database-1.cjsvopo9rkyv.ap-northeast-2.rds.amazonaws.com/team1
+    username: juneseok
+    password: gkswk123
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   mvc:
     hiddenmethod:
@@ -43,3 +66,4 @@ logging:
         web:
       hibernate:
         SQL: DEBUG
+
