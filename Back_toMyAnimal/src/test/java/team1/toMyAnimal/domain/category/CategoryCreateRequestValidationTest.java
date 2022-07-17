@@ -1,4 +1,4 @@
-package team1.toMyAnimal.dto.category;
+package team1.toMyAnimal.domain.category;
 
 import org.junit.jupiter.api.Test;
 import team1.toMyAnimal.domain.dto.category.CategoryCreateRequest;
