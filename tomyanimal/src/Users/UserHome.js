@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import AnimalAccount from './AnimalAccount';
+import AnimalAccount from './AnimalAccount/AnimalAccount';
 import UserAccount from './UserAccount';
 import Signout from './Signout'
-import './UserHome.css'
 import UserReservation from './Reservation/UserReservation';
+import './UserHome.css'
 
 const UserHome = () => {
   const [activeIndex, setActiveIndex]=useState(0);
@@ -26,7 +26,7 @@ const UserHome = () => {
         <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}> My animal </li>
       ),
       tabCont:(
-        <div> <AnimalAccount/> </div>
+        <div> <AnimalAccount /> </div>
       )
     },
     {

@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { fileInstance } from '../../utils/api';
 
 const AnimalAdd = () => {
+    const [type, setType] = useState("")
     const [animalName, setAnimalName] = useState("");
     const [animalId, setAnimalId] = useState("");
     const [animalAge, setAnimalAge] = useState("");
     const [animalWeight, setAnimalWeight] = useState("");
-    const [animalPhoto, setAnimalPhoto] = useState("");
 
+    const [isOpen, setOpen] = useState(false);
     const [error, setError] = useState("");
 
     let localStorage = window.localStorage;
@@ -17,18 +17,20 @@ const AnimalAdd = () => {
 
     const loginId = localStorage.getItem('userid');
 
+    const showInput = () => {
+        setOpen(!isOpen)
+    }
+
     const registerAnimal = async () => {
         const animal = {
-            //id: loginId,
             name: animalName,
             registrationNumber: animalId,
             birthday: animalAge,
             weight: animalWeight,
-            type: "dog"
+            type: type
         }
 
         const formData = new FormData()
-        //formData.set('id', animal.id)
         formData.set('name', animal.name)
         formData.set('registrationNumber', animal.registrationNumber)
         formData.set('birthday', animal.birthday)
@@ -43,19 +45,13 @@ const AnimalAdd = () => {
         if(animalName!=="" && animalId!=="" && animalAge!=="" && animalWeight!=="" ) {
 
             try {
-                const data = await fileInstance.post('api/signin', formData);
-
-                if(data.success === 'success') {
-                    alert("등록이 완료되었습니다");
-                    window.location.reload();
-                } else if (data.success === 'false') {
-                    alert("등록을 다시 진행해주세요")
-                    window.location.reload();
-                } 
-                console.log(formData);
-                navigate('/user')
+                await fileInstance.post('api/animals', formData);
+                alert("등록이 완료되었습니다");
+                window.location.reload();
             } catch(error) {
                 console.error('실패:', error);
+                alert("등록을 다시 진행해주세요")
+                window.location.reload();
             }
 
         } else {
@@ -76,7 +72,7 @@ const AnimalAdd = () => {
         for(let i=0; i<e.target.files.length; i++) {
         if(e.target.files[i]){
             //const uploadFile = e.target.files[0]
-            //console.log(uploadFile)
+
             let reader = new FileReader();
             reader.readAsDataURL(e.target.files[i])
 
@@ -101,6 +97,8 @@ const AnimalAdd = () => {
             <table className='account__detail__form'>
                 <thead>
                     <tr>
+                        <th>Species</th>
+                        <th>Photo</th>
                         <th>Name</th>
                         <th>No ID</th>
                         <th>Age</th>
@@ -110,7 +108,19 @@ const AnimalAdd = () => {
 
                 <tbody>
                     <tr>
-                        {/*<td><input label="사진" name="photo" id="photo" placeholder="사진" type='file' onChange={(e) => setAnimalPhoto(e.target.files)} /></td>*/}
+                        <td className='reserve__keyword' id='reserve__keyword'>
+                            <p value="동물종류" onClick={() => setType("dog")}>강아지</p>
+                            <p value="동물종류" onClick={() => setType("cat")}>고양이</p>
+                            <p value="동물종류" onClick={showInput}>기타</p>
+                            {isOpen? 
+                                <input 
+                                    label="동물종류" name="type" 
+                                    placeholder="동물종류를 입력하세요" 
+                                    onChange={(e) => setType(e.target.value)}
+                                /> 
+                                : 
+                                ""}
+                        </td>
                         <td><input label="사진" name="photo" id="file" placeholder="사진" type='file' onChange={onChangeImg} multiple="multiple"/></td>
                         <td><input label="이름" name="animalname" placeholder="이름" required onChange={(e) => setAnimalName(e.target.value)} /></td>
                         <td><input label="등록번호" name="animalId" placeholder="등록번호" required onChange={(e) => setAnimalId(e.target.value)} /></td>
