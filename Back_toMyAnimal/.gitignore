@@ -36,6 +36,4 @@ out/
 ### VS Code ###
 .vscode/
 
-
-/src/main/resources/*
-/src/test/resources/static/*
+src/main/resources

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import BoardRead from './BoardRead';
 import BoardWrite from './BoardWrite';
 import Pagination from '../components/Pagination';
@@ -21,9 +21,11 @@ const Board = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(10);
     const [isOpen, setOpen] = useState(false);
+    const [isMyPost, setMyPost] = useState(false);
     const [error, setError] = useState("");
 
     const userid = localStorage.getItem('userid');
+    const location = useLocation();
 
     const postList = [];
 
@@ -41,6 +43,26 @@ const Board = () => {
             console.log(error);
         }
     }, []);
+
+    const serchMyPost = () => {
+        setMyPost(!isMyPost)
+
+        try {
+            async function callAPI() {
+                const response = await authInstance.get(`api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PUBLIC`);
+                for (let i=0; i<response.data.result.data.length; i++) {
+                    postList.push(response.data.result.data[i])
+                }
+                setArticle(postList);
+            } callAPI();
+        } catch(error) {
+            console.log(error);
+        }
+    }
+
+    const searchAllPost = () => {
+        window.location.reload();
+    }
 
 
     // NOTE : 최신순, 오래된순 필터 적용 기능 시 쓸 예정
@@ -185,47 +207,48 @@ const Board = () => {
                     </tr>
                 </thead>
 
+                {/*Dummy data*/}
+                <tbody>
+                    <tr className='board__content'>
+                        <td style={{width:'5%'}}>
+                            <div>
+                                <div>0</div>
+                            </div>
+                        </td>
+                        <td style={{width:'75%', textAlign: 'left'}}>
+                            <span className='title__span'>
+                                <Link
+                                    className='board__title'
+                                    to={`/community/review/0`}
+                                    state={{
+                                        title: "📢 공지사항", 
+                                        content: "To. my animal 게시판을 이용해주셔서 감사합니다",
+                                        modifiedAt: "",
+                                        member: {name:"admin"},
+                                        comment: "",
+                                        view: 0
+                                    }}
+                                >
+                                    📢 공지사항
+                                </Link>
+                            </span>
+                        </td>
+                        <td style={{width:'7.5%'}}>
+                            admin
+                        </td>
+                        <td style={{width:'7.5%'}}>
+                            <span>2022-00-00</span>
+                        </td>
+                        <td style={{width:'5%'}}>
+                            <span>0</span>
+                        </td>
+                    </tr>
+                </tbody>
+
                 {getProcessedList().map((it) =>
                     <BoardRead key={it.id} {...it} />
                 )}
 
-            {/*Dummy data*/}
-            <tbody>
-                <tr className='board__content'>
-                    <td style={{width:'5%'}}>
-                        <div>
-                            <div>0</div>
-                        </div>
-                    </td>
-                    <td style={{width:'75%', textAlign: 'left'}}>
-                        <span className='title__span'>
-                            <Link
-                                className='board__title'
-                                to={`/community/review/0`}
-                                state={{
-                                    title: "공지사항", 
-                                    content: "공지사항",
-                                    modifiedAt: "",
-                                    member: "관리자",
-                                    comment: "",
-                                    view: 0
-                                }}
-                            >
-                                공지사항
-                            </Link>
-                        </span>
-                    </td>
-                    <td style={{width:'7.5%'}}>
-                        관리자
-                    </td>
-                    <td style={{width:'7.5%'}}>
-                        <span>2022-00-00</span>
-                    </td>
-                    <td style={{width:'5%'}}>
-                        <span>0</span>
-                    </td>
-                </tr>
-            </tbody>
 
 
         </table>
@@ -234,12 +257,19 @@ const Board = () => {
 
         {localStorage.getItem('logintoken') ?
         <div className='write__article'>
+
             {error}
             <button onClick={openButton}>
                 {isOpen ? "" : <FormOutlined style={{fontSize: '18px'}}/>}
             </button>
-            <button>내글</button>
-            {/*NOTE : process.env.REACT_APP_BACK_BASE_URL + `api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PUBLIC` 사용하기*/}
+            
+            <button onClick={serchMyPost}>
+                {isMyPost ? 
+                    <p onClick={searchAllPost}>모든 글</p>
+                : 
+                    "내글"
+                }
+            </button>
         </div>
         :
         ""}

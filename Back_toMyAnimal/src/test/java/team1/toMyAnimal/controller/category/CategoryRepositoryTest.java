@@ -1,4 +1,4 @@
-package team1.toMyAnimal.category;
+package team1.toMyAnimal.controller.category;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -4,7 +4,15 @@
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
 sudo yum localinstall google-chrome-stable_current_x86_64.rpm
 ```
-설치도중 y입력해 설치 진행
+
+ubuntu일 때
+```
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install ./google-chrome-stable_current_amd64.deb
+(에러 (Unmet dependencies. Try 'apt --fix-broken install' with no packages) 발생시)
+sudo apt --fix-broken install 한 후 다시 sudo apt install ./google-chrome-stable_current_amd64.deb
+```
+
 <br>
 
 ### 설치확인

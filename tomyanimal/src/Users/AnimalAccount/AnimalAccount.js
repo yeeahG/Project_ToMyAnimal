@@ -1,15 +1,11 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import AnimalAdd from './components/AnimalAdd';
-import './UserHome.css'
+import { authInstance } from '../../utils/api';
+import AnimalInfo from './AnimalInfo';
+import AnimalAdd from './AnimalAdd';
+import '../UserHome.css'
 
 const AnimalAccount = ( ) => {
-  const [editContactId, setEditContactId] = useState(null);
-  const [editFormData, setEditFormData] = useState({
-    name: "", 
-    contact: "",
-  });
   const [petArray, setPetArray] = useState([]);
   const [petId, setPetId] = useState();
 
@@ -23,53 +19,27 @@ const AnimalAccount = ( ) => {
   const putPetsIdList = [];
 
   useEffect(() => {
-    axios.get(process.env.REACT_APP_BACK_BASE_URL + `api/my-animal?memberId=${loginId}`, { 
-      headers: { 
-        Authorization: localStorage.getItem('logintoken') 
-      } 
-    })
-    .then(response => {
-      //setPetArray(response.data)
+    try {
+      async function callAPI() {
+        const response = await authInstance.get(`api/my-animal?memberId=${loginId}`);
 
-      for (let i=0; i < response.data.result.data.length; i++) {
-        putPetsList.push(response.data.result.data[i])
-        putPetsIdList.push(response.data.result.data[i].id)
-      }
-      setPetArray(putPetsList)
-      setPetId(putPetsIdList)
-    })
-    .catch((error) => {
+        for (let i=0; i < response.data.result.data.length; i++) {
+          putPetsList.push(response.data.result.data[i])
+          putPetsIdList.push(response.data.result.data[i].id)
+        }
+        setPetArray(putPetsList)
+        setPetId(putPetsIdList)
+      } callAPI();
+    } catch(error) {
       console.log('error ', error);
-    });
+    }
   }, []);
 
   const gotoLog = () => {
     navigate('/animal')
   }
 
-  const animalDelete = async (it) => {
-    it.preventDefault();
-    console.log(it.id);
-
-    await axios.delete(process.env.REACT_APP_BACK_BASE_URL + 'api/animals/' + it.id, {
-      headers: {
-        'Authorization': localStorage.getItem('logintoken'),
-      }
-    })
-    .then((data) => {
-      console.log('성공:', data);
-      setPetArray(it.filter((p) => p.id !== it.id));
-    })
-    .catch((error) => {
-      console.error('실패:', error);
-    });
-
-  }
-
-  //반려동물 나이 계산
-  const date = new Date();
-  const dateYear = date.getFullYear()
-
+  
   return (
   <div>
     <div className='animal__banner'>
@@ -120,14 +90,10 @@ const AnimalAccount = ( ) => {
 
               <tbody>
               {petArray.map((it) =>
-                <tr key={it.id}>
-                  <td>{it.name}</td>
-                  <td>{it.registrationNumber}</td>
-                  <td>{it.birthday}</td>
-                  <td>{parseInt(dateYear) - parseInt(it.birthday)}살</td>
-                  <td>{it.weight}kg</td>
-                  <td><button onClick={() => animalDelete(it)}>delete</button></td>
-                </tr>
+                <AnimalInfo 
+                  key={it.id}
+                  {...it}
+                />
               )}
               </tbody>
 

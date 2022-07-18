@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import User from '../../Users/User';
-import axios from 'axios';
 import ControlMenu from '../../Pages/ControlMenu';
 import './Reservation.css'
+import { authInstance } from '../../utils/api';
 
 const timeOptionList = [
     {value: "T9:00", name: "9:00"},
@@ -53,24 +53,14 @@ const Reservation = (props) => {
         console.log(newReserv);
     
         if(type != "" && date != "") {
-          await axios({
-            method: 'post', 
-            url: process.env.REACT_APP_BACK_BASE_URL + `api/reservation?date=${reservData}&type=${type}&animalId=1`,
-            data: newReserv,
-            headers: { 
-              'Authorization': localStorage.getItem('logintoken'),
-              'Content-Type': 'application/json',
+            try {
+                const data = await authInstance.post(`api/reservation?date=${reservData}&type=${type}&animalId=1`, newReserv);
+                console.log('성공:', data);
+                alert('예약이 완료되었습니다')
+                //window.location.reload();
+            } catch(error) {
+                console.error('실패:', error);
             }
-          })
-          .then((data) => {
-            console.log('성공:', data);
-          })
-          
-          .catch((error) => {
-            console.error('실패:', error);
-          });
-          alert('작성이 완료되었습니다')
-            window.location.reload();
         } else {
           setError("필수 항목을 모두 입력해주세요")
         }
@@ -128,11 +118,12 @@ const Reservation = (props) => {
                                 <p className='reserve__error'>{error}</p>
                                 <h3>예약 종류 *</h3>
                                 <div className='reserve__keyword' id='reserve__keyword'>
-                                    <button value="수술" onClick={typeClickHandler} style={{color: fontColor, backgroundColor: backColor}}>수술</button>
+                                    {/*NOTE : button UI 작업중*/}
+                                    {/* <button value="수술" onClick={typeClickHandler} style={{color: fontColor, backgroundColor: backColor}}>수술</button> */}
                                     <p value="수술" onClick={() => setType("SURGERY")}>수술</p>
-                                    <p value="접종" onClick={() => setType("VACCINE")}>접종</p>
-                                    <p value="진료" onClick={() => setType("CHECK")}>진료</p>
-                                    <p value="문의" onClick={() => setType("ASK")}>문의</p>
+                                    <p value="접종" onClick={() => setType("INOCULATION")}>접종</p>
+                                    <p value="진료" onClick={() => setType("DIAGNOSIS")}>진료</p>
+                                    <p value="문의" onClick={() => setType("INQUIRY")}>문의</p>
                                 </div>
                             </div>
                             <div>

@@ -2,7 +2,8 @@ import React, { useRef, useState } from 'react'
 import axios from 'axios';
 import {useOpenReply} from './Message'
 import { useMainContext } from './Context/Context';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
+import { authInstance } from '../../utils/api';
 
 const CommentsBox = (props) => {
     const {id} = useParams();
@@ -15,6 +16,8 @@ const CommentsBox = (props) => {
     const [showButtons, setShowButtons] = useState(false);
     const [enableBtn, setEnableBtn] = useState(false);
     const [error, setError] = useState("");
+
+    const location = useLocation();
 
     const commentFocus = () => {
         setCommentLine(true);
@@ -43,24 +46,16 @@ const CommentsBox = (props) => {
             parentId: props.value,
             boardId: id
         }
-        console.log(newComment);
 
-        // NOTE : axios post
+        
         if(message.current.value != "" ) {
-            await axios.post(process.env.REACT_APP_BACK_BASE_URL + 'api/comments', newComment, {
-            headers: {
-                Authorization: localStorage.getItem('logintoken'),
-            }
-            })
-            .then((data) => {
-            console.log('성공:', data);
-            //setCom([newComment, ...com]);
-            alert('작성이 완료되었습니다')
-
-            })
-            .catch((error) => {
+            try {
+                await authInstance.post('api/comments', newComment);
+                alert('작성이 완료되었습니다')
+                window.location.reload();
+            } catch(error) {
                 console.error('실패:', error);
-            });
+            }
         } else {
             setError("한 글자 이상 입력하세요")
         }

@@ -3,7 +3,6 @@
     width: 200px;
     align-items: center;
     margin: 0 auto;
-    border: 1px solid;
 }
 
 .cards__item {
@@ -120,6 +119,11 @@
     justify-content: space-between;
 }
 
+.note__footer__container {
+    display: flex;
+    justify-content: space-between;
+}
+
 .note__delete__edit {
     display: flex;
 }
@@ -146,7 +150,6 @@
     .cards__item__pic__wrap {
         height: 150px;
         width: unset;
-        border: 1px solid;
     }
 
     .checklist__content {

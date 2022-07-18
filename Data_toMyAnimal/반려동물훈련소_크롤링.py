@@ -11,6 +11,16 @@ import pandas as pd
 
 
 # In[ ]:
+
+
+from datetime import datetime
+now = datetime.now()
+print("current(start) time is", now)
+
+
+# In[ ]:
+
+
 def pet_training_center():
     
     path="D:/20220103_lab/14.python/data/chrome/103/chromedriver"

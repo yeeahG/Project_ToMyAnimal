@@ -5,11 +5,9 @@ import ControlMenu from '../../Pages/ControlMenu';
 import { ChecklistContext } from '../Checklist/CheckList'
 import AddChecklist from './AddChecklist';
 import { DeleteFilled } from '@ant-design/icons';
-
-import './CardItem.css'
-import ChecklistFooter from './ChecklistFooter';
 import ReadChecklist from './ReadChecklist';
 import { authInstance } from '../../utils/api';
+import './CardItem.css'
 
 
 const sortOptionList = [
@@ -25,7 +23,7 @@ const Detail = () => {
   const [error, setError] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(6);
+  const [postsPerPage, setPostsPerPage] = useState(3);
 
   const {id} = useParams();
 
@@ -107,8 +105,26 @@ const Detail = () => {
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
 
-  let currentPosts = 0;
-  currentPosts = data.slice(indexOfFirst, indexOfLast);
+  //let currentPosts = 0;
+  //currentPosts = data.slice(indexOfFirst, indexOfLast);
+
+  //filter 적용
+  const getProcessedList = () => {
+
+    const compare = (a,b) => {
+      if(sortType === 'latest') {
+        return parseInt(b.id) - parseInt(a.id);
+      } else {
+        return parseInt(a.id) - parseInt(b.id);
+      }
+    }
+    const copyList = JSON.parse(JSON.stringify(data));
+    const sortedList = data.sort(compare);
+
+    let currentPosts = 0;
+    currentPosts = sortedList.slice(indexOfFirst, indexOfLast);
+    return currentPosts;
+  }
 
 
   return (
@@ -152,7 +168,8 @@ const Detail = () => {
           </div>
 
           <div className='checkllist__wrapper'>
-            {currentPosts.map((it) => (
+            {/*{currentPosts.map((it) => (*/}
+            {getProcessedList().map((it) => (
               <ReadChecklist 
                 key={it.id}
                 {...it}
@@ -161,10 +178,10 @@ const Detail = () => {
             ))}
 
             <div className='checklist__note'>
-              <h3>dummy title</h3>
-              <p>dummy content</p>
+              <h3>ex) ㅇㅇ천 산책갔다옴</h3>
+              <p>ex) 초코가 너무 좋아했다. ㅇㅇ천 근처에 잔디밭이 넓게 있어서 여기를 산책장소로 자주 다니면 되겠다. </p>
               <div className='checklist__note__footer'>
-                <small>2022/07.01</small>
+                <small>2022-09-09</small>
                 <button><DeleteFilled style={{fontSize: '18px'}} /></button>
               </div>
             </div>
