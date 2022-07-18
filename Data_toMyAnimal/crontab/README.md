@@ -84,3 +84,11 @@ crontab -r -> crontab list 전체 삭제 <br>
 */20 * * * *	=> 매일 20분마다 실행 <br>
 0 */5 * * * 	=> 매일 5시간마다 실행 <br>
 
+## crontab으로 csv 생성된 모습
+![크론탭으로 csv 생성된 모습](https://user-images.githubusercontent.com/96936431/179172817-e704259e-31d5-49ab-a5f7-7a1e9a4622d2.png)
+
+
+
+
+
+

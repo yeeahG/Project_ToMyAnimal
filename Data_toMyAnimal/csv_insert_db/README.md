@@ -37,3 +37,21 @@ for line in rd:
 ```
 ![mysql 삽입](https://user-images.githubusercontent.com/96936431/178644808-8ec44727-8bc8-403b-966f-865ad75739f4.png)
 #### 데이터 성공적으로 들어간 모습
+
+
+
+
+## ubuntu에서 실행 시킬 때
+
+pymysql 설치
+```
+sudo apt install mariadb-server python3-pymysql
+```
+
+py파일 실행 시키는 명령어 예시
+```
+/usr/bin/python3 /home/ubuntu/test_pythonfiles/csv_insert_db_ubuntu.py
+
+로그생성
+/usr/bin/python3 /home/ubuntu/test_pythonfiles/csv_insert_db_ubuntu.py &> /home/ubuntu/test_pythonfiles/csv_insert_db_ubuntu_log
+```

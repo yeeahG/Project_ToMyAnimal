@@ -1,25 +1,12 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[6]:
-
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 import pandas as pd
 
-
-# In[ ]:
-
-
 from datetime import datetime
 now = datetime.now()
 print("current(start) time is", now)
-
-
-# In[2]:
-
 
 def animalhospital(place):
     
@@ -107,25 +94,14 @@ def animalhospital(place):
         animalhospital_df_dropdupl = animalhospital_df.copy()
         animalhospital_df_dropdupl.drop_duplicates(['병원이름', '주소'], keep = 'first')
         animalhospital_df_dropdupl['location_type'] = 0
-        animalhospital_df_dropdupl.to_csv('/home/ec2-user/test_pythonfiles/crwaling_csv/animalhospital_'+place+'.csv', index=False)
+        animalhospital_df_dropdupl.to_csv('/home/ubuntu/test_pythonfiles/csvlist/animalhospital_'+place+'.csv', index=False, header=False)
         print(place + "동물병원 크롤링 완료")
 
-
-# In[ ]:
-
-
 placelist = ["서울", "대전", "대구", "부산", "광주", "울산", "인천"]
-
-
-# In[ ]:
-
 
 for i in placelist:
     animalhospital(i)
 
-
-# In[1]:
-
-
 print("current(end) time is", now)
+
 
