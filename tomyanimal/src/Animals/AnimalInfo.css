@@ -157,10 +157,9 @@ li {
 .container__slide {
     width: 100%;
     height: 500px;
-    margin: 100px auto 0;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2); */
 }
 
 
@@ -177,7 +176,6 @@ li {
     grid-column-gap: 2rem;
     margin-bottom: 2rem;
     align-items: center;
-    margin: 1rem 2rem;
 }
 
 .slide img {
@@ -463,6 +461,10 @@ li {
         top: 10px;
     }
 
+    .slide {
+
+    }
+
     .etc h2 {
         letter-spacing: -0.05ch;
     }
@@ -538,7 +540,7 @@ li {
     }
 
     .animal__blob {
-        width: 20vw;
+        width: 25vw;
     }
 
     .animal__blob__profile {
@@ -564,8 +566,8 @@ li {
         grid-template-columns: 1fr 1fr 1fr;
     }
 
-    .animal__info__content {
-
+    .slide {
+        margin: 1rem 2rem;
     }
 
 
@@ -640,7 +642,7 @@ li {
 @media (min-width: 1200px) {
     .animal__blob__profile {
         width: 20vw;
-        right: 90px;
-        top: 30px;
+        right: 60px;
+        top: 60px;
     }
 }

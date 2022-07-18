@@ -78,7 +78,6 @@ const AnimalPage = () => {
 
   const userId = localStorage.getItem('userid');
 
-  const putList = [];
 
   useEffect(() => {
     try {
@@ -104,6 +103,10 @@ const AnimalPage = () => {
   const date = new Date();
   const dateYear = date.getFullYear()
 
+
+  const putList = [];
+  const putImgList = [];
+
   //slider
   useEffect(() => {
     try {
@@ -112,8 +115,10 @@ const AnimalPage = () => {
             
         for (let i=0; i<response.data.result.data.length; i++) {
           putList.push(response.data.result.data[i])
+          putImgList.push(response.data.result.data[i].images[0].uniqueName)
         }
         setAnimalList(putList);
+        setAllpetImg(putImgList);
       } callAPI();
     } catch(error) {
       console.log(error);
@@ -173,12 +178,9 @@ const AnimalPage = () => {
           alt="animal profile"
           />
         }
-
       </div>
 
-
       <div className='info__details'>
-
         <div className='animal__description'>
           <h1>I'm {petprofile.name}</h1>
           <p>{parseInt(dateYear) - parseInt(petprofile.birthday)} years old</p>
@@ -187,7 +189,6 @@ const AnimalPage = () => {
         {petprofile.length > 1 ?
         <div className='animal__next'><RightOutlined style={{fontSize: '25px', cursor: 'pointer'}} /></div>
         : "" }
-
       </div>
 
     </div>
@@ -198,50 +199,61 @@ const AnimalPage = () => {
         return (
           <div 
             key={obj.id} 
-            className={slideIndex === index+1 ? 
-              "slide active__photo" : "slide"} 
+            className={slideIndex === index+1 ? "slide active__photo" : "slide"} 
           >
             <div className='animal__imageform'>
-            <svg className="animal__blob" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg">
-              <mask id="mask0" mask-type="alpha">
-                <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 
-                  130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 129.362C2.45775 
-                  97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 -0.149132 97.9666 
-                  0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
-              </mask>
-              <g mask="url(#mask0)">
-                <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 
-                  165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 
-                  129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 
-                  -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
-                <img className="animal__blob__profile"  xlinkHref="{profile}"/>
-              </g>
-            </svg>
+              <svg className="animal__blob" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg">
+                <mask id="mask0" mask-type="alpha">
+                  <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 
+                    130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 129.362C2.45775 
+                    97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 -0.149132 97.9666 
+                    0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
+                </mask>
+                <g mask="url(#mask0)">
+                  <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 
+                    165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 
+                    129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 
+                    -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
+                  <img className="animal__blob__profile"  xlinkHref="{profile}"/>
+                </g>
+              </svg>
 
-
-            <img
-              className='animal__blob__profile'
-              src={process.env.REACT_APP_BACK_BASE_URL + "image/" + obj.images[0].uniqueName} 
-            />
-              </div>
-            <div className='animal__description'>
-              <h1>I'm {obj.name}</h1>
-              <p>{parseInt(dateYear) - parseInt(obj.birthday)} years old</p>
-              <p>{obj.weight}kg</p>
+              {allpetimg ?
+              <img
+                className='animal__blob__profile'
+                src={process.env.REACT_APP_BACK_BASE_URL + "image/" + obj.images[0].uniqueName} 
+              />
+              : 
+              <img 
+              className="animal__blob__profile" 
+              src={profile}
+              alt="animal profile"
+              />
+              }
             </div>
+            
+            <div className='info__details'>
+              <div className='animal__description'>
+                <h1>I'm {obj.name}</h1>
+                <p>{parseInt(dateYear) - parseInt(obj.birthday)} years old</p>
+                <p>{obj.weight}kg</p>
+              </div>
+            </div>
+
           </div>
         )
       })}
-      <BtnSlider moveSlide={nextSlide} direction={"next"} />
-      <BtnSlider moveSlide={prevSlide}  direction={"prev"} />
+
+    {animalList.length > 1 ?
+      <>
+        <BtnSlider moveSlide={nextSlide} direction={"next"} />
+        <BtnSlider moveSlide={prevSlide}  direction={"prev"} />
+      </>
+      : "" }
     </div>
 
 
     <section className='animal__info__wrapper'>
-    {animalList.map((obj, index) => {
-      <h2>{obj.name}'s Information</h2>
-    })}
-
       <div className='animal__info__container'>
 
         {messagelist.map(message => (
@@ -256,11 +268,9 @@ const AnimalPage = () => {
         ))}
 
       </div>
-
     </section>
 
     
-
   </div>
   )
 }
