@@ -1,4 +1,4 @@
-package team1.toMyAnimal.dto.board;
+package team1.toMyAnimal.domain.board;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

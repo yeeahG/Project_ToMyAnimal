@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import User from '../../Users/User';
-import axios from 'axios';
 import ControlMenu from '../../Pages/ControlMenu';
 import './Reservation.css'
 import { authInstance } from '../../utils/api';
@@ -119,11 +118,12 @@ const Reservation = (props) => {
                                 <p className='reserve__error'>{error}</p>
                                 <h3>예약 종류 *</h3>
                                 <div className='reserve__keyword' id='reserve__keyword'>
-                                    <button value="수술" onClick={typeClickHandler} style={{color: fontColor, backgroundColor: backColor}}>수술</button>
+                                    {/*NOTE : button UI 작업중*/}
+                                    {/* <button value="수술" onClick={typeClickHandler} style={{color: fontColor, backgroundColor: backColor}}>수술</button> */}
                                     <p value="수술" onClick={() => setType("SURGERY")}>수술</p>
-                                    <p value="접종" onClick={() => setType("VACCINE")}>접종</p>
-                                    <p value="진료" onClick={() => setType("CHECK")}>진료</p>
-                                    <p value="문의" onClick={() => setType("ASK")}>문의</p>
+                                    <p value="접종" onClick={() => setType("INOCULATION")}>접종</p>
+                                    <p value="진료" onClick={() => setType("DIAGNOSIS")}>진료</p>
+                                    <p value="문의" onClick={() => setType("INQUIRY")}>문의</p>
                                 </div>
                             </div>
                             <div>
