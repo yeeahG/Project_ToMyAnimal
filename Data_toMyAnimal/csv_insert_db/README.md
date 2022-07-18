@@ -41,7 +41,14 @@ for line in rd:
 
 
 
-## ubuntu에서 실행시키는 명령어 예시
+## ubuntu에서 실행 시킬 때
+
+pymysql 설치
+```
+sudo apt install mariadb-server python3-pymysql
+```
+
+py파일 실행 시키는 명령어 예시
 ```
 /usr/bin/python3 /home/ubuntu/test_pythonfiles/csv_insert_db_ubuntu.py
 
