@@ -153,6 +153,86 @@ li {
 
 
 
+/*----------------------SLIDE-------------------*/
+.container__slide {
+    width: 100%;
+    height: 500px;
+    margin: 100px auto 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+    transition: opacity ease-in-out 0.4s;
+
+    align-items: start;
+    display: grid;
+    grid-row-gap: 2rem;
+    grid-column-gap: 2rem;
+    margin-bottom: 2rem;
+    align-items: center;
+    margin: 1rem 2rem;
+}
+
+.slide img {
+    /* width: 100%; */
+}
+
+.active__photo {
+    opacity: 1;
+}
+
+.btn__slide {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #f7f6f2;
+    border: 1px solid rgba(34, 34, 34, 0.287);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.btn__slide RightOutlined, .btn__slideLeftOutlined {
+    pointer-events: none;
+}
+
+.prev {
+    top: 50%;
+    left: 20px;
+    transform: translateY(-60%);
+    z-index: 1;
+}
+
+  .next {
+    top: 50%;
+    right: 20px;
+    transform: translateY(-60%);
+    z-index: 1;
+}
+
+
+
+@media (min-width: 600px) {
+    .slide {
+        grid-auto-flow: column;
+        grid-auto-columns: 1fr;
+    }
+}
+  
+@media screen and (max-width: 700px){
+    .container__slide {
+      margin: 100px 10px 0;
+    }
+}
 
 .animal__info__wrapper {
     display: grid;
@@ -379,7 +459,7 @@ li {
 
     .animal__blob__profile {
         width: 40vw;
-        right: -10px;
+        right: 5px;
         top: 10px;
     }
 
@@ -463,7 +543,7 @@ li {
 
     .animal__blob__profile {
         width: 20vw;
-        right: 40px;
+        right: 65px;
         top: 20px;
     }
 

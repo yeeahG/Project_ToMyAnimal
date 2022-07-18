@@ -3,6 +3,8 @@ import profile from './Checklist/img/imageex.png'
 import './AnimalInfo.css'
 import AnimalMedicalInfoOne from './AnimalMedical/AnimalMedicalInfoOne';
 import { authInstance } from '../utils/api';
+import { RightOutlined } from '@ant-design/icons'
+import BtnSlider from './BtnSlider';
 
 export const MedicalInfoContext = React.createContext();
 
@@ -70,7 +72,13 @@ const AnimalPage = () => {
   const [petimg, setPetimg] = useState();
   const [petprofile, setPetprofile] = useState([]);
 
+  const [animalList, setAnimalList] = useState([]);
+  const [allpetimg, setAllpetImg] = useState([]);
+
+
   const userId = localStorage.getItem('userid');
+
+  const putList = [];
 
   useEffect(() => {
     try {
@@ -79,6 +87,13 @@ const AnimalPage = () => {
         
         setPetprofile(response.data.result.data);
         setPetimg(response.data.result.data.images[0].uniqueName);
+
+        //NOTE : 확장성 고려
+        // for (let i=0; i<response.data.result.data.length; i++) {
+        //   putList.push(response.data.result.data[i])
+        // }
+        // setPetprofile(response.data.result.data);
+        // setPetimg(response.data.result.data.images[0].uniqueName);
       } callAPI();
     } catch(error) {
         console.log(error);
@@ -88,6 +103,41 @@ const AnimalPage = () => {
 
   const date = new Date();
   const dateYear = date.getFullYear()
+
+  //slider
+  useEffect(() => {
+    try {
+      async function callAPI() {
+        const response = await authInstance.get(`api/my-animal?memberId=${userId}`);
+            
+        for (let i=0; i<response.data.result.data.length; i++) {
+          putList.push(response.data.result.data[i])
+        }
+        setAnimalList(putList);
+      } callAPI();
+    } catch(error) {
+      console.log(error);
+    }
+  }, [])
+
+  const [slideIndex, setSlideIndex] = useState(1);
+  
+  const nextSlide = () => {
+    if (slideIndex !== animalList.length) {
+      setSlideIndex(slideIndex + 1)
+    } else if (slideIndex === animalList.length) {
+      setSlideIndex(1)
+    }
+  }
+
+  const prevSlide = () => {
+    if (slideIndex !== 1) {
+      setSlideIndex(slideIndex - 1)
+    } else if (slideIndex === 1) {
+      setSlideIndex(animalList.length)
+    }
+  }
+
 
   return (
   <div>
@@ -134,13 +184,63 @@ const AnimalPage = () => {
           <p>{parseInt(dateYear) - parseInt(petprofile.birthday)} years old</p>
           <p>{petprofile.weight}kg</p>
         </div>
+        {petprofile.length > 1 ?
+        <div className='animal__next'><RightOutlined style={{fontSize: '25px', cursor: 'pointer'}} /></div>
+        : "" }
 
       </div>
 
     </div>
 
+
+    <div className='container__slide content__wrapper'>
+      {animalList.map((obj, index) => {
+        return (
+          <div 
+            key={obj.id} 
+            className={slideIndex === index+1 ? 
+              "slide active__photo" : "slide"} 
+          >
+            <div className='animal__imageform'>
+            <svg className="animal__blob" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg">
+              <mask id="mask0" mask-type="alpha">
+                <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 
+                  130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 129.362C2.45775 
+                  97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 -0.149132 97.9666 
+                  0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
+              </mask>
+              <g mask="url(#mask0)">
+                <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 
+                  165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 
+                  129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 
+                  -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
+                <img className="animal__blob__profile"  xlinkHref="{profile}"/>
+              </g>
+            </svg>
+
+
+            <img
+              className='animal__blob__profile'
+              src={process.env.REACT_APP_BACK_BASE_URL + "image/" + obj.images[0].uniqueName} 
+            />
+              </div>
+            <div className='animal__description'>
+              <h1>I'm {obj.name}</h1>
+              <p>{parseInt(dateYear) - parseInt(obj.birthday)} years old</p>
+              <p>{obj.weight}kg</p>
+            </div>
+          </div>
+        )
+      })}
+      <BtnSlider moveSlide={nextSlide} direction={"next"} />
+      <BtnSlider moveSlide={prevSlide}  direction={"prev"} />
+    </div>
+
+
     <section className='animal__info__wrapper'>
-      <h2>{petprofile.name}'s Information</h2>
+    {animalList.map((obj, index) => {
+      <h2>{obj.name}'s Information</h2>
+    })}
 
       <div className='animal__info__container'>
 
