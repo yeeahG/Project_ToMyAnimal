@@ -48,6 +48,7 @@ sudo mv chromedriver /usr/bin/chromedriver
 ```
 pip3 install selenium
 pip3 install pandas
+sudo apt install mariadb-server python3-pymysql (ubuntu) 
 ```
 
 
