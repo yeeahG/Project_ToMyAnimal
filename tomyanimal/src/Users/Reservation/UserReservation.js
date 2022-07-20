@@ -54,9 +54,7 @@ const UserReservation = () => {
           
           <div className='myreserv__data'>
 
-            {/* 예약내역 없을 시 문구 지정 부분 */}
-            {/* { (reservData.length >= 1) ? */}
-            { (reservData) ?
+            { (reservData === "") ?
               <>
                 <h3 className='myreserv__date'>{reservDate.slice(5,10)}</h3>
                 <p>{reservAnimal}</p>

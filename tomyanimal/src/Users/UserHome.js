@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AnimalAccount from './AnimalAccount/AnimalAccount';
 import UserAccount from './UserAccount';
 import Signout from './Signout'
 import UserReservation from './Reservation/UserReservation';
 import './UserHome.css'
+import { authInstance } from '../utils/api';
+import UserLogin from './UserLogin';
 
 const UserHome = () => {
   const [activeIndex, setActiveIndex]=useState(0);
@@ -47,6 +49,19 @@ const UserHome = () => {
     }
   ];
 
+  const [userLogin, setUserLogin] = useState();
+  const loginId = localStorage.getItem('userid');
+
+  useEffect(() => {
+    try {
+      async function callAPI() {
+        const response = await authInstance.get(`api/members/${loginId}`);
+        setUserLogin(response.data.success);
+      } callAPI();
+    } catch(error) {
+      console.log(error);
+    }
+  }, [])
 
   return (
     <div className='userinfo__container'>
@@ -80,9 +95,15 @@ const UserHome = () => {
         </div>
 
 
+      { (userLogin === 'false') ? 
+        <div className='account__content'>
+          <UserLogin />
+        </div>
+      :
         <div className='account__content'>
           <div>{tabContArr[activeIndex].tabCont}</div>
         </div>
+      }
 
       </section>
 
