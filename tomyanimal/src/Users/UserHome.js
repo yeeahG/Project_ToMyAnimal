@@ -95,13 +95,13 @@ const UserHome = () => {
         </div>
 
 
-      { (userLogin === 'false') ? 
+      { (userLogin === true) ? 
         <div className='account__content'>
-          <UserLogin />
+          <div>{tabContArr[activeIndex].tabCont}</div>
         </div>
       :
         <div className='account__content'>
-          <div>{tabContArr[activeIndex].tabCont}</div>
+          <UserLogin />
         </div>
       }
 
