@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { fileInstance } from '../../utils/api';
 import GalleryPhoto from './GalleryPhoto';
+import './Gallery.css'
 
 const GalleryGrid = () => {
     const [petimg, setPetimg] = useState();
@@ -29,17 +30,17 @@ const GalleryGrid = () => {
       }, []);
 
   return (
-    <div>
+    <div className="gallery__content">
 
-        {petimg? 
+      {petimg? 
         <img  
           src={'http://localhost:8084/image/' + petimg}
           alt="animal profile"
         />
 
-        :
+      :
         "Loading"
-        }
+      }
     {/*
     {collection.map((it) => (
         <GalleryPhoto key={it.id}

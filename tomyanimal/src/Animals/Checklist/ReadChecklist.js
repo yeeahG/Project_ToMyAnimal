@@ -26,7 +26,6 @@ const ReadChecklist = ( {id, title, content, modifiedAt, deleteNote} ) => {
         content: content,
       }
       setEditFormData(formValues);
-      console.log(editFormData);
     }
 
     const handleCancelClick = () => {
