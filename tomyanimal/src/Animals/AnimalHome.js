@@ -1,13 +1,13 @@
 import React, { useState, useReducer, useRef, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import AnimalPage from './AnimalPage';
 import AnimalLog from './AnimalLog';
 import CheckList from './Checklist/CheckList';
 import GalleryHome from './AnimalGallery/GalleryHome'
-import './AnimalInfo.css'
 import { authInstance } from '../utils/api';
+import './AnimalInfo.css'
 
 const reducer = (state, action) => {
-  //state 상태관리 로직들
   let newState = [];
 
   switch(action.type) {
@@ -32,9 +32,7 @@ const reducer = (state, action) => {
   return newState;
 }
 
-//상태관리를 담을 context
 export const DiaryStateContext = React.createContext();
-//dispatch 함수들을 담아서 context로 생성
 export const DiaryDispatchContext = React.createContext();
 
 const dummyData = [
@@ -104,6 +102,7 @@ const AnimalHome = () => {
   const [activeIndex, setActiveIndex]=useState(0);
   const [data, dispatch] = useReducer(reducer, dummyData);
   const [petName, setPetname] = useState();
+  const [isLoad, setLoad] = useState('')
 
   //date state를 변화시킬 수 있는 dispatch 함수들
   const dataId = useRef(data.length+1);
@@ -171,11 +170,13 @@ const AnimalHome = () => {
       title
     }});
   }
+  
 
   useEffect(() => {
     try {
       async function callAPI() {
         const response = await authInstance.get('api/animals/1');
+        setLoad(response.data)
         setPetname(response.data.result.data.name);
       } callAPI();
     } catch(error) {
@@ -183,8 +184,15 @@ const AnimalHome = () => {
     }
   }, []);
 
-  return (
+  const navigate = useNavigate();
 
+  const Logout = () => {
+    localStorage.clear();
+    localStorage.removeItem('logintoken');
+    navigate.push('/')
+  }
+
+  return (
     <DiaryStateContext.Provider value={data}>
      <DiaryDispatchContext.Provider value={{
        onCreate, onEdit, onRemove,
@@ -216,8 +224,26 @@ const AnimalHome = () => {
           })}
           </ul>
         </div>
-          
-        {tabContArr[activeIndex].tabCont}
+        
+        
+        {isLoad.success === true ?
+          <>
+          {tabContArr[activeIndex].tabCont}
+          </>
+        : 
+          <div className='animalhome__alert'>
+            <h3>다시 로그인해주세요</h3>
+            <div className='welcome'>
+              <button onClick={Logout} className='welcome__btn'>
+                <a href="/user">재로그인</a>
+              </button>
+              <button className='welcome__btn'>
+                <a href="/">Home</a>
+              </button>
+            </div>
+          </div>
+        }
+
       </div>
       
     </div>
