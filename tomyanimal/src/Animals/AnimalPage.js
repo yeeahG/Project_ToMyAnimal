@@ -228,7 +228,7 @@ const AnimalPage = () => {
         <h3>다시 로그인해주세요</h3>
         <div className='welcome'>
           <button onClick={Logout} className='welcome__btn'>
-            <a href="/user">Logout</a>
+            <a href="/user">재로그인</a>
           </button>
           <button className='welcome__btn'>
             <a href="/">Home</a>
