@@ -5,6 +5,7 @@ import AnimalMedicalInfoOne from './AnimalMedical/AnimalMedicalInfoOne';
 import BtnSlider from './BtnSlider';
 import ControlMenu from '../Pages/ControlMenu'
 import './AnimalInfo.css'
+import { useNavigate } from 'react-router-dom';
 
 export const MedicalInfoContext = React.createContext();
 
@@ -118,6 +119,14 @@ const AnimalPage = () => {
     }
   }
 
+  const navigate = useNavigate();
+
+  const Logout = () => {
+    localStorage.clear();
+    localStorage.removeItem('logintoken');
+    navigate.push('/')
+  }
+
 
   return (
   <div>
@@ -185,15 +194,17 @@ const AnimalPage = () => {
 
     </div>
     
-    <section className='animal__info__menu'>
-      <ControlMenu 
-        value={animalName} 
-        onChange={setAnimalName}
-        optionList={animalList}
-      />
-    </section>
 
     <section className='animal__info__wrapper'>
+
+      <h2>Information</h2>
+      <div className='animal__info__menu'>
+        <ControlMenu 
+          value={animalName} 
+          onChange={setAnimalName}
+          optionList={animalList}
+          />
+      </div>
       <div className='animal__info__container'>
 
         {messagelist.map(message => (
@@ -208,12 +219,21 @@ const AnimalPage = () => {
         ))}
 
       </div>
+      
     </section>
     
     </>
     : 
       <div>
         <h3>다시 로그인해주세요</h3>
+        <div className='welcome'>
+          <button onClick={Logout} className='welcome__btn'>
+            <a href="/user">Logout</a>
+          </button>
+          <button className='welcome__btn'>
+            <a href="/">Home</a>
+          </button>
+        </div>
       </div>
   }
     
