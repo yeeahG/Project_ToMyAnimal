@@ -1,11 +1,8 @@
 import React, { useRef, useState } from 'react'
 import Banner from './Banner'
 import withdog from '../img/withdog.png'
-import  { ReactComponent as Homeimg } from '../img/Home2.svg'
+import HomeChat from './HomeChat'
 import './Home.css'
-import dogcat from '../img/dogcat.png'
-import hospital from '../img/hospital.png'
-import medicine from '../img/medicine.png'
 
 
 const Home = () => {
@@ -123,15 +120,11 @@ const Home = () => {
           </p>
           <a href='/animal' className='main__btn'>Check your Animal</a>
         </div>
-        <div className='main__image'>
-          <span className='box__image'>
-            <span></span>
-            {/* <img src={mainimage} /> */}
-            {/* <Homeimg /> */}
-            <img src={withdog} />
-          </span>
-        </div>
+        <section className='main__chatbot'>
+          <HomeChat />
+        </section>
       </main>
+
 
       <section className='yBZdR'>
         <button aria-label="button" className="up_btn" onClick={upButton}>
