@@ -126,7 +126,6 @@ const Detail = () => {
     return currentPosts;
   }
 
-
   return (
     <div className='info__container'>
 

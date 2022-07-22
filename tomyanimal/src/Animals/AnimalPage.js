@@ -5,7 +5,6 @@ import AnimalMedicalInfoOne from './AnimalMedical/AnimalMedicalInfoOne';
 import BtnSlider from './BtnSlider';
 import ControlMenu from '../Pages/ControlMenu'
 import './AnimalInfo.css'
-import { useNavigate } from 'react-router-dom';
 
 export const MedicalInfoContext = React.createContext();
 
@@ -73,7 +72,6 @@ const AnimalPage = () => {
   const [animalList, setAnimalList] = useState([]);
   const [allpetimg, setAllpetImg] = useState([]);
   const [animalName, setAnimalName] = useState('')
-  const [isLoad, setLoad] = useState('')
 
   const userId = localStorage.getItem('userid');
 
@@ -88,7 +86,6 @@ const AnimalPage = () => {
     try {
       async function callAPI() {
         const response = await authInstance.get(`api/my-animal?memberId=${userId}`);
-        setLoad(response.data)
         for (let i=0; i<response.data.result.data.length; i++) {
           putList.push(response.data.result.data[i])
           putImgList.push(response.data.result.data[i].images[0].uniqueName)
@@ -119,19 +116,12 @@ const AnimalPage = () => {
     }
   }
 
-  const navigate = useNavigate();
 
-  const Logout = () => {
-    localStorage.clear();
-    localStorage.removeItem('logintoken');
-    navigate.push('/')
-  }
 
 
   return (
   <div>
 
-    {isLoad.success === true ?
   <>
     <div className='container__slide content__wrapper'>
       {animalList.map((obj, index) => {
@@ -223,19 +213,7 @@ const AnimalPage = () => {
     </section>
     
     </>
-    : 
-      <div>
-        <h3>다시 로그인해주세요</h3>
-        <div className='welcome'>
-          <button onClick={Logout} className='welcome__btn'>
-            <a href="/user">재로그인</a>
-          </button>
-          <button className='welcome__btn'>
-            <a href="/">Home</a>
-          </button>
-        </div>
-      </div>
-  }
+
     
   </div>
   )

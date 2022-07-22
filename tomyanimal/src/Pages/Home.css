@@ -36,7 +36,7 @@
     width: 2px;
     height: 5px;
     background-color: #f7f6f2;
-  }
+}
 
 .slide__container::-webkit-scrollbar-thumb {
     background-color: rgb(85, 157, 242);
@@ -116,7 +116,7 @@
 }
 
 .main__container {
-    padding: 0 1rem;
+    padding: 4rem 1rem;
     display: grid;
     grid-column-gap: 1rem;
     grid-row-gap: 2rem;
@@ -299,6 +299,9 @@
 
     .odd, .sec__odd, .even, .sec__even {
         width: 630px;
+    }
+
+    .main__chatbot {
     }
 
 }
