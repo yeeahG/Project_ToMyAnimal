@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import profile from './Checklist/img/imageex.png'
-import './AnimalInfo.css'
-import AnimalMedicalInfoOne from './AnimalMedical/AnimalMedicalInfoOne';
 import { authInstance } from '../utils/api';
-import { RightOutlined } from '@ant-design/icons'
+import profile from './Checklist/img/imageex.png'
+import AnimalMedicalInfoOne from './AnimalMedical/AnimalMedicalInfoOne';
 import BtnSlider from './BtnSlider';
+import ControlMenu from '../Pages/ControlMenu'
+import './AnimalInfo.css'
+import { useNavigate } from 'react-router-dom';
 
 export const MedicalInfoContext = React.createContext();
 
@@ -69,40 +70,15 @@ const messagelist = [
 ]
 
 const AnimalPage = () => {
-  const [petimg, setPetimg] = useState();
-  const [petprofile, setPetprofile] = useState([]);
-
   const [animalList, setAnimalList] = useState([]);
   const [allpetimg, setAllpetImg] = useState([]);
-
+  const [animalName, setAnimalName] = useState('')
+  const [isLoad, setLoad] = useState('')
 
   const userId = localStorage.getItem('userid');
 
-
-  useEffect(() => {
-    try {
-      async function callAPI() {
-        const response = await authInstance.get('api/animals/1');
-        
-        setPetprofile(response.data.result.data);
-        setPetimg(response.data.result.data.images[0].uniqueName);
-
-        //NOTE : 확장성 고려
-        // for (let i=0; i<response.data.result.data.length; i++) {
-        //   putList.push(response.data.result.data[i])
-        // }
-        // setPetprofile(response.data.result.data);
-        // setPetimg(response.data.result.data.images[0].uniqueName);
-      } callAPI();
-    } catch(error) {
-        console.log(error);
-    }
-
-  }, []);
-
   const date = new Date();
   const dateYear = date.getFullYear()
-
 
   const putList = [];
   const putImgList = [];
@@ -112,7 +88,7 @@ const AnimalPage = () => {
     try {
       async function callAPI() {
         const response = await authInstance.get(`api/my-animal?memberId=${userId}`);
-            
+        setLoad(response.data)
         for (let i=0; i<response.data.result.data.length; i++) {
           putList.push(response.data.result.data[i])
           putImgList.push(response.data.result.data[i].images[0].uniqueName)
@@ -143,57 +119,20 @@ const AnimalPage = () => {
     }
   }
 
+  const navigate = useNavigate();
+
+  const Logout = () => {
+    localStorage.clear();
+    localStorage.removeItem('logintoken');
+    navigate.push('/')
+  }
+
 
   return (
   <div>
 
-    <div className='content__wrapper'>
-      <div className='animal__imageform'>
-        <svg className="animal__blob" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg">
-          <mask id="mask0" mask-type="alpha">
-            <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 
-              130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 129.362C2.45775 
-              97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 -0.149132 97.9666 
-              0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
-          </mask>
-          <g mask="url(#mask0)">
-            <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 
-              165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 
-              129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 
-              -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
-            <img className="animal__blob__profile"  xlinkHref="{profile}"/>
-          </g>
-        </svg>
-
-        {petimg? 
-          <img 
-          className="animal__blob__profile" 
-          src={'http://localhost:8084/image/' + petimg}
-          alt="animal profile"
-          />
-          :
-          <img 
-          className="animal__blob__profile" 
-          src={profile}
-          alt="animal profile"
-          />
-        }
-      </div>
-
-      <div className='info__details'>
-        <div className='animal__description'>
-          <h1>I'm {petprofile.name}</h1>
-          <p>{parseInt(dateYear) - parseInt(petprofile.birthday)} years old</p>
-          <p>{petprofile.weight}kg</p>
-        </div>
-        {petprofile.length > 1 ?
-        <div className='animal__next'><RightOutlined style={{fontSize: '25px', cursor: 'pointer'}} /></div>
-        : "" }
-      </div>
-
-    </div>
-
-
+    {isLoad.success === true ?
+  <>
     <div className='container__slide content__wrapper'>
       {animalList.map((obj, index) => {
         return (
@@ -219,16 +158,16 @@ const AnimalPage = () => {
               </svg>
 
               {allpetimg ?
-              <img
-                className='animal__blob__profile'
-                src={process.env.REACT_APP_BACK_BASE_URL + "image/" + obj.images[0].uniqueName} 
-              />
+                <img
+                  className='animal__blob__profile'
+                  src={process.env.REACT_APP_BACK_BASE_URL + "image/" + obj.images[0].uniqueName} 
+                />
               : 
-              <img 
-              className="animal__blob__profile" 
-              src={profile}
-              alt="animal profile"
-              />
+                <img 
+                  className="animal__blob__profile" 
+                  src={profile}
+                  alt="animal profile"
+                />
               }
             </div>
             
@@ -244,16 +183,28 @@ const AnimalPage = () => {
         )
       })}
 
-    {animalList.length > 1 ?
-      <>
-        <BtnSlider moveSlide={nextSlide} direction={"next"} />
-        <BtnSlider moveSlide={prevSlide}  direction={"prev"} />
-      </>
-      : "" }
-    </div>
+      { (animalList.length >=2) ?
+        <>
+          <BtnSlider moveSlide={nextSlide} direction={"next"} />
+          <BtnSlider moveSlide={prevSlide}  direction={"prev"} />
+        </>
+      :
+        ""
+      }
 
+    </div>
+    
 
     <section className='animal__info__wrapper'>
+
+      <h2>Information</h2>
+      <div className='animal__info__menu'>
+        <ControlMenu 
+          value={animalName} 
+          onChange={setAnimalName}
+          optionList={animalList}
+          />
+      </div>
       <div className='animal__info__container'>
 
         {messagelist.map(message => (
@@ -268,8 +219,23 @@ const AnimalPage = () => {
         ))}
 
       </div>
+      
     </section>
-
+    
+    </>
+    : 
+      <div>
+        <h3>다시 로그인해주세요</h3>
+        <div className='welcome'>
+          <button onClick={Logout} className='welcome__btn'>
+            <a href="/user">재로그인</a>
+          </button>
+          <button className='welcome__btn'>
+            <a href="/">Home</a>
+          </button>
+        </div>
+      </div>
+  }
     
   </div>
   )
