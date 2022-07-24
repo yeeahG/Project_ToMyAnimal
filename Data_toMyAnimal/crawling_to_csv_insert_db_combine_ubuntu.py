@@ -102,13 +102,18 @@ search_list = ["동물병원", "반려동물훈련소"]
 
 [crawling_animal_hospital_or_center(area, search_word) for search_word in search_list for area in place_list]
 
-conn = pymysql.connect(host='database-1.cjsvopo9rkyv.ap-northeast-2.rds.amazonaws.com', user='juneseok', port=3306, password='gkswk123', db='team1', charset='utf8')
+host_ip = 'host_ip'
+user_name = 'user_name'
+your_password = 'password'
+your_db = 'testdb'
+conn = pymysql.connect(host=host_ip, user=user_name, port=3306, password=your_password, db=your_db, charset='utf8')
 
 cur = conn.cursor()
 
 sql = """INSERT INTO location (hospital_name, star, review_count, addr, tel, location_type) values (%s, %s, %s, %s, %s, %s) on duplicate key update addr = values(addr)"""
 
-csvfile_route = "/home/ubuntu/test_pythonfiles/csvlist2"
+
+csvfile_route = "csv파일 있는 경로"
 
 for crawling_csvfile in os.listdir(csvfile_route):
     f = open(csvfile_route + "/" + crawling_csvfile, 'r', encoding='utf-8')
