@@ -14,7 +14,7 @@ import team1.toMyAnimal.domain.dto.sign.SignInRequest;
 import team1.toMyAnimal.domain.dto.sign.SignInResponse;
 import team1.toMyAnimal.domain.dto.sign.SignUpRequest;
 import team1.toMyAnimal.domain.member.Member;
-import team1.toMyAnimal.service.sign.SignService;
+import team1.toMyAnimal.repository.service.sign.SignService;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.verify;

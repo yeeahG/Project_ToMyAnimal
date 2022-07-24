@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
-import AnimalAccount from './AnimalAccount';
+import React, { useEffect, useState } from 'react'
+import AnimalAccount from './AnimalAccount/AnimalAccount';
 import UserAccount from './UserAccount';
 import Signout from './Signout'
+import UserReservation from './Reservation/UserReservation';
 import './UserHome.css'
+import { authInstance } from '../utils/api';
+import UserLogin from './UserLogin';
 
 const UserHome = () => {
   const [activeIndex, setActiveIndex]=useState(0);
@@ -25,12 +28,20 @@ const UserHome = () => {
         <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}> My animal </li>
       ),
       tabCont:(
-        <div> <AnimalAccount/> </div>
+        <div> <AnimalAccount /> </div>
       )
     },
     {
       tabTitle:(
-        <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}> Sign out</li>
+        <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}> My reservation </li>
+      ),
+      tabCont:(
+        <div> <UserReservation/> </div>
+      )
+    },
+    {
+      tabTitle:(
+        <li className={activeIndex===3 ? "is-active" : ""} onClick={()=>tabClickHandler(3)}> Sign out</li>
       ),
       tabCont:(
         <div><Signout /></div>
@@ -38,6 +49,19 @@ const UserHome = () => {
     }
   ];
 
+  const [userLogin, setUserLogin] = useState();
+  const loginId = localStorage.getItem('userid');
+
+  useEffect(() => {
+    try {
+      async function callAPI() {
+        const response = await authInstance.get(`api/members/${loginId}`);
+        setUserLogin(response.data.success);
+      } callAPI();
+    } catch(error) {
+      console.log(error);
+    }
+  }, [])
 
   return (
     <div className='userinfo__container'>
@@ -48,7 +72,7 @@ const UserHome = () => {
           <h1 className='header__content'>My account</h1>
           <div className='header__detail'>
             <p>
-              details
+              회원정보 및 반려동물 정보
             </p>
           </div>
         </div>
@@ -71,9 +95,15 @@ const UserHome = () => {
         </div>
 
 
+      { (userLogin === true) ? 
         <div className='account__content'>
           <div>{tabContArr[activeIndex].tabCont}</div>
         </div>
+      :
+        <div className='account__content'>
+          <UserLogin />
+        </div>
+      }
 
       </section>
 

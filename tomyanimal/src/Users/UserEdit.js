@@ -1,12 +1,6 @@
 import React from 'react'
-import { useLocation } from "react-router";
 
 const UserEdit = () => {
-  // const location = useLocation();
-
-  // const username = location.userInfo.userName;
-  // const usercontact = location.userInfo.userPhoneNumberOrUserId;
-
 
   return (
     <>

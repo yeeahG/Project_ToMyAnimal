@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import team1.toMyAnimal.controller.response.Response;
 import team1.toMyAnimal.domain.dto.category.CategoryCreateRequest;
-import team1.toMyAnimal.service.category.CategoryService;
+import team1.toMyAnimal.repository.service.category.CategoryService;
 
 import javax.validation.Valid;
 

@@ -36,7 +36,7 @@
     width: 2px;
     height: 5px;
     background-color: #f7f6f2;
-  }
+}
 
 .slide__container::-webkit-scrollbar-thumb {
     background-color: rgb(85, 157, 242);
@@ -71,7 +71,6 @@
 .img__box {
     width: auto;
     height: 350px;
-    border: 1px solid;
 }
 
 .odd {
@@ -89,7 +88,12 @@
 }
 
 .sec__odd {
-    background-image: url('../img/medicine.png');
+    background-image: url('../img/cat2.jpg');
+    background-repeat: no-repeat;
+}
+
+.sec__even {
+    background-image: url('../img/dog1.jpg');
     background-repeat: no-repeat;
 }
 
@@ -112,7 +116,7 @@
 }
 
 .main__container {
-    padding: 0 1rem;
+    padding: 4rem 1rem;
     display: grid;
     grid-column-gap: 1rem;
     grid-row-gap: 2rem;
@@ -264,7 +268,7 @@
     }
 
     .slide__service {
-        margin: 0px 5vw;
+        margin: 5rem 5vw;
     }
     .slide__title {
         font-size: 5rem;
@@ -295,6 +299,9 @@
 
     .odd, .sec__odd, .even, .sec__even {
         width: 630px;
+    }
+
+    .main__chatbot {
     }
 
 }

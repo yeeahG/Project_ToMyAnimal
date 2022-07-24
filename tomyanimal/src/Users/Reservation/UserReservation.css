@@ -1,0 +1,60 @@
+.myreserv__main__container {
+    position: relative;
+}
+
+.myreserv__subtitle {
+    font-size: 2rem;
+    white-space: pre-wrap;
+}
+
+.myreserv__subtitle h3 {
+    font-weight: 800;
+    margin: 2rem 0 4rem 0;
+    position: relative;
+    z-index: 3;
+}
+
+.myreserv__background {
+    width: 400px;
+    height: 200px;
+    background-color: #559df2;
+    position: absolute;
+    top: 0px;
+    left: 200px;
+    z-index: 1;
+}
+
+.myreserv__container {
+    width: 55vw;
+    position: relative;
+    z-index: 2;
+}
+
+.myreserv__content {
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    width: 100%;
+}
+
+.myreserv__data {
+    margin: 1rem;
+}
+
+.myreserv__data h3 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+@media (min-width: 900px) {
+    .myreserv__container {
+        grid-column-gap: 3rem;
+        width: 100%;
+        
+        align-items: start;
+        display: grid;
+        grid-row-gap: 2rem;
+        grid-column-gap: 2rem;
+        margin: 2rem 1rem;
+        grid-template-columns: 1fr 1fr;
+    }
+}

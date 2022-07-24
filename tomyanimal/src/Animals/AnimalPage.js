@@ -1,193 +1,272 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
+import { authInstance } from '../utils/api';
+import { useNavigate } from 'react-router-dom';
 import profile from './Checklist/img/imageex.png'
+import AnimalMedicalInfoOne from './AnimalMedical/AnimalMedicalInfoOne';
+import BtnSlider from './BtnSlider';
+import ControlMenu from '../Pages/ControlMenu'
 import './AnimalInfo.css'
 
-const AnimalPage = () => {
-  const [petName, setPetname] = useState();
-  const [petBTD, setPetBTD] = useState();
-  const [petKg, setPetKg] = useState();
-  const [petimg, setPetimg] = useState();
-  const [petprofile, setPetprofile] = useState();
+export const MedicalInfoContext = React.createContext();
 
-  const [isOpen, setOpen] = useState(false);
+const messagelist = [
+  {
+    id: 1,
+    type: "접종",
+    editable: false,
+    replies: [
+      {
+        id: 1, 
+        date: "2022-07-01",
+        type: "광견병",
+        likes: 231
+      },
+      {
+        id: 2, 
+        date: "2022-07-03",
+        type: "심장 사상충",
+        likes: 2
+      },
+    ]
+  },
+  {
+    id: 4, 
+    type: "수술",
+    editable: false,
+    replies: [
+      {
+        id: 5,
+        date: "2022-07-06",
+        type: "중성화",
+        likes: 2
+      },
+      {
+        id: 5,
+        date: "2022-07-07",
+        type: "슬개골",
+        likes: 2
+      },
+    ]
+  },
+  {
+    id: 6,
+    type: "복용",
+    editable: false,
+    replies: [
+      {
+        id: 1,
+        date: "2022-07-06",
+        type: "유산균",
+        likes: 2
+      },
+      {
+        id: 2,
+        date: "2022-07-07",
+        type: "칼슘",
+        likes: 2
+      },
+    ]
+  },
+]
+
+const AnimalPage = () => {
+  const [animalList, setAnimalList] = useState([]);
+  const [allpetimg, setAllpetImg] = useState([]);
+  const [animalName, setAnimalName] = useState('');
+  const [isLoad, setLoad] = useState('');
 
   const userId = localStorage.getItem('userid');
 
+  const date = new Date();
+  const dateYear = date.getFullYear()
 
-  // useEffect(() => {
-  //   axios({
-  //     method: 'get', 
-  //     url: 'http://localhost:8084/api/pets/1',
-  //     headers: { Authorization: localStorage.getItem('logintoken')}
-  //   }).then((response) => {
-  //     setPetname(response.data.result.data['petName'])
-  //     setPetBTD(response.data.result.data['birthday'])
-  //     setPetKg(response.data.result.data['weight'])
-  //   })
-  //}, []);
-  
+  const putList = [];
+  const putImgList = [];
+
+  //slider
   useEffect(() => {
-    axios.get(`http://localhost:8084/api/my-pet?memberId=${userId}`, {
-      headers: {
-        Authorization: localStorage.getItem('logintoken') 
-      }
-    }).then((response) => {
-      console.log(response);
-      // 내가 데리고 있는 동물이 여러마리 일때는 data[0] 이곳을
-      // i를 length만큼 돌려서 가져와야될것으로 보임
-      setPetname(response.data.result.data[0].petName);
-      setPetBTD(response.data.result.data[0].birthday);
-      setPetKg(response.data.result.data[0].weight);
-      setPetimg(response.data.result.data[0].images[0].uniqueName);
-    }).catch((error) => {
-      console.error(error);
-    });
-  }, []);
+    try {
+      async function callAPI() {
+        const response = await authInstance.get(`api/my-animal?memberId=${userId}`);
+        setLoad(response.data.result.data)
 
-  //console.log(petimg[0].uniqueName);
-  //const imageurl = petimg[0].uniqueName
-  //localhost:8084/image/uniqueName
-  console.log(petimg);
+        for (let i=0; i<response.data.result.data.length; i++) {
+          putList.push(response.data.result.data[i])
+          putImgList.push(response.data.result.data[i].images[0].uniqueName)
+        }
+        setAnimalList(putList);
+        setAllpetImg(putImgList);
+      } callAPI();
+    } catch(error) {
+      console.log(error);
+    }
+  }, [])
+
+  const [slideIndex, setSlideIndex] = useState(1);
+  
+  const nextSlide = () => {
+    if (slideIndex !== animalList.length) {
+      setSlideIndex(slideIndex + 1)
+    } else if (slideIndex === animalList.length) {
+      setSlideIndex(1)
+    }
+  }
+
+  const prevSlide = () => {
+    if (slideIndex !== 1) {
+      setSlideIndex(slideIndex - 1)
+    } else if (slideIndex === 1) {
+      setSlideIndex(animalList.length)
+    }
+  }
+
+  const navigate = useNavigate();
+
+  const Logout = () => {
+    localStorage.clear();
+    localStorage.removeItem('logintoken');
+    navigate.push('/')
+  }
+
+
+
 
   return (
   <div>
+    { (isLoad.length) >= 1 ?
+      <>
+        <div className='container__slide content__wrapper'>
+          {animalList.map((obj, index) => {
+            return (
+              <div 
+                key={obj.id} 
+                className={slideIndex === index+1 ? "slide active__photo" : "slide"} 
+              >
+                <div className='animal__imageform'>
+                  <svg className="animal__blob" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg">
+                    <mask id="mask0" mask-type="alpha">
+                      <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 
+                        130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 129.362C2.45775 
+                        97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 -0.149132 97.9666 
+                        0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
+                    </mask>
+                    <g mask="url(#mask0)">
+                      <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 
+                        165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 
+                        129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 
+                        -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
+                      <img className="animal__blob__profile"  xlinkHref="{profile}"/>
+                    </g>
+                  </svg>
 
-    <div className='content__wrapper'>
-      <div className='animal__imageform'>
-        <svg className="animal__blob" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg">
-          <mask id="mask0" mask-type="alpha">
-            <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 
-                  130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 129.362C2.45775 
-                  97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 -0.149132 97.9666 
-                  0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
-          </mask>
-          <g mask="url(#mask0)">
-            <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 
-                  165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 
-                  129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 
-                  -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
-            <img className="animal__blob__profile"  xlinkHref="{profile}"/>
-          </g>
-        </svg>
+                  {allpetimg ?
+                    <img
+                      className='animal__blob__profile'
+                      src={process.env.REACT_APP_BACK_BASE_URL + "image/" + obj.images[0].uniqueName} 
+                    />
+                  : 
+                    <img 
+                      className="animal__blob__profile" 
+                      src={profile}
+                      alt="animal profile"
+                    />
+                  }
+                </div>
+                
+                <div className='info__details'>
+                  <div className='animal__description'>
+                    <h1>I'm {obj.name}</h1>
+                    <p>{parseInt(dateYear) - parseInt(obj.birthday)} years old</p>
+                    <p>{obj.weight}kg</p>
+                  </div>
+                </div>
 
-        {petimg? 
-        <img 
-        className="animal__blob__profile" 
-        src={'http://localhost:8084/image/' + petimg}
-        alt="animal profile"
-        />
-        :
-        <img 
-        className="animal__blob__profile" 
-        src={profile}
-        alt="animal profile"
-        />
-      }
+              </div>
+            )
+          })}
 
-      </div>
+          { (animalList.length >=2) ?
+            <>
+              <BtnSlider moveSlide={nextSlide} direction={"next"} />
+              <BtnSlider moveSlide={prevSlide}  direction={"prev"} />
+            </>
+          :
+            ""
+          }
 
-
-      <div className='info__details'>
-
-        <div className='details__description'>
-          <h1>I'm {petName}</h1>
-          <p>{petBTD} years old</p>
-          <p>{petKg}kg</p>
         </div>
+        
 
-        <div className='stack'>
-          <button className='details__btn' aria-expanded="false">
-            <span>접종내역</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="14.255" height="14.255">
-              <path fill='none' stroke="currentcolor" strokeWidth="1.5" d="M7.129 0v14.255M0 7.129h14.255"></path>
+        <section className='animal__info__wrapper'>
+
+          <h2>Information</h2>
+          <div className='animal__info__menu'>
+            <ControlMenu 
+              value={animalName} 
+              onChange={setAnimalName}
+              optionList={animalList}
+              />
+          </div>
+          <div className='animal__info__container'>
+
+            {messagelist.map(message => (
+              <div className='animal__info__content'>
+                <AnimalMedicalInfoOne 
+                  editable={message.editable} 
+                  type={message.type}
+                  likes={message.likes} 
+                  replies={message.replies}
+                />
+              </div>
+            ))}
+
+          </div>
+          
+        </section>
+        
+      </>
+    :
+      <div className='animalhome__alert__container'>
+        <div className='animalhome__alert'>
+          <div>
+            <svg className="animal__blob" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg">
+              <mask id="mask0" mask-type="alpha">
+                <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 
+                        130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 129.362C2.45775 
+                        97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 -0.149132 97.9666 
+                        0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
+              </mask>
+              <g mask="url(#mask0)">
+                <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 
+                        165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 
+                        129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 
+                        -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
+                <img className="animal__blob__profile"  xlinkHref="{profile}"/>
+              </g>
             </svg>
-          </button>
-          <div className='details__panel'>
-            <p>세부내용 aria-expanded="true"로 변경되면서 이 부분이 열림
-                d="M0 7.128h14.255"로 바꿔주기
-            </p>
+            <img 
+              className="animalhome__alert__blob" 
+              src={profile}
+              alt="animal profile"
+            />
           </div>
-        </div>
-      </div>
 
-    </div>
-
-    <section className='animal__info__wrapper'>
-      <h2>{petName} Information</h2>
-      
-      <div className='animal__info__container'>
-
-        <div className='animal__info__content'>
-
-          <div className='animal__info__cover'>
-            <h3>예방접종 내역</h3>
-          </div>
-          <div className='animal__info__vaccine'>
-            <h3>내역</h3>
-            <div className='animal__info__desc'>
-              <p>2022 06 29
-              광견병 접종</p>
+          <div className='animalhome__alert__content'>
+            <h3>내 동물을 등록해주세요</h3>
+            <div className='welcome'>
+              <button className='welcome__btn'>
+                <a href="/user">동물등록</a>
+              </button>
+              <button className='welcome__btn'>
+                <a href="/">홈</a>
+              </button>
             </div>
           </div>
-
+        </div>
         </div>
 
-        <div className='animal__info__content'>
-
-          <div className='animal__info__cover'>
-            <h3>예방접종 내역</h3>
-            </div>
-          <div className='animal__info__vaccine'>
-            <h3>내역</h3>
-          </div>
-
-        </div>
-
-        <div className='animal__info__content'>
-
-          <div className='animal__info__cover'>
-              <h3>예방접종 내역</h3>
-            </div>
-          <div className='animal__info__vaccine'>
-            <h3>내역</h3>
-          </div>
-
-        </div>
-      </div>
-
-
-
-      <div className='animal__info__container'>
-
-        <div className='animal__info__content'>
-
-          <h3>심장사상충 접종</h3>
-          <p>2022 06 29
-          광견병 접종</p>
-
-        </div>
-
-        <div className='animal__info__content'>
-
-          <h3>수술 내역</h3>
-          <p>2022 06 29
-            중성화 수술</p>
-
-        </div>
-
-        <div className='animal__info__content'>
-
-          <h3>복용 내역</h3>
-          <p>2022 06 29
-            심장사상충</p>
-        </div>
-      </div>
-
-    </section>
-
+    }
     
-
   </div>
   )
 }

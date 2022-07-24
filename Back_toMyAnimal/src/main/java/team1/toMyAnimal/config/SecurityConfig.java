@@ -40,9 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers(HttpMethod.GET, "/api/members/**","/api/categories/**", "/api/comments/**", "/logout").permitAll()
                 .antMatchers(HttpMethod.GET, "/image/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/my-pet").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/my-animal").authenticated()
                 .antMatchers(HttpMethod.GET, "/api/my-board").authenticated()
-                .antMatchers(HttpMethod.GET, "/api/pets/{id}").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/public-board").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/animals/{id}").authenticated()
                 .antMatchers(HttpMethod.GET, "/api/board/{id}").access("@boardGuard.check(#id)")
                 .antMatchers(HttpMethod.GET, "/api/reservation/{id}").authenticated()
                 .antMatchers(HttpMethod.GET, "/api/my-reservation").authenticated()
@@ -50,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers(HttpMethod.POST, "/api/signin", "/api/signup", "/api/refresh-token").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/categories/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "/api/pets").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/animals").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/comments").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/board").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/reservation").authenticated()
@@ -58,12 +59,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers(HttpMethod.DELETE, "/api/members/{id}").access("@memberGuard.check(#id)")
                 .antMatchers(HttpMethod.DELETE, "/api/categories/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/api/pets/{id}").access("@animalGuard.check(#id)")
+                .antMatchers(HttpMethod.DELETE, "/api/animals/{id}").access("@animalGuard.check(#id)")
                 .antMatchers(HttpMethod.DELETE, "/api/comments/{id}").access("@commentGuard.check(#id)")
                 .antMatchers(HttpMethod.DELETE, "/api/board/{id}").access("@boardGuard.check(#id)")
                 .antMatchers(HttpMethod.DELETE, "/api/reservation/{id}").authenticated()
 
-                .antMatchers(HttpMethod.PUT, "/api/pets/{id}").access("@animalGuard.check(#id)")
+                .antMatchers(HttpMethod.PUT, "/api/animals/{id}").access("@animalGuard.check(#id)")
                 .antMatchers(HttpMethod.PUT, "/api/member/{id}").access("@memberGuard.check(#id)")
                 .antMatchers(HttpMethod.PUT, "/api/board/{id}").access("@boardGuard.check(#id)")
                 .antMatchers(HttpMethod.PUT, "/api/reservation/{id}").authenticated()

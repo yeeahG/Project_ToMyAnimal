@@ -37,9 +37,10 @@ const Banner = ( {downButton} ) => {
 
         <section className='banner__description'>
           <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-          Nulla interdum nibh orci, id pharetra metus pellentesque quis. 
+            We love my animal. This is for my animal. For love for care.<br/>
+            I'll text a postcard send to you, Sending all my love to you.
           </p>
+          
         </section>
 
         <section className='yBZdR'>

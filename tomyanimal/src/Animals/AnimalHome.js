@@ -1,14 +1,13 @@
-import React, { useState, useReducer, useRef } from 'react'
+import React, { useState, useReducer, useRef, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import AnimalPage from './AnimalPage';
 import AnimalLog from './AnimalLog';
-import CheckUp from './Checklist/CheckList';
-import {logData} from './components/data'
-import Log from './AnimalLog/Log';
-import './AnimalInfo.css'
 import CheckList from './Checklist/CheckList';
+import GalleryHome from './AnimalGallery/GalleryHome'
+import { authInstance } from '../utils/api';
+import './AnimalInfo.css'
 
 const reducer = (state, action) => {
-  //state 상태관리 로직들
   let newState = [];
 
   switch(action.type) {
@@ -33,9 +32,7 @@ const reducer = (state, action) => {
   return newState;
 }
 
-//상태관리를 담을 context
 export const DiaryStateContext = React.createContext();
-//dispatch 함수들을 담아서 context로 생성
 export const DiaryDispatchContext = React.createContext();
 
 const dummyData = [
@@ -104,11 +101,11 @@ const dummyData = [
 const AnimalHome = () => {
   const [activeIndex, setActiveIndex]=useState(0);
   const [data, dispatch] = useReducer(reducer, dummyData);
+  const [petName, setPetname] = useState();
+  const [isLoad, setLoad] = useState('')
 
   //date state를 변화시킬 수 있는 dispatch 함수들
-  const dataId = useRef(0);
-
-  
+  const dataId = useRef(data.length+1);
 
   const tabClickHandler=(index)=>{
     setActiveIndex(index);
@@ -125,30 +122,29 @@ const AnimalHome = () => {
     },
     {
       tabTitle:(
-        <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}> My Log</li>
+        <li className={activeIndex===1 ? "is-active" : ""} onClick={()=>tabClickHandler(1)}>Photos</li>
       ),
       tabCont:(
-        <div> <AnimalLog /> </div>
+        <div> <GalleryHome /> </div>
       )
     },
     {
       tabTitle:(
-        <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}>Memo</li>
-      ),
-      tabCont:(
-        <div> <Log /> </div>
-      )
-    },
-    {
-      tabTitle:(
-        <li className={activeIndex===3 ? "is-active" : ""} onClick={()=>tabClickHandler(3)}>Check</li>
+        <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}>My Record</li>
       ),
       tabCont:(
         <div> <CheckList /> </div>
       )
     },
+    {
+      tabTitle:(
+        <li className={activeIndex===3 ? "is-active" : ""} onClick={()=>tabClickHandler(3)}>My Memo</li>
+      ),
+      tabCont:(
+        <div> <AnimalLog /> </div>
+      )
+    },
   ];
-
 
 
   //CREATE
@@ -174,12 +170,21 @@ const AnimalHome = () => {
       title
     }});
   }
+  
 
-
-
+  useEffect(() => {
+    try {
+      async function callAPI() {
+        const response = await authInstance.get('api/animals/1');
+        setLoad(response.data)
+        setPetname(response.data.result.data.name);
+      } callAPI();
+    } catch(error) {
+      console.log(error);
+    }
+  }, []);
 
   return (
-
     <DiaryStateContext.Provider value={data}>
      <DiaryDispatchContext.Provider value={{
        onCreate, onEdit, onRemove,
@@ -192,7 +197,7 @@ const AnimalHome = () => {
         <div className='header__wrapper'>
           <h1 className='header__content'>About you</h1>
           <div className='header__detail'>
-            <p>내 (petname)의 모든 것</p>
+            <p>내 {petName}의 모든 것</p>
           </div>
         </div>
       </div>
@@ -202,23 +207,17 @@ const AnimalHome = () => {
       <div className='space'></div>
 
       <div className='info__content'>
-        {/* <div className='grid'> */}
+        
+        <div className='left__menu'>
+          <ul className='menu__wrap'>
+            <li className='menu__list'>My animal</li>
+            {tabContArr.map((section)=>{
+            return section.tabTitle
+          })}
+          </ul>
+        </div>
 
-          <div className='left__menu'>
-            <ul className='menu__wrap'>
-              <li className='menu__list'>My animal</li>
-              {tabContArr.map((section, index)=>{
-              return section.tabTitle
-            })}
-            </ul>
-          </div>
-
-
-
-          {tabContArr[activeIndex].tabCont}
-
-
-        {/* </div> */}
+        {tabContArr[activeIndex].tabCont}
 
       </div>
       

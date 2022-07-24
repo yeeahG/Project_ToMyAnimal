@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
 import team1.toMyAnimal.config.TokenHelper;
-import team1.toMyAnimal.service.sign.TokenService;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

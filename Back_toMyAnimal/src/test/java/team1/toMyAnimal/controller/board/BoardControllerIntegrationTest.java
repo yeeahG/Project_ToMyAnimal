@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import team1.toMyAnimal.domain.board.Board;
+import team1.toMyAnimal.domain.board.BoardType;
 import team1.toMyAnimal.domain.category.Category;
 import team1.toMyAnimal.domain.dto.board.BoardCreateRequest;
 import team1.toMyAnimal.domain.dto.sign.SignInResponse;
@@ -22,8 +23,8 @@ import team1.toMyAnimal.init.TestInitDB;
 import team1.toMyAnimal.repository.board.BoardRepository;
 import team1.toMyAnimal.repository.category.CategoryRepository;
 import team1.toMyAnimal.repository.member.MemberRepository;
-import team1.toMyAnimal.service.board.BoardService;
-import team1.toMyAnimal.service.sign.SignService;
+import team1.toMyAnimal.repository.service.board.BoardService;
+import team1.toMyAnimal.repository.service.sign.SignService;
 
 import java.util.List;
 
@@ -79,7 +80,7 @@ public class BoardControllerIntegrationTest {
     void createTest() throws Exception {
         // given
         SignInResponse signInRes = signService.signIn(createSignInRequest(member1.getIdentifier(), initDB.getPassword()));
-        BoardCreateRequest req = createBoardCreateRequest("title", "content", 0, member1.getId(), category.getId(), List.of());
+        BoardCreateRequest req = createBoardCreateRequest("title", "content", BoardType.PUBLIC, member1.getId(), category.getId(), List.of());
 
         // when, then
         mockMvc.perform(
@@ -105,7 +106,7 @@ public class BoardControllerIntegrationTest {
     @Test
     void createUnauthorizedByNoneTokenTest() throws Exception {
         // given
-        BoardCreateRequest req = createBoardCreateRequest("title", "content", 0, member1.getId(), category.getId(), List.of());
+        BoardCreateRequest req = createBoardCreateRequest("title", "content", BoardType.PUBLIC, member1.getId(), category.getId(), List.of());
 
         // when, then
         mockMvc.perform(

@@ -10,11 +10,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import team1.toMyAnimal.controller.sign.SignController;
 import team1.toMyAnimal.domain.dto.sign.SignInRequest;
 import team1.toMyAnimal.domain.dto.sign.SignUpRequest;
 import team1.toMyAnimal.exception.*;
-import team1.toMyAnimal.service.sign.SignService;
+import team1.toMyAnimal.repository.service.sign.SignService;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;

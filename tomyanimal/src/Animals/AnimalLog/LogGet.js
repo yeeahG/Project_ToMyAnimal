@@ -9,7 +9,6 @@ const LogGet = ( {id,  title, content} ) => {
     title: title,
     content: content, 
   });
-  //console.log(content);
 
   const [editContactId, setEditContactId] = useState(null);
   const [editFormData, setEditFormData] = useState({
@@ -20,12 +19,11 @@ const LogGet = ( {id,  title, content} ) => {
   const loginId = localStorage.getItem('userid');
 
 
-  const handleEditClick = (e, logs) => {
+  const handleEditClick = (e) => {
     e.preventDefault();
     setEditContactId(id);
 
     const formValues = {
-      //id: editContactId,
       title: title,
       content: content,
     }
@@ -53,23 +51,17 @@ const LogGet = ( {id,  title, content} ) => {
     e.preventDefault();
 
     const editedContact = {
-      //id: editContactId,
       title: editFormData.title,
       content: editFormData.content
     }
 
-    // setLogs(editedContact);
-    // setEditContactId(null);
-
-
-    axios.put('http://localhost:8084/api/board/' + editContactId, editedContact,{
+    axios.put(process.env.REACT_APP_BACK_BASE_URL + 'api/board/' + editContactId, editedContact,{
       headers: {
         "Access-Control-Allow-Origin": "*",
         'Authorization': localStorage.getItem('logintoken'),
       }
     })
     .then((response) => {
-      console.log(response.data);
       //setLogs(editedContact);
       setLogs(response.data);
       setEditContactId(null); 
@@ -81,7 +73,6 @@ const LogGet = ( {id,  title, content} ) => {
     });
 
   }
-
 
 
   return (

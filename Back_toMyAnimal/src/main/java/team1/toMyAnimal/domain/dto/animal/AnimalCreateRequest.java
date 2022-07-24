@@ -27,8 +27,9 @@ public class AnimalCreateRequest {
 
     private String birthday;
 
-
     private double weight;
+
+    private String type;
 
     @Null
     private Long memberId;
@@ -41,6 +42,7 @@ public class AnimalCreateRequest {
                 req.name,
                 req.birthday,
                 req.weight,
+                req.type,
                 memberRepository.findById(req.getMemberId()).orElseThrow(MemberNotFoundException::new),
                 req.images.stream().map(i -> new AnimalImage(i.getOriginalFilename())).collect(toList())
         );

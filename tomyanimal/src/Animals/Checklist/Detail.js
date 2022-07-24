@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Pagination from '../../Community/components/Pagination';
@@ -6,8 +5,10 @@ import ControlMenu from '../../Pages/ControlMenu';
 import { ChecklistContext } from '../Checklist/CheckList'
 import AddChecklist from './AddChecklist';
 import { DeleteFilled } from '@ant-design/icons';
-
+import ReadChecklist from './ReadChecklist';
+import { authInstance } from '../../utils/api';
 import './CardItem.css'
+
 
 const sortOptionList = [
   {value: "latest", name: "최신순"},
@@ -15,17 +16,14 @@ const sortOptionList = [
 ]
 
 const Detail = () => {
-  const [isOpen, setOpen] = useState(false);
   const [sortType, setSortType] = useState('latest');
-  
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+
   const [data, setData] = useState([]);
   const [noteId, setNoteId] = useState([]);
   const [error, setError] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(6);
+  const [postsPerPage, setPostsPerPage] = useState(3);
 
   const {id} = useParams();
 
@@ -36,107 +34,97 @@ const Detail = () => {
   const navigate = useNavigate();
   const contentRef = useRef();
 
-
-
-  {/*
-  useEffect(() => {
-
-      const targetCheckList = checklist.find(
-        (it) => parseInt(it.id) === parseInt(id)
-      )
-      console.log(targetCheckList);
-
-      if(targetCheckList) {
-        setData(targetCheckList)
-      } else {
-        alert("존재하지 않는 메모입니다")
-        navigate('/', {replace:true})
-      }
-    
-  }, [id, checklist]) */}
-
   const checklistBack = () => {
     navigate(-1);
   }
 
   const putList = [];
+  const postIdList = [];
   
   useEffect ( () => {
-    //axios.get(`http://localhost:8084/api/posts?page=0&size=4&categoryId=${id}&memberId=${userid}`, {
-    axios.get(`http://localhost:8084/api/my-board?memberId=${userid}&categoryId=${id}&page=0&size=4&type=1`, {
-      headers: {
-        Authorization: localStorage.getItem('logintoken'),
+    async function callAPI() {
+      const response = await authInstance.get(`api/my-board?memberId=${userid}&categoryId=${id}&page=0&size=4&type=PRIVATE`);
+
+      for (let i=0; i < response.data.result.data.length; i++) {
+        putList.push(response.data.result.data[i])
+        postIdList.push(response.data.result.data[i].id)
       }
-    }).then((response) => {
-      //console.log(response.data.result.data.postList[0]);
-      for (let i=0; i < response.data.result.data.postList.length; i++) {
-        putList.push(response.data.result.data.postList[i])
-        //console.log(putList);
-      } setData(putList);
-    }).catch((error) => {
-      console.log(error);
-    });
+      setData(putList);
+      setNoteId(postIdList);
+    } callAPI();
   }, []);
   
-  console.log(data);
-
-  const submitHandler = async (content) => {
-    console.log("submit" + content);
-
+  const submitHandler = async (title, content) => {
     const newPost = {
-      type: 1,
+      type: "PRIVATE",
       title: title, 
       content: content,
       categoryId: id
     }
 
-    // if(content.length < 1) {
-    //   contentRef.current.focus();
-    //   return;
-    // }
+    if(content.length < 1) {
+      contentRef.current.focus();
+      return;
+    }
 
     const newPosts = [...data, newPost];
-    console.log(newPosts);
     setData(newPosts);
 
-    if(title != "" || content != "") {
-      await axios({
-        method: 'post', 
-        url: 'http://localhost:8084/api/board',
-        data: newPost,
-        headers: { 
-          'Authorization': localStorage.getItem('logintoken'),
-          'Content-Type': 'multipart/form-data',
-        }
-      })
-      .then((data) => {
-        console.log('성공:', data);
-      })
-      
-      .catch((error) => {
+    if(title != "" && content != "") {
+      try {
+        async function callAPI() {
+          await authInstance.post('api/board', newPost)
+          alert('작성이 완료되었습니다')
+          window.location.reload();
+        } callAPI();
+      } catch {
         console.error('실패:', error);
-      });
-      alert('작성이 완료되었습니다')
-      //window.location.reload();
+      }
     } else {
       setError("한 글자 이상 입력하세요")
     }
   }
 
 
-  const deleteNote = (noteId) => {
-    //글 각각의 id 필요
-    //noteId
-    data.filter((note) => note.noteId != noteId)
+  const deleteNote = async (id) => {
+    //글 각각의 id 필요 = noteId
+    const newNotes = data.filter((note) => note.noteId != noteId)
+    setData(newNotes);
+
+    try {
+      await authInstance.delete(`api/board/${id}`)
+      alert("삭제가 완료되었습니다")
+      window.location.reload();
+    } catch (error) {
+      console.error('실패:', error);
+    }
   }
+
 
   //pagination
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
 
-  let currentPosts = 0;
-  currentPosts = data.slice(indexOfFirst, indexOfLast);
+  //let currentPosts = 0;
+  //currentPosts = data.slice(indexOfFirst, indexOfLast);
 
+  //filter 적용
+  const getProcessedList = () => {
+
+    const compare = (a,b) => {
+      if(sortType === 'latest') {
+        return parseInt(b.id) - parseInt(a.id);
+      } else {
+        return parseInt(a.id) - parseInt(b.id);
+      }
+    }
+    const copyList = JSON.parse(JSON.stringify(data));
+    const sortedList = data.sort(compare);
+
+    let currentPosts = 0;
+    currentPosts = sortedList.slice(indexOfFirst, indexOfLast);
+    return currentPosts;
+  }
 
   return (
     <div className='info__container'>
@@ -172,95 +160,30 @@ const Detail = () => {
               onChange={setSortType}
               optionList={sortOptionList}
             />
-            <button onClick={()=>setOpen(!isOpen)}>
-            {isOpen ? "Close" : "Write"}
-            </button>
           </div>
 
           <div className='checklist__walk__container'>
             {error}
-            {id} detail
           </div>
-
-          {isOpen ?
-          <div className='checklist__walk__container'>
-            Write
-            <form>
-              <input
-                name="title" 
-                placeholder='title'
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-
-              <p>
-                <textarea 
-                  name="content" 
-                  placeholder='What about your animal?'
-                  ref={contentRef}
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                />
-              </p>
-            </form>
-
-            <button className='upload__btn' onClick={submitHandler} >write</button>
-          </div>
-            :
-          // <div className='checklist__read__container'>
-          //   {/* {data.title} 
-          //   {data.map((it) => ( */}
-          //   {currentPosts.map((it) => (
-          //     <div className='checklist__read__content'>
-          //       <h3>{it.title}</h3>
-          //       <p>{it.content}</p>
-          //     </div>
-          //   ))}
-          // </div>
-          null
-          }
-
 
           <div className='checkllist__wrapper'>
-
-            {currentPosts.map((it) => (
-              <div className='checklist__note'>
-                <div className='checklist__text'>
-                  <h3>{it.title}</h3>
-                  <p>{it.content}</p> 
-                </div>
-                <div className='checklist__note__footer'>
-                  <small>2022/07.01</small>
-                  <button><DeleteFilled style={{fontSize: '18px'}} /></button>
-                </div>
-              </div>
+            {/*{currentPosts.map((it) => (*/}
+            {getProcessedList().map((it) => (
+              <ReadChecklist 
+                key={it.id}
+                {...it}
+                deleteNote={deleteNote}
+              />
             ))}
 
             <div className='checklist__note'>
-              <h3>title</h3>
-              <p>content</p>
+              <h3>ex) ㅇㅇ천 산책갔다옴</h3>
+              <p>ex) 초코가 너무 좋아했다. ㅇㅇ천 근처에 잔디밭이 넓게 있어서 여기를 산책장소로 자주 다니면 되겠다. </p>
               <div className='checklist__note__footer'>
-                <small>2022/07.01</small>
+                <small>2022-09-09</small>
                 <button><DeleteFilled style={{fontSize: '18px'}} /></button>
               </div>
             </div>
-            <div className='checklist__note'>
-              <h3>title</h3>
-              <p>content</p>
-              <div className='checklist__note__footer'>
-                <small>2022/07.01</small>
-                <button><DeleteFilled style={{fontSize: '18px'}} /></button>
-              </div>
-            </div>
-            <div className='checklist__note'>
-              <h3>title</h3>
-              <p>content</p>
-              <div className='checklist__note__footer'>
-                <small>2022/07.01</small>
-                <button><DeleteFilled style={{fontSize: '18px'}} /></button>
-              </div>
-            </div>
-
 
             <AddChecklist 
               submitHandler={submitHandler}
@@ -274,7 +197,6 @@ const Detail = () => {
             totalPosts={data.length}
             paginate={setCurrentPage}
           />
-
 
 
         </div>

@@ -10,5 +10,8 @@ import java.util.List;
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     @Query("select r from Reservation r join fetch r.member where r.member.id = :id")
     List<Reservation> findWithMemberId(@Param("id") Long id);
+
+    @Query("select r from Reservation r join fetch r.animal where r.animal.id = :animalId")
+    List<Reservation> findByAnimalId(@Param("animalId") Long animalId);
 }
 

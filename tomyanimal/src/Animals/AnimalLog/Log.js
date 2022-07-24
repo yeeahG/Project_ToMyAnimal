@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Pagination from '../../Community/components/Pagination'
 import ControlMenu from '../../Pages/ControlMenu'
-import Write from '../Write'
 import LogGet from './LogGet'
 import axios from 'axios';
 import LogWrite from './LogWrite'
@@ -18,49 +17,32 @@ const Log = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(5);
 
-  //const [logList, setLogList] = useState([]);
   const [logId, setLogId] = useState("");
   const [logTitle, setLogTitle] = useState("");
   const [logContent, setLogContent] = useState("");
   const [logarray, setLogArray] = useState([]);
 
-  //const userId = localStorage.getItem('userid');
   const userid = localStorage.getItem('userid');
 
-  {/* http://localhost:8084/api/my-board?memberId=${userId}
-  https://jsonplaceholder.typicode.com/posts */}
-  
   const putLog = [];
 
-  useEffect( () => { 
-    //axios.get(`http://localhost:8084/api/my-board?memberId=${userid}`, {
-    axios.get(`http://localhost:8084/api/posts?page=0&size=4&categoryId=1&memberId=${userid}`, {
+  useEffect( () => {
+    axios.get(process.env.REACT_APP_BACK_BASE_URL + `api/my-board?memberId=${userid}&categoryId=1&page=0&size=4&type=PRIVATE`, {
       headers: {
         Authorization: localStorage.getItem('logintoken'),
       }
     }).then((response) => {
-      for (let i=0; i < response.data.result.data.postList.length; i++) {
-      // setLogId(response.data.result.data[i].id);
-      // setLogTitle(response.data.result.data[i].title)
-      // setLogContent(response.data.result.data[i].content)
-      //putLog.push(response.data.result.data[i])
-        putLog.push(response.data.result.data.postList[i])
+      for (let i=0; i < response.data.result.data.length; i++) {
+        putLog.push(response.data.result.data[i])
       } setLogArray(putLog)
-      
-      // for (let i=0; i < response.data.result.data.length; i++) {
-        //   putLog.push(response.data.result.data[i])
-        // } 
     }).catch((error) => {
       console.error(error);
     });
   }, [])
 
-  console.log(putLog);
-
   const logList = [
     {id: logId, title: logTitle, content: logContent}
   ]
-
 
 
   const indexOfLast = currentPage * postsPerPage;
@@ -108,13 +90,10 @@ const Log = () => {
         {getProcessedList().map((it) => (
           <LogGet key={it.id} {...it}/>
         ))}
-         {/* {putLog.map((it, index) => (
-          <LogGet 
-            key={index.id} 
-            content={it.content}
-            title={it.title}
-            />
-        ))} */}
+
+        <div>
+          
+        </div>
 
         <Pagination 
           postsPerPage={postsPerPage}
@@ -124,8 +103,6 @@ const Log = () => {
 
       </>
       }
-
-      
 
 
       <section className='etc'>

@@ -4,16 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import team1.toMyAnimal.aop.AssignMemberId;
 import team1.toMyAnimal.controller.response.Response;
-import team1.toMyAnimal.domain.dto.board.BoardReadCondition;
-import team1.toMyAnimal.domain.dto.mail.MailDto;
-import team1.toMyAnimal.domain.dto.member.MemberReadCondition;
 import team1.toMyAnimal.domain.dto.member.MemberUpdateRequest;
-import team1.toMyAnimal.domain.member.Member;
-import team1.toMyAnimal.service.member.MemberService;
+import team1.toMyAnimal.repository.service.member.MemberService;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;

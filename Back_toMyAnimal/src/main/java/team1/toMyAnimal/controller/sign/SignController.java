@@ -6,10 +6,9 @@ import org.springframework.web.bind.annotation.*;
 import team1.toMyAnimal.controller.response.Response;
 import team1.toMyAnimal.domain.dto.sign.SignInRequest;
 import team1.toMyAnimal.domain.dto.sign.SignUpRequest;
-import team1.toMyAnimal.service.sign.SignService;
+import team1.toMyAnimal.repository.service.sign.SignService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import static team1.toMyAnimal.controller.response.Response.success;

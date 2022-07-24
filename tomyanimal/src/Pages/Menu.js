@@ -9,11 +9,11 @@ const Menu = () => {
     }
 
     const bgChange = () => {
-        document.getElementById("menu-wrapper").style.background = "#FF6458";
+        document.getElementById("menu-wrapper").style.background = "#FE81b9";
     }
 
     const bgTurnBack = () => {
-        document.getElementById("menu-wrapper").style.background = "#fe81b9";
+        document.getElementById("menu-wrapper").style.background = "#F6CA3B";
     }
 
     function useOutsideClose(ref) {
@@ -50,7 +50,6 @@ const Menu = () => {
             </div>
 
             <div className="Container__StyledContainer heASqm">
-                {/* <div className="space__styledSpace djzxvY"></div> */}
                 <div className="Border__StyeldBorder klPBwl"></div>
             </div>
         </header>
@@ -84,7 +83,7 @@ const Menu = () => {
                         <a className="menu__name" id="places" href="/places/all">Where is</a>
                     </div>
                     <div>
-                        <a className="menu__name" id="about" href="/">About</a>
+                        <a className="menu__name" id="about" href="/about">About</a>
                     </div>
                 </div>
 

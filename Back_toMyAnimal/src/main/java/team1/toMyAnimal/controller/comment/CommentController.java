@@ -7,7 +7,7 @@ import team1.toMyAnimal.aop.AssignMemberId;
 import team1.toMyAnimal.controller.response.Response;
 import team1.toMyAnimal.domain.dto.comment.CommentCreateRequest;
 import team1.toMyAnimal.domain.dto.comment.CommentReadCondition;
-import team1.toMyAnimal.service.comment.CommentService;
+import team1.toMyAnimal.repository.service.comment.CommentService;
 
 import javax.validation.Valid;
 

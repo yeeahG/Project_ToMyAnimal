@@ -132,11 +132,16 @@ li {
     display: grid;
     align-content: start;
     grid-row-gap: 3rem;
+    grid-template-columns: 1fr 0.1fr;
 }
 
 .details__description {
     display: grid;
     grid-row-gap: 1rem;
+}
+
+.animal__next {
+    margin: 100px auto;
 }
 
 
@@ -182,7 +187,7 @@ li {
     display: flex
 }
 
-.place__detail__reserve p{
+.place__detail__reserve{
     border: 1px solid;
     border-radius: 20px;
     width: 70px;
@@ -192,10 +197,11 @@ li {
     cursor: pointer;
 }
 
-.place__detail__reserve p:hover {
+.place__detail__reserve:hover {
     background-color: transparent;
     color: #559df2;
 }
+
 
 @media (min-width: 600px) {
     .place__wrapper {

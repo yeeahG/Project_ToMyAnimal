@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Message from './Message'
-import axios from 'axios'
 import { useMainContext, } from './Context/Context'
 import CommentsBox from '../components/CommentsBox'
 import './Review.css'
+import { useParams } from 'react-router-dom';
+import { authInstance } from '../../utils/api';
 
 export const MessagelistContext = React.createContext();
 
@@ -17,14 +18,18 @@ const messagelist = [
     replies: [
       {
         id: 2, 
-        user: "Junseok Lee",
-        message: "No I am",
+        member: {
+          name: "Junseok Lee",
+        },
+        content: "No I am",
         likes: 231
       },
       {
         id: 3, 
-        user: "Jeongmin kwon",
-        message: "Hmmm",
+        member: {
+          name: "Jeongmin kwon",
+        },
+        content: "Hmmm",
         likes: 2
       },
     ]
@@ -38,8 +43,10 @@ const messagelist = [
     replies: [
       {
         id: 5,
-        user: "민트초코",
-        message: "yesss",
+        member: {
+          name: "민트초코",
+        },
+        content: "yesss",
         likes: 2
       },
     ]
@@ -61,30 +68,29 @@ const MessageScroll = (props) => {
   const [message, setMessages] = useState([])
   const [showBottomBar, setShowBottomBar] = useState(true);
 
-  const {messageReset, commentIncrement, setMethodIncrement } = useMainContext();
-  //console.log(messageReset);
+  const {id} = useParams();
+
+  const {messageReset, commentIncrement, setMethodIncrement, messageUpdate } = useMainContext();
   const commentIncrementRef = useRef(commentIncrement);
 
-  
-  // useEffect(async () => {
-  //   setShowBottomBar(true);
-    
-  //   await axios({
-  //     method: 'get', 
-  //     url: 'https://jsonplaceholder.typicode.com/posts',
-  //     headers: {
-  //       'Authorization': localStorage.getItem('logintoken'),
-  //       'Content-Type': 'multipart/form-data',
-  //     }
-  //   })
-  //   .then((data) => {
-  //     console.log('성공:', data);
-  //     setMessages(data)
-  //   }) 
-  //   .catch((error) => {
-  //     console.error('실패:', error);
-  //   });
-  // },[messageReset])
+  const commentlist = [];
+
+  useEffect(() => {
+    setShowBottomBar(true);
+
+    try {
+      async function callAPI() {
+        const data = await authInstance.get('api/comments', {
+          params: {boardId: id}
+        });
+        console.log('성공:', data);
+        setMessages(data.data.result.data);
+      } callAPI();
+    }catch(error) {
+      console.error('실패:', error);
+    }
+  },[])
+
 
   const observer = React.useRef(new IntersectionObserver(entries => {
     const first = entries[0];
@@ -110,46 +116,34 @@ const MessageScroll = (props) => {
 
   const [bottomBar, setBottomBar] = useState(null);
 
-  console.log(messagelist);
-
   return (
     <>
-    {/*<MessagelistContext.Provider value={messagelist}>
-        <div>
-            <Message />
+      {/*NOTE : DUMMY */}
+      {messagelist.map(message => (
+        <Message 
+          user={message.user}
+          editable={message.editable} 
+          message={message.message}
+          likes={message.likes} 
+          replies={message.replies}
+        />
+      ))}
 
-            {messagelist.length > 9 && showBottomBar ?
-            <div className='bottomBar'>
-                <div className='loader'></div>
-            </div>
-            : null}
+      {message.map(message => (
+        <Message 
+          id={message.id}
+          user={message.member.name}
+          message={message.content}
+          replies={message.children}
+        />
+      ))}
 
+      {message.length > 2 && showBottomBar ?
+        <div className='bottomBar' ref={setBottomBar}>
+          <div className='loader'></div>
         </div>
-    </MessagelistContext.Provider> */}
-
-    {/* <Message 
-      user="Dummy user" 
-      editable={false} 
-      message="Dummy Message"
-      likes={25} 
-    /> */}
-
-    {messagelist.map(message => (
-    <Message 
-      user={message.user}
-      editable={message.editable} 
-      message={message.message}
-      likes={message.likes} 
-      replies={message.replies}
-    />
-    ))}
-
-    {messagelist.length > 2 && showBottomBar ?
-      <div className='bottomBar' ref={setBottomBar}>
-        <div className='loader'></div>
-      </div>
-    : null}
-  </>
+      : null}
+    </>
   )
 }
 

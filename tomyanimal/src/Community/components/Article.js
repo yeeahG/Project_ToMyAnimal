@@ -51,7 +51,7 @@ const Article = ( {title, body} ) => {
   
   useEffect(() => {
     /*
-    axios.get('http://localhost:8084/api/comments' + id, {
+    axios.get(process.env.REACT_APP_BACK_BASE_URL + 'api/comments' + id, {
       headers: {
         Authorization: localStorage.getItem('logintoken'),
       }
@@ -59,7 +59,6 @@ const Article = ( {title, body} ) => {
     axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments/`)
     .then((response)=> {
       setCom(response.data);
-      // console.log(response.data.length);
 
       // for (let i=0; i <response.data.length; i++) {
       //   setLike([...like, 0])
@@ -82,7 +81,7 @@ const Article = ( {title, body} ) => {
 
     if(comtext != "" ) {
       //await axios.post('https://jsonplaceholder.typicode.com/posts/${id}/comments/', newComment)
-      await axios.post('http://localhost:8084/api/comments', newComment, {
+      await axios.post(process.env.REACT_APP_BACK_BASE_URL + 'api/comments', newComment, {
         headers: {
           Authorization: localStorage.getItem('logintoken'),
         }
@@ -342,10 +341,7 @@ const Article = ( {title, body} ) => {
 
 
                     <div className='comment__paging'>
-                      <ul>
-                        <li></li>
-                        <li></li>
-                      </ul>
+
                     </div>
 
                   </>
