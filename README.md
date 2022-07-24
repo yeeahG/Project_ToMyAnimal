@@ -3,4 +3,5 @@
 To my Animal
 
 # Main Page
-![mainhome](https://user-images.githubusercontent.com/95362504/177897614-7dcacf1c-a2de-47fe-bfa7-b2637f3f0134.png)
+![tomyanimal home](https://user-images.githubusercontent.com/97449025/180651354-ae9c0053-93f5-4991-994a-6297c4da53d9.png)
+
