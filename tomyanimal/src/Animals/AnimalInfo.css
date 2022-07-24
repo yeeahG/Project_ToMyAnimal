@@ -94,7 +94,7 @@ li {
 
 
 /*================================ANIMAL INFORMATION================================*/
-.content__wrapper {
+.content__wrapper, .animalhome__alert {
     align-items: start;
     display: grid;
     grid-row-gap: 2rem;
@@ -104,6 +104,22 @@ li {
 
 .grid {
     display: grid;
+}
+
+.animalhome__alert__container {
+    display: grid;
+}
+
+.animalhome__alert__blob {
+    position: absolute;
+    width: 350px;
+    top: 650px;
+    right: 40px;
+    z-index: 1;
+}
+
+.animalhome__alert__content {
+    margin: auto;
 }
 
 /*사진*/
@@ -223,6 +239,12 @@ li {
     .slide {
         grid-auto-flow: column;
         grid-auto-columns: 1fr;
+    }
+    .animalhome__alert__blob {
+        position: absolute;
+        width: 350px;
+        top: 850px;
+        right: 430px;
     }
 }
   
@@ -446,7 +468,7 @@ li {
 }
 
 @media (min-width: 600px) {
-    .content__wrapper {
+    .content__wrapper, .animalhome__alert {
         grid-auto-flow: column;
         grid-auto-columns: 1fr;
     }
@@ -467,16 +489,22 @@ li {
         top: 35px;
     }
 
-    .slide {
-
-    }
-
     .etc h2 {
         letter-spacing: -0.05ch;
     }
 }
 
 @media (min-width: 900px) {
+    .animalhome__alert {
+
+    }
+
+    .animalhome__alert__blob {
+        width: 20vw;
+        left: 350px;
+        top: 320px;
+    }
+
     .info__container {
         margin: 0px 2.77778vw;
         padding: 4rem;
@@ -540,7 +568,7 @@ li {
     }
 
     /*반려동물 정보 내용*/
-    .content__wrapper {
+    .content__wrapper, .animalhome__alert {
         grid-column-gap: 3rem;
         width: 55vw;
     }
@@ -649,5 +677,11 @@ li {
         width: 20vw;
         right: 40px;
         top: 60px;
+    }
+
+    .animalhome__alert__blob {
+        width: 20vw;
+        left: 550px;
+        top: 400px;
     }
 }

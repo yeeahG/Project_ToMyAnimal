@@ -17,12 +17,12 @@ const Footer = () => {
                     Animal</p>
                 </a>
                 <p className='footer__text'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus egestas rhoncus dolor non porttitor. Vestibulum vitae interdum nisl, ut tempor quam. Cras sed sollicitudin ligula, vitae dictum leo. Vestibulum consequat facilisis turpis vitae fringilla. Integer semper ullamcorper malesuada. Vestibulum eget est ligula. Nam gravida lacus non urna feugiat, quis egestas lorem vulputate.
+                    반려동물 케어 및 기록 사이트 To. my animal입니다. 이용해주셔서 감사합니다. 
+                    궁금하신 사항은 아래의 <strong>About</strong>이나 <strong><a href='https://github.com/yeeahG/Project_ToMyAnimal'>Github</a></strong>를 방문해주세요.
                 </p>
 
                 <div className='footer__form'>
                     <h6>Let's Keep in Touch</h6>
-                    <p>Sign-up for 10% off your first online order</p>
                     <form className='input__form'>
                         <input 
                                 className='text__input' 
@@ -44,22 +44,10 @@ const Footer = () => {
                         <li>
                             <a>About</a>
                         </li>
-                        <li>
-                            <a>About</a>
-                        </li>
-                        <li>
-                            <a>About</a>
-                        </li>
                     </ul>
                     <ul className='stack'>
-                    <li>
-                            <a>About</a>
-                        </li>
                         <li>
-                            <a>About</a>
-                        </li>
-                        <li>
-                            <a>About</a>
+                            <a href='/about'>Contact</a>
                         </li>
                     </ul>
                 </nav>

@@ -40,10 +40,10 @@ const HomeChat = () => {
           options: [
               {value: 1, label: '회원가입', trigger: '5'},
               {value: 2, label: '동물등록', trigger: '6'},
-              {value: 3, label: '동물 정보 확인', trigger: '6'},
-              {value: 4, label: '기록하기', trigger: '7'},
-              {value: 5, label: '원하는 장소 찾기', trigger: '8'},
-              {value: 6, label: '종료', trigger: '9'},
+              {value: 3, label: '동물 정보 확인', trigger: '7'},
+              {value: 4, label: '기록하기', trigger: '8'},
+              {value: 5, label: '원하는 장소 찾기', trigger: '9'},
+              {value: 6, label: '종료', trigger: '10'},
           ]
         },
         {
@@ -53,21 +53,26 @@ const HomeChat = () => {
         },
         {
           id: '6',
-          message: '원하시는 서비스를 선택해주세요',
+          message: '동물사진, 이름, 생일, 무게를 입력하여 내 동물 프로필을 완성해보세요.',
           trigger: '4',
         },
         {
           id: '7',
-          message: '원하시는 서비스를 선택해주세요',
+          message: 'menu-my animal에서 프로필을 확인할 수 있습니다.',
           trigger: '4',
         },
         {
           id: '8',
-          message: '원하시는 서비스를 선택해주세요',
+          message: 'menu-my animal의 My Record부분에서 반려동물에 관한 것들을 기록할 수 있습니다.',
           trigger: '4',
         },
         {
           id: '9',
+          message: 'menu-where에서 원하는 장소를 찾아보고 예약이 필요하면 예약을 진행할 수 있습니다.',
+          trigger: '4',
+        },
+        {
+          id: '10',
           message: 'To.my animal을 이용해주셔서 감사합니다',
           end: true,
         },

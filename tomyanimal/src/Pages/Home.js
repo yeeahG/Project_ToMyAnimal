@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react'
 import Banner from './Banner'
-import withdog from '../img/withdog.png'
 import HomeChat from './HomeChat'
 import './Home.css'
 
@@ -47,13 +46,23 @@ const Home = () => {
 
         <div className='desc__content'>
           <div className='part__one'>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis dui augue. Donec sed feugiat leo. Proin et lacus ac orci vestibulum condimentum. Praesent sit amet venenatis felis. Ut in diam eget lectus mattis convallis vitae sed orci. Nunc scelerisque velit a mi mollis, quis vestibulum nulla luctus. </p>
+            <p>
+              To.my animal을 방문해주셔서 감사합니다. 나의 반려동물에게 사랑을 선물하는 사이트 입니다. 
+              저희의 사이트는 반려동물과 함께사는 가족을 위한 사이트입니다. 
+              가장 필요한 것을 담으려고 했으며 사용자의 관점에서 가장 사용하기 쉬운 방법으로 개발하도록 노력했습니다. 
+            </p>
           </div>
           <div className='part__two'>
-            <p>In leo odio, posuere non pulvinar vel, consectetur vitae augue. Praesent quis nibh facilisis, venenatis ex quis, posuere eros.  Pellentesque eu malesuada enim.</p>
+            <p>
+              반려동물을 위한 페이지는 동물의 정보, 의료정보, 사진 그리고 동물에 관한 기록을 언제든지 만들 수 있도록 계획했습니다.
+              동물정보가 입력되어야 프로필 및 의료정보를 확인할 수 있습니다. 
+            </p>
           </div>
           <div className='part__three'>
-            <p>In pretium, elit in commodo posuere, libero lectus varius lacus, sit amet sodales magna quam vitae turpis. Duis hendrerit, tellus ut pharetra hendrerit, arcu massa tincidunt purus, eu fermentum nisi quam vitae dolor.</p>
+            <p>
+              사용자를 위한 페이지는 사용자의 이름(닉네임), 이메일, 연락처만 있으면 회원가입이 가능여 쉽고 빠르게 가입할 수 있도록 꼐획했습니다. 
+              회원가입이 이루어져야 Animal page, Reservation page, Community page를 이용할 수 있습니다. 
+            </p>
           </div>
         </div>
       </section>
@@ -95,7 +104,7 @@ const Home = () => {
               </div>
               <p>03</p>
               <div>
-                <h3 className='slide__subtitle'>Recommend</h3>
+                <h3 className='slide__subtitle'>Reservation</h3>
               </div>
             </div>
             <div className='slide__content'>
@@ -113,12 +122,11 @@ const Home = () => {
 
       <main className='main__container'>
         <div className='main__text'>
-          <h2>Check up everyday</h2>
+          <h2>Find our services</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Nulla interdum nibh orci, id pharetra metus pellentesque quis. 
+            챗봇을 통해서 이용방법 및 원하는 서비스를 알아보세요. 
           </p>
-          <a href='/animal' className='main__btn'>Check your Animal</a>
+          <a href='/animal' className='main__btn'>Check my Animal</a>
         </div>
         <section className='main__chatbot'>
           <HomeChat />

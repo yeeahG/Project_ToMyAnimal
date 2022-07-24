@@ -130,7 +130,7 @@ const AnimalHome = () => {
     },
     {
       tabTitle:(
-        <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}>CheckList</li>
+        <li className={activeIndex===2 ? "is-active" : ""} onClick={()=>tabClickHandler(2)}>My Record</li>
       ),
       tabCont:(
         <div> <CheckList /> </div>
@@ -138,7 +138,7 @@ const AnimalHome = () => {
     },
     {
       tabTitle:(
-        <li className={activeIndex===3 ? "is-active" : ""} onClick={()=>tabClickHandler(3)}> My Log</li>
+        <li className={activeIndex===3 ? "is-active" : ""} onClick={()=>tabClickHandler(3)}>My Memo</li>
       ),
       tabCont:(
         <div> <AnimalLog /> </div>
@@ -184,14 +184,6 @@ const AnimalHome = () => {
     }
   }, []);
 
-  const navigate = useNavigate();
-
-  const Logout = () => {
-    localStorage.clear();
-    localStorage.removeItem('logintoken');
-    navigate.push('/')
-  }
-
   return (
     <DiaryStateContext.Provider value={data}>
      <DiaryDispatchContext.Provider value={{
@@ -224,25 +216,8 @@ const AnimalHome = () => {
           })}
           </ul>
         </div>
-        
-        
-        {isLoad.success === true ?
-          <>
-          {tabContArr[activeIndex].tabCont}
-          </>
-        : 
-          <div className='animalhome__alert'>
-            <h3>다시 로그인해주세요</h3>
-            <div className='welcome'>
-              <button onClick={Logout} className='welcome__btn'>
-                <a href="/user">재로그인</a>
-              </button>
-              <button className='welcome__btn'>
-                <a href="/">Home</a>
-              </button>
-            </div>
-          </div>
-        }
+
+        {tabContArr[activeIndex].tabCont}
 
       </div>
       
