@@ -13,8 +13,7 @@ cur = conn.cursor()
 
 sql = """INSERT INTO location (columns_1, columns_2, columns_3, columns_4, columns_5, columns_6) values (%s, %s, %s, %s, %s, %s) on duplicate key update addr = values(columns_4)"""
 
-route = "/"
-csvfile_route = route
+csvfile_route = "/csv파일이 있는 경로"
 
 for crawling_csvfile in os.listdir(csvfile_route):
     f = open(csvfile_route + "/" + crawling_csvfile, 'r', encoding='utf-8')
