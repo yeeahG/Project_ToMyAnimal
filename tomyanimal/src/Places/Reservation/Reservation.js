@@ -57,7 +57,7 @@ const Reservation = (props) => {
                 const data = await authInstance.post(`api/reservation?date=${reservData}&type=${type}&animalId=1`, newReserv);
                 console.log('성공:', data);
                 alert('예약이 완료되었습니다')
-                //window.location.reload();
+                window.location.reload();
             } catch(error) {
                 console.error('실패:', error);
             }

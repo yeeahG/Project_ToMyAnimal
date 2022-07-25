@@ -132,7 +132,7 @@ const Detail = () => {
       <div className='header'>
         <div className='space'></div>
         <div className='header__wrapper'>
-          <h1 className='header__content'>Checklist</h1>
+          <h1 className='header__content'>Record my animal</h1>
           <div className='header__detail'>
             <p>나의 동물이 좋아하고 행동했던 것들을 기록하기</p>
           </div>
