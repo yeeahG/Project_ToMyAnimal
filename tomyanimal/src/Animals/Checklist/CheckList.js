@@ -58,7 +58,7 @@ const CheckList = () => {
 
         <div className='userinfo__subtitle'>
           <a href='/animal'>
-            <h1>Check list</h1>
+            <h1>Record my animal</h1>
           </a>
           <p>반려동물이 오늘 하루 했던 것, 좋아한 것, 잘 먹던 것을 기록해주세요</p>
         </div>

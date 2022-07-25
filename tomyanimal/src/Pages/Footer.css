@@ -27,21 +27,21 @@
     
 .title__btn p {
     font-family: 'Ultra', serif;
-    font-size: 4rem;
+    font-size: 3rem;
     height: 2.5rem;
     width: auto;
-    margin-bottom: 2rem;
+    margin: 2rem;
 }
     
 .footer__text {
     min-width: 20em;
-    margin-bottom: 4rem;
+    margin: 3rem 2rem;
 }
     
 .footer__form {
     display: grid;
     grid-gap: 1rem;
-    margin-bottom: 3rem;
+    margin: 3rem;
     max-width: 25em;
 }
     
