@@ -1,4 +1,11 @@
-# To my Animal
+# ✉️ To my Animal  
+
+## 🖥️    
+http://tomyanimal.s3-website.ap-northeast-2.amazonaws.com/
+
+
+## ✏️Notion
+https://valiant-file-0a8.notion.site/To-my-animal-eb32e8757ca4473db706250ca48a0393
 
 ![슬라이드1](https://user-images.githubusercontent.com/97449025/181519221-024133d5-a0b4-4fb5-9fb5-80ba17e527ed.PNG)
 ![슬라이드2](https://user-images.githubusercontent.com/97449025/181519342-d665297a-eb21-4f8c-bd40-beb1b6fba813.PNG)
@@ -20,10 +27,3 @@
 ![슬라이드18](https://user-images.githubusercontent.com/97449025/181519332-c39dac44-59ad-45da-859d-a4a310bb724f.PNG)
 ![슬라이드19](https://user-images.githubusercontent.com/97449025/181519333-81721cc0-e683-4c88-ad46-050e02fc1375.PNG)
 ![슬라이드20](https://user-images.githubusercontent.com/97449025/181519338-bbc368b0-277a-42ca-b6a3-975d15064ff9.PNG)
-
-## 👉  
-http://tomyanimal.s3-website.ap-northeast-2.amazonaws.com/
-
-
-## ✏️Notion
-https://valiant-file-0a8.notion.site/To-my-animal-eb32e8757ca4473db706250ca48a0393
